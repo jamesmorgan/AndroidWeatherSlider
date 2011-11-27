@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/welcome" />
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/home_instructions" />
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_gravity="clip_horizontal|clip_vertical"
+		android:orientation="vertical"
+		android:weightSum="1.0">
+		<EditText
+			android:layout_height="wrap_content"
+			android:maxLines="1"
+			android:id="@+id/locationText"
+			android:hint="Enter Location..."
+			android:layout_width="fill_parent"
+			android:layout_marginTop="50dp"
+			android:layout_marginBottom="20px">
+			<requestFocus></requestFocus>
+		</EditText>
+		<Button
+			android:onClick="onGetLocation"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/lookUpLocationButton"
+			android:text="Get Location..."
+			android:layout_gravity="center"></Button>
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- to apply the system's default colors for notifications on Android 2.3 
+	and higher, use the following styles for res/values-v9/styles.xml: -->
+<resources>
+	<style
+		name="NotificationText"
+		parent="android:TextAppearance.StatusBar.EventContent" />
+	<style
+		name="NotificationTitle"
+		parent="android:TextAppearance.StatusBar.EventContent.Title" />
+</resources>

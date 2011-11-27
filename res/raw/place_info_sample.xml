@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<rss
+	version="2.0"
+	xmlns:yweather="http://xml.weather.yahoo.com/ns/rss/1.0"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+	<channel>
+
+		<title>Yahoo! Weather - Altrincham, GB</title>
+		<link>http://us.rd.yahoo.com/dailynews/rss/weather/Altrincham__GB/*http://weather.yahoo.com/forecast/UKXX0004_c.html</link>
+		<description>Yahoo! Weather for Altrincham, GB</description>
+		<language>en-us</language>
+		<lastBuildDate>Sat, 12 Nov 2011 7:19 pm GMT</lastBuildDate>
+		<ttl>60</ttl>
+
+		<yweather:location
+			city="Altrincham"
+			region=""
+			country="United Kingdom" />
+		<yweather:units
+			temperature="C"
+			distance="km"
+			pressure="mb"
+			speed="km/h" />
+		<yweather:wind
+			chill="8"
+			direction="80"
+			speed="9.66" />
+		<yweather:atmosphere
+			humidity="93"
+			visibility="9.99"
+			pressure="1015.92"
+			rising="1" />
+		<yweather:astronomy
+			sunrise="7:26 am"
+			sunset="4:17 pm" />
+		<image>
+			<title>Yahoo! Weather</title>
+			<width>142</width>
+			<height>18</height>
+			<link>http://weather.yahoo.com</link>
+			<url>http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif</url>
+		</image>
+
+		<item>
+			<title>Conditions for Altrincham, GB at 7:19 pm GMT</title>
+			<geo:lat>53.39</geo:lat>
+			<geo:long>-2.35</geo:long>
+			<link>http://us.rd.yahoo.com/dailynews/rss/weather/Altrincham__GB/*http://weather.yahoo.com/forecast/UKXX0004_c.html</link>
+			<pubDate>Sat, 12 Nov 2011 7:19 pm GMT</pubDate>
+			<yweather:condition
+				text="Fair"
+				code="33"
+				temp="9"
+				date="Sat, 12 Nov 2011 7:19 pm GMT" />
+			<description><![CDATA[
+<img src="http://l.yimg.com/a/i/us/we/52/33.gif"/><br />
+<b>Current Conditions:</b><br />
+Fair, 9 C<BR />
+<BR /><b>Forecast:</b><BR />
+Sat - Cloudy. High: 13 Low: 11<br />
+Sun - Partly Cloudy. High: 13 Low: 7<br />
+<br />
+<a href="http://us.rd.yahoo.com/dailynews/rss/weather/Altrincham__GB/*http://weather.yahoo.com/forecast/UKXX0004_c.html">Full Forecast at Yahoo! Weather</a><BR/><BR/>
+(provided by <a href="http://www.weather.com" >The Weather Channel</a>)<br/>
+]]></description>
+			<yweather:forecast
+				day="Sat"
+				date="12 Nov 2011"
+				low="11"
+				high="13"
+				text="Cloudy"
+				code="26" />
+			<yweather:forecast
+				day="Sun"
+				date="13 Nov 2011"
+				low="7"
+				high="13"
+				text="Partly Cloudy"
+				code="30" />
+			<guid isPermaLink="false">UKXX0004_2011_11_13_7_00_GMT</guid>
+
+		</item>
+	</channel>
+</rss>
+<!-- api5.weather.ch1.yahoo.com compressed/chunked Sat Nov 12 11:52:08 PST 
+	2011 -->

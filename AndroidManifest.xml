@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.morgan.design"
+    android:versionCode="1"
+    android:versionName="0.0.1-SNAPSHOT" >
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+
+        <!-- Main activity , can dispatch view on load -->
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name=".android.ManageWeatherChoiceActivity" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Allows user to enter a location -->
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name=".android.EnterLocationActivity" >
+        </activity>
+
+        <!-- Lists out all known WOEID entries found -->
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name=".android.ListLocationsActivity" >
+        </activity>
+
+        <service
+            android:enabled="true"
+            android:label="@string/yahoo_notifcation_service"
+            android:name=".android.service.YahooWeatherNotifcationService" />
+        <service
+            android:enabled="true"
+            android:label="@string/yahoo_weather_loader_service"
+            android:name=".android.service.YahooWeatherLoaderService" />
+
+        <receiver
+            android:label="@string/app_name"
+            android:name=".android.broadcast.LaunchReceiver" >
+            <intent-filter >
+                <action android:name="com.morgan.design.android.broadcast.GET_WEATHER_FORCAST" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+
+</manifest>

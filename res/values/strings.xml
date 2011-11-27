@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="welcome">Welcome To WeatherSlider</string>
+    <string name="home_instructions">Please enter your location to get started</string>
+    <string name="app_name">WeatherSlider</string>
+    <string name="weather_service_started">Service Started</string>
+    <string name="weather_service_stopped">Service Stopped</string>
+    
+    <string name="yahoo_weather_loader_service">yahoo_weather_loader_service</string>
+    <string name="yahoo_notifcation_service">yahoo_notifcation_service</string>
+    
+    <string name="add_new_location_text">Add more locations</string>
+    <string name="modify_loaded_locaitons">Click location to modify</string>
+
+</resources>
