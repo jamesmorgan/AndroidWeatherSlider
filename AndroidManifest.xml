@@ -40,16 +40,20 @@
             android:label="@string/yahoo_weather_loader_service"
             android:name=".android.service.YahooWeatherLoaderService" />
 
+        <!-- Register periodic launcher for connectivity changed and get weather download -->
         <receiver
             android:label="@string/app_name"
             android:name=".android.broadcast.LaunchReceiver" >
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
             <intent-filter >
                 <action android:name="com.morgan.design.android.broadcast.GET_WEATHER_FORCAST" />
             </intent-filter>
         </receiver>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
