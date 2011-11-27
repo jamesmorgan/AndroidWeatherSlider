@@ -31,6 +31,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> google analytics
 	// FIXME -> add provider
 	// FIXME -> paid version
+	// FIXME -> start service on boot up
+	// FIXME -> start last known service on open
+	// FIXME -> localisation
+	// FIXME -> periodically query for weather
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
 

@@ -31,9 +31,10 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	private YahooWeatherNotifcationService mBoundNotificationService;
 
 	private YahooWeatherInfo currentWeather;
-	private boolean mIsNotificatoionServiceBound = false;
-
 	private WoeidChoiceDao woeidChoiceDao;
+	private String woeidId;
+
+	private boolean mIsNotificatoionServiceBound = false;
 
 	private final ServiceConnection mNotificationConnection = new ServiceConnection() {
 		@Override
@@ -49,8 +50,6 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			Logger.d(LOG_TAG, "Disconnected from weather service");
 		}
 	};
-
-	private String woeidId;
 
 	@Override
 	public IBinder onBind(final Intent arg) {

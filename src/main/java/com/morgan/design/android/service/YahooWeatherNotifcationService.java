@@ -81,10 +81,7 @@ public class YahooWeatherNotifcationService extends Service {
 
 		notification.setLatestEventInfo(this, forcastText, getContent(), createOpenWebLinkPendingIntent());
 
-		// FIXME -> add option so if setting allows, open URL of current clicked weather in browser Or open Information tab.
-
 		this.notificationManager.notify(this.NOTIFICATION, notification);
-
 	}
 
 	private String getContent() {

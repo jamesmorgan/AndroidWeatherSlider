@@ -17,7 +17,7 @@ import com.morgan.design.android.util.DateUtils;
 
 public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 
-	private final String LOG_TAG = "CurrentChoiceAdaptor";
+	protected final static String LOG_TAG = "CurrentChoiceAdaptor";
 
 	private final List<WoeidChoice> woeidChoices;
 	private final Activity context;

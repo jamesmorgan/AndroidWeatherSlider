@@ -14,7 +14,8 @@ import com.morgan.design.R;
 import com.morgan.design.android.domain.WOEIDEntry;
 
 public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
-	private final String LOG_TAG = "WOIEDAdaptor";
+
+	protected final static String LOG_TAG = "WOIEDAdaptor";
 
 	private final List<WOEIDEntry> woiedEntries;
 	private final Activity context;
