@@ -12,16 +12,18 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.morgan.design.R;
+import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.YahooRequestUtils;
 import com.morgan.design.android.util.Logger;
+import com.weatherslider.morgan.design.R;
 
-public class EnterLocationActivity extends Activity {
+public class EnterLocationActivity extends Activity implements SimpleGestureListener {
 
 	private static final String LOG_TAG = "EnterLocationActivity";
 
@@ -31,13 +33,34 @@ public class EnterLocationActivity extends Activity {
 	private ArrayList<WOEIDEntry> WOIEDlocations;
 
 	private boolean destroyed = false;
+	private SimpleGestureFilter detector;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		this.detector = new SimpleGestureFilter(this, this);
+		this.detector.setEnabled(true);
 		this.location = (EditText) findViewById(R.id.locationText);
+	}
+
+	@Override
+	public void onSwipe(final int direction) {
+		switch (direction) {
+			case SimpleGestureFilter.SWIPE_RIGHT:
+				onBackPressed();
+		}
+	}
+
+	@Override
+	public void onDoubleTap() {
+		// Do nothing at present
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(final MotionEvent me) {
+		this.detector.onTouchEvent(me);
+		return super.dispatchTouchEvent(me);
 	}
 
 	public void onGetLocation(final View v) {

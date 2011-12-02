@@ -3,7 +3,7 @@ package com.morgan.design.android.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.morgan.design.R;
+import com.weatherslider.morgan.design.R;
 
 public class YahooImageLoaderUtils {
 

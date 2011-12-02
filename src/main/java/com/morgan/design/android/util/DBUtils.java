@@ -5,7 +5,6 @@ import java.util.concurrent.Callable;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-
 public class DBUtils {
 
 	private static final String LOG_TAG = "DBUtils";
@@ -27,7 +26,11 @@ public class DBUtils {
 	@SuppressWarnings("unchecked")
 	public static <T> T executeInSafety(final Callable<?> callable) {
 		try {
-			return (T) callable.call();
+			final Object call = callable.call();
+			if (null == call) {
+				return null;
+			}
+			return (T) call;
 		}
 		catch (final SQLException sqlException) {
 			logError(sqlException);

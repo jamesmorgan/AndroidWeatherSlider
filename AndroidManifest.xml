@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.morgan.design"
+    package="com.weatherslider.morgan.design"
     android:versionCode="1"
     android:versionName="0.0.1-SNAPSHOT" >
 
@@ -11,7 +11,7 @@
         <!-- Main activity , can dispatch view on load -->
         <activity
             android:configChanges="keyboardHidden|orientation"
-            android:name=".android.ManageWeatherChoiceActivity" >
+            android:name="com.morgan.design.android.ManageWeatherChoiceActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,28 +22,37 @@
         <!-- Allows user to enter a location -->
         <activity
             android:configChanges="keyboardHidden|orientation"
-            android:name=".android.EnterLocationActivity" >
+            android:name="com.morgan.design.android.EnterLocationActivity" >
         </activity>
 
         <!-- Lists out all known WOEID entries found -->
         <activity
             android:configChanges="keyboardHidden|orientation"
-            android:name=".android.ListLocationsActivity" >
+            android:name="com.morgan.design.android.ListLocationsActivity" >
         </activity>
 
+        <!-- Lists all User Preferences -->
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.android.UserPreferencesActivity" />
+
+        <!-- Service which notifies about changes to the weather -->
         <service
             android:enabled="true"
             android:label="@string/yahoo_notifcation_service"
-            android:name=".android.service.YahooWeatherNotifcationService" />
+            android:name="com.morgan.design.android.service.YahooWeatherNotifcationService" />
+
+        <!-- Service which periodically queries for the latest weather -->
         <service
             android:enabled="true"
             android:label="@string/yahoo_weather_loader_service"
-            android:name=".android.service.YahooWeatherLoaderService" />
+            android:name="com.morgan.design.android.service.YahooWeatherLoaderService" />
 
-        <!-- Register periodic launcher for connectivity changed and get weather download -->
+        <!-- Register periodic launcher for connectivity changes and get weather download -->
         <receiver
-            android:label="@string/app_name"
-            android:name=".android.broadcast.LaunchReceiver" >
+            android:label="@string/periodic_reciever"
+            android:name="com.morgan.design.android.broadcast.LaunchReceiver" >
             <intent-filter >
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -51,9 +60,19 @@
                 <action android:name="com.morgan.design.android.broadcast.GET_WEATHER_FORCAST" />
             </intent-filter>
         </receiver>
+
+        <!-- Register for phone start-up event in order to start service if enabled -->
+        <receiver
+            android:label="@string/start_up_receiver"
+            android:name="com.morgan.design.android.broadcast.MyStartupIntentReceiver" >
+            <intent-filter >
+                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

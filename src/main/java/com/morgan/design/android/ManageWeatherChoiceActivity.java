@@ -13,11 +13,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
-import com.morgan.design.R;
+import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.dao.WoeidChoiceDao;
 import com.morgan.design.android.domain.orm.WoeidChoice;
@@ -25,23 +29,28 @@ import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.YahooWeatherLoaderService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.PreferenceUtils;
+import com.weatherslider.morgan.design.R;
 
-public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
+public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
 
 	// FIXME -> google analytics
 	// FIXME -> add provider
 	// FIXME -> paid version
-	// FIXME -> start service on boot up
-	// FIXME -> start last known service on open
 	// FIXME -> localisation
-	// FIXME -> periodically query for weather
-	// FIXME -> check phone has internet before launching?
+
+	// FIXME -> DONE - start service on phone boot boot up (paid version only)
+	// FIXME -> DONE - start last known service on open (paid version only)
+	// FIXME -> DONE - swipe navigation path - (add to manual)
+	// FIXME -> DONE - periodically query for weather
+	// FIXME -> DONE - check phone has Internet before launching?
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
 
 	public static final String LATEST_WEATHER_QUERY_COMPLETE = "com.morgan.design.intent.COMPLETED_LATEST_WEATHER_LOAD";
 	public static final int ENTER_LOCATION = 1;
 	public static final int SELECT_LOCATION = 2;
+	public static final int UPDATED_PREFERENCES = 3;
 
 	private WoeidChoiceDao woeidChoiceDao;
 
@@ -51,6 +60,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private NotificationManager notificationManager;
 
+	private SimpleGestureFilter detector;
 	private BroadcastReceiver broadcastReceiver;
 
 	@Override
@@ -58,6 +68,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_choice_layout);
 		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
+		this.detector = new SimpleGestureFilter(this, this);
+		this.detector.setEnabled(true);
 
 		this.woeidChoices = this.getWoeidChoiceDao().findAllWoeidChoices();
 		if (this.woeidChoices.isEmpty()) {
@@ -84,12 +96,53 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	@Override
+	public boolean onCreateOptionsMenu(final Menu menu) {
+		final MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.home_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.home_menu_changelog:
+				return true;
+			case R.id.home_menu_settings:
+				// TODO -> listen for call back on preferences and restart service
+				PreferenceUtils.openUserPreferenecesActivity(this);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
 	protected void onPause() {
 		super.onPause();
 		if (isNotNull(this.broadcastReceiver)) {
 			unregisterReceiver(this.broadcastReceiver);
 			this.broadcastReceiver = null;
 		}
+	}
+
+	@Override
+	public void onSwipe(final int direction) {
+		switch (direction) {
+			case SimpleGestureFilter.SWIPE_LEFT:
+				onAddNewLocation(null);
+				break;
+		}
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(final MotionEvent me) {
+		this.detector.onTouchEvent(me);
+		return super.dispatchTouchEvent(me);
+	}
+
+	@Override
+	public void onDoubleTap() {
+		// Do nothing at present
 	}
 
 	public void onAddNewLocation(final View view) {
@@ -115,6 +168,11 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				}
 				else if (resultCode == RESULT_CANCELED) {
 					Logger.d(LOG_TAG, "SELECT_LOCATION -> RESULT_CANCELED");
+				}
+				break;
+			case UPDATED_PREFERENCES:
+				if (resultCode == RESULT_OK) {
+					Logger.d(LOG_TAG, "UPDATED_PREFERENCES -> RESULT_OK");
 				}
 				break;
 			default:

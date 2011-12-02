@@ -9,25 +9,30 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
-import com.morgan.design.R;
+import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.WOIEDAdaptor;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.YahooWeatherLoaderService;
+import com.weatherslider.morgan.design.R;
 
-public class ListLocationsActivity extends ListActivity {
+public class ListLocationsActivity extends ListActivity implements SimpleGestureListener {
 
 	private WOIEDAdaptor adaptor;
 
 	private List<WOEIDEntry> WOIEDlocations;
+	private SimpleGestureFilter detector;
 
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.woied_list);
+		this.detector = new SimpleGestureFilter(this, this);
+		this.detector.setEnabled(true);
 
 		final Bundle extras = getIntent().getExtras();
 		if (null != extras) {
@@ -42,6 +47,26 @@ public class ListLocationsActivity extends ListActivity {
 		this.WOIEDlocations = locations;
 		this.adaptor = new WOIEDAdaptor(this, this.WOIEDlocations);
 		setListAdapter(this.adaptor);
+	}
+
+	@Override
+	public void onSwipe(final int direction) {
+		switch (direction) {
+			case SimpleGestureFilter.SWIPE_RIGHT:
+				onBackPressed();
+				break;
+		}
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(final MotionEvent me) {
+		this.detector.onTouchEvent(me);
+		return super.dispatchTouchEvent(me);
+	}
+
+	@Override
+	public void onDoubleTap() {
+		// Do nothing at present
 	}
 
 	@Override

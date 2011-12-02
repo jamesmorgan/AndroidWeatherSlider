@@ -27,6 +27,7 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.WoeidChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.PreferenceUtils;
 
 public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper> {
 
@@ -126,7 +127,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		final WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeidOrNewInstance(this.woeidId);
 
 		// FIXME -> when allowing more than one notification, get notification Id, plus ystem millis
-		if (null != this.mBoundNotificationService) {
+		if (null != woeidChoice && null != this.mBoundNotificationService) {
 			woeidChoice.setLastknownNotifcationId(this.mBoundNotificationService.getCurrentNotifcationId());
 		}
 
@@ -186,16 +187,18 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 				Logger.e(LOG_TAG, "Unknonw error when running periodic download weather data task", e);
 			}
 			finally {
-				// TODO settings for next query call
-
 				// TODO Confirm if required to create new one everytime
 				final Intent intentOnAlarm = new Intent(LaunchReceiver.GET_WEATHER_FORCAST);
 				intentOnAlarm.putExtra(CURRENT_WEATHER_WOEID, this.woeidId);
 				final PendingIntent broadcast =
 						PendingIntent.getBroadcast(YahooWeatherLoaderService.this, 0, intentOnAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
 
-				Logger.d(LOG_TAG, "Adding next repating alarm");
-				final long timer = SystemClock.elapsedRealtime() + 10000;
+				final int pollingSchedule = Integer.parseInt(PreferenceUtils.getPollingSchedule(getApplicationContext()));
+				Logger.d(LOG_TAG, "Polling scheduled [%s]", pollingSchedule);
+
+				final long timer = SystemClock.elapsedRealtime() + (pollingSchedule * (60 * 1000));
+				Logger.d(LOG_TAG, "Adding next repating alarm, timer [%s]", timer);
+
 				YahooWeatherLoaderService.this.alarms.set(AlarmManager.ELAPSED_REALTIME, timer, broadcast);
 			}
 			return null;

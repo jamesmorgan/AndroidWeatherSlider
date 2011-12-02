@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.morgan.design.R;
+import com.weatherslider.morgan.design.R;
 import com.morgan.design.android.domain.WOEIDEntry;
 
 public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {

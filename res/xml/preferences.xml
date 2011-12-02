@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="General Options" >
+
+        <!-- TODO -> Option to start on boot, paid version only -->
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="startOnBoot"
+            android:summary="Enable this to start on first boot"
+            android:title="Start On First Boot" />
+
+        <!-- TODO - On notification click option, open web or open overview dialog with link, possible option can show sample? -->
+        <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="overviewMode"
+            android:summary="Change what hapopens when you click"
+            android:title="Web or Overview mode" />
+
+        <!-- TODO - Option to disable google adds? -->
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="enableGoogleAnalytics"
+            android:summary="Thanks for helping improve this applicaiton"
+            android:title="Enhable Google Analytics" />
+
+        <!-- TODO - Show change log on start? -->
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="changelog"
+            android:summary="Show Change Log On Version Upgrade"
+            android:title="Change Log" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Refresh Options" >
+
+        <!-- When to check for weather updates from API -->
+
+        <ListPreference
+            android:defaultValue="0.15f"
+            android:entries="@array/polling_time"
+            android:entryValues="@array/polling_time_values"
+            android:key="pollingSchedule"
+            android:summary="Configure when you check of weather updates"
+            android:title="Weather Update Interval" />
+    </PreferenceCategory>
+
+    <!-- TODO - Option to show up to 3 notifications, paid version only -->
+    <!-- TODO - Option to pick API, e.g. Google/Yahoo -->
+
+</PreferenceScreen>

@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.morgan.design.R;
+import com.weatherslider.morgan.design.R;
 import com.morgan.design.android.domain.orm.WoeidChoice;
 import com.morgan.design.android.util.DateUtils;
 

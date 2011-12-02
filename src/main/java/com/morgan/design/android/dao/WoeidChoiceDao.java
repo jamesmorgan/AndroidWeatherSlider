@@ -39,10 +39,12 @@ public class WoeidChoiceDao {
 	}
 
 	public WoeidChoice findByWoeidOrNewInstance(final String woeidId) {
-
 		return DBUtils.executeInSafety(new Callable<WoeidChoice>() {
 			@Override
 			public WoeidChoice call() throws Exception {
+				if (null == woeidId) {
+					return null;
+				}
 				final PreparedQuery<WoeidChoice> preparedQuery =
 						getWoeidDao().queryBuilder().where().eq(WoeidChoice.WOEID_ID, woeidId).prepare();
 				WoeidChoice woeidChoice = getWoeidDao().queryForFirst(preparedQuery);

@@ -6,11 +6,11 @@
     <string name="app_name">WeatherSlider</string>
     <string name="weather_service_started">Service Started</string>
     <string name="weather_service_stopped">Service Stopped</string>
-    
     <string name="yahoo_weather_loader_service">yahoo_weather_loader_service</string>
     <string name="yahoo_notifcation_service">yahoo_notifcation_service</string>
-    
     <string name="add_new_location_text">Add more locations</string>
     <string name="modify_loaded_locaitons">Click location to modify</string>
+    <string name="periodic_reciever">Register periodic launcher for connectivity changes and get weather download</string>
+    <string name="start_up_receiver">Register for phone start-up event in order to start service if enabled</string>
 
 </resources>

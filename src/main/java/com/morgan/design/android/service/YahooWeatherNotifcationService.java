@@ -10,7 +10,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.morgan.design.R;
+import com.weatherslider.morgan.design.R;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 
 public class YahooWeatherNotifcationService extends Service {
