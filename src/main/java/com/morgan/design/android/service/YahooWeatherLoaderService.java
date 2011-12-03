@@ -136,15 +136,17 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			this.mBoundNotificationService.setWeatherInformation(this.currentWeather);
 		}
 		finally {
-			if (failed) {
-				woeidChoice.failedQuery();
-				this.woeidChoiceDao.update(woeidChoice);
+			if (null != woeidChoice) {
+				if (failed) {
+					woeidChoice.failedQuery();
+					this.woeidChoiceDao.update(woeidChoice);
+				}
+				else {
+					woeidChoice.successfullyQuery(this.currentWeather);
+					this.woeidChoiceDao.update(woeidChoice);
+				}
+				sendBroadcast(new Intent(ManageWeatherChoiceActivity.LATEST_WEATHER_QUERY_COMPLETE));
 			}
-			else {
-				woeidChoice.successfullyQuery(this.currentWeather);
-				this.woeidChoiceDao.update(woeidChoice);
-			}
-			sendBroadcast(new Intent(ManageWeatherChoiceActivity.LATEST_WEATHER_QUERY_COMPLETE));
 		}
 	}
 

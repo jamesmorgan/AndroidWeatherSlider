@@ -76,7 +76,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		this.WOIEDlocations = new ArrayList<WOEIDEntry>(locations);
 		Log.d("HelloAndroidActivity", String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
 
-		if (this.WOIEDlocations.isEmpty()) {
+		if (null == locations || locations.isEmpty()) {
 			Toast.makeText(this, String.format("Unable to find %s, please try again.", this.location.getText()), Toast.LENGTH_SHORT);
 		}
 		else {

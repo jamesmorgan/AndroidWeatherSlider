@@ -9,6 +9,8 @@ package com.weatherslider.morgan.design;
 
 public final class R {
     public static final class array {
+        public static final int overview_mode=0x7f060002;
+        public static final int overview_mode_values=0x7f060003;
         public static final int polling_time=0x7f060000;
         public static final int polling_time_values=0x7f060001;
     }
@@ -45,31 +47,33 @@ public final class R {
     }
     public static final class id {
         public static final int add_new_location=0x7f0a0007;
-        public static final int admin=0x7f0a000d;
-        public static final int country=0x7f0a000e;
+        public static final int admin=0x7f0a000e;
+        public static final int country=0x7f0a000f;
         public static final int edit_text_dialog=0x7f0a0000;
-        public static final int home_menu_changelog=0x7f0a0010;
-        public static final int home_menu_settings=0x7f0a000f;
+        public static final int home_menu_changelog=0x7f0a0011;
+        public static final int home_menu_settings=0x7f0a0010;
         public static final int image=0x7f0a0002;
-        public static final int last_time_updated=0x7f0a000a;
+        public static final int last_time_updated=0x7f0a000b;
         public static final int layout=0x7f0a0001;
-        public static final int location=0x7f0a0008;
+        public static final int location=0x7f0a0009;
         public static final int locationText=0x7f0a0005;
         public static final int lookUpLocationButton=0x7f0a0006;
-        public static final int main_location_text_layout=0x7f0a000b;
-        public static final int name=0x7f0a000c;
+        public static final int main_location_text_layout=0x7f0a000c;
+        public static final int name=0x7f0a000d;
         public static final int text=0x7f0a0004;
+        public static final int textView1=0x7f0a0008;
         public static final int title=0x7f0a0003;
-        public static final int weather_text=0x7f0a0009;
+        public static final int weather_text=0x7f0a000a;
     }
     public static final class layout {
         public static final int alert_dialog_text_entry=0x7f030000;
         public static final int custom_weather_notifcation=0x7f030001;
         public static final int main=0x7f030002;
         public static final int weather_choice_layout=0x7f030003;
-        public static final int woeid_choice_adaptor_layout=0x7f030004;
-        public static final int woied_list=0x7f030005;
-        public static final int woied_rowlayout=0x7f030006;
+        public static final int weather_overview=0x7f030004;
+        public static final int woeid_choice_adaptor_layout=0x7f030005;
+        public static final int woied_list=0x7f030006;
+        public static final int woied_rowlayout=0x7f030007;
     }
     public static final class menu {
         public static final int home_menu=0x7f090000;

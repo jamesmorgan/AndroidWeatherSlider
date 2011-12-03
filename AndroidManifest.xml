@@ -43,6 +43,18 @@
             android:label="@string/yahoo_notifcation_service"
             android:name="com.morgan.design.android.service.YahooWeatherNotifcationService" />
 
+        <!-- Weather Overview Screen -->
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.android.WeatherOverviewActivity" >
+            <intent-filter >
+                <action android:name="com.morgan.design.android.action.OPEN_WEATHER_VIEW" />
+            </intent-filter>
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <!-- Service which periodically queries for the latest weather -->
         <service
             android:enabled="true"

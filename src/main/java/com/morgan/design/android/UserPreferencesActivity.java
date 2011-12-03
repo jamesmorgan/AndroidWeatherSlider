@@ -5,6 +5,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
+import com.morgan.design.android.domain.OverviewMode;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.weatherslider.morgan.design.R;
@@ -32,7 +33,7 @@ public class UserPreferencesActivity extends PreferenceActivity {
 
 	@Override
 	public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen, final Preference pref) {
-		Logger.d(LOG_TAG, "Finding preferences : " + pref.getKey());
+		Logger.d(LOG_TAG, "Finding preferences : key=[" + pref.getKey() + "]");
 
 		if (pref.getKey().equals(PreferenceUtils.PREF_CHANGELOG)) {
 			findPreference(PreferenceUtils.PREF_CHANGELOG).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -64,6 +65,17 @@ public class UserPreferencesActivity extends PreferenceActivity {
 					setResult(RESULT_OK);
 					final Boolean booleanClicked = (Boolean) clicked;
 					return PreferenceUtils.setShouldStartOnBoot(getApplicationContext(), booleanClicked);
+				}
+			});
+		}
+
+		if (pref.getKey().equals(PreferenceUtils.PREF_OVERVIEW_MODE)) {
+			findPreference(PreferenceUtils.PREF_OVERVIEW_MODE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object overview) {
+					setResult(RESULT_OK);
+					final String overviewValue = (String) overview;
+					return PreferenceUtils.setOverviewMode(getApplicationContext(), OverviewMode.fromPref(overviewValue));
 				}
 			});
 		}

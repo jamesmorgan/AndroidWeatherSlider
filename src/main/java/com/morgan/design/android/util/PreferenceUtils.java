@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.morgan.design.android.UserPreferencesActivity;
+import com.morgan.design.android.domain.OverviewMode;
 
 public class PreferenceUtils {
 
@@ -40,6 +41,14 @@ public class PreferenceUtils {
 
 	public static boolean setPollingSchedule(final Context context, final String minutes) {
 		return getPrefs(context).edit().putString(PREF_POLLING_SCHEDULE, minutes).commit();
+	}
+
+	public static OverviewMode getOverviewMode(final Context context) {
+		return OverviewMode.to(getPrefs(context).getString(PREF_OVERVIEW_MODE, OverviewMode.WEB.name()));
+	}
+
+	public static boolean setOverviewMode(final Context context, final String overviewMode) {
+		return getPrefs(context).edit().putString(PREF_OVERVIEW_MODE, overviewMode).commit();
 	}
 
 	public static boolean shouldStartOnBoot(final Context context) {

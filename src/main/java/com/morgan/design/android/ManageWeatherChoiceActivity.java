@@ -38,7 +38,12 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> add provider
 	// FIXME -> paid version
 	// FIXME -> localisation
+	// FIXME -> pop-up overview mode
+	// FIXME -> improve notification when no locations found
 
+	// FIXME -> handle on click event notification event. opening overview, no design
+
+	// FIXME -> DONE - On click notification user preference (paid version only)
 	// FIXME -> DONE - start service on phone boot boot up (paid version only)
 	// FIXME -> DONE - start last known service on open (paid version only)
 	// FIXME -> DONE - swipe navigation path - (add to manual)

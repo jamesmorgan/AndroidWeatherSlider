@@ -10,10 +10,15 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.android.WeatherOverviewActivity;
+import com.morgan.design.android.domain.OverviewMode;
 import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.util.PreferenceUtils;
+import com.weatherslider.morgan.design.R;
 
 public class YahooWeatherNotifcationService extends Service {
+
+	private static final String OPEN_WEATHER_VIEW = "com.morgan.design.android.action.OPEN_WEATHER_VIEW";
 
 	private NotificationManager notificationManager;
 
@@ -77,11 +82,29 @@ public class YahooWeatherNotifcationService extends Service {
 				"Updated Weather Information, it is " + this.currentWeather.getCurrentText() + " in " + safeLocation + " "
 					+ this.currentWeather.getCountry();
 
-		final String forcastText = this.currentWeather.getCurrentText() + ", " + safeLocation;
+		final OverviewMode overviewMode = PreferenceUtils.getOverviewMode(getApplicationContext());
 
-		notification.setLatestEventInfo(this, forcastText, getContent(), createOpenWebLinkPendingIntent());
+		PendingIntent pendingIntent = null;;
+		if (OverviewMode.OVERVIEW.equals(overviewMode)) {
+			pendingIntent = createOpenOverviewActivity();
+		}
+		else if (OverviewMode.WEB.equals(overviewMode)) {
+			pendingIntent = createOpenWebLinkPendingIntent();
+		}
+
+		final String forcastText = this.currentWeather.getCurrentText() + ", " + safeLocation;
+		notification.setLatestEventInfo(this, forcastText, getContent(), pendingIntent);
 
 		this.notificationManager.notify(this.NOTIFICATION, notification);
+	}
+
+	private PendingIntent createOpenOverviewActivity() {
+		final Intent notifyIntent = new Intent(OPEN_WEATHER_VIEW);
+		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
+
+		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+		return contentIntent;
 	}
 
 	private String getContent() {
