@@ -1,15 +1,18 @@
 package com.morgan.design.android.service;
 
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
+import static com.morgan.design.android.util.ObjectUtils.isNull;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -20,7 +23,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.morgan.design.android.ManageWeatherChoiceActivity;
+import com.morgan.design.Consants;
 import com.morgan.design.android.broadcast.LaunchReceiver;
 import com.morgan.design.android.dao.WoeidChoiceDao;
 import com.morgan.design.android.domain.YahooWeatherInfo;
@@ -43,6 +46,8 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	private YahooWeatherInfo currentWeather;
 	private WoeidChoiceDao woeidChoiceDao;
 	private String woeidId;
+
+	private BroadcastReceiver preferencesChangedBroadcastReceiver;
 
 	private boolean mIsNotificatoionServiceBound = false;
 
@@ -71,15 +76,15 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		super.onCreate();
 		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
 		doBindService();
-
-		this.cnnxManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		this.alarms = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		doRegisterSystemServices();
+		doRegisterRecievers();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		doUnbindService();
+		doUnregisterService();
 	}
 
 	@Override
@@ -101,13 +106,6 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		}
 
 		return START_STICKY;
-	}
-
-	void doUnbindService() {
-		if (this.mIsNotificatoionServiceBound) {
-			unbindService(this.mNotificationConnection);
-			this.mIsNotificatoionServiceBound = false;
-		}
 	}
 
 	public void loadWeatherInfomation(final YahooWeatherInfo weatherInfo) {
@@ -145,7 +143,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 					woeidChoice.successfullyQuery(this.currentWeather);
 					this.woeidChoiceDao.update(woeidChoice);
 				}
-				sendBroadcast(new Intent(ManageWeatherChoiceActivity.LATEST_WEATHER_QUERY_COMPLETE));
+				sendBroadcast(new Intent(Consants.LATEST_WEATHER_QUERY_COMPLETE));
 			}
 		}
 	}
@@ -153,6 +151,45 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	void doBindService() {
 		bindService(new Intent(this, YahooWeatherNotifcationService.class), this.mNotificationConnection, Context.BIND_AUTO_CREATE);
 		this.mIsNotificatoionServiceBound = true;
+	}
+
+	private void doUnregisterService() {
+		if (isNotNull(this.preferencesChangedBroadcastReceiver)) {
+			unregisterReceiver(this.preferencesChangedBroadcastReceiver);
+			this.preferencesChangedBroadcastReceiver = null;
+		}
+	}
+
+	void doUnbindService() {
+		if (this.mIsNotificatoionServiceBound) {
+			unbindService(this.mNotificationConnection);
+			this.mIsNotificatoionServiceBound = false;
+		}
+	}
+
+	private void doRegisterSystemServices() {
+		this.cnnxManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		this.alarms = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+	}
+
+	private void doRegisterRecievers() {
+		if (isNull(this.preferencesChangedBroadcastReceiver)) {
+			this.preferencesChangedBroadcastReceiver = new BroadcastReceiver() {
+				@Override
+				public void onReceive(final Context context, final Intent intent) {
+					Logger.d(LOG_TAG, "Recieved: com.morgan.design.intent.PREFERENCES_UPDATED");
+					rebindPreferences();
+				}
+			};
+			registerReceiver(this.preferencesChangedBroadcastReceiver, new IntentFilter(Consants.PREFERENCES_UPDATED));
+		}
+	}
+
+	protected void rebindPreferences() {
+		if (null != this.mBoundNotificationService && this.mIsNotificatoionServiceBound) {
+			this.mBoundNotificationService.updatePreferences();
+			new DownloadWeatherInfoDataTask(this.woeidId).execute();
+		}
 	}
 
 	private class DownloadWeatherInfoDataTask extends AsyncTask<Void, Void, YahooWeatherInfo> {
@@ -215,5 +252,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			final NetworkInfo ni = YahooWeatherLoaderService.this.cnnxManager.getActiveNetworkInfo();
 			return ni == null || !ni.isAvailable() || !ni.isConnected();
 		}
+
 	}
+
 }

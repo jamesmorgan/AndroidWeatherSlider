@@ -6,21 +6,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.morgan.design.Consants;
 import com.morgan.design.android.UserPreferencesActivity;
 import com.morgan.design.android.domain.OverviewMode;
 
 public class PreferenceUtils {
 
-	public static final String PREF_OVERVIEW_MODE = "overviewMode";
 	public static final String PREF_ENABLE_GOOGLE_ANALYTICS = "enableGoogleAnalytics";
 
 	public static final String PREF_CHANGELOG = "changelog";
 	public static final String PREF_POLLING_SCHEDULE = "pollingSchedule";
 	public static final String PREF_START_ON_BOOT = "startOnBoot";
+	public static final String PREF_OVERVIEW_MODE = "overviewMode";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
-		activity.startActivityForResult(intent, UserPreferencesActivity.ACTIVITY_ID);
+		activity.startActivityForResult(intent, Consants.UPDATED_PREFERENCES);
 	}
 
 	private static SharedPreferences getPrefs(final Context context) {

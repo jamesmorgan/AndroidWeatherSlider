@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.morgan.design.Consants;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.YahooRequestUtils;
@@ -85,7 +86,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 			final Intent intent = new Intent(this, ListLocationsActivity.class);
 			intent.putExtras(extras);
-			startActivityForResult(intent, ManageWeatherChoiceActivity.SELECT_LOCATION);
+			startActivityForResult(intent, Consants.SELECT_LOCATION);
 		}
 	}
 
@@ -94,7 +95,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		super.onActivityResult(requestCode, resultCode, data);
 
 		switch (requestCode) {
-			case ManageWeatherChoiceActivity.SELECT_LOCATION:
+			case Consants.SELECT_LOCATION:
 				if (resultCode == RESULT_OK) {
 					setResult(RESULT_OK);
 					finish();
@@ -112,7 +113,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	@Override
 	public void onBackPressed() {
 		setResult(RESULT_CANCELED);
-		finishActivity(ManageWeatherChoiceActivity.ENTER_LOCATION);
+		finishActivity(Consants.ENTER_LOCATION);
 		super.finish();
 	}
 

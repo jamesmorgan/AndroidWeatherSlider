@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
+import com.morgan.design.Consants;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.dao.WoeidChoiceDao;
@@ -43,6 +44,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	// FIXME -> handle on click event notification event. opening overview, no design
 
+	// FIXME -> DONE - on preferences change notification service click handler
+	// FIXME -> DONE - on preferences change loader service polling options
 	// FIXME -> DONE - On click notification user preference (paid version only)
 	// FIXME -> DONE - start service on phone boot boot up (paid version only)
 	// FIXME -> DONE - start last known service on open (paid version only)
@@ -51,11 +54,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> DONE - check phone has Internet before launching?
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
-
-	public static final String LATEST_WEATHER_QUERY_COMPLETE = "com.morgan.design.intent.COMPLETED_LATEST_WEATHER_LOAD";
-	public static final int ENTER_LOCATION = 1;
-	public static final int SELECT_LOCATION = 2;
-	public static final int UPDATED_PREFERENCES = 3;
 
 	private WoeidChoiceDao woeidChoiceDao;
 
@@ -96,7 +94,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 					reLoadWoeidChoices();
 				}
 			};
-			registerReceiver(this.broadcastReceiver, new IntentFilter(LATEST_WEATHER_QUERY_COMPLETE));
+			registerReceiver(this.broadcastReceiver, new IntentFilter(Consants.LATEST_WEATHER_QUERY_COMPLETE));
 		}
 	}
 
@@ -113,7 +111,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case R.id.home_menu_changelog:
 				return true;
 			case R.id.home_menu_settings:
-				// TODO -> listen for call back on preferences and restart service
 				PreferenceUtils.openUserPreferenecesActivity(this);
 				return true;
 			default:
@@ -152,32 +149,26 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	public void onAddNewLocation(final View view) {
 		final Intent intent = new Intent(this, EnterLocationActivity.class);
-		startActivityForResult(intent, ENTER_LOCATION);
+		startActivityForResult(intent, Consants.ENTER_LOCATION);
 	}
 
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-			case ENTER_LOCATION:
+			case Consants.ENTER_LOCATION:
 				if (resultCode == RESULT_OK) {
 					Logger.d(LOG_TAG, "ENTER_LOCATION -> RESULT_OK");
 				}
-				else if (resultCode == RESULT_CANCELED) {
-					Logger.d(LOG_TAG, "ENTER_LOCATION -> RESULT_CANCELED");
-				}
 				break;
-			case SELECT_LOCATION:
+			case Consants.SELECT_LOCATION:
 				if (resultCode == RESULT_OK) {
 					Logger.d(LOG_TAG, "SELECT_LOCATION -> RESULT_OK");
 				}
-				else if (resultCode == RESULT_CANCELED) {
-					Logger.d(LOG_TAG, "SELECT_LOCATION -> RESULT_CANCELED");
-				}
 				break;
-			case UPDATED_PREFERENCES:
+			case Consants.UPDATED_PREFERENCES:
 				if (resultCode == RESULT_OK) {
-					Logger.d(LOG_TAG, "UPDATED_PREFERENCES -> RESULT_OK");
+					sendBroadcast(new Intent(Consants.PREFERENCES_UPDATED));
 				}
 				break;
 			default:

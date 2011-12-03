@@ -82,20 +82,23 @@ public class YahooWeatherNotifcationService extends Service {
 				"Updated Weather Information, it is " + this.currentWeather.getCurrentText() + " in " + safeLocation + " "
 					+ this.currentWeather.getCountry();
 
-		final OverviewMode overviewMode = PreferenceUtils.getOverviewMode(getApplicationContext());
-
-		PendingIntent pendingIntent = null;;
-		if (OverviewMode.OVERVIEW.equals(overviewMode)) {
-			pendingIntent = createOpenOverviewActivity();
-		}
-		else if (OverviewMode.WEB.equals(overviewMode)) {
-			pendingIntent = createOpenWebLinkPendingIntent();
-		}
+		final PendingIntent pendingIntent = createIntent();;
 
 		final String forcastText = this.currentWeather.getCurrentText() + ", " + safeLocation;
 		notification.setLatestEventInfo(this, forcastText, getContent(), pendingIntent);
 
 		this.notificationManager.notify(this.NOTIFICATION, notification);
+	}
+
+	private PendingIntent createIntent() {
+		final OverviewMode overviewMode = PreferenceUtils.getOverviewMode(getApplicationContext());
+		if (OverviewMode.OVERVIEW.equals(overviewMode)) {
+			return createOpenOverviewActivity();
+		}
+		else if (OverviewMode.WEB.equals(overviewMode)) {
+			return createOpenWebLinkPendingIntent();
+		}
+		return null;
 	}
 
 	private PendingIntent createOpenOverviewActivity() {
@@ -128,6 +131,12 @@ public class YahooWeatherNotifcationService extends Service {
 		final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(this.currentWeather.getLink()));
 		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, viewIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 		return contentIntent;
+	}
+
+	public void updatePreferences() {
+		if (null != this.currentWeather) {
+			showNotification();
+		}
 	}
 
 	public void setWeatherInformation(final YahooWeatherInfo currentWeather) {
