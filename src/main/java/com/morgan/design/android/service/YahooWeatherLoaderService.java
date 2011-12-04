@@ -20,10 +20,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.Constants;
+import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.dao.WoeidChoiceDao;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.WoeidChoice;
@@ -94,7 +94,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			if (isNotNull(extras)) {
 
 				this.woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
-				Log.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + this.woeidId);
+				Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + this.woeidId);
 
 				new DownloadWeatherInfoDataTask(this.woeidId).execute();
 			}
@@ -116,6 +116,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	}
 
 	protected void setUpdateWeatherInfoForService() {
+		getToLevelApplication().setCurrentWoeid(this.woeidId);
 
 		final WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeidOrNewInstance(this.woeidId);
 
@@ -173,11 +174,20 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved: com.morgan.design.intent.PREFERENCES_UPDATED");
-					rebindPreferences();
+
+					final String woeidId = getToLevelApplication().getCurrentWoied();
+					if (null != woeidId) {
+						YahooWeatherLoaderService.this.woeidId = woeidId;
+						rebindPreferences();
+					}
 				}
 			};
 			registerReceiver(this.preferencesChangedBroadcastReceiver, new IntentFilter(Constants.PREFERENCES_UPDATED));
 		}
+	}
+
+	protected WeatherSliderApplication getToLevelApplication() {
+		return ((WeatherSliderApplication) getApplication());
 	}
 
 	protected void rebindPreferences() {

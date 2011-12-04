@@ -24,6 +24,9 @@ public class LaunchReceiver extends BroadcastReceiver {
 			final Bundle extras = intent.getExtras();
 			if (isNotNull(extras)) {
 				final String woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
+
+				Toast.makeText(context, String.format("Starting service, WOEID = [%s]", woeidId), Toast.LENGTH_LONG).show();
+
 				Logger.d("LaunchReceiver", "LaunchReceiver recieved intent containing CURRENT_WEATHER_WOEID [%s]", woeidId);
 				service.putExtra(Constants.CURRENT_WEATHER_WOEID, woeidId);
 			}

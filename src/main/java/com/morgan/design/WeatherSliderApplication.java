@@ -7,6 +7,7 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 public class WeatherSliderApplication extends Application {
 
 	private YahooWeatherInfo currentWeather;
+	private String currentWoeid;
 
 	public YahooWeatherInfo getCurrentWeather() {
 		return this.currentWeather;
@@ -14,6 +15,14 @@ public class WeatherSliderApplication extends Application {
 
 	public void setCurrentWeather(final YahooWeatherInfo currentWeather) {
 		this.currentWeather = currentWeather;
+	}
+
+	public void setCurrentWoeid(final String currentWoeid) {
+		this.currentWoeid = currentWoeid;
+	}
+
+	public String getCurrentWoied() {
+		return this.currentWoeid;
 	}
 
 }

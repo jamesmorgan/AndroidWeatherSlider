@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.weatherslider.morgan.design.R;
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.weatherslider.morgan.design.R;
 
 public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 
@@ -45,8 +45,6 @@ public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 
 		final WOEIDEntry entry = this.woiedEntries.get(position);
 		// Logger.d(this.LOG_TAG, entry.getName() + ", " + entry.getCountry());
-
-		// FIXME -> add country flags
 
 		if (entry != null) {
 			final TextView name = (TextView) view.findViewById(R.id.name);

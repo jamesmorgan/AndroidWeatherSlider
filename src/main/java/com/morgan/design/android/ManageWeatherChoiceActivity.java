@@ -44,8 +44,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> add flags for each country
 	// FIXME -> cancel all active notifications
 	// FIXME -> allow for multiple notifications at once (paid version only)
+	// FIXME -> replace single current woeid with hash map of notification id and woeid when running multiple
 	// FIXME -> Open location on map from notification click handler
-	// FIXME -> Show location on a small map in overview mode
+	// FIXME -> Show location on a small map in overview mode?
 
 	// FIXME -> handle on click event notification event. opening overview, no design
 

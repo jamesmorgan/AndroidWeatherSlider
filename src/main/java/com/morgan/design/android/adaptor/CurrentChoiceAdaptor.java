@@ -11,9 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.weatherslider.morgan.design.R;
 import com.morgan.design.android.domain.orm.WoeidChoice;
 import com.morgan.design.android.util.DateUtils;
+import com.weatherslider.morgan.design.R;
 
 public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 
@@ -48,8 +48,6 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 		}
 
 		final WoeidChoice woeidChoice = this.woeidChoices.get(position);
-
-		// FIXME -> add country flags
 
 		if (woeidChoice != null) {
 
