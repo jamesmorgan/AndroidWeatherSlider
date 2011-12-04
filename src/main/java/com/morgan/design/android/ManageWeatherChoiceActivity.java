@@ -47,6 +47,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> Show location on a small map in overview mode?
+	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
+	// FIXME -> Add option for C or F when retrieving temperature
 
 	// FIXME -> handle on click event notification event. opening overview, no design
 

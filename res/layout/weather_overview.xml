@@ -101,16 +101,19 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
+                android:id="@+id/wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Speed" />
 
             <TextView
+                android:id="@+id/wind_chill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chill" />
 
             <TextView
+                android:id="@+id/wind_direction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Direction" />
@@ -128,15 +131,41 @@
                 android:text=" Sun Info "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rise" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
 
-            <TextView
+                <ImageView
+                    android:layout_width="16dip"
+                    android:layout_height="16dip"
+                    android:src="@drawable/sun_rise" />
+
+                <TextView
+                    android:id="@+id/sun_rise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rise" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="16dip"
+                    android:layout_height="16dip"
+                    android:src="@drawable/sun_set" />
+
+                <TextView
+                    android:id="@+id/sun_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -152,11 +181,13 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
+                android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Value" />
 
             <TextView
+                android:id="@+id/humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Humidity" />

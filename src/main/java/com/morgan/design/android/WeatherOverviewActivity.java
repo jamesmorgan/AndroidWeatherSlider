@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.util.DegreeToDirectionConverter;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
@@ -54,22 +55,42 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 
 	private void setLocationDetails() {
 		// TODO Auto-generated method stub
-
 	}
+
+	private TextView wind_speed;
+	private TextView wind_chill;
+	private TextView wind_direction;
 
 	private void setWindDetails() {
-		// TODO Auto-generated method stub
+		this.wind_speed = (TextView) findViewById(R.id.wind_speed);
+		this.wind_chill = (TextView) findViewById(R.id.wind_chill);
+		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
+		this.wind_speed.setText(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit());
+		this.wind_chill.setText(this.currentWeather.getWindChill() + this.currentWeather.getTemperatureUnit());
+		this.wind_direction.setText(DegreeToDirectionConverter.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
 	}
+
+	private TextView sun_rise;
+	private TextView sun_set;
 
 	private void setSunDetails() {
-		// TODO Auto-generated method stub
+		this.sun_rise = (TextView) findViewById(R.id.sun_rise);
+		this.sun_set = (TextView) findViewById(R.id.sun_set);
 
+		this.sun_rise.setText(this.currentWeather.getSunRise());
+		this.sun_set.setText(this.currentWeather.getSunSet());
 	}
 
-	private void setTemperatureDetails() {
-		// TODO Auto-generated method stub
+	private TextView temperature;
+	private TextView humidity;
 
+	private void setTemperatureDetails() {
+		this.temperature = (TextView) findViewById(R.id.temperature);
+		this.humidity = (TextView) findViewById(R.id.humidity);
+
+		this.temperature.setText(this.currentWeather.getCurrentTemp() + this.currentWeather.getTemperatureUnit());
+		this.humidity.setText(this.currentWeather.getHumidity() + "%");
 	}
 
 	// /////////////////////////////////////////////
