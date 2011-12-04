@@ -63,19 +63,22 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
+                    android:id="@+id/location_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Place Name" />
-
+
                 <TextView
+                    android:id="@+id/location_b"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="City" />
 
                 <TextView
+                    android:id="@+id/location_lat_long"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Postal Code | long &amp; Lat" />
+                    android:text="long &amp; Lat" />
             </LinearLayout>
         </TableRow>
     </TableLayout>
@@ -101,16 +104,16 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/wind_speed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Speed" />
-
-            <TextView
                 android:id="@+id/wind_chill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chill" />
+
+            <TextView
+                android:id="@+id/wind_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Speed" />
 
             <TextView
                 android:id="@+id/wind_direction"

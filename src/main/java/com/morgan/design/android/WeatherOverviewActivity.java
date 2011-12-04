@@ -1,5 +1,6 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -11,6 +12,7 @@ import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.util.DegreeToDirectionConverter;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.TempUtils;
 import com.weatherslider.morgan.design.R;
 
 public class WeatherOverviewActivity extends Activity implements SimpleGestureListener {
@@ -53,8 +55,29 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.weather_image.setImageResource(this.currentWeather.getCurrentCode());
 	}
 
+	private TextView location_1;
+	private TextView location_2;
+	private TextView location_lat_long;
+
 	private void setLocationDetails() {
-		// TODO Auto-generated method stub
+		this.location_1 = (TextView) findViewById(R.id.location_a);
+		this.location_2 = (TextView) findViewById(R.id.location_b);
+		this.location_lat_long = (TextView) findViewById(R.id.location_lat_long);
+
+		String location2 = "";
+		if (stringHasValue(this.currentWeather.getCountry())) {
+			location2 += this.currentWeather.getCountry();
+		}
+		if (stringHasValue(this.currentWeather.getRegion())) {
+			location2 += stringHasValue(location2)
+					? ", " + this.currentWeather.getRegion()
+					: this.currentWeather.getRegion();
+		}
+
+		this.location_1.setText(this.currentWeather.getCity());
+		this.location_2.setText(location2);
+		this.location_lat_long.setText(String.format("Lat: %s | Long: %s", this.currentWeather.getLatitude(),
+				this.currentWeather.getLongitude()));
 	}
 
 	private TextView wind_speed;
@@ -67,7 +90,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
 		this.wind_speed.setText(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit());
-		this.wind_chill.setText(this.currentWeather.getWindChill() + this.currentWeather.getTemperatureUnit());
+		this.wind_chill.setText(this.currentWeather.getWindChill() + TempUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.wind_direction.setText(DegreeToDirectionConverter.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
 	}
 
@@ -89,7 +112,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.temperature = (TextView) findViewById(R.id.temperature);
 		this.humidity = (TextView) findViewById(R.id.humidity);
 
-		this.temperature.setText(this.currentWeather.getCurrentTemp() + this.currentWeather.getTemperatureUnit());
+		this.temperature.setText(this.currentWeather.getCurrentTemp()
+			+ TempUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.humidity.setText(this.currentWeather.getHumidity() + "%");
 	}
 

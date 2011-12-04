@@ -50,8 +50,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Add option for C or F when retrieving temperature
 
-	// FIXME -> handle on click event notification event. opening overview, no design
-
+	// FIXME -> DONE - handle on click event notification event. opening overview, inital design
+	// FIXME -> DONE - Create converter for decimal degrees to human readable wind direction
+	// FIXME -> DONE - Add icons over view sun set and rise
 	// FIXME -> DONE - Ensure Home screen is always updated on application focus/launch
 	// FIXME -> DONE - Query Yahoo based on GPS location (paid version only)
 	// FIXME -> DONE - GPS based location finding (paid version only)
