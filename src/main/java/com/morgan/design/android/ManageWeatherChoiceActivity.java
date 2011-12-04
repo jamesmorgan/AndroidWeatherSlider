@@ -50,6 +50,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	// FIXME -> handle on click event notification event. opening overview, no design
 
+	// FIXME -> DONE - Ensure Home screen is always updated on application focus/launch
 	// FIXME -> DONE - Query Yahoo based on GPS location (paid version only)
 	// FIXME -> DONE - GPS based location finding (paid version only)
 	// FIXME -> DONE - on preferences change notification service click handler
@@ -81,15 +82,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
-
-		this.woeidChoices = this.getWoeidChoiceDao().findAllWoeidChoices();
-		if (this.woeidChoices.isEmpty()) {
-			onAddNewLocation(null);
-		}
-		else {
-			this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
-			setListAdapter(this.adaptor);
-		}
+		reloadCurrentWeatherNotifications();
 	}
 
 	@Override
@@ -103,6 +96,16 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				}
 			};
 			registerReceiver(this.weatherQueryCompleteBroadcastReceiver, new IntentFilter(Constants.LATEST_WEATHER_QUERY_COMPLETE));
+		}
+		reloadCurrentWeatherNotifications();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (isNotNull(this.weatherQueryCompleteBroadcastReceiver)) {
+			unregisterReceiver(this.weatherQueryCompleteBroadcastReceiver);
+			this.weatherQueryCompleteBroadcastReceiver = null;
 		}
 	}
 
@@ -124,40 +127,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (isNotNull(this.weatherQueryCompleteBroadcastReceiver)) {
-			unregisterReceiver(this.weatherQueryCompleteBroadcastReceiver);
-			this.weatherQueryCompleteBroadcastReceiver = null;
-		}
-	}
-
-	@Override
-	public void onSwipe(final int direction) {
-		switch (direction) {
-			case SimpleGestureFilter.SWIPE_LEFT:
-				onAddNewLocation(null);
-				break;
-		}
-	}
-
-	@Override
-	public boolean dispatchTouchEvent(final MotionEvent me) {
-		this.detector.onTouchEvent(me);
-		return super.dispatchTouchEvent(me);
-	}
-
-	@Override
-	public void onDoubleTap() {
-		// Do nothing at present
-	}
-
-	public void onAddNewLocation(final View view) {
-		final Intent intent = new Intent(this, EnterLocationActivity.class);
-		startActivityForResult(intent, Constants.ENTER_LOCATION);
 	}
 
 	@Override
@@ -184,12 +153,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		}
 	}
 
-	private void reLoadWoeidChoices() {
-		this.woeidChoices = this.getWoeidChoiceDao().findAllWoeidChoices();
-		this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
-		setListAdapter(this.adaptor);
-	}
-
 	@Override
 	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		super.onListItemClick(l, v, position, id);
@@ -213,21 +176,34 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Load", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
-				loadWoeidLocation(woeidChoice);
+				onLoadWoeidLocation(woeidChoice);
 			}
 		});
 		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Remove", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
-				getWoeidChoiceDao().delete(woeidChoice);
-				attemptToKillNotifcation(woeidChoice);
-				removeItemFromList(woeidChoice);
+				onRemoveNotiifcaiton(woeidChoice);
 			}
 		});
 		alertDialog.show();
 	}
 
-	protected void loadWoeidLocation(final WoeidChoice woeidChoice) {
+	// ///////////////////////////////////////
+	// ///////////// Click Handlers //////////
+	// ///////////////////////////////////////
+
+	public void onAddNewLocation(final View view) {
+		final Intent intent = new Intent(this, EnterLocationActivity.class);
+		startActivityForResult(intent, Constants.ENTER_LOCATION);
+	}
+
+	protected void onRemoveNotiifcaiton(final WoeidChoice woeidChoice) {
+		this.woeidChoiceDao.delete(woeidChoice);
+		attemptToKillNotifcation(woeidChoice);
+		removeItemFromList(woeidChoice);
+	}
+
+	protected void onLoadWoeidLocation(final WoeidChoice woeidChoice) {
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(Constants.CURRENT_WEATHER_WOEID, woeidChoice.getWoeid());
 
@@ -235,6 +211,27 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		intent.putExtras(bundle);
 
 		startService(intent);
+	}
+
+	// //////////////////////////////////////////
+	// ///////////// General / Utility //////////
+	// //////////////////////////////////////////
+
+	private void reLoadWoeidChoices() {
+		this.woeidChoices = this.woeidChoiceDao.findAllWoeidChoices();
+		this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
+		setListAdapter(this.adaptor);
+	}
+
+	private void reloadCurrentWeatherNotifications() {
+		this.woeidChoices = this.woeidChoiceDao.findAllWoeidChoices();
+		if (this.woeidChoices.isEmpty()) {
+			onAddNewLocation(null);
+		}
+		else {
+			this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
+			setListAdapter(this.adaptor);
+		}
 	}
 
 	protected void removeItemFromList(final WoeidChoice woeidChoice) {
@@ -248,7 +245,27 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.notificationManager.cancel(woeidChoice.getLastknownNotifcationId());
 	}
 
-	protected WoeidChoiceDao getWoeidChoiceDao() {
-		return this.woeidChoiceDao;
+	// /////////////////////////////////////////////
+	// ////////// Swipe Gestures ///////////////////
+	// /////////////////////////////////////////////
+
+	@Override
+	public void onSwipe(final int direction) {
+		switch (direction) {
+			case SimpleGestureFilter.SWIPE_LEFT:
+				onAddNewLocation(null);
+				break;
+		}
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(final MotionEvent me) {
+		this.detector.onTouchEvent(me);
+		return super.dispatchTouchEvent(me);
+	}
+
+	@Override
+	public void onDoubleTap() {
+		// Do nothing at present
 	}
 }

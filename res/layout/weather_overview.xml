@@ -32,12 +32,14 @@
                 android:orientation="vertical" >
 
                 <TextView
+                    android:id="@+id/weather_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Current Weather Description"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <ImageView
+                    android:id="@+id/weather_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/a0" />
@@ -152,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="asdasd" />
+                android:text="Value" />
 
             <TextView
                 android:layout_width="wrap_content"
