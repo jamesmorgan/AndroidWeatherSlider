@@ -7,7 +7,6 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,6 +50,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		doBindService();
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.location = (EditText) findViewById(R.id.locationText);
@@ -61,6 +61,21 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		super.onDestroy();
 		this.destroyed = true;
 		doUnbindService();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		dismissLoadingProgress();
+		if (this.mIsLocationServiceBound && null != this.mBoundMyLocationService) {
+			this.mBoundMyLocationService.cancelTimer();
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		doBindService();
 	}
 
 	@Override
@@ -95,7 +110,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	public void onGetLocation(final View v) {
 		final String location = this.location.getText().toString();
 		if (null == location || "".equals(location)) {
-			Toast.makeText(this, "Please enter a location.", Toast.LENGTH_SHORT);
+			Toast.makeText(this, "Please enter a location.", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		lookupLocation(location);
@@ -106,6 +121,12 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			doBindService();
 		}
 		showLoadingProgress();
+		if (null != this.mBoundMyLocationService && this.mIsLocationServiceBound) {
+			this.mBoundMyLocationService.getLocation(this, this.locationResult);
+		}
+		else {
+			dismissLoadingProgress();
+		}
 	}
 
 	// //////////////////////////////////////////
@@ -117,7 +138,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		Log.d("HelloAndroidActivity", String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
 
 		if (null == locations || locations.isEmpty()) {
-			Toast.makeText(this, String.format("Unable to find %s, please try again.", this.location.getText()), Toast.LENGTH_SHORT);
+			Toast.makeText(this, String.format("Unable to find %s, please try again.", this.location.getText()), Toast.LENGTH_SHORT).show();
 		}
 		else {
 			final Bundle extras = new Bundle();
@@ -154,38 +175,39 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	private final ServiceConnection mConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(final ComponentName className, final IBinder service) {
-			EnterLocationActivity.this.mBoundMyLocationService = ((GetMyLocationService.LocalBinder) service).getService();
-			EnterLocationActivity.this.mBoundMyLocationService.getLocation(EnterLocationActivity.this,
-					EnterLocationActivity.this.locationResult);
 			Logger.d(LOG_TAG, "Successfully loaded gps service");
+			EnterLocationActivity.this.mBoundMyLocationService = ((GetMyLocationService.LocalBinder) service).getService();
 		}
 
 		@Override
 		public void onServiceDisconnected(final ComponentName className) {
-			EnterLocationActivity.this.mBoundMyLocationService = null;
-			new AlertDialog.Builder(EnterLocationActivity.this).setMessage("Unable to locate your location.").create().show();
-			dismissLoadingProgress();
 			Logger.d(LOG_TAG, "Disconnected from gps service");
+			EnterLocationActivity.this.mBoundMyLocationService = null;
+			Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
+					Toast.LENGTH_SHORT).show();
+			dismissLoadingProgress();
 		}
 	};
 
 	public LocationResult locationResult = new LocationResult() {
 		@Override
 		public void onLocationChanged(final Location location) {
-			if (null != location) {
-				handleLocationChanged(location);
-			}
-			else {
-				new AlertDialog.Builder(EnterLocationActivity.this).setMessage("Unable to locate your location.").create().show();
-			}
-			dismissLoadingProgress();
+			EnterLocationActivity.this.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					dismissLoadingProgress();
+					if (null != location) {
+						Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
+						new DownloadWOIEDDataTaskFromLocation(location).execute();
+					}
+					else {
+						Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
+								Toast.LENGTH_SHORT);
+					}
+				};
+			});
 		}
 	};
-
-	protected void handleLocationChanged(final Location location) {
-		Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
-		// TODO handle location change event
-	}
 
 	void doBindService() {
 		bindService(new Intent(this, GetMyLocationService.class), this.mConnection, Context.BIND_AUTO_CREATE);
@@ -231,6 +253,38 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		private final String location;
 
 		public DownloadWOIEDDataTask(final String location) {
+			this.location = location;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			showLoadingProgress();
+		}
+
+		@Override
+		protected List<WOEIDEntry> doInBackground(final Void... params) {
+			final String url = YahooRequestUtils.getInstance().createQuerryGetWoeid(this.location);
+
+			final RestTemplate restTemplate = new RestTemplate();
+			restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+
+			final String woiedResponse = restTemplate.getForObject(url, String.class);
+			return YahooRequestUtils.getInstance().parseWOIEDResults(woiedResponse);
+		}
+
+		@Override
+		protected void onPostExecute(final List<WOEIDEntry> locations) {
+			dismissLoadingProgress();
+			refreshAvailableLocations(locations);
+		}
+
+	}
+
+	private class DownloadWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, List<WOEIDEntry>> {
+
+		private final Location location;
+
+		public DownloadWOIEDDataTaskFromLocation(final Location location) {
 			this.location = location;
 		}
 

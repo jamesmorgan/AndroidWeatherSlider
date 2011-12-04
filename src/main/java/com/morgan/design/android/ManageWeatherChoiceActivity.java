@@ -41,14 +41,15 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> localisation
 	// FIXME -> pop-up overview mode
 	// FIXME -> improve notification when no locations found
+	// FIXME -> add flags for each country
 	// FIXME -> cancel all active notifications
 	// FIXME -> allow for multiple notifications at once (paid version only)
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> Show location on a small map in overview mode
 
 	// FIXME -> handle on click event notification event. opening overview, no design
-	// FIXME -> Query Yahoo based on GPS location (paid version only)
 
+	// FIXME -> DONE - Query Yahoo based on GPS location (paid version only)
 	// FIXME -> DONE - GPS based location finding (paid version only)
 	// FIXME -> DONE - on preferences change notification service click handler
 	// FIXME -> DONE - on preferences change loader service polling options

@@ -84,6 +84,20 @@ public class GetMyLocationService extends Service {
 		return true;
 	}
 
+	public void cancelTimer() {
+		if (null != this.timer) {
+			this.timer.cancel();
+		}
+		if (null != this.locationManager) {
+			if (null != this.locationListenerGps) {
+				this.locationManager.removeUpdates(this.locationListenerGps);
+			}
+			if (null != this.locationListenerNetwork) {
+				this.locationManager.removeUpdates(this.locationListenerNetwork);
+			}
+		}
+	}
+
 	LocationListener locationListenerGps = new LocationListener() {
 		@Override
 		public void onLocationChanged(final Location location) {

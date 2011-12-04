@@ -2,7 +2,7 @@
 <resources>
 
     <string name="welcome">Welcome To WeatherSlider</string>
-    <string name="home_instructions">Please enter your location to get started or Click Get GPS Location</string>
+    <string name="home_instructions">Please enter your location to get started: \n - Enter a location e.g. postal code or town \n - Or request your location via GPS/Network</string>
     <string name="app_name">WeatherSlider</string>
     <string name="weather_service_started">Service Started</string>
     <string name="weather_service_stopped">Service Stopped</string>
