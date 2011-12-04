@@ -46,26 +46,29 @@ public final class R {
         public static final int icon=0x7f02001a;
     }
     public static final class id {
-        public static final int add_new_location=0x7f0a0009;
-        public static final int admin=0x7f0a0010;
-        public static final int country=0x7f0a0011;
+        public static final int add_new_location=0x7f0a000a;
+        public static final int additionaal_details_container=0x7f0a000d;
+        public static final int admin=0x7f0a0013;
+        public static final int country=0x7f0a0014;
         public static final int edit_text_dialog=0x7f0a0000;
         public static final int enter_location_container=0x7f0a0005;
-        public static final int getMyLocationButton=0x7f0a0008;
-        public static final int home_menu_changelog=0x7f0a0013;
-        public static final int home_menu_settings=0x7f0a0012;
+        public static final int getMyLocationButton=0x7f0a0009;
+        public static final int home_menu_changelog=0x7f0a0016;
+        public static final int home_menu_settings=0x7f0a0015;
         public static final int image=0x7f0a0002;
-        public static final int last_time_updated=0x7f0a000d;
+        public static final int last_time_updated=0x7f0a0010;
         public static final int layout=0x7f0a0001;
-        public static final int location=0x7f0a000b;
+        public static final int location=0x7f0a000e;
         public static final int locationText=0x7f0a0006;
         public static final int lookUpLocationButton=0x7f0a0007;
-        public static final int main_location_text_layout=0x7f0a000e;
-        public static final int name=0x7f0a000f;
+        public static final int main_location_text_layout=0x7f0a0011;
+        public static final int name=0x7f0a0012;
+        public static final int tableLayout1=0x7f0a000b;
+        public static final int tableRow1=0x7f0a000c;
         public static final int text=0x7f0a0004;
-        public static final int textView1=0x7f0a000a;
+        public static final int textView1=0x7f0a0008;
         public static final int title=0x7f0a0003;
-        public static final int weather_text=0x7f0a000c;
+        public static final int weather_text=0x7f0a000f;
     }
     public static final class layout {
         public static final int alert_dialog_text_entry=0x7f030000;
