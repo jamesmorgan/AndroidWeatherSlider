@@ -23,8 +23,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.morgan.design.Consants;
-import com.morgan.design.android.broadcast.LaunchReceiver;
+import com.morgan.design.Constants;
 import com.morgan.design.android.dao.WoeidChoiceDao;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.WoeidChoice;
@@ -32,9 +31,7 @@ import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 
-public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper> {
-
-	public static final String CURRENT_WEATHER_WOEID = "CURRENT_WEATHER_WOEID";
+public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
 
 	private static final String LOG_TAG = "YahooWeatherLoaderService";
 
@@ -51,20 +48,18 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 
 	private boolean mIsNotificatoionServiceBound = false;
 
-	private final ServiceConnection mNotificationConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(final ComponentName className, final IBinder service) {
-			YahooWeatherLoaderService.this.mBoundNotificationService = ((YahooWeatherNotifcationService.LocalBinder) service).getService();
-			setUpdateWeatherInfoForService();
-			Logger.d(LOG_TAG, "Successfully loaded weather details");
-		}
+	@Override
+	public void onServiceConnected(final ComponentName className, final IBinder service) {
+		this.mBoundNotificationService = ((YahooWeatherNotifcationService.LocalBinder) service).getService();
+		setUpdateWeatherInfoForService();
+		Logger.d(LOG_TAG, "Successfully loaded weather details");
+	}
 
-		@Override
-		public void onServiceDisconnected(final ComponentName className) {
-			YahooWeatherLoaderService.this.mBoundNotificationService = null;
-			Logger.d(LOG_TAG, "Disconnected from weather service");
-		}
-	};
+	@Override
+	public void onServiceDisconnected(final ComponentName className) {
+		this.mBoundNotificationService = null;
+		Logger.d(LOG_TAG, "Disconnected from weather service");
+	}
 
 	@Override
 	public IBinder onBind(final Intent arg) {
@@ -98,7 +93,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			final Bundle extras = intent.getExtras();
 			if (isNotNull(extras)) {
 
-				this.woeidId = intent.getStringExtra(CURRENT_WEATHER_WOEID);
+				this.woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
 				Log.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + this.woeidId);
 
 				new DownloadWeatherInfoDataTask(this.woeidId).execute();
@@ -143,13 +138,13 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 					woeidChoice.successfullyQuery(this.currentWeather);
 					this.woeidChoiceDao.update(woeidChoice);
 				}
-				sendBroadcast(new Intent(Consants.LATEST_WEATHER_QUERY_COMPLETE));
+				sendBroadcast(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 			}
 		}
 	}
 
 	void doBindService() {
-		bindService(new Intent(this, YahooWeatherNotifcationService.class), this.mNotificationConnection, Context.BIND_AUTO_CREATE);
+		bindService(new Intent(this, YahooWeatherNotifcationService.class), this, Context.BIND_AUTO_CREATE);
 		this.mIsNotificatoionServiceBound = true;
 	}
 
@@ -162,7 +157,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 
 	void doUnbindService() {
 		if (this.mIsNotificatoionServiceBound) {
-			unbindService(this.mNotificationConnection);
+			unbindService(this);
 			this.mIsNotificatoionServiceBound = false;
 		}
 	}
@@ -181,7 +176,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 					rebindPreferences();
 				}
 			};
-			registerReceiver(this.preferencesChangedBroadcastReceiver, new IntentFilter(Consants.PREFERENCES_UPDATED));
+			registerReceiver(this.preferencesChangedBroadcastReceiver, new IntentFilter(Constants.PREFERENCES_UPDATED));
 		}
 	}
 
@@ -227,8 +222,8 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			}
 			finally {
 				// TODO Confirm if required to create new one everytime
-				final Intent intentOnAlarm = new Intent(LaunchReceiver.GET_WEATHER_FORCAST);
-				intentOnAlarm.putExtra(CURRENT_WEATHER_WOEID, this.woeidId);
+				final Intent intentOnAlarm = new Intent(Constants.GET_WEATHER_FORCAST);
+				intentOnAlarm.putExtra(Constants.CURRENT_WEATHER_WOEID, this.woeidId);
 				final PendingIntent broadcast =
 						PendingIntent.getBroadcast(YahooWeatherLoaderService.this, 0, intentOnAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
 

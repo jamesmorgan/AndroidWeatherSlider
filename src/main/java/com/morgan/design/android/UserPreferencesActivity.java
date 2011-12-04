@@ -5,7 +5,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
-import com.morgan.design.Consants;
+import com.morgan.design.Constants;
 import com.morgan.design.android.domain.OverviewMode;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
@@ -40,7 +40,7 @@ public class UserPreferencesActivity extends PreferenceActivity {
 		else {
 			setResult(RESULT_CANCELED);
 		}
-		finishActivity(Consants.UPDATED_PREFERENCES);
+		finishActivity(Constants.UPDATED_PREFERENCES);
 		super.onBackPressed();
 	}
 

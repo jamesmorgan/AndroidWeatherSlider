@@ -6,7 +6,8 @@
 
     <application
         android:icon="@drawable/icon"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:name="com.morgan.design.WeatherSliderApplication" >
 
         <!-- Main activity , can dispatch view on load -->
         <activity
@@ -37,12 +38,6 @@
             android:configChanges="keyboardHidden|orientation"
             android:name="com.morgan.design.android.UserPreferencesActivity" />
 
-        <!-- Service which notifies about changes to the weather -->
-        <service
-            android:enabled="true"
-            android:label="@string/yahoo_notifcation_service"
-            android:name="com.morgan.design.android.service.YahooWeatherNotifcationService" />
-
         <!-- Weather Overview Screen -->
         <activity
             android:configChanges="keyboardHidden|orientation"
@@ -60,6 +55,18 @@
             android:enabled="true"
             android:label="@string/yahoo_weather_loader_service"
             android:name="com.morgan.design.android.service.YahooWeatherLoaderService" />
+
+        <!-- Service which gets current GPS location -->
+        <service
+            android:enabled="true"
+            android:label="@string/get_my_location_service"
+            android:name="com.morgan.design.android.service.GetMyLocationService" />
+
+        <!-- Service which notifies about changes to the weather -->
+        <service
+            android:enabled="true"
+            android:label="@string/yahoo_notifcation_service"
+            android:name="com.morgan.design.android.service.YahooWeatherNotifcationService" />
 
         <!-- Register periodic launcher for connectivity changes and get weather download -->
         <receiver
@@ -86,5 +93,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

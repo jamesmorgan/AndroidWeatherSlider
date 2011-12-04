@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.morgan.design.Constants;
 import com.morgan.design.android.service.YahooImageLoaderUtils;
 
 public class YahooWeatherInfo implements Serializable {
 
 	private static final long serialVersionUID = 8831504790036616130L;
 
-	private static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
-	// private static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/UKXX0092_c";
 	private String city;
 	private String country;
 
@@ -113,7 +112,7 @@ public class YahooWeatherInfo implements Serializable {
 	}
 
 	public void setWebLink(final String webLink) {
-		this.webLink = String.format(YAHOO_WEATHER_FORECAST_LINK, webLink);
+		this.webLink = String.format(Constants.YAHOO_WEATHER_FORECAST_LINK, webLink);
 	}
 
 	public String getWebLink() {

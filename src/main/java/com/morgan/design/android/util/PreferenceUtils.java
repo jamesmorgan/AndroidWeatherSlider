@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.morgan.design.Consants;
+import com.morgan.design.Constants;
 import com.morgan.design.android.UserPreferencesActivity;
 import com.morgan.design.android.domain.OverviewMode;
 
@@ -21,7 +21,7 @@ public class PreferenceUtils {
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
-		activity.startActivityForResult(intent, Consants.UPDATED_PREFERENCES);
+		activity.startActivityForResult(intent, Constants.UPDATED_PREFERENCES);
 	}
 
 	private static SharedPreferences getPrefs(final Context context) {

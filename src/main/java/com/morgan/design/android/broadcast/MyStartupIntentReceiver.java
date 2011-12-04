@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.morgan.design.Constants;
 import com.morgan.design.android.service.YahooWeatherLoaderService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
@@ -24,9 +25,9 @@ public class MyStartupIntentReceiver extends BroadcastReceiver {
 			if (isNotNull(intent)) {
 				final Bundle extras = intent.getExtras();
 				if (isNotNull(extras)) {
-					final String woeidId = intent.getStringExtra(YahooWeatherLoaderService.CURRENT_WEATHER_WOEID);
+					final String woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
 					Logger.d("LaunchReceiver", "LaunchReceiver recieved intent containing CURRENT_WEATHER_WOEID [%s]", woeidId);
-					service.putExtra(YahooWeatherLoaderService.CURRENT_WEATHER_WOEID, woeidId);
+					service.putExtra(Constants.CURRENT_WEATHER_WOEID, woeidId);
 				}
 			}
 

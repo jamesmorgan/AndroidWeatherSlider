@@ -10,6 +10,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
 import com.morgan.design.android.domain.OverviewMode;
 import com.morgan.design.android.domain.YahooWeatherInfo;
@@ -25,6 +26,11 @@ public class YahooWeatherNotifcationService extends Service {
 	// Unique Identification Number for the Notification.
 	// We use it on Notification start, and to cancel it.
 	private final int NOTIFICATION = R.string.weather_service_started;
+
+	// This is the object that receives interactions from clients. See RemoteService for a more complete example.
+	private final IBinder mBinder = new LocalBinder();
+
+	private YahooWeatherInfo currentWeather;
 
 	/**
 	 * Class for clients to access. Because we know this service always runs in the same process as its clients, we don't need to deal with
@@ -61,11 +67,6 @@ public class YahooWeatherNotifcationService extends Service {
 	public IBinder onBind(final Intent intent) {
 		return this.mBinder;
 	}
-
-	// This is the object that receives interactions from clients. See RemoteService for a more complete example.
-	private final IBinder mBinder = new LocalBinder();
-
-	private YahooWeatherInfo currentWeather;
 
 	private void showNotification() {
 
@@ -104,10 +105,7 @@ public class YahooWeatherNotifcationService extends Service {
 	private PendingIntent createOpenOverviewActivity() {
 		final Intent notifyIntent = new Intent(OPEN_WEATHER_VIEW);
 		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
-
-		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifyIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-		return contentIntent;
+		return PendingIntent.getActivity(this, 0, notifyIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 
 	private String getContent() {
@@ -129,8 +127,7 @@ public class YahooWeatherNotifcationService extends Service {
 
 	private PendingIntent createOpenWebLinkPendingIntent() {
 		final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(this.currentWeather.getLink()));
-		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, viewIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-		return contentIntent;
+		return PendingIntent.getActivity(this, 0, viewIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 
 	public void updatePreferences() {
@@ -141,6 +138,7 @@ public class YahooWeatherNotifcationService extends Service {
 
 	public void setWeatherInformation(final YahooWeatherInfo currentWeather) {
 		if (null != currentWeather) {
+			((WeatherSliderApplication) getApplication()).setCurrentWeather(currentWeather);
 			this.currentWeather = currentWeather;
 			showNotification();
 		}

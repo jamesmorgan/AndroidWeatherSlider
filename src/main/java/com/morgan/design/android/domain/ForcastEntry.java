@@ -1,6 +1,10 @@
 package com.morgan.design.android.domain;
 
-public class ForcastEntry {
+import java.io.Serializable;
+
+public class ForcastEntry implements Serializable {
+
+	private static final long serialVersionUID = -5786425131508243418L;
 
 	private String code;
 	private String text;

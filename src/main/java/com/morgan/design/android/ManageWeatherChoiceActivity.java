@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
-import com.morgan.design.Consants;
+import com.morgan.design.Constants;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.dao.WoeidChoiceDao;
@@ -41,9 +41,15 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> localisation
 	// FIXME -> pop-up overview mode
 	// FIXME -> improve notification when no locations found
+	// FIXME -> cancel all active notifications
+	// FIXME -> allow for multiple notifications at once (paid version only)
+	// FIXME -> Open location on map from notification click handler
+	// FIXME -> Show location on a small map in overview mode
 
 	// FIXME -> handle on click event notification event. opening overview, no design
+	// FIXME -> Query Yahoo based on GPS location (paid version only)
 
+	// FIXME -> DONE - GPS based location finding (paid version only)
 	// FIXME -> DONE - on preferences change notification service click handler
 	// FIXME -> DONE - on preferences change loader service polling options
 	// FIXME -> DONE - On click notification user preference (paid version only)
@@ -51,7 +57,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> DONE - start last known service on open (paid version only)
 	// FIXME -> DONE - swipe navigation path - (add to manual)
 	// FIXME -> DONE - periodically query for weather
-	// FIXME -> DONE - check phone has Internet before launching?
+	// FIXME -> DONE - check phone has Internet before launching
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
 
@@ -64,7 +70,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	private NotificationManager notificationManager;
 
 	private SimpleGestureFilter detector;
-	private BroadcastReceiver broadcastReceiver;
+	private BroadcastReceiver weatherQueryCompleteBroadcastReceiver;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -87,14 +93,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (isNull(this.broadcastReceiver)) {
-			this.broadcastReceiver = new BroadcastReceiver() {
+		if (isNull(this.weatherQueryCompleteBroadcastReceiver)) {
+			this.weatherQueryCompleteBroadcastReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					reLoadWoeidChoices();
 				}
 			};
-			registerReceiver(this.broadcastReceiver, new IntentFilter(Consants.LATEST_WEATHER_QUERY_COMPLETE));
+			registerReceiver(this.weatherQueryCompleteBroadcastReceiver, new IntentFilter(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 		}
 	}
 
@@ -121,9 +127,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (isNotNull(this.broadcastReceiver)) {
-			unregisterReceiver(this.broadcastReceiver);
-			this.broadcastReceiver = null;
+		if (isNotNull(this.weatherQueryCompleteBroadcastReceiver)) {
+			unregisterReceiver(this.weatherQueryCompleteBroadcastReceiver);
+			this.weatherQueryCompleteBroadcastReceiver = null;
 		}
 	}
 
@@ -149,26 +155,26 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	public void onAddNewLocation(final View view) {
 		final Intent intent = new Intent(this, EnterLocationActivity.class);
-		startActivityForResult(intent, Consants.ENTER_LOCATION);
+		startActivityForResult(intent, Constants.ENTER_LOCATION);
 	}
 
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-			case Consants.ENTER_LOCATION:
+			case Constants.ENTER_LOCATION:
 				if (resultCode == RESULT_OK) {
 					Logger.d(LOG_TAG, "ENTER_LOCATION -> RESULT_OK");
 				}
 				break;
-			case Consants.SELECT_LOCATION:
+			case Constants.SELECT_LOCATION:
 				if (resultCode == RESULT_OK) {
 					Logger.d(LOG_TAG, "SELECT_LOCATION -> RESULT_OK");
 				}
 				break;
-			case Consants.UPDATED_PREFERENCES:
+			case Constants.UPDATED_PREFERENCES:
 				if (resultCode == RESULT_OK) {
-					sendBroadcast(new Intent(Consants.PREFERENCES_UPDATED));
+					sendBroadcast(new Intent(Constants.PREFERENCES_UPDATED));
 				}
 				break;
 			default:
@@ -221,7 +227,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	protected void loadWoeidLocation(final WoeidChoice woeidChoice) {
 		final Bundle bundle = new Bundle();
-		bundle.putSerializable(YahooWeatherLoaderService.CURRENT_WEATHER_WOEID, woeidChoice.getWoeid());
+		bundle.putSerializable(Constants.CURRENT_WEATHER_WOEID, woeidChoice.getWoeid());
 
 		final Intent intent = new Intent(this, YahooWeatherLoaderService.class);
 		intent.putExtras(bundle);

@@ -43,6 +43,10 @@ public class Logger {
 		android.util.Log.d(LOGTAG, LOG_TAG + ": " + logMe);
 	}
 
+	public static void d(final String LOG_TAG, final Object logMe) {
+		android.util.Log.d(LOGTAG, LOG_TAG + ": " + logMe);
+	}
+
 	public static void d(final String LOG_TAG, final String logMe, final Object... values) {
 		android.util.Log.d(LOGTAG, LOG_TAG + ": " + String.format(logMe, values));
 	}

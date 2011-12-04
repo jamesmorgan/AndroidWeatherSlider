@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
+import com.morgan.design.Constants;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.WOIEDAdaptor;
 import com.morgan.design.android.domain.WOEIDEntry;
@@ -36,7 +37,7 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 
 		final Bundle extras = getIntent().getExtras();
 		if (null != extras) {
-			final Serializable serializable = extras.getSerializable("WOIED_LOCAITONS");
+			final Serializable serializable = extras.getSerializable(Constants.WOIED_LOCAITONS);
 			if (null != serializable) {
 				setLocations((ArrayList<WOEIDEntry>) serializable);
 			}
@@ -132,7 +133,7 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 
 	protected void loadWeatherDataForEntry(final WOEIDEntry entry) {
 		final Bundle bundle = new Bundle();
-		bundle.putSerializable(YahooWeatherLoaderService.CURRENT_WEATHER_WOEID, entry.getWoeid());
+		bundle.putSerializable(Constants.CURRENT_WEATHER_WOEID, entry.getWoeid());
 
 		final Intent intent = new Intent(this, YahooWeatherLoaderService.class);
 		intent.putExtras(bundle);
@@ -158,7 +159,6 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 	// Toast.makeText(ListLocationsActivity.this, "Disconnected from weather service", Toast.LENGTH_SHORT).show();
 	// }
 	// };
-	//
 	// private boolean mIsBound;
 	//
 	// void doBindService() {
@@ -166,6 +166,7 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 	// Context.BIND_AUTO_CREATE);
 	// this.mIsBound = true;
 	// }
+	//
 	// protected void setUpdateWeatherInfoForService() {
 	// this.mBoundService.setWeatherInformation(this.currentWeather);
 	// }
@@ -176,11 +177,13 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 	// this.mIsBound = false;
 	// }
 	// }
+	//
 	// @Override
 	// protected void onDestroy() {
 	// super.onDestroy();
 	// doUnbindService();
 	// }
+	//
 	// private YahooWeatherInfo currentWeather;
 	//
 	// public void loadWeatherInfomation(final YahooWeatherInfo weatherInfo) {
@@ -199,8 +202,10 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 	// }
 	// }
 	// }
+	//
 	// private ProgressDialog progressDialog;
 	// private final boolean destroyed = false;
+	//
 	// public void showLoadingProgress() {
 	// this.showProgressDialog("Gathering Weather Information. Please wait...");
 	// }
@@ -214,6 +219,7 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 	// this.progressDialog.dismiss();
 	// }
 	// }
+	//
 	// private class DownloadWeatherInfoDataTask extends AsyncTask<Void, Void, YahooWeatherInfo> {
 	//
 	// private final WOEIDEntry entry;

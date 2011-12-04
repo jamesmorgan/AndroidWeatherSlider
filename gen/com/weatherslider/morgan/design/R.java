@@ -46,24 +46,25 @@ public final class R {
         public static final int icon=0x7f02001a;
     }
     public static final class id {
-        public static final int add_new_location=0x7f0a0007;
-        public static final int admin=0x7f0a000e;
-        public static final int country=0x7f0a000f;
+        public static final int add_new_location=0x7f0a0009;
+        public static final int admin=0x7f0a000f;
+        public static final int country=0x7f0a0010;
         public static final int edit_text_dialog=0x7f0a0000;
-        public static final int home_menu_changelog=0x7f0a0011;
-        public static final int home_menu_settings=0x7f0a0010;
+        public static final int getMyLocationButton=0x7f0a0008;
+        public static final int home_menu_changelog=0x7f0a0012;
+        public static final int home_menu_settings=0x7f0a0011;
         public static final int image=0x7f0a0002;
-        public static final int last_time_updated=0x7f0a000b;
+        public static final int last_time_updated=0x7f0a000c;
         public static final int layout=0x7f0a0001;
-        public static final int location=0x7f0a0009;
+        public static final int location=0x7f0a000a;
         public static final int locationText=0x7f0a0005;
         public static final int lookUpLocationButton=0x7f0a0006;
-        public static final int main_location_text_layout=0x7f0a000c;
-        public static final int name=0x7f0a000d;
+        public static final int main_location_text_layout=0x7f0a000d;
+        public static final int name=0x7f0a000e;
         public static final int text=0x7f0a0004;
-        public static final int textView1=0x7f0a0008;
+        public static final int textView1=0x7f0a0007;
         public static final int title=0x7f0a0003;
-        public static final int weather_text=0x7f0a000a;
+        public static final int weather_text=0x7f0a000b;
     }
     public static final class layout {
         public static final int alert_dialog_text_entry=0x7f030000;
@@ -82,18 +83,19 @@ public final class R {
         public static final int place_info_sample=0x7f050000;
     }
     public static final class string {
-        public static final int add_new_location_text=0x7f070009;
+        public static final int add_new_location_text=0x7f07000a;
         public static final int app_name=0x7f070004;
         public static final int change_log=0x7f070001;
+        public static final int get_my_location_service=0x7f070008;
         public static final int home_instructions=0x7f070003;
-        public static final int modify_loaded_locaitons=0x7f07000a;
-        public static final int periodic_reciever=0x7f07000b;
+        public static final int modify_loaded_locaitons=0x7f07000b;
+        public static final int periodic_reciever=0x7f07000c;
         public static final int settings=0x7f070000;
-        public static final int start_up_receiver=0x7f07000c;
+        public static final int start_up_receiver=0x7f07000d;
         public static final int weather_service_started=0x7f070005;
         public static final int weather_service_stopped=0x7f070006;
         public static final int welcome=0x7f070002;
-        public static final int yahoo_notifcation_service=0x7f070008;
+        public static final int yahoo_notifcation_service=0x7f070009;
         public static final int yahoo_weather_loader_service=0x7f070007;
     }
     public static final class style {
