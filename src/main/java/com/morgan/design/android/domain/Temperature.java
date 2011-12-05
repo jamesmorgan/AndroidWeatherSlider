@@ -26,7 +26,7 @@ public enum Temperature {
 			}
 		}
 		Logger.e("Temperature", "Unable to convert Temperature from [%s]", temp);
-		return null;
+		return Temperature.CELSIUS;
 	}
 
 	public String getQueryValue() {

@@ -125,7 +125,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			woeidChoice.setLastknownNotifcationId(this.mBoundNotificationService.getCurrentNotifcationId());
 		}
 
-		final boolean failed = null == this.currentWeather;
+		final boolean failed = (null == this.currentWeather);
 		try {
 			this.mBoundNotificationService.setWeatherInformation(this.currentWeather);
 		}

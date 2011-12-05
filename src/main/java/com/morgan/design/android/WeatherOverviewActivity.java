@@ -12,6 +12,7 @@ import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.util.DegreeToDirectionConverter;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.PressureUtils;
 import com.morgan.design.android.util.TemperatureUtils;
 import com.weatherslider.morgan.design.R;
 
@@ -45,13 +46,17 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 	}
 
 	private TextView weather_description;
+	private TextView main_temperature;
 	private ImageView weather_image;
 
 	private void setDescriptionAndImage() {
 		this.weather_description = (TextView) findViewById(R.id.weather_description);
 		this.weather_image = (ImageView) findViewById(R.id.weather_image);
+		this.main_temperature = (TextView) findViewById(R.id.main_temperature);
 
 		this.weather_description.setText(this.currentWeather.getCurrentText());
+		this.main_temperature.setText(this.currentWeather.getCurrentTemp()
+			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.weather_image.setImageResource(this.currentWeather.getCurrentCode());
 	}
 
@@ -90,7 +95,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
 		this.wind_speed.setText(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit());
-		this.wind_chill.setText(this.currentWeather.getWindChill() + TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
+		this.wind_chill.setText(this.currentWeather.getWindChill()
+			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.wind_direction.setText(DegreeToDirectionConverter.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
 	}
 
@@ -107,14 +113,20 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 
 	private TextView temperature;
 	private TextView humidity;
+	private TextView pressure;
+	private ImageView pressure_icon;
 
 	private void setTemperatureDetails() {
 		this.temperature = (TextView) findViewById(R.id.temperature);
 		this.humidity = (TextView) findViewById(R.id.humidity);
+		this.pressure = (TextView) findViewById(R.id.pressure);
+		this.pressure_icon = (ImageView) findViewById(R.id.pressure_icon);
 
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
 			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.humidity.setText(this.currentWeather.getHumidity() + "%");
+		this.pressure.setText(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit());
+		this.pressure_icon.setImageResource(PressureUtils.getPressureStateImage(this.currentWeather.getRising()));
 	}
 
 	// /////////////////////////////////////////////

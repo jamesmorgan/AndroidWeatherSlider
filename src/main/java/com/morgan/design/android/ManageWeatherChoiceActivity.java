@@ -50,9 +50,11 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Show location on a small map in overview mode?
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> improve notification when no locations found
-	// FIXME -> Overview forecast mode
 	// FIXME -> cancel all active notifications
 
+	// FIXME -> Overview forecast mode
+
+	// FIXME -> DONE - Add visibility/pressure/pressure rising to query and overview screen
 	// FIXME -> DONE - Add option for C or F when retrieving temperature
 	// FIXME -> DONE - improved error messages for no connection found for GPS and weather query
 	// FIXME -> DONE - handle on click event notification event. opening overview, initial design

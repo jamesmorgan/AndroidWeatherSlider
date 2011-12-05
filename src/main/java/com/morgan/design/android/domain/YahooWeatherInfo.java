@@ -21,6 +21,7 @@ public class YahooWeatherInfo implements Serializable {
 
 	private String temperatureUnit;
 	private String windSpeedUnit;
+	private String pressureUnit;
 
 	private String windChill;
 	private String windSpeed;
@@ -38,6 +39,12 @@ public class YahooWeatherInfo implements Serializable {
 	private String currentText;
 	private String latitude;
 	private String longitude;
+
+	private String rising;
+
+	private String pressure;
+
+	private String visiblity;
 
 	public final String getSunRise() {
 		return this.sunRise;
@@ -208,6 +215,38 @@ public class YahooWeatherInfo implements Serializable {
 		return this.latitude;
 	}
 
+	public void setRising(final String rising) {
+		this.rising = rising;
+	}
+
+	public String getRising() {
+		return this.rising;
+	}
+
+	public void setPressure(final String pressure) {
+		this.pressure = pressure;
+	}
+
+	public String getPressure() {
+		return this.pressure;
+	}
+
+	public void setVisiblity(final String visiblity) {
+		this.visiblity = visiblity;
+	}
+
+	public String getVisiblity() {
+		return this.visiblity;
+	}
+
+	public String getPressureUnit() {
+		return this.pressureUnit;
+	}
+
+	public void setPressureUnit(final String pressureUnit) {
+		this.pressureUnit = pressureUnit;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
@@ -225,6 +264,8 @@ public class YahooWeatherInfo implements Serializable {
 			.append(this.temperatureUnit)
 			.append(", windSpeedUnit=")
 			.append(this.windSpeedUnit)
+			.append(", pressureUnit=")
+			.append(this.pressureUnit)
 			.append(", windChill=")
 			.append(this.windChill)
 			.append(", windSpeed=")
@@ -251,7 +292,14 @@ public class YahooWeatherInfo implements Serializable {
 			.append(this.latitude)
 			.append(", longitude=")
 			.append(this.longitude)
+			.append(", rising=")
+			.append(this.rising)
+			.append(", pressure=")
+			.append(this.pressure)
+			.append(", visiblity=")
+			.append(this.visiblity)
 			.append("]");
 		return builder.toString();
 	}
+
 }

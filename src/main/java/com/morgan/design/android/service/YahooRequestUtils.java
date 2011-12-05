@@ -71,6 +71,6 @@ public class YahooRequestUtils {
 		if (woeidId == null) {
 			return null;
 		}
-		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.getValue());
+		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.getQueryValue());
 	}
 }

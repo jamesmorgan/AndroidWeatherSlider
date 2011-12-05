@@ -26,6 +26,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 	private static final String UNIT = "units";
 	private static final String TEMPERATURE = "temperature";
 	private static final String SPEED_UNIT = "speed";
+	private static final String PRESSURE_UNIT = "pressure";
 
 	// yweather:wind
 	private static final String WIND = "wind";
@@ -36,6 +37,9 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 	// yweather:atmosphere
 	private static final String ATMOSPHERE = "atmosphere";
 	private static final String HUMIDITY = "humidity";
+	private static final String VISIBILITY = "visibility";
+	private static final String PRESSURE = "pressure";
+	private static final String RISING = "rising";
 
 	// yweather:astronomy
 	private static final String ASTRONOMY = "astronomy";
@@ -159,6 +163,9 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 	private void extractAtmosphereData(final YahooWeatherInfo info, final Element element) {
 		if (element.getName().equals(ATMOSPHERE)) {
 			info.setHumidity(element.getAttributeValue(HUMIDITY));
+			info.setVisiblity(element.getAttributeValue(VISIBILITY));
+			info.setRising(element.getAttributeValue(RISING));
+			info.setPressure(element.getAttributeValue(PRESSURE));
 		}
 	}
 
@@ -174,6 +181,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 		if (element.getName().equals(UNIT)) {
 			info.setTemperatureUnit(element.getAttributeValue(TEMPERATURE));
 			info.setWindSpeedUnit(element.getAttributeValue(SPEED_UNIT));
+			info.setPressureUnit(element.getAttributeValue(PRESSURE_UNIT));
 		}
 	}
 
