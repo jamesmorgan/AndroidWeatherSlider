@@ -52,7 +52,6 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
 		this.mBoundNotificationService = ((YahooWeatherNotifcationService.LocalBinder) service).getService();
-		setUpdateWeatherInfoForService();
 		Logger.d(LOG_TAG, "Successfully loaded weather details");
 	}
 
