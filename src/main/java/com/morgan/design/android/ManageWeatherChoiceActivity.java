@@ -57,6 +57,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	// FIXME -> Overview forecast mode
 	// FIXME -> Ensure notification tab is always updated
+	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
 	// FIXME -> DONE - add swipe gesture to overview tabs
 	// FIXME -> DONE - custom tab view with xml skin

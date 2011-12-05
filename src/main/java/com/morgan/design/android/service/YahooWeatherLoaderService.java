@@ -95,6 +95,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 				this.woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
 				Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + this.woeidId);
 
+				getToLevelApplication().setCurrentWoeid(this.woeidId);
 				initiateWeatherDownloadTask();
 			}
 		}
@@ -115,8 +116,6 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	}
 
 	protected void setUpdateWeatherInfoForService() {
-		getToLevelApplication().setCurrentWoeid(this.woeidId);
-
 		final WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeidOrNewInstance(this.woeidId);
 
 		// FIXME -> when allowing more than one notification, get notification Id, plus ystem millis
@@ -268,7 +267,6 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 			final NetworkInfo ni = YahooWeatherLoaderService.this.cnnxManager.getActiveNetworkInfo();
 			return ni == null || !ni.isAvailable() || !ni.isConnected();
 		}
-
 	}
 
 }

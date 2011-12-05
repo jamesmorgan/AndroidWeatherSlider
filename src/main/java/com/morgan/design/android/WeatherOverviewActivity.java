@@ -170,8 +170,6 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 	@Override
 	public void onSwipe(final int direction) {
 		switch (direction) {
-			case SimpleGestureFilter.SWIPE_RIGHT:
-				//
 			case SimpleGestureFilter.SWIPE_LEFT:
 				if (null != this.currentWeather) {
 					final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
