@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Constants;
@@ -31,6 +32,7 @@ import com.morgan.design.android.service.YahooWeatherLoaderService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.TimeUtils;
 import com.weatherslider.morgan.design.R;
 
 public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
@@ -39,18 +41,21 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> add provider
 	// FIXME -> paid version
 	// FIXME -> localisation
-	// FIXME -> pop-up overview mode
-	// FIXME -> improve notification when no locations found
 	// FIXME -> add flags for each country
-	// FIXME -> cancel all active notifications
 	// FIXME -> allow for multiple notifications at once (paid version only)
 	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
-	// FIXME -> Open location on map from notification click handler
-	// FIXME -> Show location on a small map in overview mode?
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
+	// FIXME -> debug mode on/off for deployment
+
+	// FIXME -> Show location on a small map in overview mode?
+	// FIXME -> Open location on map from notification click handler
+	// FIXME -> improve notification when no locations found
+	// FIXME -> Overview forecast mode
+	// FIXME -> cancel all active notifications
 	// FIXME -> Add option for C or F when retrieving temperature
 
-	// FIXME -> DONE - handle on click event notification event. opening overview, inital design
+	// FIXME -> DONE - improved error messages for no connection found for GPS and weather query
+	// FIXME -> DONE - handle on click event notification event. opening overview, initial design
 	// FIXME -> DONE - Create converter for decimal degrees to human readable wind direction
 	// FIXME -> DONE - Add icons over view sun set and rise
 	// FIXME -> DONE - Ensure Home screen is always updated on application focus/launch
@@ -95,7 +100,16 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			this.weatherQueryCompleteBroadcastReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
-					reLoadWoeidChoices();
+					final Bundle extras = intent.getExtras();
+					if (isNotNull(extras)) {
+						final boolean successful = extras.getBoolean(Constants.SUCCESSFUL);
+						if (successful) {
+							reLoadWoeidChoices();
+						}
+						else {
+							displayFailedQuery();
+						}
+					}
 				}
 			};
 			registerReceiver(this.weatherQueryCompleteBroadcastReceiver, new IntentFilter(Constants.LATEST_WEATHER_QUERY_COMPLETE));
@@ -220,6 +234,12 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// ///////////// General / Utility //////////
 	// //////////////////////////////////////////
 
+	private void displayFailedQuery() {
+		final String schedule = TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this));
+		Toast.makeText(this, String.format("Unable to get weather details at present, will try again in %s", schedule), Toast.LENGTH_SHORT)
+			.show();
+	}
+
 	private void reLoadWoeidChoices() {
 		this.woeidChoices = this.woeidChoiceDao.findAllWoeidChoices();
 		this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
@@ -237,11 +257,11 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		}
 	}
 
-	protected void removeItemFromList(final WoeidChoice woeidChoice) {
+	private void removeItemFromList(final WoeidChoice woeidChoice) {
 		this.adaptor.remove(woeidChoice);
 	}
 
-	protected void attemptToKillNotifcation(final WoeidChoice woeidChoice) {
+	private void attemptToKillNotifcation(final WoeidChoice woeidChoice) {
 		if (isNull(this.notificationManager)) {
 			this.notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		}

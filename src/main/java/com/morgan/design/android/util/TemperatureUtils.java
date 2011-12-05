@@ -1,6 +1,6 @@
 package com.morgan.design.android.util;
 
-public class TempUtils {
+public class TemperatureUtils {
 
 	// f: Fahrenheit
 	// c: Celsius

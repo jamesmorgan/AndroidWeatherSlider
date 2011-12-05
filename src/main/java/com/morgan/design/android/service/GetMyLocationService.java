@@ -177,12 +177,14 @@ public class GetMyLocationService extends Service {
 				GetMyLocationService.this.locationResult.onLocationChanged(net_loc);
 				return;
 			}
-			GetMyLocationService.this.locationResult.onLocationChanged(null);
+			GetMyLocationService.this.locationResult.onLocationNotFound();
 		}
 	}
 
 	public static abstract class LocationResult {
 		public abstract void onLocationChanged(Location location);
+
+		public abstract void onLocationNotFound();
 	}
 
 }

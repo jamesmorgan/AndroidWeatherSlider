@@ -20,5 +20,6 @@ public class Constants {
 	public static final String CURRENT_WEATHER_WOEID = "CURRENT_WEATHER_WOEID";
 	public static final String CURRENT_WEATHER = "CURRENT_WEATHER";
 	public static final String WOIED_LOCAITONS = "WOIED_LOCAITONS";
+	public static final String SUCCESSFUL = "SUCCESSFUL";
 
 }

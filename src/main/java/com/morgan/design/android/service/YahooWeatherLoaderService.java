@@ -131,15 +131,20 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		}
 		finally {
 			if (null != woeidChoice) {
+				final Intent broadcastIntent = new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE);
+
 				if (failed) {
+					broadcastIntent.putExtra(Constants.SUCCESSFUL, false);
 					woeidChoice.failedQuery();
 					this.woeidChoiceDao.update(woeidChoice);
 				}
 				else {
+					broadcastIntent.putExtra(Constants.SUCCESSFUL, true);
 					woeidChoice.successfullyQuery(this.currentWeather);
 					this.woeidChoiceDao.update(woeidChoice);
 				}
-				sendBroadcast(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
+
+				sendBroadcast(broadcastIntent);
 			}
 		}
 	}
@@ -231,7 +236,6 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 				Logger.e(LOG_TAG, "Unknonw error when running periodic download weather data task", e);
 			}
 			finally {
-				// TODO Confirm if required to create new one everytime
 				final Intent intentOnAlarm = new Intent(Constants.GET_WEATHER_FORCAST);
 				intentOnAlarm.putExtra(Constants.CURRENT_WEATHER_WOEID, this.woeidId);
 				final PendingIntent broadcast =

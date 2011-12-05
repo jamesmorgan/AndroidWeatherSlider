@@ -12,7 +12,7 @@ import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.util.DegreeToDirectionConverter;
 import com.morgan.design.android.util.Logger;
-import com.morgan.design.android.util.TempUtils;
+import com.morgan.design.android.util.TemperatureUtils;
 import com.weatherslider.morgan.design.R;
 
 public class WeatherOverviewActivity extends Activity implements SimpleGestureListener {
@@ -90,7 +90,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
 		this.wind_speed.setText(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit());
-		this.wind_chill.setText(this.currentWeather.getWindChill() + TempUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
+		this.wind_chill.setText(this.currentWeather.getWindChill() + TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.wind_direction.setText(DegreeToDirectionConverter.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
 	}
 
@@ -113,7 +113,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.humidity = (TextView) findViewById(R.id.humidity);
 
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
-			+ TempUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
+			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.humidity.setText(this.currentWeather.getHumidity() + "%");
 	}
 

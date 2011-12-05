@@ -122,7 +122,14 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		}
 		showLoadingProgress();
 		if (null != this.mBoundMyLocationService && this.mIsLocationServiceBound) {
-			this.mBoundMyLocationService.getLocation(this, this.locationResult);
+			// this.mBoundMyLocationService.getLocation(this, this.locationResult);
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					EnterLocationActivity.this.mBoundMyLocationService.getLocation(EnterLocationActivity.this,
+							EnterLocationActivity.this.locationResult);
+				}
+			});
 		}
 		else {
 			dismissLoadingProgress();
@@ -192,21 +199,20 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	public LocationResult locationResult = new LocationResult() {
 		@Override
 		public void onLocationChanged(final Location location) {
-			EnterLocationActivity.this.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					dismissLoadingProgress();
-					if (null != location) {
-						Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
-						new DownloadWOIEDDataTaskFromLocation(location).execute();
-					}
-					else {
-						Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
-								Toast.LENGTH_SHORT);
-					}
-				};
-			});
+			dismissLoadingProgress();
+			if (null != location) {
+				Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
+				new DownloadWOIEDDataTaskFromLocation(location).execute();
+			}
 		}
+
+		@Override
+		public void onLocationNotFound() {
+			Logger.d(LOG_TAG, "GPS location not found");
+			dismissLoadingProgress();
+			Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
+					Toast.LENGTH_SHORT).show();
+		};
 	};
 
 	void doBindService() {
