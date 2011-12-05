@@ -2,8 +2,12 @@ package com.morgan.design.android;
 
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +47,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		setWindDetails();
 		setSunDetails();
 		setTemperatureDetails();
+
+		setUpMoreInformationLink();
 	}
 
 	private TextView weather_description;
@@ -127,6 +133,21 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.humidity.setText(this.currentWeather.getHumidity() + "%");
 		this.pressure.setText(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit());
 		this.pressure_icon.setImageResource(PressureUtils.getPressureStateImage(this.currentWeather.getRising()));
+	}
+
+	private TextView more_information_link;
+
+	private void setUpMoreInformationLink() {
+		this.more_information_link = (TextView) findViewById(R.id.more_information_link);
+		this.more_information_link.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				final Intent browserIntent =
+						new Intent(Intent.ACTION_VIEW, Uri.parse(WeatherOverviewActivity.this.currentWeather.getLink()));
+				startActivity(browserIntent);
+			}
+		});
+		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	// /////////////////////////////////////////////
