@@ -53,10 +53,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> improve notification when no locations found
 	// FIXME -> cancel all active notifications
+	// FIXME -> download new icon sets
 
 	// FIXME -> Overview forecast mode
-	// FIXME -> TODO -> custom tab view with xml skin
+	// FIXME -> Ensure notification tab is always updated
 
+	// FIXME -> DONE - add swipe gesture to overview tabs
+	// FIXME -> DONE - custom tab view with xml skin
 	// FIXME -> DONE - Add Link to more information on Overview screen
 	// FIXME -> DONE - Add visibility/pressure/pressure rising to query and overview screen
 	// FIXME -> DONE - Add option for C or F when retrieving temperature

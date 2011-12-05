@@ -38,6 +38,6 @@ public class ForecastOverviewTabActivity extends Activity {
 			final TextView date = (TextView) findViewById(R.id.date);
 			date.setText(forcastEntry.getDate());
 		}
-
 	}
+
 }

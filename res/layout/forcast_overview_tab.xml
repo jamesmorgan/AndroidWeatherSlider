@@ -14,6 +14,13 @@
         android:text="Description"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <ImageView
         android:id="@+id/weather_image"
         android:layout_width="wrap_content"
@@ -33,14 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Low Temp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dip"
-        android:text="Date"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

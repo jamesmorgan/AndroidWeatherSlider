@@ -3,43 +3,50 @@ package com.morgan.design.android;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.TabHost;
 
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
+import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.util.TemperatureUtils;
 
-public class ForcastTabCreationActivity extends TabActivity {
+public class ForcastTabCreationActivity extends TabActivity implements SimpleGestureListener {
 
 	private YahooWeatherInfo currentWeather;
+	private SimpleGestureFilter detector;
+	private int currentIndex;
+	private TabHost tabHost;
+	private int tabCount;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.detector = new SimpleGestureFilter(this, this);
+		this.detector.setEnabled(true);
 
 		this.currentWeather = getToLevelApplication().getCurrentWeather();
 
-		// The activity TabHost
-		final TabHost tabHost = getTabHost();
-		// Resusable TabSpec for each tab
+		this.tabHost = getTabHost();
 		TabHost.TabSpec spec;
 
 		for (final ForcastEntry forcastEntry : this.currentWeather.getForcastEntries()) {
 			if (isNotToday(forcastEntry)) {
-				// Create an Intent to launch an Activity for the tab (to be reused)
+
 				final Intent intent = new Intent().setClass(this, ForecastOverviewTabActivity.class);
 				intent.putExtra(Constants.FORCAST_ENTRY, forcastEntry);
 				intent.putExtra(Constants.TEMPERATURE_UNIT, TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 
-				// Initialize a TabSpec for each tab and add it to the TabHost
-				spec = tabHost.newTabSpec(forcastEntry.getDay()).setIndicator(forcastEntry.getDay(), null).setContent(intent);
-				tabHost.addTab(spec);
+				spec = this.tabHost.newTabSpec(forcastEntry.getDay()).setIndicator(forcastEntry.getDay(), null).setContent(intent);
+				this.tabHost.addTab(spec);
 			}
 		}
 
-		tabHost.setCurrentTab(0);
+		this.currentIndex = 0;
+		this.tabHost.setCurrentTab(this.currentIndex);
+		this.tabCount = this.tabHost.getTabWidget().getTabCount();
 	}
 
 	private boolean isNotToday(final ForcastEntry forcastEntry) {
@@ -48,5 +55,37 @@ public class ForcastTabCreationActivity extends TabActivity {
 
 	protected WeatherSliderApplication getToLevelApplication() {
 		return ((WeatherSliderApplication) getApplication());
+	}
+
+	// /////////////////////////////////////////////
+	// ////////// Swipe Gestures ///////////////////
+	// /////////////////////////////////////////////
+
+	@Override
+	public void onSwipe(final int direction) {
+		switch (direction) {
+			case SimpleGestureFilter.SWIPE_RIGHT:
+				if (0 == this.currentIndex) {
+					finish();
+				}
+				this.tabHost.setCurrentTab(--this.currentIndex);
+				break;
+			case SimpleGestureFilter.SWIPE_LEFT:
+				if (this.tabCount != this.currentIndex + 1) {
+					this.tabHost.setCurrentTab(++this.currentIndex);
+				}
+				break;
+		}
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(final MotionEvent me) {
+		this.detector.onTouchEvent(me);
+		return super.dispatchTouchEvent(me);
+	}
+
+	@Override
+	public void onDoubleTap() {
+		// Do nothing at present
 	}
 }

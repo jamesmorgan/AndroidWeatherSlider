@@ -239,7 +239,7 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 					return YahooRequestUtils.getInstance().getWeatherInfo(weatherResponse);
 				}
 			}
-			catch (final Exception e) {
+			catch (final Throwable e) {
 				Logger.e(LOG_TAG, "Unknonw error when running periodic download weather data task", e);
 			}
 			finally {
