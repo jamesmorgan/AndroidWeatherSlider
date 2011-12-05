@@ -1,6 +1,7 @@
 package com.morgan.design.android.util;
 
 import java.util.List;
+import java.util.Map;
 
 public final class ObjectUtils {
 
@@ -19,7 +20,18 @@ public final class ObjectUtils {
 		return value.isEmpty();
 	}
 
+	public static final boolean isEmpty(final Map<?, ?> value) {
+		if (isNull(value)) {
+			return false;
+		}
+		return value.isEmpty();
+	}
+
 	public static final boolean isNotEmpty(final List<?> value) {
+		return !isEmpty(value);
+	}
+
+	public static final boolean isNotEmpty(final Map<?, ?> value) {
 		return !isEmpty(value);
 	}
 

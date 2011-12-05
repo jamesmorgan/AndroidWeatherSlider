@@ -49,13 +49,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> debug mode on/off for deployment
 	// FIXME -> Change default preferences before go-live
-
 	// FIXME -> Show location on a small map in overview mode?
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> improve notification when no locations found
 	// FIXME -> cancel all active notifications
 
 	// FIXME -> Overview forecast mode
+	// FIXME -> TODO -> custom tab view with xml skin
 
 	// FIXME -> DONE - Add Link to more information on Overview screen
 	// FIXME -> DONE - Add visibility/pressure/pressure rising to query and overview screen

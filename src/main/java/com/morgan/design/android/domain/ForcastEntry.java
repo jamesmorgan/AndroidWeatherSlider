@@ -2,23 +2,25 @@ package com.morgan.design.android.domain;
 
 import java.io.Serializable;
 
+import com.morgan.design.android.service.YahooImageLoaderUtils;
+
 public class ForcastEntry implements Serializable {
 
 	private static final long serialVersionUID = -5786425131508243418L;
 
-	private String code;
+	private int code;
 	private String text;
 	private String high;
 	private String low;
 	private String date;
 	private String day;
 
-	public final String getCode() {
+	public final int getCode() {
 		return this.code;
 	}
 
 	public final void setCode(final String code) {
-		this.code = code;
+		this.code = YahooImageLoaderUtils.getImageResourceFromCode(code);
 	}
 
 	public final String getText() {

@@ -21,5 +21,8 @@ public class Constants {
 	public static final String CURRENT_WEATHER = "CURRENT_WEATHER";
 	public static final String WOIED_LOCAITONS = "WOIED_LOCAITONS";
 	public static final String SUCCESSFUL = "SUCCESSFUL";
+	public static final String FORCAST_ENTRY = "FORCAST_ENTRY";
+
+	public static final String TEMPERATURE_UNIT = null;
 
 }

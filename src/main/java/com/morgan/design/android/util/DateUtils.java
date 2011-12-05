@@ -20,4 +20,7 @@ public class DateUtils {
 		final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a");
 		return dateFormat.format(date);
 	}
+
+	// Mon Tue Wed Thu Fri Sat Sun
+	// TODO convert from abreviation to full
 }

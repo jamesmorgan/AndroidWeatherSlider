@@ -34,13 +34,14 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 
 		final WeatherSliderApplication appState = ((WeatherSliderApplication) getApplicationContext());
 		this.currentWeather = appState.getCurrentWeather();
-		if (null == this.currentWeather) {
-			// TODO handle null?
-		}
-		Logger.d(LOG_TAG, this.currentWeather);
-
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
+
+		if (null == this.currentWeather) {
+			Logger.d(LOG_TAG, "Current weather if null, unable to create overview screen");
+			return;
+		}
+		Logger.d(LOG_TAG, this.currentWeather);
 
 		setDescriptionAndImage();
 		setLocationDetails();
@@ -60,7 +61,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.weather_image = (ImageView) findViewById(R.id.weather_image);
 		this.main_temperature = (TextView) findViewById(R.id.main_temperature);
 
-		this.weather_description.setText(this.currentWeather.getCurrentText());
+		this.weather_description.setText(valueOrDefault(this.currentWeather.getCurrentText(), "N/A"));
 		this.main_temperature.setText(this.currentWeather.getCurrentTemp()
 			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.weather_image.setImageResource(this.currentWeather.getCurrentCode());
@@ -85,8 +86,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 					: this.currentWeather.getRegion();
 		}
 
-		this.location_1.setText(this.currentWeather.getCity());
-		this.location_2.setText(location2);
+		this.location_1.setText(valueOrDefault(this.currentWeather.getCity(), "N/A"));
+		this.location_2.setText(valueOrDefault(location2, "N/A"));
 		this.location_lat_long.setText(String.format("Lat: %s | Long: %s", this.currentWeather.getLatitude(),
 				this.currentWeather.getLongitude()));
 	}
@@ -100,7 +101,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.wind_chill = (TextView) findViewById(R.id.wind_chill);
 		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
-		this.wind_speed.setText(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit());
+		this.wind_speed.setText(valueOrDefault(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit(), "N/A"));
 		this.wind_chill.setText(this.currentWeather.getWindChill()
 			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.wind_direction.setText(DegreeToDirectionConverter.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
@@ -113,8 +114,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.sun_rise = (TextView) findViewById(R.id.sun_rise);
 		this.sun_set = (TextView) findViewById(R.id.sun_set);
 
-		this.sun_rise.setText(this.currentWeather.getSunRise());
-		this.sun_set.setText(this.currentWeather.getSunSet());
+		this.sun_rise.setText(valueOrDefault(this.currentWeather.getSunRise(), "N/A"));
+		this.sun_set.setText(valueOrDefault(this.currentWeather.getSunSet(), "N/A"));
 	}
 
 	private TextView temperature;
@@ -131,8 +132,14 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
 			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
 		this.humidity.setText(this.currentWeather.getHumidity() + "%");
-		this.pressure.setText(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit());
+		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "N/A"));
 		this.pressure_icon.setImageResource(PressureUtils.getPressureStateImage(this.currentWeather.getRising()));
+	}
+
+	private CharSequence valueOrDefault(final String string, final String defaultValue) {
+		return stringHasValue(string)
+				? string
+				: defaultValue;
 	}
 
 	private TextView more_information_link;
@@ -166,7 +173,11 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 			case SimpleGestureFilter.SWIPE_RIGHT:
 				//
 			case SimpleGestureFilter.SWIPE_LEFT:
-				//
+				if (null != this.currentWeather) {
+					final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
+					startActivity(intent);
+				}
+				return;
 		}
 	}
 

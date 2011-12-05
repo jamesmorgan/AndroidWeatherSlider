@@ -50,6 +50,21 @@
             </intent-filter>
         </activity>
 
+        <!-- Weather Forcast Overview Screen -->
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.android.ForecastOverviewActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.android.ForcastTabCreationActivity" >
+        </activity>
+        <activity
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.android.ForecastOverviewTabActivity" >
+        </activity>
+
         <!-- Service which periodically queries for the latest weather -->
         <service
             android:enabled="true"

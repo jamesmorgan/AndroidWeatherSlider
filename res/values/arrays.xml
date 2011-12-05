@@ -31,12 +31,12 @@
         <item>OVERVIEW</item>
     </string-array>
 
-    <string-array name="temperature_mode">
+    <string-array name="temperature_mode_values">
         <item>c</item>
         <item>f</item>
     </string-array>
 
-    <string-array name="temperature_mode_values">
+    <string-array name="temperature_mode">
         <item>Celsius</item>
         <item>Fahrenheit</item>
     </string-array>
