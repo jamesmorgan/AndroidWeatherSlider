@@ -25,6 +25,7 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.dao.WoeidChoiceDao;
+import com.morgan.design.android.domain.Temperature;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.WoeidChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
@@ -92,11 +93,10 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		if (isNotNull(intent)) {
 			final Bundle extras = intent.getExtras();
 			if (isNotNull(extras)) {
-
 				this.woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
 				Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + this.woeidId);
 
-				new DownloadWeatherInfoDataTask(this.woeidId).execute();
+				initiateWeatherDownloadTask();
 			}
 		}
 
@@ -197,17 +197,24 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 
 	protected void rebindPreferences() {
 		if (null != this.mBoundNotificationService && this.mIsNotificatoionServiceBound) {
+			initiateWeatherDownloadTask();
 			this.mBoundNotificationService.updatePreferences();
-			new DownloadWeatherInfoDataTask(this.woeidId).execute();
 		}
+	}
+
+	protected void initiateWeatherDownloadTask() {
+		final Temperature temperatureMode = PreferenceUtils.getTemperatureMode(getApplicationContext());
+		new DownloadWeatherInfoDataTask(this.woeidId, temperatureMode).execute();
 	}
 
 	private class DownloadWeatherInfoDataTask extends AsyncTask<Void, Void, YahooWeatherInfo> {
 
 		private final String woeidId;
+		private final Temperature temperature;
 
-		public DownloadWeatherInfoDataTask(final String woeidId) {
+		public DownloadWeatherInfoDataTask(final String woeidId, final Temperature temperature) {
 			this.woeidId = woeidId;
+			this.temperature = temperature;
 		}
 
 		// http://stackoverflow.com/questions/2775628/android-how-to-periodically-send-location-to-a-server
@@ -223,7 +230,8 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 				}
 				else {
 					Logger.d(LOG_TAG, "Looking up weather details for woeid=[%s]", this.woeidId);
-					final String url = YahooRequestUtils.getInstance().createWeatherQuery(this.woeidId);
+
+					final String url = YahooRequestUtils.getInstance().createWeatherQuery(this.woeidId, this.temperature);
 
 					final RestTemplate restTemplate = new RestTemplate();
 					restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());

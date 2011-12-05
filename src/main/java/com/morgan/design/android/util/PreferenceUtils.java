@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import com.morgan.design.Constants;
 import com.morgan.design.android.UserPreferencesActivity;
 import com.morgan.design.android.domain.OverviewMode;
+import com.morgan.design.android.domain.Temperature;
 
 public class PreferenceUtils {
 
@@ -18,6 +19,7 @@ public class PreferenceUtils {
 	public static final String PREF_POLLING_SCHEDULE = "pollingSchedule";
 	public static final String PREF_START_ON_BOOT = "startOnBoot";
 	public static final String PREF_OVERVIEW_MODE = "overviewMode";
+	public static final String PREF_TEMPERATURE_MODE = "temperatureMode";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
@@ -50,6 +52,14 @@ public class PreferenceUtils {
 
 	public static boolean setOverviewMode(final Context context, final String overviewMode) {
 		return getPrefs(context).edit().putString(PREF_OVERVIEW_MODE, overviewMode).commit();
+	}
+
+	public static Temperature getTemperatureMode(final Context context) {
+		return Temperature.to(getPrefs(context).getString(PREF_TEMPERATURE_MODE, Temperature.CELSIUS.getQueryValue()));
+	}
+
+	public static boolean setTemperatureMode(final Context context, final String temperature) {
+		return getPrefs(context).edit().putString(PREF_TEMPERATURE_MODE, temperature).commit();
 	}
 
 	public static boolean shouldStartOnBoot(final Context context) {

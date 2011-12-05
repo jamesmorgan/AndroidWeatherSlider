@@ -52,8 +52,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> improve notification when no locations found
 	// FIXME -> Overview forecast mode
 	// FIXME -> cancel all active notifications
-	// FIXME -> Add option for C or F when retrieving temperature
 
+	// FIXME -> DONE - Add option for C or F when retrieving temperature
 	// FIXME -> DONE - improved error messages for no connection found for GPS and weather query
 	// FIXME -> DONE - handle on click event notification event. opening overview, initial design
 	// FIXME -> DONE - Create converter for decimal degrees to human readable wind direction

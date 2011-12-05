@@ -22,7 +22,7 @@ public enum OverviewMode {
 				return type;
 			}
 		}
-		Logger.e("OverviewMode", "Unable to convertto overview from [%s]", overview);
+		Logger.e("OverviewMode", "Unable to convert overview from [%s]", overview);
 		return null;
 	}
 }

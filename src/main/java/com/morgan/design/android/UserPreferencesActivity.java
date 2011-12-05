@@ -88,6 +88,17 @@ public class UserPreferencesActivity extends PreferenceActivity {
 				}
 			});
 		}
+
+		if (pref.getKey().equals(PreferenceUtils.PREF_TEMPERATURE_MODE)) {
+			findPreference(PreferenceUtils.PREF_TEMPERATURE_MODE).setOnPreferenceChangeListener(
+					new Preference.OnPreferenceChangeListener() {
+						@Override
+						public boolean onPreferenceChange(final Preference arg0, final Object temperature) {
+							UserPreferencesActivity.this.hasChanged = true;
+							return PreferenceUtils.setTemperatureMode(getApplicationContext(), (String) temperature);
+						}
+					});
+		}
 		return super.onPreferenceTreeClick(preferenceScreen, pref);
 	}
 }

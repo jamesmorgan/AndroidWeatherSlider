@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.location.Location;
 
+import com.morgan.design.android.domain.Temperature;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.parser.WOIEDParser;
@@ -11,7 +12,7 @@ import com.morgan.design.android.parser.YahooWeatherInfoParser;
 
 public class YahooRequestUtils {
 
-	private static final String URL_YAHOO_API_WEATHER = "http://weather.yahooapis.com/forecastrss?w=%s&u=c";
+	private static final String URL_YAHOO_API_WEATHER = "http://weather.yahooapis.com/forecastrss?w=%s&u=%s";
 
 	private static final String GET_LOCATION_WOEID_FOR_TEXT =
 			"http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text='%s' | SORT(field='placeTypeName.code')&format=xml";
@@ -59,17 +60,17 @@ public class YahooRequestUtils {
 		return String.format(GET_LOCATION_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
 	}
 
-	public String createWeatherQuery(final WOEIDEntry woiedEntry) {
+	public String createWeatherQuery(final WOEIDEntry woiedEntry, final Temperature temperature) {
 		if (woiedEntry == null) {
 			return null;
 		}
-		return String.format(URL_YAHOO_API_WEATHER, woiedEntry.getWoeid());
+		return createWeatherQuery(woiedEntry.getWoeid(), temperature);
 	}
 
-	public String createWeatherQuery(final String woeidId) {
+	public String createWeatherQuery(final String woeidId, final Temperature temperature) {
 		if (woeidId == null) {
 			return null;
 		}
-		return String.format(URL_YAHOO_API_WEATHER, woeidId);
+		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.getValue());
 	}
 }

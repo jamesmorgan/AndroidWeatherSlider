@@ -11,17 +11,6 @@
             android:summary="Enable this to start on first boot"
             android:title="Start On First Boot" />
 
-        <!-- TODO - On notification click option, open web or open overview dialog with link, possible option can show sample? -->
-        <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
-
-        <ListPreference
-            android:defaultValue="WEB"
-            android:entries="@array/overview_mode"
-            android:entryValues="@array/overview_mode_values"
-            android:key="overviewMode"
-            android:summary="Change what hapopens when you click each weather notification"
-            android:title="Web or Overview mode" />
-
         <!-- TODO - Option to disable google adds? -->
 
         <CheckBoxPreference
@@ -37,6 +26,28 @@
             android:key="changelog"
             android:summary="Show Change Log On Version Upgrade"
             android:title="Change Log" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Interface Options" >
+
+        <!-- TODO - On notification click option, open web or open overview dialog with link, possible option can show sample? -->
+        <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
+
+        <ListPreference
+            android:defaultValue="WEB"
+            android:entries="@array/overview_mode"
+            android:entryValues="@array/overview_mode_values"
+            android:key="overviewMode"
+            android:summary="Change what hapopens when you click each weather notification"
+            android:title="Web or Overview mode" />
+
+        <ListPreference
+            android:defaultValue="c"
+            android:entries="@array/temperature_mode"
+            android:entryValues="@array/temperature_mode_values"
+            android:key="temperatureMode"
+            android:summary="Show temperature in Celcius or Fahrenheit"
+            android:title="Temperature Mode" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Refresh Options" >
