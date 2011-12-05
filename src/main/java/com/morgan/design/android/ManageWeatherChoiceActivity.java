@@ -40,6 +40,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> google analytics
 	// FIXME -> add provider
 	// FIXME -> paid version
+	// FIXME -> Change log
+	// FIXME -> DB Versioning
 	// FIXME -> localisation
 	// FIXME -> add flags for each country
 	// FIXME -> allow for multiple notifications at once (paid version only)

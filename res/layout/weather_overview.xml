@@ -223,6 +223,7 @@
     </LinearLayout>
 
     <TextView
+        android:padding="10dip"
         android:id="@+id/more_information_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

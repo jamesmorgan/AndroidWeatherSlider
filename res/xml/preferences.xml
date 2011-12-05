@@ -34,7 +34,7 @@
         <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
 
         <ListPreference
-            android:defaultValue="WEB"
+            android:defaultValue="OVERVIEW"
             android:entries="@array/overview_mode"
             android:entryValues="@array/overview_mode_values"
             android:key="overviewMode"
@@ -42,7 +42,7 @@
             android:title="Web or Overview mode" />
 
         <ListPreference
-            android:defaultValue="c"
+            android:defaultValue="Celsius"
             android:entries="@array/temperature_mode"
             android:entryValues="@array/temperature_mode_values"
             android:key="temperatureMode"
