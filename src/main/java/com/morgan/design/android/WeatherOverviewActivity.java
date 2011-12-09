@@ -155,7 +155,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		});
 		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());
 
-		this.last_updated_date_time = (TextView) findViewById(R.id.more_information_link);
+		this.last_updated_date_time = (TextView) findViewById(R.id.last_updated_date_time);
 		this.last_updated_date_time.setText(DateUtils.dateToSimpleDateFormat(this.currentWeather.getCurrentDate()));
 	}
 

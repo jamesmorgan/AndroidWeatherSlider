@@ -220,16 +220,21 @@
         android:id="@+id/last_updated_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
         android:text="Last Update Datetime"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:padding="10dip"
         android:id="@+id/more_information_link"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:linksClickable="true"
         android:autoLink="web"
+        android:linksClickable="true"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
         android:text="More Information..."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
