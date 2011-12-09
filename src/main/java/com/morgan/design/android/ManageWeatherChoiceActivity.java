@@ -54,7 +54,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> improve notification when no locations found
 	// FIXME -> cancel all active notifications
-	// FIXME -> download new icon sets
 	// FIXME -> turn sun set and rise in time objects
 	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
@@ -65,6 +64,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
+	// FIXME -> DONE - download new icon sets, weather channel icons
 	// FIXME -> DONE - add option for wind unit e.g. km/mph
 	// FIXME -> DONE - add location information to overview screen
 	// FIXME -> DONE - Improve notification layout

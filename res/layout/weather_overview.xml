@@ -42,7 +42,7 @@
                     android:id="@+id/weather_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/a0" />
+                    android:src="@drawable/default_weather_icon" />
 
                 <TextView
                     android:id="@+id/main_temperature"

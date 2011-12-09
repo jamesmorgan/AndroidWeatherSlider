@@ -10,7 +10,7 @@
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="10dp"
-        android:src="@drawable/a0" />
+        android:src="@drawable/default_weather_icon" />
 
     <TextView
         android:id="@+id/location"
