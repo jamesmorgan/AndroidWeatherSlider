@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.morgan.design.Constants;
 import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.domain.types.WindSpeed;
 
 public class YahooWeatherInfo implements Serializable {
 
@@ -20,7 +21,7 @@ public class YahooWeatherInfo implements Serializable {
 	private String sunRise;
 	private String sunSet;
 
-	private String windSpeedUnit;
+	private WindSpeed windSpeedUnit;
 	private String windChill;
 	private String windSpeed;
 
@@ -111,11 +112,11 @@ public class YahooWeatherInfo implements Serializable {
 		this.windSpeed = windSpeed;
 	}
 
-	public final String getWindSpeedUnit() {
+	public final WindSpeed getWindSpeedUnit() {
 		return this.windSpeedUnit;
 	}
 
-	public final void setWindSpeedUnit(final String windSpeedUnit) {
+	public final void setWindSpeedUnit(final WindSpeed windSpeedUnit) {
 		this.windSpeedUnit = windSpeedUnit;
 	}
 

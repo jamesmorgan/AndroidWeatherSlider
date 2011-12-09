@@ -15,6 +15,7 @@ import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.DayOfWeek;
 import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.util.DateUtils;
 
 public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
@@ -233,7 +234,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 	private void extractUnitData(final YahooWeatherInfo info, final Element element) {
 		if (element.getName().equals(UNIT)) {
 			info.setTemperatureUnit(Temperature.to(element.getAttributeValue(TEMPERATURE)));
-			info.setWindSpeedUnit(element.getAttributeValue(SPEED_UNIT));
+			info.setWindSpeedUnit(WindSpeed.fromYahoo(element.getAttributeValue(SPEED_UNIT)));
 			info.setPressureUnit(element.getAttributeValue(PRESSURE_UNIT));
 			info.setDistanceUnit(element.getAttributeValue(DISTANCE_UNIT));
 		}

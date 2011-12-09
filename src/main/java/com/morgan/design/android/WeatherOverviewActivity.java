@@ -18,6 +18,8 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
+import com.morgan.design.android.domain.types.WindSpeed;
+import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PressureUtils;
 import com.weatherslider.morgan.design.R;
@@ -103,7 +105,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.wind_chill = (TextView) findViewById(R.id.wind_chill);
 		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
-		this.wind_speed.setText(valueOrDefault(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit(), "N/A"));
+		this.wind_speed.setText(WindSpeed.fromSpeedAndUnit(this, this.currentWeather.getWindSpeed(), this.currentWeather.getWindSpeedUnit()));
 		this.wind_chill.setText(this.currentWeather.getWindChill()
 			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
 		this.wind_direction.setText(Wind.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
@@ -139,6 +141,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 	}
 
 	private TextView more_information_link;
+	private TextView last_updated_date_time;
 
 	private void setUpMoreInformationLink() {
 		this.more_information_link = (TextView) findViewById(R.id.more_information_link);
@@ -151,6 +154,9 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 			}
 		});
 		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());
+
+		this.last_updated_date_time = (TextView) findViewById(R.id.more_information_link);
+		this.last_updated_date_time.setText(DateUtils.dateToSimpleDateFormat(this.currentWeather.getCurrentDate()));
 	}
 
 	// /////////////////////////////////////////////

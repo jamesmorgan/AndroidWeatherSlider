@@ -99,6 +99,16 @@ public class UserPreferencesActivity extends PreferenceActivity {
 						}
 					});
 		}
+
+		if (pref.getKey().equals(PreferenceUtils.PREF_WIND_MODE)) {
+			findPreference(PreferenceUtils.PREF_WIND_MODE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object speed) {
+					UserPreferencesActivity.this.hasChanged = true;
+					return PreferenceUtils.setWindSpeedMode(getApplicationContext(), (String) speed);
+				}
+			});
+		}
 		return super.onPreferenceTreeClick(preferenceScreen, pref);
 	}
 }

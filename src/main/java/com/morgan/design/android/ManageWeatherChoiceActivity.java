@@ -58,14 +58,15 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> turn sun set and rise in time objects
 	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
+	// FIXME -> change tabs for viewpager -> http://blog.stylingandroid.com/archives/537
 
 	// FIXME -> Ensure notification tab is always updated
 	// FIXME -> Fix loading
-	// FIXME -> add location information to overview screen
-	// FIXME -> add option for wind unit e.g. km/mph
-	// FIXME -> Ensure all necessary data is being stored/recorded correctly
-	// FIXME -> change tabs for viewpager -> http://blog.stylingandroid.com/archives/537
 
+	// FIXME -> Ensure all necessary data is being stored/recorded correctly
+
+	// FIXME -> DONE - add option for wind unit e.g. km/mph
+	// FIXME -> DONE - add location information to overview screen
 	// FIXME -> DONE - Improve notification layout
 	// FIXME -> DONE - Condition code translation class
 	// FIXME -> DONE - Convert all types correctly, dates, ints, floats, longs etc
@@ -196,19 +197,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Manage Location");
-		alertDialog.setCancelable(false);
-
 		final String dialogText =
-				" Location:\n" + woeidChoice.getCurrentLocationText() + "\nLast updated:\n"
+				"Location:\n" + woeidChoice.getCurrentLocationText() + "\nLast updated:\n"
 					+ DateUtils.dateToSimpleDateFormat(woeidChoice.getLastUpdatedDateTime());
 		alertDialog.setMessage(dialogText);
-
-		alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int id) {
-				dialog.cancel();
-			}
-		});
 		alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Load", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {

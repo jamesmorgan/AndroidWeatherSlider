@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <PreferenceCategory android:title="Interface Options" >
+
+        <!-- TODO - On notification click option, open web or open overview dialog with link, possible option can show sample? -->
+        <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
+
+        <ListPreference
+            android:defaultValue="OVERVIEW"
+            android:entries="@array/overview_mode"
+            android:entryValues="@array/overview_mode_values"
+            android:key="overviewMode"
+            android:summary="Change what happens when you click on each notification"
+            android:title="Web or Overview mode" />
+
+        <ListPreference
+            android:defaultValue="c"
+            android:entries="@array/temperature_mode"
+            android:entryValues="@array/temperature_mode_values"
+            android:key="temperatureMode"
+            android:summary="Show temperature in Celcius or Fahrenheit"
+            android:title="Temperature" />
+
+        <ListPreference
+            android:defaultValue="c"
+            android:entries="@array/wind_mode"
+            android:entryValues="@array/wind_mode_values"
+            android:key="windSpeedMode"
+            android:summary="Show speed in mph or kph"
+            android:title="Wind Speed" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Refresh Options" >
+
+        <!-- When to check for weather updates from API -->
+
+        <ListPreference
+            android:defaultValue="15"
+            android:entries="@array/polling_time"
+            android:entryValues="@array/polling_time_values"
+            android:key="pollingSchedule"
+            android:summary="Configure when you check of weather updates"
+            android:title="Update Interval" />
+    </PreferenceCategory>
+
+    <!-- TODO - Option to show up to 3 notifications, paid version only -->
+    <!-- TODO - Option to pick API, e.g. Google/Yahoo -->
+
     <PreferenceCategory android:title="General Options" >
 
         <!-- TODO -> Option to start on boot, paid version only -->
@@ -27,43 +73,4 @@
             android:summary="Show Change Log On Version Upgrade"
             android:title="Change Log" />
     </PreferenceCategory>
-
-    <PreferenceCategory android:title="Interface Options" >
-
-        <!-- TODO - On notification click option, open web or open overview dialog with link, possible option can show sample? -->
-        <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
-
-        <ListPreference
-            android:defaultValue="OVERVIEW"
-            android:entries="@array/overview_mode"
-            android:entryValues="@array/overview_mode_values"
-            android:key="overviewMode"
-            android:summary="Change what hapopens when you click each weather notification"
-            android:title="Web or Overview mode" />
-
-        <ListPreference
-            android:defaultValue="Celsius"
-            android:entries="@array/temperature_mode"
-            android:entryValues="@array/temperature_mode_values"
-            android:key="temperatureMode"
-            android:summary="Show temperature in Celcius or Fahrenheit"
-            android:title="Temperature Mode" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Refresh Options" >
-
-        <!-- When to check for weather updates from API -->
-
-        <ListPreference
-            android:defaultValue="15"
-            android:entries="@array/polling_time"
-            android:entryValues="@array/polling_time_values"
-            android:key="pollingSchedule"
-            android:summary="Configure when you check of weather updates"
-            android:title="Weather Update Interval" />
-    </PreferenceCategory>
-
-    <!-- TODO - Option to show up to 3 notifications, paid version only -->
-    <!-- TODO - Option to pick API, e.g. Google/Yahoo -->
-
-</PreferenceScreen>
+</PreferenceScreen>

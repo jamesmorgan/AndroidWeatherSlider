@@ -10,6 +10,7 @@ import com.morgan.design.Constants;
 import com.morgan.design.android.UserPreferencesActivity;
 import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.domain.types.WindSpeed;
 
 public class PreferenceUtils {
 
@@ -20,6 +21,7 @@ public class PreferenceUtils {
 	public static final String PREF_START_ON_BOOT = "startOnBoot";
 	public static final String PREF_OVERVIEW_MODE = "overviewMode";
 	public static final String PREF_TEMPERATURE_MODE = "temperatureMode";
+	public static final String PREF_WIND_MODE = "windSpeedMode";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
@@ -60,6 +62,14 @@ public class PreferenceUtils {
 
 	public static boolean setTemperatureMode(final Context context, final String temperature) {
 		return getPrefs(context).edit().putString(PREF_TEMPERATURE_MODE, temperature).commit();
+	}
+
+	public static WindSpeed getWindSpeedMode(final Context context) {
+		return WindSpeed.fromPref(getPrefs(context).getString(PREF_WIND_MODE, WindSpeed.MPH.toString().toLowerCase()));
+	}
+
+	public static boolean setWindSpeedMode(final Context context, final String wind) {
+		return getPrefs(context).edit().putString(PREF_WIND_MODE, wind).commit();
 	}
 
 	public static boolean shouldStartOnBoot(final Context context) {

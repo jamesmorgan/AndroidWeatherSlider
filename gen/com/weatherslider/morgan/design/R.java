@@ -15,6 +15,8 @@ public final class R {
         public static final int polling_time_values=0x7f060001;
         public static final int temperature_mode=0x7f060005;
         public static final int temperature_mode_values=0x7f060004;
+        public static final int wind_mode=0x7f060007;
+        public static final int wind_mode_values=0x7f060006;
     }
     public static final class attr {
     }
@@ -55,31 +57,32 @@ public final class R {
     public static final class id {
         public static final int add_new_location=0x7f0a000f;
         public static final int additionaal_details_container=0x7f0a0017;
-        public static final int admin=0x7f0a0027;
-        public static final int country=0x7f0a0028;
+        public static final int admin=0x7f0a0028;
+        public static final int country=0x7f0a0029;
         public static final int date=0x7f0a0006;
         public static final int description=0x7f0a0005;
         public static final int edit_text_dialog=0x7f0a0000;
         public static final int enter_location_container=0x7f0a000a;
         public static final int getMyLocationButton=0x7f0a000e;
         public static final int high_temp=0x7f0a0008;
-        public static final int home_menu_changelog=0x7f0a002a;
-        public static final int home_menu_settings=0x7f0a0029;
+        public static final int home_menu_changelog=0x7f0a002b;
+        public static final int home_menu_settings=0x7f0a002a;
         public static final int humidity=0x7f0a0019;
         public static final int image=0x7f0a0002;
-        public static final int last_time_updated=0x7f0a0024;
+        public static final int last_time_updated=0x7f0a0025;
+        public static final int last_updated_date_time=0x7f0a0021;
         public static final int layout=0x7f0a0001;
-        public static final int location=0x7f0a0022;
+        public static final int location=0x7f0a0023;
         public static final int locationText=0x7f0a000b;
         public static final int location_a=0x7f0a0014;
         public static final int location_b=0x7f0a0015;
         public static final int location_lat_long=0x7f0a0016;
         public static final int lookUpLocationButton=0x7f0a000c;
         public static final int low_temp=0x7f0a0009;
-        public static final int main_location_text_layout=0x7f0a0025;
+        public static final int main_location_text_layout=0x7f0a0026;
         public static final int main_temperature=0x7f0a0013;
-        public static final int more_information_link=0x7f0a0021;
-        public static final int name=0x7f0a0026;
+        public static final int more_information_link=0x7f0a0022;
+        public static final int name=0x7f0a0027;
         public static final int pressure=0x7f0a001a;
         public static final int pressure_icon=0x7f0a001b;
         public static final int sun_rise=0x7f0a001f;
@@ -92,7 +95,7 @@ public final class R {
         public static final int title=0x7f0a0003;
         public static final int weather_description=0x7f0a0012;
         public static final int weather_image=0x7f0a0007;
-        public static final int weather_text=0x7f0a0023;
+        public static final int weather_text=0x7f0a0024;
         public static final int wind_chill=0x7f0a001c;
         public static final int wind_direction=0x7f0a001e;
         public static final int wind_speed=0x7f0a001d;

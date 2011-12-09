@@ -41,4 +41,14 @@
         <item>Fahrenheit</item>
     </string-array>
 
+    <string-array name="wind_mode_values">
+        <item>mph</item>
+        <item>kmh</item>
+    </string-array>
+
+    <string-array name="wind_mode">
+        <item>Mp/h</item>
+        <item>Km/h</item>
+    </string-array>
+
 </resources>

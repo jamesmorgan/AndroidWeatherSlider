@@ -64,12 +64,6 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Location Data"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
                     android:id="@+id/location_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Temp Info "
+                android:text=" Temp Info"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -221,6 +215,13 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/last_updated_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Update Datetime"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:padding="10dip"

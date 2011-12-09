@@ -1,7 +1,6 @@
 package com.morgan.design.android.service;
 
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
-import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -19,6 +18,8 @@ import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
+import com.morgan.design.android.domain.types.WindSpeed;
+import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.weatherslider.morgan.design.R;
 
@@ -115,13 +116,15 @@ public class YahooWeatherNotifcationService extends Service {
 		final String temp =
 				this.currentWeather.getCurrentTemp() + Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev());
 		final String wind =
-				this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit() + " ("
+				WindSpeed.fromSpeedAndUnit(this, this.currentWeather.getWindSpeed(), this.currentWeather.getWindSpeedUnit()) + " ("
 					+ Wind.fromDegreeToAbbreviation(this.currentWeather.getWindDirection()).toLowerCase() + ")";
 
 		final String humidity = this.currentWeather.getHumidityPercentage() + "% (Humdity)";
-		final String pressure = valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "");
+		// final String pressure = valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "");
 
-		return temp + " | " + wind + "  | " + humidity + " | " + pressure;
+		final String time = DateUtils.dateToTime(this.currentWeather.getCurrentDate());
+
+		return temp + " | " + wind + "  | " + humidity + " | " + time;
 	}
 
 	private String getSafeLocation() {

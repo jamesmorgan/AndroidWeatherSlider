@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class DateUtils {
 
+	private static final String LOG_TAG = "DateUtils";
+
 	/**
 	 * COnvert date to string
 	 * 
@@ -23,20 +25,27 @@ public class DateUtils {
 		return dateFormat.format(date);
 	}
 
-	// Wed, 07 Dec 2011 6:49 pm GMT
+	// Fri, 09 Dec 2011 12:18 pm GMT
 	public static Date fromRFC822(final String date) {
 		if (isBlank(date)) {
 			return null;
 		}
 		try {
-			final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a");
+			final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a z");
 			return dateFormat.parse(date);
 		}
 		catch (final ParseException e) {
+			Logger.e(LOG_TAG, "ParseException: ", e);
 			e.printStackTrace();
 		}
 		return null;
 	}
+
+	public static final SimpleDateFormat rfc822DateFormats[] = new SimpleDateFormat[] { new SimpleDateFormat("EEE, d MMM yy HH:mm:ss z"),
+			new SimpleDateFormat("EEE, d MMM yy HH:mm z"), new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z"),
+			new SimpleDateFormat("EEE, d MMM yyyy HH:mm z"), new SimpleDateFormat("d MMM yy HH:mm z"),
+			new SimpleDateFormat("d MMM yy HH:mm:ss z"), new SimpleDateFormat("d MMM yyyy HH:mm z"),
+			new SimpleDateFormat("d MMM yyyy HH:mm:ss z"), };
 
 	public static Date fromSimpleDate(final String date) {
 		if (isBlank(date)) {
@@ -47,6 +56,7 @@ public class DateUtils {
 			return dateFormat.parse(date);
 		}
 		catch (final ParseException e) {
+			Logger.e(LOG_TAG, "ParseException: ", e);
 			e.printStackTrace();
 		}
 		return null;
@@ -58,6 +68,14 @@ public class DateUtils {
 		}
 		final SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
 		return dateFormat.format(date);
+	}
+
+	public static String dateToTime(final Date currentDate) {
+		if (isNull(currentDate)) {
+			return "";
+		}
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm a");
+		return dateFormat.format(currentDate);
 	}
 
 	// Mon Tue Wed Thu Fri Sat Sun
