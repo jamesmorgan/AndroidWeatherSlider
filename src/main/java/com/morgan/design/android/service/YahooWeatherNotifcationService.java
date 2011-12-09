@@ -106,12 +106,6 @@ public class YahooWeatherNotifcationService extends Service {
 		return null;
 	}
 
-	private PendingIntent createOpenOverviewActivity() {
-		final Intent notifyIntent = new Intent(OPEN_WEATHER_VIEW);
-		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
-		return PendingIntent.getActivity(this, 0, notifyIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-	}
-
 	private String getContent() {
 		final String temp =
 				this.currentWeather.getCurrentTemp() + Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev());
@@ -139,6 +133,12 @@ public class YahooWeatherNotifcationService extends Service {
 		return stringHasValue(this.currentWeather.getCountry())
 				? location.append(", ").append(this.currentWeather.getCountry()).toString()
 				: location.toString();
+	}
+
+	private PendingIntent createOpenOverviewActivity() {
+		final Intent notifyIntent = new Intent(OPEN_WEATHER_VIEW);
+		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
+		return PendingIntent.getActivity(this, 0, notifyIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 
 	private PendingIntent createOpenWebLinkPendingIntent() {

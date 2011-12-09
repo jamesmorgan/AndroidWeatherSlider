@@ -20,6 +20,7 @@ import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.util.DateUtils;
+import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PressureUtils;
 import com.weatherslider.morgan.design.R;
@@ -31,12 +32,16 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 	private YahooWeatherInfo currentWeather;
 	private SimpleGestureFilter detector;
 
+	private GoogleAnalyticsService googleAnalyticsService;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_overview);
 
-		final WeatherSliderApplication appState = ((WeatherSliderApplication) getApplicationContext());
+		final WeatherSliderApplication appState = getToLevelApplication();
+		this.googleAnalyticsService = appState.getGoogleAnalyticsService();
+
 		this.currentWeather = appState.getCurrentWeather();
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
@@ -151,12 +156,17 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 				final Intent browserIntent =
 						new Intent(Intent.ACTION_VIEW, Uri.parse(WeatherOverviewActivity.this.currentWeather.getLink()));
 				startActivity(browserIntent);
+				WeatherOverviewActivity.this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.WEATHER_OVERVIEW);
 			}
 		});
 		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());
 
 		this.last_updated_date_time = (TextView) findViewById(R.id.last_updated_date_time);
 		this.last_updated_date_time.setText(DateUtils.dateToSimpleDateFormat(this.currentWeather.getCurrentDate()));
+	}
+
+	protected WeatherSliderApplication getToLevelApplication() {
+		return ((WeatherSliderApplication) getApplication());
 	}
 
 	// /////////////////////////////////////////////

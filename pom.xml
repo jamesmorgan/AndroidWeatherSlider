@@ -67,14 +67,20 @@
 			<version>2.1.2</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.android</groupId>
 			<artifactId>spring-android-rest-template</artifactId>
 			<version>1.0.0.M2</version>
 			<scope>compile</scope>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>com.google.android.apps.analytics</groupId>
+			<artifactId>GoogleAnalyticsTracker</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

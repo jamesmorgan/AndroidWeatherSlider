@@ -23,11 +23,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.morgan.design.Constants;
+import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.GetMyLocationService;
 import com.morgan.design.android.service.GetMyLocationService.LocationResult;
 import com.morgan.design.android.service.YahooRequestUtils;
+import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
@@ -46,6 +48,8 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	private GetMyLocationService mBoundMyLocationService;
 	private boolean mIsLocationServiceBound = false;
 
+	private GoogleAnalyticsService googleAnalyticsService;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +58,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.location = (EditText) findViewById(R.id.locationText);
+		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 	}
 
 	@Override
@@ -113,10 +118,12 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			Toast.makeText(this, "Please enter a location.", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.GET_LOCATION);
 		lookupLocation(location);
 	}
 
 	public void onGetCurrentMyLocation(final View v) {
+		this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.GET_GPS_LOCATION);
 		if (null == this.mBoundMyLocationService || !this.mIsLocationServiceBound) {
 			doBindService();
 		}
@@ -172,6 +179,10 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		if (this.progressDialog != null && !this.destroyed) {
 			this.progressDialog.dismiss();
 		}
+	}
+
+	protected WeatherSliderApplication getToLevelApplication() {
+		return ((WeatherSliderApplication) getApplication());
 	}
 
 	// /////////////////////////////////////////////

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Constants;
+import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.dao.WoeidChoiceDao;
@@ -30,6 +31,7 @@ import com.morgan.design.android.domain.orm.WoeidChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.YahooWeatherLoaderService;
 import com.morgan.design.android.util.DateUtils;
+import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
@@ -37,16 +39,10 @@ import com.weatherslider.morgan.design.R;
 
 public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
 
-	// FIXME -> google analytics
-	// FIXME -> add provider
 	// FIXME -> paid version
-	// FIXME -> Change log
-	// FIXME -> DB Versioning
+	// FIXME -> add provider
 	// FIXME -> localisation
 	// FIXME -> add flags for each country
-	// FIXME -> allow for multiple notifications at once (paid version only)
-	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
-	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> add option for date format
 	// FIXME -> debug mode on/off for deployment
 	// FIXME -> Change default preferences before go-live
@@ -58,12 +54,18 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
 	// FIXME -> change tabs for viewpager -> http://blog.stylingandroid.com/archives/537
+	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 
 	// FIXME -> Ensure notification tab is always updated
 	// FIXME -> Fix loading
-
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
+	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
+	// FIXME -> allow for multiple notifications at once (paid version only)
 
+	// FIXME -> DB Versioning
+	// FIXME -> Change log
+
+	// FIXME -> DONE - Added google analytics jar and initial tracking calls
 	// FIXME -> DONE - download new icon sets, weather channel icons
 	// FIXME -> DONE - add option for wind unit e.g. km/mph
 	// FIXME -> DONE - add location information to overview screen
@@ -104,6 +106,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	private SimpleGestureFilter detector;
 	private BroadcastReceiver weatherQueryCompleteBroadcastReceiver;
 
+	private GoogleAnalyticsService googleAnalyticsService;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,6 +115,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
+		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 	}
 
 	@Override
@@ -157,8 +162,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.home_menu_changelog:
+				this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.OPEN_CHANGE_LOG);
 				return true;
 			case R.id.home_menu_settings:
+				this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.OPEN_PREFERENCES);
 				PreferenceUtils.openUserPreferenecesActivity(this);
 				return true;
 			default:
@@ -169,6 +176,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.ADD_NEW_LOCATION);
 		switch (requestCode) {
 			case Constants.ENTER_LOCATION:
 				if (resultCode == RESULT_OK) {
@@ -277,6 +285,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			this.notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		}
 		this.notificationManager.cancel(woeidChoice.getLastknownNotifcationId());
+	}
+
+	protected WeatherSliderApplication getToLevelApplication() {
+		return ((WeatherSliderApplication) getApplication());
 	}
 
 	// /////////////////////////////////////////////

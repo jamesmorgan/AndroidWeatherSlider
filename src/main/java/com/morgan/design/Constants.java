@@ -2,6 +2,9 @@ package com.morgan.design;
 
 public class Constants {
 
+	// Google Analytics
+	public static final String GOOGLE_ANALYTICS_KEY = "UA-27624701-1";
+
 	// Web URL's
 	public static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
 
@@ -23,6 +26,6 @@ public class Constants {
 	public static final String SUCCESSFUL = "SUCCESSFUL";
 	public static final String FORCAST_ENTRY = "FORCAST_ENTRY";
 
-	public static final String TEMPERATURE_UNIT = null;
+	public static final String TEMPERATURE_UNIT = "TEMPERATURE_UNIT";
 
 }
