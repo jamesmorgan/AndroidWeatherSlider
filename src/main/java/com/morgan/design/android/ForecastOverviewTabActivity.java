@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.morgan.design.Constants;
 import com.morgan.design.android.domain.ForcastEntry;
+import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.util.DateUtils;
 import com.weatherslider.morgan.design.R;
 
@@ -28,7 +29,7 @@ public class ForecastOverviewTabActivity extends Activity {
 			description.setText(forcastEntry.getText());
 
 			final ImageView weather_image = (ImageView) findViewById(R.id.weather_image);
-			weather_image.setImageResource(forcastEntry.getCode());
+			weather_image.setImageResource(IconFactory.getImageResourceFromCode(forcastEntry.getCode()));
 
 			final TextView high_temp = (TextView) findViewById(R.id.high_temp);
 			high_temp.setText("Highs of " + forcastEntry.getHigh() + tempUnit);
