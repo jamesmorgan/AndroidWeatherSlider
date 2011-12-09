@@ -1,4 +1,4 @@
-package com.morgan.design.android.domain;
+package com.morgan.design.android.domain.types;
 
 import com.morgan.design.android.util.Logger;
 

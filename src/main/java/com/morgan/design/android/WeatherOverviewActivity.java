@@ -1,6 +1,7 @@
 package com.morgan.design.android;
 
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
+import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,10 +15,11 @@ import android.widget.TextView;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.util.DegreeToDirectionConverter;
+import com.morgan.design.android.domain.types.IconFactory;
+import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PressureUtils;
-import com.morgan.design.android.util.TemperatureUtils;
 import com.weatherslider.morgan.design.R;
 
 public class WeatherOverviewActivity extends Activity implements SimpleGestureListener {
@@ -63,8 +65,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 
 		this.weather_description.setText(valueOrDefault(this.currentWeather.getCurrentText(), "N/A"));
 		this.main_temperature.setText(this.currentWeather.getCurrentTemp()
-			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
-		this.weather_image.setImageResource(this.currentWeather.getCurrentCode());
+			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
+		this.weather_image.setImageResource(IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode()));
 	}
 
 	private TextView location_1;
@@ -103,8 +105,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 
 		this.wind_speed.setText(valueOrDefault(this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit(), "N/A"));
 		this.wind_chill.setText(this.currentWeather.getWindChill()
-			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
-		this.wind_direction.setText(DegreeToDirectionConverter.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
+			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
+		this.wind_direction.setText(Wind.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
 	}
 
 	private TextView sun_rise;
@@ -130,16 +132,10 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.pressure_icon = (ImageView) findViewById(R.id.pressure_icon);
 
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
-			+ TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
-		this.humidity.setText(this.currentWeather.getHumidity() + "%");
+			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
+		this.humidity.setText(this.currentWeather.getHumidityPercentage() + "%");
 		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "N/A"));
 		this.pressure_icon.setImageResource(PressureUtils.getPressureStateImage(this.currentWeather.getRising()));
-	}
-
-	private CharSequence valueOrDefault(final String string, final String defaultValue) {
-		return stringHasValue(string)
-				? string
-				: defaultValue;
 	}
 
 	private TextView more_information_link;

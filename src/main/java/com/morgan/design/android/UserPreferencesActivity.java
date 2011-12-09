@@ -6,7 +6,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
 import com.morgan.design.Constants;
-import com.morgan.design.android.domain.OverviewMode;
+import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.weatherslider.morgan.design.R;

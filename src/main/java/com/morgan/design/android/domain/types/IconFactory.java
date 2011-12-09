@@ -1,12 +1,11 @@
-package com.morgan.design.android.service;
+package com.morgan.design.android.domain.types;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.weatherslider.morgan.design.R;
 
-public class YahooImageLoaderUtils {
-
+public class IconFactory {
 	public static final Map<Integer, Integer> WEATHER_MAP;
 	static {
 		WEATHER_MAP = new HashMap<Integer, Integer>();
@@ -60,8 +59,8 @@ public class YahooImageLoaderUtils {
 		WEATHER_MAP.put(3200, R.drawable.a3200);
 	}
 
-	public static int getImageResourceFromCode(final String code) {
-		final Integer imageRes = WEATHER_MAP.get(Integer.parseInt(code));
+	public static int getImageResourceFromCode(final int code) {
+		final Integer imageRes = WEATHER_MAP.get(code);
 		return null != imageRes
 				? imageRes
 				: R.drawable.a0;

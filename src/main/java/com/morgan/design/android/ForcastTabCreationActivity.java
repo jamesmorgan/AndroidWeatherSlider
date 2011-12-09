@@ -11,7 +11,7 @@ import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.util.TemperatureUtils;
+import com.morgan.design.android.domain.types.Temperature;
 
 public class ForcastTabCreationActivity extends TabActivity implements SimpleGestureListener {
 
@@ -37,9 +37,13 @@ public class ForcastTabCreationActivity extends TabActivity implements SimpleGes
 
 				final Intent intent = new Intent().setClass(this, ForecastOverviewTabActivity.class);
 				intent.putExtra(Constants.FORCAST_ENTRY, forcastEntry);
-				intent.putExtra(Constants.TEMPERATURE_UNIT, TemperatureUtils.fromSingleToDegree(this.currentWeather.getTemperatureUnit()));
+				intent.putExtra(Constants.TEMPERATURE_UNIT, Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
 
-				spec = this.tabHost.newTabSpec(forcastEntry.getDay()).setIndicator(forcastEntry.getDay(), null).setContent(intent);
+				spec =
+						this.tabHost.newTabSpec(forcastEntry.getDayOfWeek().full())
+							.setIndicator(forcastEntry.getDayOfWeek().full(), null)
+							.setContent(intent);
+
 				this.tabHost.addTab(spec);
 			}
 		}

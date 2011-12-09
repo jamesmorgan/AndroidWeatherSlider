@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morgan.design.android.domain.orm.WoeidChoice;
+import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.util.DateUtils;
 import com.weatherslider.morgan.design.R;
 
@@ -61,7 +62,7 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 			location.setText(woeidChoice.getCurrentLocationText());
 
 			final ImageView image = (ImageView) view.findViewById(R.id.image);
-			image.setImageResource(woeidChoice.getCurrentWeatherCode());
+			image.setImageResource(IconFactory.getImageResourceFromCode(woeidChoice.getCurrentWeatherCode()));
 		}
 		return view;
 	}

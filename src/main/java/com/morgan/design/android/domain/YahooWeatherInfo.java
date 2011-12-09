@@ -2,10 +2,11 @@ package com.morgan.design.android.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.morgan.design.Constants;
-import com.morgan.design.android.service.YahooImageLoaderUtils;
+import com.morgan.design.android.domain.types.Temperature;
 
 public class YahooWeatherInfo implements Serializable {
 
@@ -14,15 +15,12 @@ public class YahooWeatherInfo implements Serializable {
 	private String city;
 	private String country;
 
-	private String humidity;
+	private int humidityPercentage;
 
 	private String sunRise;
 	private String sunSet;
 
-	private String temperatureUnit;
 	private String windSpeedUnit;
-	private String pressureUnit;
-
 	private String windChill;
 	private String windSpeed;
 
@@ -33,8 +31,9 @@ public class YahooWeatherInfo implements Serializable {
 	private String region;
 	private String windDirection;
 
-	private String currentDate;
-	private String currentTemp;
+	private int currentTemp;
+	private Temperature temperatureUnit;
+	private Date currentDate;
 	private int currentCode;
 	private String currentText;
 	private String latitude;
@@ -42,9 +41,11 @@ public class YahooWeatherInfo implements Serializable {
 
 	private String rising;
 
-	private String pressure;
+	private String pressureUnit;
+	private float pressure;
 
-	private String visiblity;
+	private int visiblityDistance;
+	private String distanceUnit;
 
 	public final String getSunRise() {
 		return this.sunRise;
@@ -78,19 +79,19 @@ public class YahooWeatherInfo implements Serializable {
 		this.country = country;
 	}
 
-	public final String getHumidity() {
-		return this.humidity;
+	public int getHumidityPercentage() {
+		return this.humidityPercentage;
 	}
 
-	public final void setHumidity(final String humidity) {
-		this.humidity = humidity;
+	public void setHumidityPercentage(final int humidityPercentage) {
+		this.humidityPercentage = humidityPercentage;
 	}
 
-	public final String getTemperatureUnit() {
+	public final Temperature getTemperatureUnit() {
 		return this.temperatureUnit;
 	}
 
-	public final void setTemperatureUnit(final String temperatureUnit) {
+	public final void setTemperatureUnit(final Temperature temperatureUnit) {
 		this.temperatureUnit = temperatureUnit;
 	}
 
@@ -175,27 +176,27 @@ public class YahooWeatherInfo implements Serializable {
 		return this.currentText;
 	}
 
-	public void setCurrentCode(final String currentCode) {
-		this.currentCode = YahooImageLoaderUtils.getImageResourceFromCode(currentCode);
+	public void setCurrentCode(final int currentCode) {
+		this.currentCode = currentCode;
 	}
 
 	public int getCurrentCode() {
 		return this.currentCode;
 	}
 
-	public void setCurrentTemp(final String currentTemp) {
+	public void setCurrentTemp(final int currentTemp) {
 		this.currentTemp = currentTemp;
 	}
 
-	public String getCurrentTemp() {
+	public int getCurrentTemp() {
 		return this.currentTemp;
 	}
 
-	public void setCurrentDate(final String currentDate) {
+	public void setCurrentDate(final Date currentDate) {
 		this.currentDate = currentDate;
 	}
 
-	public String getCurrentDate() {
+	public Date getCurrentDate() {
 		return this.currentDate;
 	}
 
@@ -223,20 +224,20 @@ public class YahooWeatherInfo implements Serializable {
 		return this.rising;
 	}
 
-	public void setPressure(final String pressure) {
+	public void setPressure(final float pressure) {
 		this.pressure = pressure;
 	}
 
-	public String getPressure() {
+	public float getPressure() {
 		return this.pressure;
 	}
 
-	public void setVisiblity(final String visiblity) {
-		this.visiblity = visiblity;
+	public void setVisiblityDistance(final int visiblityDistance) {
+		this.visiblityDistance = visiblityDistance;
 	}
 
-	public String getVisiblity() {
-		return this.visiblity;
+	public int getVisiblityDistance() {
+		return this.visiblityDistance;
 	}
 
 	public String getPressureUnit() {
@@ -247,6 +248,14 @@ public class YahooWeatherInfo implements Serializable {
 		this.pressureUnit = pressureUnit;
 	}
 
+	public void setDistanceUnit(final String distanceUnit) {
+		this.distanceUnit = distanceUnit;
+	}
+
+	public String getDistanceUnit() {
+		return this.distanceUnit;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
@@ -254,18 +263,14 @@ public class YahooWeatherInfo implements Serializable {
 			.append(this.city)
 			.append(", country=")
 			.append(this.country)
-			.append(", humidity=")
-			.append(this.humidity)
+			.append(", humidityPercentage=")
+			.append(this.humidityPercentage)
 			.append(", sunRise=")
 			.append(this.sunRise)
 			.append(", sunSet=")
 			.append(this.sunSet)
-			.append(", temperatureUnit=")
-			.append(this.temperatureUnit)
 			.append(", windSpeedUnit=")
 			.append(this.windSpeedUnit)
-			.append(", pressureUnit=")
-			.append(this.pressureUnit)
 			.append(", windChill=")
 			.append(this.windChill)
 			.append(", windSpeed=")
@@ -280,10 +285,12 @@ public class YahooWeatherInfo implements Serializable {
 			.append(this.region)
 			.append(", windDirection=")
 			.append(this.windDirection)
-			.append(", currentDate=")
-			.append(this.currentDate)
 			.append(", currentTemp=")
 			.append(this.currentTemp)
+			.append(", temperatureUnit=")
+			.append(this.temperatureUnit)
+			.append(", currentDate=")
+			.append(this.currentDate)
 			.append(", currentCode=")
 			.append(this.currentCode)
 			.append(", currentText=")
@@ -294,10 +301,14 @@ public class YahooWeatherInfo implements Serializable {
 			.append(this.longitude)
 			.append(", rising=")
 			.append(this.rising)
+			.append(", pressureUnit=")
+			.append(this.pressureUnit)
 			.append(", pressure=")
 			.append(this.pressure)
-			.append(", visiblity=")
-			.append(this.visiblity)
+			.append(", visiblityDistance=")
+			.append(this.visiblityDistance)
+			.append(", distanceUnit=")
+			.append(this.distanceUnit)
 			.append("]");
 		return builder.toString();
 	}

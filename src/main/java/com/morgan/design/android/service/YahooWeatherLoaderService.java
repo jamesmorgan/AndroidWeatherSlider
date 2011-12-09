@@ -1,7 +1,11 @@
 package com.morgan.design.android.service;
 
+import static com.morgan.design.android.util.ObjectUtils.isBlank;
+import static com.morgan.design.android.util.ObjectUtils.isNotBlank;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
+
+import java.util.Date;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -25,9 +29,9 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.dao.WoeidChoiceDao;
-import com.morgan.design.android.domain.Temperature;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.WoeidChoice;
+import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
@@ -92,11 +96,13 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		if (isNotNull(intent)) {
 			final Bundle extras = intent.getExtras();
 			if (isNotNull(extras)) {
-				this.woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
-				Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + this.woeidId);
-
-				getToLevelApplication().setCurrentWoeid(this.woeidId);
-				initiateWeatherDownloadTask();
+				final String woeidId = intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID);
+				Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + woeidId);
+				if (isNotBlank(woeidId)) {
+					this.woeidId = woeidId;
+					getToLevelApplication().setCurrentWoeid(this.woeidId);
+					new DownloadWeatherInfoDataTask(this.woeidId, PreferenceUtils.getTemperatureMode(getApplicationContext())).execute();
+				}
 			}
 		}
 
@@ -116,35 +122,38 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	}
 
 	protected void setUpdateWeatherInfoForService() {
-		final WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeidOrNewInstance(this.woeidId);
 
-		// FIXME -> when allowing more than one notification, get notification Id, plus ystem millis
-		if (null != woeidChoice && null != this.mBoundNotificationService) {
+		this.mBoundNotificationService.setWeatherInformation(this.currentWeather);
+
+		// Find one, if not make new one
+		WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeid(this.woeidId);
+		if (isNull(woeidChoice)) {
+			woeidChoice = new WoeidChoice();
+			woeidChoice.setWoeid(this.woeidId);
+			woeidChoice.setCreatedDateTime(new Date());
+			this.woeidChoiceDao.create(woeidChoice);
+		}
+
+		// FIXME -> when allowing more than one notification, get notification Id, plus system millis
+		if (null != this.mBoundNotificationService) {
 			woeidChoice.setLastknownNotifcationId(this.mBoundNotificationService.getCurrentNotifcationId());
 		}
 
+		final Intent broadcastIntent = new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE);
+
 		final boolean failed = (null == this.currentWeather);
-		try {
-			this.mBoundNotificationService.setWeatherInformation(this.currentWeather);
+		if (failed) {
+			broadcastIntent.putExtra(Constants.SUCCESSFUL, false);
+			woeidChoice.failedQuery();
+			this.woeidChoiceDao.update(woeidChoice);
 		}
-		finally {
-			if (null != woeidChoice) {
-				final Intent broadcastIntent = new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE);
-
-				if (failed) {
-					broadcastIntent.putExtra(Constants.SUCCESSFUL, false);
-					woeidChoice.failedQuery();
-					this.woeidChoiceDao.update(woeidChoice);
-				}
-				else {
-					broadcastIntent.putExtra(Constants.SUCCESSFUL, true);
-					woeidChoice.successfullyQuery(this.currentWeather);
-					this.woeidChoiceDao.update(woeidChoice);
-				}
-
-				sendBroadcast(broadcastIntent);
-			}
+		else {
+			broadcastIntent.putExtra(Constants.SUCCESSFUL, true);
+			woeidChoice.successfullyQuery(this.currentWeather);
+			this.woeidChoiceDao.update(woeidChoice);
 		}
+
+		sendBroadcast(broadcastIntent);
 	}
 
 	void doBindService() {
@@ -177,9 +186,8 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved: com.morgan.design.intent.PREFERENCES_UPDATED");
-
 					final String woeidId = getToLevelApplication().getCurrentWoied();
-					if (null != woeidId) {
+					if (isNotBlank(woeidId)) {
 						YahooWeatherLoaderService.this.woeidId = woeidId;
 						rebindPreferences();
 					}
@@ -194,15 +202,12 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 	}
 
 	protected void rebindPreferences() {
+		if (isNotBlank(this.woeidId)) {
+			new DownloadWeatherInfoDataTask(this.woeidId, PreferenceUtils.getTemperatureMode(getApplicationContext())).execute();
+		}
 		if (null != this.mBoundNotificationService && this.mIsNotificatoionServiceBound) {
-			initiateWeatherDownloadTask();
 			this.mBoundNotificationService.updatePreferences();
 		}
-	}
-
-	protected void initiateWeatherDownloadTask() {
-		final Temperature temperatureMode = PreferenceUtils.getTemperatureMode(getApplicationContext());
-		new DownloadWeatherInfoDataTask(this.woeidId, temperatureMode).execute();
 	}
 
 	private class DownloadWeatherInfoDataTask extends AsyncTask<Void, Void, YahooWeatherInfo> {
@@ -221,7 +226,10 @@ public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper
 		protected YahooWeatherInfo doInBackground(final Void... params) {
 
 			try {
-				// if we have no data connection, no point in proceeding.
+				if (isBlank(this.woeidId)) {
+					Logger.e(LOG_TAG, "No locaiton WOIED found. Skipping pulse action.");
+					return null;
+				}
 				if (isNotConnectedToNetwork()) {
 					Logger.e(LOG_TAG, "No usable network. Skipping pulse action.");
 					return null;

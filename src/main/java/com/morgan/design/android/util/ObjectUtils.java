@@ -35,6 +35,12 @@ public final class ObjectUtils {
 		return !isEmpty(value);
 	}
 
+	public static String valueOrDefault(final String string, final String defaultValue) {
+		return stringHasValue(string)
+				? string
+				: defaultValue;
+	}
+
 	public static final boolean isZero(final int value) {
 		return 0 == value;
 	}
@@ -49,5 +55,13 @@ public final class ObjectUtils {
 
 	public static final boolean stringHasValue(final String value) {
 		return null != value && !"".equals(value);
+	}
+
+	public static final boolean isNotBlank(final String value) {
+		return stringHasValue(value);
+	}
+
+	public static final boolean isBlank(final String value) {
+		return !stringHasValue(value);
 	}
 }

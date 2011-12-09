@@ -1,8 +1,8 @@
 package com.morgan.design.android.util;
 
+import java.sql.SQLException;
 import java.util.concurrent.Callable;
 
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 public class DBUtils {

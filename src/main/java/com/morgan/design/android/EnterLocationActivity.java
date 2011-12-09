@@ -122,7 +122,6 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		}
 		showLoadingProgress();
 		if (null != this.mBoundMyLocationService && this.mIsLocationServiceBound) {
-			// this.mBoundMyLocationService.getLocation(this, this.locationResult);
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {

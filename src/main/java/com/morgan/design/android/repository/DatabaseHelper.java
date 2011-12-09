@@ -17,7 +17,7 @@ import com.morgan.design.android.util.Logger;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	private static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
-	private static final String DATABASE_NAME = "tea_round.db";
+	private static final String DATABASE_NAME = "weather_slider.db";
 
 	// TODO reset to 1 for release
 	private static final int DATABASE_VERSION = 1;

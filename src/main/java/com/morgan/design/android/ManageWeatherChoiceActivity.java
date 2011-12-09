@@ -47,6 +47,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> allow for multiple notifications at once (paid version only)
 	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
+	// FIXME -> add option for date format
 	// FIXME -> debug mode on/off for deployment
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Show location on a small map in overview mode?
@@ -54,11 +55,20 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> improve notification when no locations found
 	// FIXME -> cancel all active notifications
 	// FIXME -> download new icon sets
-
+	// FIXME -> turn sun set and rise in time objects
+	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
-	// FIXME -> Ensure notification tab is always updated
-	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
+	// FIXME -> Ensure notification tab is always updated
+	// FIXME -> Fix loading
+	// FIXME -> add location information to overview screen
+	// FIXME -> add option for wind unit e.g. km/mph
+	// FIXME -> Ensure all necessary data is being stored/recorded correctly
+	// FIXME -> change tabs for viewpager -> http://blog.stylingandroid.com/archives/537
+
+	// FIXME -> DONE - Improve notification layout
+	// FIXME -> DONE - Condition code translation class
+	// FIXME -> DONE - Convert all types correctly, dates, ints, floats, longs etc
 	// FIXME -> DONE - add swipe gesture to overview tabs
 	// FIXME -> DONE - custom tab view with xml skin
 	// FIXME -> DONE - Add Link to more information on Overview screen
@@ -100,7 +110,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
-		reloadCurrentWeatherNotifications();
 	}
 
 	@Override

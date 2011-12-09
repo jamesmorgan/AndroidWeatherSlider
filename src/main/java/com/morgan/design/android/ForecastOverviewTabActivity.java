@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.morgan.design.Constants;
 import com.morgan.design.android.domain.ForcastEntry;
+import com.morgan.design.android.util.DateUtils;
 import com.weatherslider.morgan.design.R;
 
 public class ForecastOverviewTabActivity extends Activity {
@@ -36,7 +37,7 @@ public class ForecastOverviewTabActivity extends Activity {
 			low_temp.setText("Lows of " + forcastEntry.getLow() + tempUnit);
 
 			final TextView date = (TextView) findViewById(R.id.date);
-			date.setText(forcastEntry.getDate());
+			date.setText(DateUtils.toSimpleDate(forcastEntry.getDate()));
 		}
 	}
 

@@ -8,8 +8,8 @@ import android.preference.PreferenceManager;
 
 import com.morgan.design.Constants;
 import com.morgan.design.android.UserPreferencesActivity;
-import com.morgan.design.android.domain.OverviewMode;
-import com.morgan.design.android.domain.Temperature;
+import com.morgan.design.android.domain.types.OverviewMode;
+import com.morgan.design.android.domain.types.Temperature;
 
 public class PreferenceUtils {
 
@@ -55,7 +55,7 @@ public class PreferenceUtils {
 	}
 
 	public static Temperature getTemperatureMode(final Context context) {
-		return Temperature.to(getPrefs(context).getString(PREF_TEMPERATURE_MODE, Temperature.CELSIUS.getQueryValue()));
+		return Temperature.to(getPrefs(context).getString(PREF_TEMPERATURE_MODE, Temperature.CELSIUS.getAbrev()));
 	}
 
 	public static boolean setTemperatureMode(final Context context, final String temperature) {

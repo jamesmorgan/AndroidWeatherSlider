@@ -28,10 +28,13 @@ public class WoeidChoice implements Serializable {
 	private int lastknownNotifcationId;
 
 	@DatabaseField(dataType = DataType.DATE)
-	private Date createdDateTime = new Date();
+	private Date createdDateTime;
 
 	@DatabaseField(dataType = DataType.DATE)
 	private Date lastUpdatedDateTime;
+
+	@DatabaseField(dataType = DataType.DATE)
+	private Date lastSuccessfulUpdateDateTime;
 
 	@DatabaseField
 	private int numberOfTimesUpdated = 0;
@@ -45,7 +48,7 @@ public class WoeidChoice implements Serializable {
 	@DatabaseField
 	private String currentWeatherText;
 
-	private String currentTemp;
+	private int currentTemperature;
 
 	public final int getId() {
 		return this.id;
@@ -111,12 +114,12 @@ public class WoeidChoice implements Serializable {
 		this.lastknownNotifcationId = lastknownNotifcationId;
 	}
 
-	public String getCurrentTemp() {
-		return this.currentTemp;
+	public int getCurrentTemperature() {
+		return this.currentTemperature;
 	}
 
-	public void setCurrentTemp(final String currentTemp) {
-		this.currentTemp = currentTemp;
+	public void setCurrentTemperature(final int currentTemperature) {
+		this.currentTemperature = currentTemperature;
 	}
 
 	public String getCurrentWeatherText() {
@@ -127,19 +130,35 @@ public class WoeidChoice implements Serializable {
 		this.currentWeatherText = currentWeatherText;
 	}
 
+	public boolean isFirstAttempt() {
+		return null == this.createdDateTime;
+	}
+
+	public void setLastSuccessfulUpdateDateTime(final Date lastSuccessfulUpdateDateTime) {
+		this.lastSuccessfulUpdateDateTime = lastSuccessfulUpdateDateTime;
+	}
+
+	public Date getLastSuccessfulUpdateDateTime() {
+		return this.lastSuccessfulUpdateDateTime;
+	}
+
 	public void failedQuery() {
-		this.lastUpdatedDateTime = new Date();
-		this.numberOfTimesUpdated++;
+		recordUdpate();
 	}
 
 	public void successfullyQuery(final YahooWeatherInfo currentWeather) {
-		this.lastUpdatedDateTime = new Date();
-		this.numberOfTimesUpdated++;
+		recordUdpate();
 
 		this.currentWeatherText = currentWeather.getCurrentText();
-		this.currentTemp = currentWeather.getCurrentTemp();
+		this.currentTemperature = currentWeather.getCurrentTemp();
 		this.currentWeatherCode = currentWeather.getCurrentCode();
+		this.lastSuccessfulUpdateDateTime = currentWeather.getCurrentDate();
 		this.currentLocationText = getSafeLocation(currentWeather);
+	}
+
+	private void recordUdpate() {
+		this.lastUpdatedDateTime = new Date();
+		this.numberOfTimesUpdated++;
 	}
 
 	private String getSafeLocation(final YahooWeatherInfo currentWeather) {
@@ -165,8 +184,33 @@ public class WoeidChoice implements Serializable {
 		return sb.toString();
 	}
 
-	public boolean isFirstAttempt() {
-		return null == this.createdDateTime;
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("WoeidChoice [id=")
+			.append(this.id)
+			.append(", woeid=")
+			.append(this.woeid)
+			.append(", lastknownNotifcationId=")
+			.append(this.lastknownNotifcationId)
+			.append(", createdDateTime=")
+			.append(this.createdDateTime)
+			.append(", lastUpdatedDateTime=")
+			.append(this.lastUpdatedDateTime)
+			.append(", lastSuccessfulUpdateDateTime=")
+			.append(this.lastSuccessfulUpdateDateTime)
+			.append(", numberOfTimesUpdated=")
+			.append(this.numberOfTimesUpdated)
+			.append(", currentWeatherCode=")
+			.append(this.currentWeatherCode)
+			.append(", currentLocationText=")
+			.append(this.currentLocationText)
+			.append(", currentWeatherText=")
+			.append(this.currentWeatherText)
+			.append(", currentTemperature=")
+			.append(this.currentTemperature)
+			.append("]");
+		return builder.toString();
 	}
 
 }

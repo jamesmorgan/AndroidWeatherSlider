@@ -4,9 +4,9 @@ import java.util.List;
 
 import android.location.Location;
 
-import com.morgan.design.android.domain.Temperature;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.parser.WOIEDParser;
 import com.morgan.design.android.parser.YahooWeatherInfoParser;
 
@@ -71,6 +71,6 @@ public class YahooRequestUtils {
 		if (woeidId == null) {
 			return null;
 		}
-		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.getQueryValue());
+		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.getAbrev());
 	}
 }

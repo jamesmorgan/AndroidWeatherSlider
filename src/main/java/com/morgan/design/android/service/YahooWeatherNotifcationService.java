@@ -1,5 +1,7 @@
 package com.morgan.design.android.service;
 
+import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
+import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,8 +14,11 @@ import android.util.Log;
 
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
-import com.morgan.design.android.domain.OverviewMode;
 import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.domain.types.IconFactory;
+import com.morgan.design.android.domain.types.OverviewMode;
+import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.weatherslider.morgan.design.R;
 
@@ -75,13 +80,11 @@ public class YahooWeatherNotifcationService extends Service {
 		// Time stamp, set 0 to remove value from skin
 		notification.when = 0;
 		notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.DEFAULT_LIGHTS;
-		notification.icon = this.currentWeather.getCurrentCode();
+		notification.icon = IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode());
 
 		// Scrolling update text
 		final String safeLocation = getSafeLocation();
-		notification.tickerText =
-				"Updated Weather Information, it is " + this.currentWeather.getCurrentText() + " in " + safeLocation + " "
-					+ this.currentWeather.getCountry();
+		notification.tickerText = "Updated Weather Information, it is " + this.currentWeather.getCurrentText() + " in " + safeLocation;
 
 		final PendingIntent pendingIntent = createIntent();;
 
@@ -109,20 +112,30 @@ public class YahooWeatherNotifcationService extends Service {
 	}
 
 	private String getContent() {
-		final String temp = this.currentWeather.getCurrentTemp() + this.currentWeather.getTemperatureUnit();
-		final String wind = this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit();
-		final String contentText = temp + " | " + wind + "  | " + this.currentWeather.getCurrentDate();
-		return contentText;
+		final String temp =
+				this.currentWeather.getCurrentTemp() + Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev());
+		final String wind =
+				this.currentWeather.getWindSpeed() + this.currentWeather.getWindSpeedUnit() + " ("
+					+ Wind.fromDegreeToAbbreviation(this.currentWeather.getWindDirection()).toLowerCase() + ")";
+
+		final String humidity = this.currentWeather.getHumidityPercentage() + "% (Humdity)";
+		final String pressure = valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "");
+
+		return temp + " | " + wind + "  | " + humidity + " | " + pressure;
 	}
 
 	private String getSafeLocation() {
-		if ("" != this.currentWeather.getCity()) {
-			return this.currentWeather.getCity();
+		final StringBuilder location = new StringBuilder();
+		if (stringHasValue(this.currentWeather.getRegion())) {
+			location.append(this.currentWeather.getRegion());
 		}
-		if ("" != this.currentWeather.getRegion()) {
-			return this.currentWeather.getRegion();
+		else if (stringHasValue(this.currentWeather.getCity())) {
+			location.append(this.currentWeather.getCity());
 		}
-		return "";
+
+		return stringHasValue(this.currentWeather.getCountry())
+				? location.append(", ").append(this.currentWeather.getCountry()).toString()
+				: location.toString();
 	}
 
 	private PendingIntent createOpenWebLinkPendingIntent() {
@@ -146,4 +159,5 @@ public class YahooWeatherNotifcationService extends Service {
 			stopSelf();
 		}
 	}
+
 }

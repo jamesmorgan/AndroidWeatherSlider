@@ -106,10 +106,10 @@ public class WOEIDEntry implements Serializable {
 			.append(this.admin1)
 			.append(", admin2=")
 			.append(this.admin2)
-			.append(", locality1=")
-			.append(this.locality1)
 			.append(", admin3=")
 			.append(this.admin3)
+			.append(", locality1=")
+			.append(this.locality1)
 			.append(", locality2=")
 			.append(this.locality2)
 			.append("]");
