@@ -5,6 +5,9 @@ public class Constants {
 	// Google Analytics
 	public static final String GOOGLE_ANALYTICS_KEY = "UA-27624701-1";
 
+	// Email's
+	public static final String[] FEEDBACK_EMAIL = new String[] { "appfeedback@morgan-design.com" };
+
 	// Web URL's
 	public static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
 

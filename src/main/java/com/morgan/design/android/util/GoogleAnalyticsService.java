@@ -33,15 +33,19 @@ public class GoogleAnalyticsService {
 		tracker.startNewSession(Constants.GOOGLE_ANALYTICS_KEY, 30, context);
 	}
 
-	public void trackClickEvent(final String button) {
-		tracker.trackEvent("Clicks", // Category
-				"Button", // Action
-				button, // Label
-				1); // VALUE
+	public void trackClickEvent(final Context context, final String button) {
+		if (PreferenceUtils.isGoogleAnalyticsEnabled(context)) {
+			tracker.trackEvent("Clicks", // Category
+					"Button", // Action
+					button, // Label
+					1); // VALUE
+		}
 	}
 
-	public void trackPageView(final String page) {
-		tracker.trackPageView("/" + page);
+	public void trackPageView(final Context context, final String page) {
+		if (PreferenceUtils.isGoogleAnalyticsEnabled(context)) {
+			tracker.trackPageView("/" + page);
+		}
 	}
 
 }

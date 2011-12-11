@@ -146,9 +146,6 @@
 					<sdk>
 						<platform>7</platform>
 					</sdk>
-					<emulator>
-						<avd>AVD2.1</avd>
-					</emulator>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 				</configuration>
 				<extensions>true</extensions>

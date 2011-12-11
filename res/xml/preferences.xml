@@ -57,20 +57,17 @@
             android:summary="Enable this to start on first boot"
             android:title="Start On First Boot" />
 
-        <!-- TODO - Option to disable google adds? -->
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="enableGoogleAnalytics"
             android:summary="Thanks for helping improve this applicaiton"
             android:title="Enhable Google Analytics" />
 
-        <!-- TODO - Show change log on start? -->
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="changelog"
             android:summary="Show Change Log On Version Upgrade"
             android:title="Change Log" />
+        
     </PreferenceCategory>
 </PreferenceScreen>

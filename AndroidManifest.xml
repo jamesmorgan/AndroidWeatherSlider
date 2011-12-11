@@ -38,7 +38,13 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation"
             android:name="com.morgan.design.android.UserPreferencesActivity" />
-
+        
+        <!-- Feedback form -->
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.FeedbackFormActivity" />
+        
         <!-- Weather Overview Screen -->
         <activity
             android:configChanges="keyboardHidden|orientation"

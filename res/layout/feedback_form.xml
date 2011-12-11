@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ScrollView01"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:scrollbars="vertical"
+	android:padding="10dip">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:orientation="vertical"
+		android:layout_height="fill_parent">
+
+		<TextView
+			android:id="@+id/TextViewTitle"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/feedbacktitle"
+			android:textSize="10pt"
+			android:paddingBottom="5dip"></TextView>
+
+
+		<EditText
+			android:id="@+id/EditTextName"
+			android:layout_height="wrap_content"
+			android:hint="@string/feedbackname"
+			android:inputType="textPersonName"
+			android:layout_width="fill_parent"
+			android:paddingBottom="5dip"></EditText>
+
+		<EditText
+			android:id="@+id/EditTextEmail"
+			android:layout_height="wrap_content"
+			android:hint="@string/feedbackemail"
+			android:inputType="textEmailAddress"
+			android:layout_width="fill_parent"
+			android:paddingBottom="5dip"></EditText>
+
+		<Spinner
+			android:id="@+id/SpinnerFeedbackType"
+			android:layout_height="wrap_content"
+			android:prompt="@string/feedbacktype"
+			android:layout_width="fill_parent"
+			android:entries="@array/feedbacktypelist"
+			android:paddingBottom="5dip"></Spinner>
+
+		<EditText
+			android:id="@+id/EditTextFeedbackBody"
+			android:layout_height="wrap_content"
+			android:hint="@string/feedbackbody"
+			android:inputType="textMultiLine"
+			android:lines="5"
+			android:layout_width="fill_parent"
+			android:paddingBottom="5dip"></EditText>
+
+		<CheckBox
+			android:id="@+id/CheckBoxResponse"
+			android:layout_height="wrap_content"
+			android:text="@string/feedbackresponse"
+			android:layout_width="fill_parent"
+			android:paddingBottom="5dip"></CheckBox>
+
+		<Button
+			android:id="@+id/ButtonSendFeedback"
+			android:layout_height="wrap_content"
+			android:text="@string/feedbackbutton"
+			android:onClick="onSendFeedback"
+			android:layout_width="fill_parent"></Button>
+
+	</LinearLayout>
+</ScrollView>

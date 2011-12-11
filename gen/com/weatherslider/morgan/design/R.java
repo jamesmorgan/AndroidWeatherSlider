@@ -9,6 +9,7 @@ package com.weatherslider.morgan.design;
 
 public final class R {
     public static final class array {
+        public static final int feedbacktypelist=0x7f060008;
         public static final int overview_mode=0x7f060002;
         public static final int overview_mode_values=0x7f060003;
         public static final int polling_time=0x7f060000;
@@ -79,61 +80,72 @@ public final class R {
         public static final int weather_channel_47=0x7f020037;
     }
     public static final class id {
-        public static final int add_new_location=0x7f0a000f;
-        public static final int additionaal_details_container=0x7f0a0017;
-        public static final int admin=0x7f0a0028;
-        public static final int country=0x7f0a0029;
-        public static final int date=0x7f0a0006;
-        public static final int description=0x7f0a0005;
+        public static final int ButtonSendFeedback=0x7f0a000d;
+        public static final int CheckBoxResponse=0x7f0a000c;
+        public static final int EditTextEmail=0x7f0a0009;
+        public static final int EditTextFeedbackBody=0x7f0a000b;
+        public static final int EditTextName=0x7f0a0008;
+        public static final int ScrollView01=0x7f0a0006;
+        public static final int SpinnerFeedbackType=0x7f0a000a;
+        public static final int TextViewTitle=0x7f0a0007;
+        public static final int add_new_location=0x7f0a0018;
+        public static final int additionaal_details_container=0x7f0a0020;
+        public static final int admin=0x7f0a0031;
+        public static final int country=0x7f0a0032;
+        public static final int date=0x7f0a000f;
+        public static final int description=0x7f0a000e;
         public static final int edit_text_dialog=0x7f0a0000;
-        public static final int enter_location_container=0x7f0a000a;
-        public static final int getMyLocationButton=0x7f0a000e;
-        public static final int high_temp=0x7f0a0008;
-        public static final int home_menu_changelog=0x7f0a002b;
-        public static final int home_menu_settings=0x7f0a002a;
-        public static final int humidity=0x7f0a0019;
+        public static final int enter_location_container=0x7f0a0013;
+        public static final int getMyLocationButton=0x7f0a0017;
+        public static final int high_temp=0x7f0a0011;
+        public static final int home_menu_changelog=0x7f0a0034;
+        public static final int home_menu_settings=0x7f0a0033;
+        public static final int humidity=0x7f0a0022;
         public static final int image=0x7f0a0002;
-        public static final int last_time_updated=0x7f0a0025;
-        public static final int last_updated_date_time=0x7f0a0021;
+        public static final int last_time_updated=0x7f0a002e;
+        public static final int last_updated_date_time=0x7f0a002a;
         public static final int layout=0x7f0a0001;
-        public static final int location=0x7f0a0023;
-        public static final int locationText=0x7f0a000b;
-        public static final int location_a=0x7f0a0014;
-        public static final int location_b=0x7f0a0015;
-        public static final int location_lat_long=0x7f0a0016;
-        public static final int lookUpLocationButton=0x7f0a000c;
-        public static final int low_temp=0x7f0a0009;
-        public static final int main_location_text_layout=0x7f0a0026;
-        public static final int main_temperature=0x7f0a0013;
-        public static final int more_information_link=0x7f0a0022;
-        public static final int name=0x7f0a0027;
-        public static final int pressure=0x7f0a001a;
-        public static final int pressure_icon=0x7f0a001b;
-        public static final int sun_rise=0x7f0a001f;
-        public static final int sun_set=0x7f0a0020;
-        public static final int tableLayout1=0x7f0a0010;
-        public static final int tableRow1=0x7f0a0011;
-        public static final int temperature=0x7f0a0018;
+        public static final int location=0x7f0a002c;
+        public static final int locationText=0x7f0a0014;
+        public static final int location_a=0x7f0a001d;
+        public static final int location_b=0x7f0a001e;
+        public static final int location_lat_long=0x7f0a001f;
+        public static final int lookUpLocationButton=0x7f0a0015;
+        public static final int low_temp=0x7f0a0012;
+        public static final int main_location_text_layout=0x7f0a002f;
+        public static final int main_temperature=0x7f0a001c;
+        public static final int more_information_link=0x7f0a002b;
+        public static final int name=0x7f0a0030;
+        public static final int pressure=0x7f0a0023;
+        public static final int pressure_icon=0x7f0a0024;
+        public static final int sun_rise=0x7f0a0028;
+        public static final int sun_set=0x7f0a0029;
+        public static final int tableLayout1=0x7f0a0019;
+        public static final int tableRow1=0x7f0a001a;
+        public static final int temperature=0x7f0a0021;
         public static final int text=0x7f0a0004;
-        public static final int textView1=0x7f0a000d;
+        public static final int textView1=0x7f0a0016;
         public static final int title=0x7f0a0003;
-        public static final int weather_description=0x7f0a0012;
-        public static final int weather_image=0x7f0a0007;
-        public static final int weather_text=0x7f0a0024;
-        public static final int wind_chill=0x7f0a001c;
-        public static final int wind_direction=0x7f0a001e;
-        public static final int wind_speed=0x7f0a001d;
+        public static final int weather_description=0x7f0a001b;
+        public static final int weather_image=0x7f0a0010;
+        public static final int weather_text=0x7f0a002d;
+        public static final int wind_chill=0x7f0a0025;
+        public static final int wind_direction=0x7f0a0027;
+        public static final int wind_speed=0x7f0a0026;
+        public static final int wv_dialog=0x7f0a0005;
     }
     public static final class layout {
         public static final int alert_dialog_text_entry=0x7f030000;
         public static final int custom_weather_notifcation=0x7f030001;
-        public static final int forcast_overview_tab=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int weather_choice_layout=0x7f030004;
-        public static final int weather_overview=0x7f030005;
-        public static final int woeid_choice_adaptor_layout=0x7f030006;
-        public static final int woied_list=0x7f030007;
-        public static final int woied_rowlayout=0x7f030008;
+        public static final int dialog_webview=0x7f030002;
+        public static final int feedback_form=0x7f030003;
+        public static final int forcast_overview_tab=0x7f030004;
+        public static final int main=0x7f030005;
+        public static final int weather_choice_layout=0x7f030006;
+        public static final int weather_overview=0x7f030007;
+        public static final int woeid_choice_adaptor_layout=0x7f030008;
+        public static final int woied_list=0x7f030009;
+        public static final int woied_rowlayout=0x7f03000a;
     }
     public static final class menu {
         public static final int home_menu=0x7f090000;
@@ -145,9 +157,33 @@ public final class R {
         public static final int add_new_location_text=0x7f07000a;
         public static final int app_name=0x7f070004;
         public static final int change_log=0x7f070001;
+        public static final int changelog_filename=0x7f07000f;
+        /**  Change Log 
+         */
+        public static final int changelog_title=0x7f07000e;
+        public static final int feedback=0x7f070011;
+        public static final int feedbackbody=0x7f070015;
+        public static final int feedbackbutton=0x7f070017;
+        public static final int feedbackemail=0x7f070014;
+        public static final int feedbackmessagebody_responseno=0x7f07001e;
+        public static final int feedbackmessagebody_responseyes=0x7f07001d;
+        public static final int feedbackmessagesubject_format=0x7f07001f;
+        public static final int feedbackname=0x7f070013;
+        public static final int feedbackresponse=0x7f070016;
+        /**  Feedback form 
+         */
+        public static final int feedbacktitle=0x7f070012;
+        public static final int feedbacktype=0x7f070018;
+        public static final int feedbacktype1=0x7f070019;
+        public static final int feedbacktype2=0x7f07001a;
+        public static final int feedbacktype3=0x7f07001b;
+        public static final int feedbacktype4=0x7f07001c;
         public static final int get_my_location_service=0x7f070008;
         public static final int home_instructions=0x7f070003;
         public static final int modify_loaded_locaitons=0x7f07000b;
+        /**  Button 
+         */
+        public static final int okay=0x7f070010;
         public static final int periodic_reciever=0x7f07000c;
         public static final int settings=0x7f070000;
         public static final int start_up_receiver=0x7f07000d;

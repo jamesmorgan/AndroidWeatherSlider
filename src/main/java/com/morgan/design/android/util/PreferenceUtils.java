@@ -22,6 +22,7 @@ public class PreferenceUtils {
 	public static final String PREF_OVERVIEW_MODE = "overviewMode";
 	public static final String PREF_TEMPERATURE_MODE = "temperatureMode";
 	public static final String PREF_WIND_MODE = "windSpeedMode";
+	public static final String PREF_APP_VERSION = "app.version";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
@@ -38,6 +39,14 @@ public class PreferenceUtils {
 
 	public static boolean setChangelogPref(final Context context, final boolean value) {
 		return getPrefs(context).edit().putBoolean(PREF_CHANGELOG, value).commit();
+	}
+
+	public static boolean isGoogleAnalyticsEnabled(final Context context) {
+		return getPrefs(context).getBoolean(PREF_ENABLE_GOOGLE_ANALYTICS, true);
+	}
+
+	public static boolean setEnableGoogleAalytics(final Context context, final boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_ENABLE_GOOGLE_ANALYTICS, value).commit();
 	}
 
 	public static String getPollingSchedule(final Context context) {
@@ -80,5 +89,13 @@ public class PreferenceUtils {
 
 	public static boolean setShouldStartOnBoot(final Context context, final boolean shouldStartOnBoot) {
 		return getPrefs(context).edit().putBoolean(PREF_START_ON_BOOT, shouldStartOnBoot).commit();
+	}
+
+	public static int getAppVersionPref(final Context context) {
+		return getPrefs(context).getInt(PREF_APP_VERSION, 0);
+	}
+
+	public static boolean setAppVersionPref(final Context context, final int value) {
+		return getPrefs(context).edit().putInt(PREF_APP_VERSION, value).commit();
 	}
 }

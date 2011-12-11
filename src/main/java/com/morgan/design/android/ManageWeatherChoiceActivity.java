@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
+import com.morgan.design.Changelog;
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
@@ -53,7 +54,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> turn sun set and rise in time objects
 	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
-	// FIXME -> change tabs for viewpager -> http://blog.stylingandroid.com/archives/537
+	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 
 	// FIXME -> Ensure notification tab is always updated
@@ -63,11 +64,12 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> allow for multiple notifications at once (paid version only)
 
 	// FIXME -> DB Versioning
-	// FIXME -> Change log
 
+	// FIXME -> DONE - Change log
+	// FIXME -> DONE - Feedback log
 	// FIXME -> DONE - Added google analytics jar and initial tracking calls
 	// FIXME -> DONE - download new icon sets, weather channel icons
-	// FIXME -> DONE - add option for wind unit e.g. km/mph
+	// FIXME -> DONE - add option for wind unit e.g. kmh/mph
 	// FIXME -> DONE - add location information to overview screen
 	// FIXME -> DONE - Improve notification layout
 	// FIXME -> DONE - Condition code translation class
@@ -116,6 +118,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
+
+		Changelog.show(this, false);
 	}
 
 	@Override
@@ -162,10 +166,11 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.home_menu_changelog:
-				this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.OPEN_CHANGE_LOG);
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_CHANGE_LOG);
+				Changelog.show(this, true);
 				return true;
 			case R.id.home_menu_settings:
-				this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.OPEN_PREFERENCES);
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_PREFERENCES);
 				PreferenceUtils.openUserPreferenecesActivity(this);
 				return true;
 			default:
@@ -176,7 +181,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.ADD_NEW_LOCATION);
+		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.ADD_NEW_LOCATION);
 		switch (requestCode) {
 			case Constants.ENTER_LOCATION:
 				if (resultCode == RESULT_OK) {

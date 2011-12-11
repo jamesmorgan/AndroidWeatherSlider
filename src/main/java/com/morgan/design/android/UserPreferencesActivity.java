@@ -79,6 +79,17 @@ public class UserPreferencesActivity extends PreferenceActivity {
 			});
 		}
 
+		if (pref.getKey().equals(PreferenceUtils.PREF_ENABLE_GOOGLE_ANALYTICS)) {
+			findPreference(PreferenceUtils.PREF_ENABLE_GOOGLE_ANALYTICS).setOnPreferenceChangeListener(
+					new Preference.OnPreferenceChangeListener() {
+						@Override
+						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+							UserPreferencesActivity.this.hasChanged = true;
+							return PreferenceUtils.setEnableGoogleAalytics(getApplicationContext(), (Boolean) clicked);
+						}
+					});
+		}
+
 		if (pref.getKey().equals(PreferenceUtils.PREF_OVERVIEW_MODE)) {
 			findPreference(PreferenceUtils.PREF_OVERVIEW_MODE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 				@Override

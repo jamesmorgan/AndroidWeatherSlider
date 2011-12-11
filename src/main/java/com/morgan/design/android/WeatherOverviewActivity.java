@@ -156,7 +156,8 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 				final Intent browserIntent =
 						new Intent(Intent.ACTION_VIEW, Uri.parse(WeatherOverviewActivity.this.currentWeather.getLink()));
 				startActivity(browserIntent);
-				WeatherOverviewActivity.this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.WEATHER_OVERVIEW);
+				WeatherOverviewActivity.this.googleAnalyticsService.trackPageView(WeatherOverviewActivity.this,
+						GoogleAnalyticsService.WEATHER_OVERVIEW);
 			}
 		});
 		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());

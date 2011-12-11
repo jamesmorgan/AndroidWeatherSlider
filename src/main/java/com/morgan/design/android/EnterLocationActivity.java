@@ -118,15 +118,16 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			Toast.makeText(this, "Please enter a location.", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.GET_LOCATION);
+		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_LOCATION);
 		lookupLocation(location);
 	}
 
 	public void onGetCurrentMyLocation(final View v) {
-		this.googleAnalyticsService.trackPageView(GoogleAnalyticsService.GET_GPS_LOCATION);
+		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_GPS_LOCATION);
 		if (null == this.mBoundMyLocationService || !this.mIsLocationServiceBound) {
 			doBindService();
 		}
+
 		showLoadingProgress();
 		if (null != this.mBoundMyLocationService && this.mIsLocationServiceBound) {
 			runOnUiThread(new Runnable() {
@@ -140,6 +141,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		else {
 			dismissLoadingProgress();
 		}
+
 	}
 
 	// //////////////////////////////////////////
@@ -219,9 +221,9 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		@Override
 		public void onLocationNotFound() {
 			Logger.d(LOG_TAG, "GPS location not found");
-			dismissLoadingProgress();
 			Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
 					Toast.LENGTH_SHORT).show();
+			dismissLoadingProgress();
 		};
 	};
 
