@@ -68,6 +68,6 @@
             android:key="changelog"
             android:summary="Show Change Log On Version Upgrade"
             android:title="Change Log" />
-        
     </PreferenceCategory>
-</PreferenceScreen>
+
+</PreferenceScreen>

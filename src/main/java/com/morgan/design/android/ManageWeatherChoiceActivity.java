@@ -53,6 +53,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> improve notification when no locations found
 	// FIXME -> cancel all active notifications
 	// FIXME -> turn sun set and rise in time objects
+	// FIXME -> Capture all shared prefer3ence values on application crash (ARCA)
 	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
@@ -64,19 +65,20 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Fix loading
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> DB Versioning
-	
+
 	// FIXME -> Pro-guard bug when running on real phone
 	// FIXME -> Update latest maven-androidplugin - 3.0.1
-	// FIXME -> Updtae latest ORMLite version
-	
+
 	// Friday
 	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 	// FIXME -> allow for multiple notifications at once (paid version only)
 
 	// Thursday
-	// FIXME -> Add in and setup crash report handler (http://code.google.com/p/acra/) -> Maven repo -> http://code.google.com/p/acra/issues/detail?id=12
-	// FIXME -> Allow for roaming location based settings (paid version only) - http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
+	// FIXME -> Allow for roaming location based settings (paid version only) -
+	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 
+	// FIXME -> DONE - Add in and setup crash report handler (http://code.google.com/p/acra/), Customised with toast and logcat logs
+	// FIXME -> DONE - Update latest ORMLite version - 4.31
 	// FIXME -> DONE - Change log pop-up and menu option
 	// FIXME -> DONE - Feedback log pop-up on new version
 	// FIXME -> DONE - Setup merchant account on google

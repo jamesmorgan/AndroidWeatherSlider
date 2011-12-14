@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <string-array name="polling_time">
         <item>1 minute</item>
         <item>15 minutes</item>

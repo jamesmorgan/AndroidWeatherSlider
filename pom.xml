@@ -45,7 +45,11 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
+		<!-- Google Android crash reporting tool -->
+		<repository>
+			<id>acra-releases</id>
+			<url>http://acra.googlecode.com/svn/repository/releases</url>
+		</repository>
 
 		<repository>
 			<id>maven-android-plugin</id>
@@ -74,13 +78,13 @@
 			<version>1.0.0.M2</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.android.apps.analytics</groupId>
 			<artifactId>GoogleAnalyticsTracker</artifactId>
 			<version>1.4.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -127,6 +131,11 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.acra</groupId>
+			<artifactId>acra</artifactId>
+			<version>4.2.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -162,7 +171,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

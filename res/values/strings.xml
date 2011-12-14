@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="crash_toast_text">Sorry! The application has died, a report has been sent to the developer in order to fix the issue!</string>
+    
     <string name="welcome">Welcome To WeatherSlider</string>
     <string name="home_instructions">Please enter your location to get started: \n - Enter a location e.g. postal code or town \n - Or request your location via GPS/Network</string>
     <string name="app_name">WeatherSlider</string>

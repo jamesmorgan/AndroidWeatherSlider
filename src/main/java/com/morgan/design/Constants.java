@@ -5,6 +5,9 @@ public class Constants {
 	// Google Analytics
 	public static final String GOOGLE_ANALYTICS_KEY = "UA-27624701-1";
 
+	// Application Crash Report Google Docs Keys
+	public static final String ANDROID_DOCS_CRASH_REPORT_KEY = "dHJsdXA5Nk5VVXRZdzFlcWY3bWhpWkE6MQ";
+
 	// Email's
 	public static final String[] FEEDBACK_EMAIL = new String[] { "appfeedback@morgan-design.com" };
 
