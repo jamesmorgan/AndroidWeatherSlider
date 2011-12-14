@@ -46,6 +46,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> add flags for each country
 	// FIXME -> add option for date format
 	// FIXME -> debug mode on/off for deployment
+	// FIXME -> Configure build process, updating versions/ debug enabled/ keys/ changelog etc
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Show location on a small map in overview mode?
 	// FIXME -> Open location on map from notification click handler
@@ -56,17 +57,29 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Overview forecast mode
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
+	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
+	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 
 	// FIXME -> Ensure notification tab is always updated
 	// FIXME -> Fix loading
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
+	// FIXME -> DB Versioning
+	
+	// FIXME -> Pro-guard bug when running on real phone
+	// FIXME -> Update latest maven-androidplugin - 3.0.1
+	// FIXME -> Updtae latest ORMLite version
+	
+	// Friday
 	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 	// FIXME -> allow for multiple notifications at once (paid version only)
 
-	// FIXME -> DB Versioning
+	// Thursday
+	// FIXME -> Add in and setup crash report handler (http://code.google.com/p/acra/) -> Maven repo -> http://code.google.com/p/acra/issues/detail?id=12
+	// FIXME -> Allow for roaming location based settings (paid version only) - http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 
-	// FIXME -> DONE - Change log
-	// FIXME -> DONE - Feedback log
+	// FIXME -> DONE - Change log pop-up and menu option
+	// FIXME -> DONE - Feedback log pop-up on new version
+	// FIXME -> DONE - Setup merchant account on google
 	// FIXME -> DONE - Added google analytics jar and initial tracking calls
 	// FIXME -> DONE - download new icon sets, weather channel icons
 	// FIXME -> DONE - add option for wind unit e.g. kmh/mph

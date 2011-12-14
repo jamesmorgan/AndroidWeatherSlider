@@ -30,13 +30,23 @@ public enum DayOfWeek {
 		this.abrev = abrev;
 	}
 
-	public static DayOfWeek from(final String temp) {
+	public static DayOfWeek fromPreference(final String preference) {
 		for (final DayOfWeek type : values()) {
-			if (type.abrev.equalsIgnoreCase(temp)) {
+			if (type.abrev.equalsIgnoreCase(preference)) {
 				return type;
 			}
 		}
-		Logger.e("DayOfWeek", "Unable to convert DayOfWeek from [%s]", temp);
+		Logger.e("DayOfWeek", "Unable to convert DayOfWeek from [%s]", preference);
+		return NA;
+	}
+
+	public static DayOfWeek fromYahoo(final String yahoo) {
+		for (final DayOfWeek type : values()) {
+			if (type.abrev.equalsIgnoreCase(yahoo)) {
+				return type;
+			}
+		}
+		Logger.e("DayOfWeek", "Unable to convert DayOfWeek from [%s]", yahoo);
 		return NA;
 	}
 

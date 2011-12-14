@@ -34,7 +34,7 @@ public enum WindSpeed {
 				return type;
 			}
 		}
-		Logger.e("Speed", "Unable to determine speed preference for [%s]", speed);
+		Logger.e("Speed", "Unable to determine WindSpeed preference for [%s]", speed);
 		return null;
 	}
 

@@ -158,7 +158,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 			forcast.setHigh(valueOrZero(element.getAttributeValue(HIGH)));
 			forcast.setLow(valueOrZero(element.getAttributeValue(LOW)));
 			forcast.setDate(DateUtils.fromSimpleDate(element.getAttributeValue(DATE)));
-			forcast.setDayOfWeek(DayOfWeek.from(element.getAttributeValue(DAY)));
+			forcast.setDayOfWeek(DayOfWeek.fromYahoo(element.getAttributeValue(DAY)));
 		}
 	}
 
