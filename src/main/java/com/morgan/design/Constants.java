@@ -2,6 +2,9 @@ package com.morgan.design;
 
 public class Constants {
 
+	// Yahoo Key
+	public static final String YAHOO_API_KEY = "8t08Wo34";
+
 	// Google Analytics
 	public static final String GOOGLE_ANALYTICS_KEY = "UA-27624701-1";
 

@@ -12,6 +12,7 @@
     <string name="get_my_location_bindable_service">Bindable Location Look Service</string>
     <string name="get_my_location_service">None-bindable Location Look Service</string>
     <string name="yahoo_notifcation_service">yahoo_notifcation_service</string>
+    <string name="gps_weather_service">gps_weather_service</string>
     <string name="add_new_location_text">Add more locations</string>
     <string name="modify_loaded_locaitons">Click location to modify</string>
     <string name="periodic_reciever">Register periodic launcher for connectivity changes and get weather download</string>

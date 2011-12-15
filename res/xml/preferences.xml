@@ -23,7 +23,7 @@
             android:title="Temperature" />
 
         <ListPreference
-            android:defaultValue="c"
+            android:defaultValue="mph"
             android:entries="@array/wind_mode"
             android:entryValues="@array/wind_mode_values"
             android:key="windSpeedMode"

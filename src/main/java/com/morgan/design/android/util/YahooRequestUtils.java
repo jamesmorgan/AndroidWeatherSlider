@@ -60,6 +60,8 @@ public class YahooRequestUtils {
 		return String.format(GET_LOCATION_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
 	}
 
+	// http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D%2237.416275%2C%20-122.025092%22%20and%20gflags%3D%22R%22&appid=test
+
 	public String createWeatherQuery(final WOEIDEntry woiedEntry, final Temperature temperature) {
 		if (woiedEntry == null) {
 			return null;

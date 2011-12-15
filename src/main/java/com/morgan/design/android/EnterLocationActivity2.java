@@ -31,6 +31,7 @@ import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.morgan.design.android.service.GpsWeatherLookupService;
 import com.morgan.design.android.service.LocationLookupService;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
@@ -201,8 +202,8 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 	}
 
 	public void onEnabledGpsLocation(final View view) {
-
 		final boolean isChecked = this.useGps.isChecked();
+
 		this.location.setEnabled(!isChecked);
 		this.location.setClickable(!isChecked);
 		this.location.setFocusable(!isChecked);
@@ -217,7 +218,14 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 	}
 
 	public void onAlwaysUseGpsForLocation(final View view) {
+		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.ALWAYS_USE_GPS_LOCATION);
 
+		final Bundle bundle = new Bundle();
+		final Intent intent = new Intent(this, GpsWeatherLookupService.class);
+		intent.putExtras(bundle);
+
+		startService(intent);
+		finish();
 	}
 
 	// //////////////////////////////////////////

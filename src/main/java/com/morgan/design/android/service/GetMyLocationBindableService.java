@@ -22,6 +22,7 @@ import android.os.IBinder;
  * 
  * @author James Edward Morgan
  */
+@Deprecated
 public class GetMyLocationBindableService extends Service {
 
 	Timer timer;

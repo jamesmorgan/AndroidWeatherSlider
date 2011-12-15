@@ -34,8 +34,8 @@ public enum WindSpeed {
 				return type;
 			}
 		}
-		Logger.e("Speed", "Unable to determine WindSpeed preference for [%s]", speed);
-		return null;
+		Logger.e("Speed", "Unable to determine WindSpeed preference for [%s], returning default", speed);
+		return MPH;
 	}
 
 	public static WindSpeed fromYahoo(final String speed) {

@@ -9,6 +9,7 @@ public class GoogleAnalyticsService {
 
 	public static final String WEATHER_OVERVIEW = "WeatherOverviewActivity";
 	public static final String GET_LOCATION = "GetLocation";
+	public static final String ALWAYS_USE_GPS_LOCATION = "AlwaysUseGpsLocation";
 	public static final String GET_GPS_LOCATION = "GetGpsLocation";
 	public static final String ADD_NEW_LOCATION = "AddNewLocation";
 	public static final String OPEN_CHANGE_LOG = "OpenChangeLog";
