@@ -17,8 +17,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,10 +30,10 @@ import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.LocationLookupService;
-import com.morgan.design.android.service.YahooRequestUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.Utils;
+import com.morgan.design.android.util.YahooRequestUtils;
 import com.weatherslider.morgan.design.R;
 
 public class EnterLocationActivity2 extends Activity implements SimpleGestureListener {
@@ -57,7 +55,7 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.enter_location);
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.location = (EditText) findViewById(R.id.locationText);
@@ -168,11 +166,12 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 		showProgressDialog("Getting Current Location. Please wait...");
 
 		// Ensure network is active/connected in order to use
-		final NetworkInfo activeNetwork = ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
-		final boolean connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-		if (isNot(connected)) {
+		final boolean networkConnected = Utils.isConnectedOrConnecting(getApplicationContext());
+		final boolean gpsEnabled = Utils.isGpsEnabled(getContentResolver());
+		if (isNot(networkConnected) && isNot(gpsEnabled)) {
 			dismissLoadingProgress();
 			Toast.makeText(this, "Unable to request network location. You are currently not connected.", Toast.LENGTH_SHORT).show();
+			// TODO prompt user to enabled
 			return;
 		}
 

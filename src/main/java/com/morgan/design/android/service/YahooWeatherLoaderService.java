@@ -35,6 +35,7 @@ import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.YahooRequestUtils;
 
 public class YahooWeatherLoaderService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
 

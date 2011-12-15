@@ -28,9 +28,9 @@ import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.GetMyLocationBindableService;
 import com.morgan.design.android.service.GetMyLocationBindableService.LocationResult;
-import com.morgan.design.android.service.YahooRequestUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.YahooRequestUtils;
 import com.weatherslider.morgan.design.R;
 
 public class EnterLocationActivity extends Activity implements SimpleGestureListener {
@@ -53,7 +53,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.enter_location);
 		doBindService();
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);

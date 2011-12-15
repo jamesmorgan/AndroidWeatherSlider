@@ -50,36 +50,37 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Show location on a small map in overview mode?
 	// FIXME -> Open location on map from notification click handler
-	// FIXME -> improve notification when no locations found
 	// FIXME -> cancel all active notifications
 	// FIXME -> turn sun set and rise in time objects
-	// FIXME -> Capture all shared prefer3ence values on application crash (ARCA)
+	// FIXME -> Capture all shared preference values on application crash (ARCA)
 	// FIXME -> Improve current notification layout
-	// FIXME -> Overview forecast mode
 	// FIXME -> Allow users to narrow down location accuracy
-	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
-	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
+	// FIXME -> If GPS/network is disabled, prompt user to turn it on -> http://advback.com/android/checking-if-gps-is-enabled-android/
+	// FIXME -> Potentially show accuracy and time when looking up GPS location
 
 	// FIXME -> Ensure notification tab is always updated
 	// FIXME -> Fix loading
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> DB Versioning
+	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
+	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
 
 	// FIXME -> Pro-guard bug when running on real phone
 	// FIXME -> Update latest maven-androidplugin - 3.0.1
 
 	// Friday
-	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 	// FIXME -> allow for multiple notifications at once (paid version only)
+	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 
 	// Thursday
 	// FIXME -> Add to current sticky service ability to request intent location
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 
-	// FIXME -> DONE - Check for battery level, active networks, location age
+	// FIXME -> DONE - Check for battery level (15%), active networks (GPS and Mobile), location age
+	// FIXME -> DONE - improve notification when no locations found
 	// FIXME -> DONE - Created none-bindable intent based service
 	// FIXME -> DONE - Add in and setup crash report handler (http://code.google.com/p/acra/), Customised with toast and logcat logs
 	// FIXME -> DONE - Update latest ORMLite version - 4.31

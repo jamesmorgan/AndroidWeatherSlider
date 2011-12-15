@@ -1,10 +1,14 @@
 package com.morgan.design.android.util;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.BatteryManager;
+import android.provider.Settings;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -12,6 +16,9 @@ import android.widget.Toast;
 import com.morgan.design.FeedbackFormActivity;
 import com.weatherslider.morgan.design.R;
 
+/**
+ * @author James Edward Morgan
+ */
 public class Utils {
 
 	private static final String LOG_TAG = "Utils";
@@ -51,4 +58,22 @@ public class Utils {
 		}
 		return level;
 	}
+
+	/**
+	 * @return true if an active network connection if found, either connected or connecting
+	 */
+	public static boolean isConnectedOrConnecting(final Context context) {
+		final NetworkInfo activeNetwork =
+				((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+		return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
+	}
+
+	/**
+	 * @return true if the GPS setting is enabled for the phone
+	 */
+	public static boolean isGpsEnabled(final ContentResolver contentResolver) {
+		final String gpsProviders = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+		return (null != gpsProviders && !"".equals(gpsProviders));
+	}
+
 }
