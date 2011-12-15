@@ -3,6 +3,8 @@ package com.morgan.design.android.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -35,4 +37,18 @@ public class Utils {
 		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * @return double the percentage of battery remaining
+	 */
+	public static double getBatteryLevel(final Context context) {
+		final Intent batteryIntent =
+				context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+		final int rawlevel = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+		final double scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+		double level = -1;
+		if (rawlevel >= 0 && scale > 0) {
+			level = (rawlevel * 100) / scale;
+		}
+		return level;
+	}
 }

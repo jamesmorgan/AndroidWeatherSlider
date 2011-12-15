@@ -5,6 +5,10 @@ import java.util.Map;
 
 public final class ObjectUtils {
 
+	public static final boolean isNot(final boolean value) {
+		return !value;
+	}
+
 	public static final boolean isNull(final Object value) {
 		return null == value;
 	}

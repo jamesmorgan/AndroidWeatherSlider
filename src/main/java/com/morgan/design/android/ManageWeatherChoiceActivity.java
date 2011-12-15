@@ -56,6 +56,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Capture all shared prefer3ence values on application crash (ARCA)
 	// FIXME -> Improve current notification layout
 	// FIXME -> Overview forecast mode
+	// FIXME -> Allow users to narrow down location accuracy
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
@@ -74,9 +75,12 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> allow for multiple notifications at once (paid version only)
 
 	// Thursday
+	// FIXME -> Add to current sticky service ability to request intent location
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 
+	// FIXME -> DONE - Check for battery level, active networks, location age
+	// FIXME -> DONE - Created none-bindable intent based service
 	// FIXME -> DONE - Add in and setup crash report handler (http://code.google.com/p/acra/), Customised with toast and logcat logs
 	// FIXME -> DONE - Update latest ORMLite version - 4.31
 	// FIXME -> DONE - Change log pop-up and menu option
@@ -249,7 +253,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// ///////////////////////////////////////
 
 	public void onAddNewLocation(final View view) {
-		final Intent intent = new Intent(this, EnterLocationActivity.class);
+		// final Intent intent = new Intent(this, EnterLocationActivity.class);
+		final Intent intent = new Intent(this, EnterLocationActivity2.class);
 		startActivityForResult(intent, Constants.ENTER_LOCATION);
 	}
 

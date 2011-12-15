@@ -1,5 +1,9 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.android.util.ObjectUtils.isNot;
+import static com.morgan.design.android.util.ObjectUtils.isNotNull;
+import static com.morgan.design.android.util.ObjectUtils.isNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,14 +12,15 @@ import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.IntentFilter;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,14 +31,14 @@ import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
-import com.morgan.design.android.service.GetMyLocationBindableService;
-import com.morgan.design.android.service.GetMyLocationBindableService.LocationResult;
+import com.morgan.design.android.service.LocationLookupService;
 import com.morgan.design.android.service.YahooRequestUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.Utils;
 import com.weatherslider.morgan.design.R;
 
-public class EnterLocationActivity extends Activity implements SimpleGestureListener {
+public class EnterLocationActivity2 extends Activity implements SimpleGestureListener {
 
 	private static final String LOG_TAG = "EnterLocationActivity";
 
@@ -45,16 +50,14 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	private boolean destroyed = false;
 	private SimpleGestureFilter detector;
 
-	private GetMyLocationBindableService mBoundMyLocationService;
-	private boolean mIsLocationServiceBound = false;
-
 	private GoogleAnalyticsService googleAnalyticsService;
+
+	private BroadcastReceiver locationChangedBroadcastReciever;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		doBindService();
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.location = (EditText) findViewById(R.id.locationText);
@@ -65,22 +68,59 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	protected void onDestroy() {
 		super.onDestroy();
 		this.destroyed = true;
-		doUnbindService();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		dismissLoadingProgress();
-		if (this.mIsLocationServiceBound && null != this.mBoundMyLocationService) {
-			this.mBoundMyLocationService.cancelTimer();
+		if (isNotNull(this.locationChangedBroadcastReciever)) {
+			unregisterReceiver(this.locationChangedBroadcastReciever);
+			this.locationChangedBroadcastReciever = null;
 		}
+		stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		doBindService();
+
+		if (isNull(this.locationChangedBroadcastReciever)) {
+			this.locationChangedBroadcastReciever = new BroadcastReceiver() {
+				@Override
+				public void onReceive(final Context context, final Intent intent) {
+					dismissLoadingProgress();
+
+					final Bundle extras = intent.getExtras();
+
+					if (null != extras) {
+						if (intent.hasExtra(LocationLookupService.PROVIDERS_FOUND)) {
+							final boolean providersFound = extras.getBoolean(LocationLookupService.PROVIDERS_FOUND);
+
+							if (providersFound) {
+								Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
+								Toast.makeText(EnterLocationActivity2.this,
+										"No location providers found, please check you are have your GPS or mobile network enabled.",
+										Toast.LENGTH_SHORT).show();
+							}
+							else {
+								Logger.d(LOG_TAG, "GPS location not found");
+								Toast.makeText(EnterLocationActivity2.this,
+										"Unable to locate you, please ensure you are connected to the network.", Toast.LENGTH_SHORT).show();
+							}
+						}
+
+						if (intent.hasExtra(LocationLookupService.CURRENT_LOCAION)) {
+							final Location location = (Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
+							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
+									location.getLatitude());
+							new DownloadWOIEDDataTaskFromLocation(location).execute();
+						}
+					}
+				}
+			};
+			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(LocationLookupService.LOCATION_CHANGED_BROADCAST));
+		}
 	}
 
 	@Override
@@ -119,29 +159,34 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			return;
 		}
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_LOCATION);
-		lookupLocation(location);
+		new DownloadWOIEDDataTask(location).execute();
 	}
 
 	public void onGetCurrentMyLocation(final View v) {
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_GPS_LOCATION);
-		if (null == this.mBoundMyLocationService || !this.mIsLocationServiceBound) {
-			doBindService();
-		}
 
-		showLoadingProgress();
-		if (null != this.mBoundMyLocationService && this.mIsLocationServiceBound) {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					EnterLocationActivity.this.mBoundMyLocationService.getLocation(EnterLocationActivity.this,
-							EnterLocationActivity.this.locationResult);
-				}
-			});
-		}
-		else {
+		showProgressDialog("Getting Current Location. Please wait...");
+
+		// Ensure network is active/connected in order to use
+		final NetworkInfo activeNetwork = ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+		final boolean connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+		if (isNot(connected)) {
 			dismissLoadingProgress();
+			Toast.makeText(this, "Unable to request network location. You are currently not connected.", Toast.LENGTH_SHORT).show();
+			return;
 		}
 
+		// Ensure have at-least 15% battery power left
+		if (15.00 > Utils.getBatteryLevel(getApplicationContext())) {
+			dismissLoadingProgress();
+			Toast.makeText(this, "Low battery, unable to use location services.", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		// Allow for overriding default timeout
+		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_CURRENT_LOCATION_LOOKUP);
+		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
+		startService(findLocationBroadcast);
 	}
 
 	// //////////////////////////////////////////
@@ -165,14 +210,6 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		}
 	}
 
-	protected void lookupLocation(final String location) {
-		new DownloadWOIEDDataTask(location).execute();
-	}
-
-	public void showLoadingProgress() {
-		this.showProgressDialog("Getting Location. Please wait...");
-	}
-
 	public void showProgressDialog(final CharSequence message) {
 		this.progressDialog = ProgressDialog.show(this, "", message, true);
 	}
@@ -185,58 +222,6 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 	protected WeatherSliderApplication getToLevelApplication() {
 		return ((WeatherSliderApplication) getApplication());
-	}
-
-	// /////////////////////////////////////////////
-	// ////////// Service Binder ///////////////////
-	// /////////////////////////////////////////////
-
-	private final ServiceConnection mConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(final ComponentName className, final IBinder service) {
-			Logger.d(LOG_TAG, "Successfully loaded gps service");
-			EnterLocationActivity.this.mBoundMyLocationService = ((GetMyLocationBindableService.LocalBinder) service).getService();
-		}
-
-		@Override
-		public void onServiceDisconnected(final ComponentName className) {
-			Logger.d(LOG_TAG, "Disconnected from gps service");
-			EnterLocationActivity.this.mBoundMyLocationService = null;
-			Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
-					Toast.LENGTH_SHORT).show();
-			dismissLoadingProgress();
-		}
-	};
-
-	public LocationResult locationResult = new LocationResult() {
-		@Override
-		public void onLocationChanged(final Location location) {
-			dismissLoadingProgress();
-			if (null != location) {
-				Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
-				new DownloadWOIEDDataTaskFromLocation(location).execute();
-			}
-		}
-
-		@Override
-		public void onLocationNotFound() {
-			Logger.d(LOG_TAG, "GPS location not found");
-			Toast.makeText(EnterLocationActivity.this, "Unable to locate you, please ensure you are connected to the network.",
-					Toast.LENGTH_SHORT).show();
-			dismissLoadingProgress();
-		};
-	};
-
-	void doBindService() {
-		bindService(new Intent(this, GetMyLocationBindableService.class), this.mConnection, Context.BIND_AUTO_CREATE);
-		this.mIsLocationServiceBound = true;
-	}
-
-	void doUnbindService() {
-		if (this.mIsLocationServiceBound) {
-			unbindService(this.mConnection);
-			this.mIsLocationServiceBound = false;
-		}
 	}
 
 	// /////////////////////////////////////////////
@@ -276,7 +261,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		@Override
 		protected void onPreExecute() {
-			showLoadingProgress();
+			showProgressDialog("Getting Location. Please wait...");
 		}
 
 		@Override
@@ -308,7 +293,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		@Override
 		protected void onPreExecute() {
-			showLoadingProgress();
+			showProgressDialog("Location found, looking up area. Please wait...");
 		}
 
 		@Override
