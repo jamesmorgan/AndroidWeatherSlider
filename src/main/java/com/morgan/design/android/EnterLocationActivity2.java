@@ -46,6 +46,7 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 	private EditText location;
 	private Button getMyLocationButton;
 	private Button lookUpLocationButton;
+	private Button alwaysUseGpsButton;
 
 	private ProgressDialog progressDialog;
 	private ArrayList<WOEIDEntry> WOIEDlocations;
@@ -68,6 +69,7 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 		this.useGps = (CheckBox) findViewById(R.id.use_gps);
 		this.lookUpLocationButton = (Button) findViewById(R.id.lookUpLocationButton);
 		this.getMyLocationButton = (Button) findViewById(R.id.getMyLocationButton);
+		this.alwaysUseGpsButton = (Button) findViewById(R.id.alwaysUseGpsButton);
 
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 	}
@@ -209,6 +211,12 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 		this.getMyLocationButton.setClickable(!isChecked);
 		this.lookUpLocationButton.setEnabled(!isChecked);
 		this.lookUpLocationButton.setClickable(!isChecked);
+
+		this.alwaysUseGpsButton.setEnabled(isChecked);
+		this.alwaysUseGpsButton.setClickable(isChecked);
+	}
+
+	public void onAlwaysUseGpsForLocation(final View view) {
 
 	}
 
