@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dip" >
 
     <TextView
         android:layout_width="fill_parent"
@@ -57,28 +58,73 @@
             android:background="#3399FF" />
 
         <LinearLayout
-            android:id="@+id/enter_location_container"
+            android:id="@+id/lookup_location_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_gravity="clip_horizontal|clip_vertical"
             android:orientation="horizontal"
             android:paddingBottom="13dip"
             android:paddingTop="13dip" >
 
-            <TextView
-                android:id="@+id/textView1"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.00"
-                android:text="Use GPS to find you - "
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.00"
+                    android:text="Find your location"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find your current location now via GPS &amp; Mobile"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/getMyLocationButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onGetCurrentMyLocation"
-                android:text="Use GPS.." />
+                android:text="Lookup..." />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#3399FF" />
+
+        <LinearLayout
+            android:id="@+id/enter_location_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="13dip"
+            android:paddingTop="13dip" >
+
+            <CheckBox
+                android:id="@+id/use_gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onEnabledGpsLocation"
+                android:text="Use GPS for Geolocation"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tick to always find your location via GPS &amp; Mobile"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
         <View

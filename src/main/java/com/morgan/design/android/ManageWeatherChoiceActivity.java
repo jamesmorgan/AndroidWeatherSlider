@@ -76,6 +76,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	// Thursday
 	// FIXME -> Add to current sticky service ability to request intent location
+
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 

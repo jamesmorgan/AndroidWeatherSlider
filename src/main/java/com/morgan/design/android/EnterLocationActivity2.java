@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -40,7 +42,10 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 
 	private static final String LOG_TAG = "EnterLocationActivity";
 
+	private CheckBox useGps;
 	private EditText location;
+	private Button getMyLocationButton;
+	private Button lookUpLocationButton;
 
 	private ProgressDialog progressDialog;
 	private ArrayList<WOEIDEntry> WOIEDlocations;
@@ -58,7 +63,12 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 		setContentView(R.layout.enter_location);
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
+
 		this.location = (EditText) findViewById(R.id.locationText);
+		this.useGps = (CheckBox) findViewById(R.id.use_gps);
+		this.lookUpLocationButton = (Button) findViewById(R.id.lookUpLocationButton);
+		this.getMyLocationButton = (Button) findViewById(R.id.getMyLocationButton);
+
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 	}
 
@@ -186,6 +196,20 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_CURRENT_LOCATION_LOOKUP);
 		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
 		startService(findLocationBroadcast);
+	}
+
+	public void onEnabledGpsLocation(final View view) {
+
+		final boolean isChecked = this.useGps.isChecked();
+		this.location.setEnabled(!isChecked);
+		this.location.setClickable(!isChecked);
+		this.location.setFocusable(!isChecked);
+		this.location.setFocusableInTouchMode(!isChecked);
+		this.getMyLocationButton.setEnabled(!isChecked);
+		this.getMyLocationButton.setClickable(!isChecked);
+		this.lookUpLocationButton.setEnabled(!isChecked);
+		this.lookUpLocationButton.setClickable(!isChecked);
+
 	}
 
 	// //////////////////////////////////////////

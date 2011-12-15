@@ -4,7 +4,7 @@
     <string name="crash_toast_text">Sorry! The application has died, a report has been sent to the developer in order to fix the issue!</string>
     
     <string name="welcome">Welcome To WeatherSlider</string>
-    <string name="home_instructions">Please enter your location to get started: \n - Enter a location e.g. postal code or town \n - Or request your location via GPS/Network</string>
+    <string name="home_instructions">Please enter your location to get started: \n - Enter a location e.g. postal code or town \n - Or request your location via GPS/Network \n - Or tick Use GPS to always try find your location</string>
     <string name="app_name">WeatherSlider</string>
     <string name="weather_service_started">Service Started</string>
     <string name="weather_service_stopped">Service Stopped</string>
