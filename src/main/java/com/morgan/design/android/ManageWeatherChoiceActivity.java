@@ -67,18 +67,26 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
 
+	// FIXME -> Add ability to pay for application in-line
+
 	// FIXME -> Pro-guard bug when running on real phone
-	// FIXME -> Update latest maven-androidplugin - 3.0.1
+	// FIXME -> Update latest maven-android-plugin - 3.0.1
 
 	// Friday
 	// FIXME -> allow for multiple notifications at once (paid version only)
 	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
+	// FIXME -> Always update notification when weather service lookup finished
 
 	// Thursday
 	// FIXME -> Add to current sticky service ability to request intent location
 
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
+
+	// FIXME -> Improve progress/interaction when looking up GPS location
+	// FIXME -> Handle situations when no locations found
+	// FIXME -> Investigate how to ensure service is always started/on
+	// FIXME -> Add ability to launch service on phone start up
 
 	// FIXME -> DONE - Check for battery level (15%), active networks (GPS and Mobile), location age
 	// FIXME -> DONE - improve notification when no locations found

@@ -20,6 +20,7 @@ public class Constants {
 	// Broadcast receiver actions
 	public static final String LATEST_WEATHER_QUERY_COMPLETE = "com.morgan.design.intent.COMPLETED_LATEST_WEATHER_LOAD";
 	public static final String PREFERENCES_UPDATED = "com.morgan.design.intent.PREFERENCES_UPDATED";
+
 	public static final String GET_WEATHER_FORCAST = "com.morgan.design.android.broadcast.GET_WEATHER_FORCAST";
 
 	// Activity Result codes

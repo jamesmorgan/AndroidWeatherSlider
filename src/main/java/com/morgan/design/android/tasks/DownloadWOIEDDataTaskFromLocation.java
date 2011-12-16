@@ -14,16 +14,16 @@ import com.morgan.design.android.util.YahooRequestUtils;
 public class DownloadWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, List<WOEIDEntry>> {
 
 	private final Location location;
-	private final OnLookupWoeidCallback onLookupWoeidCallback;
+	private final OnAsyncQueryCallback<List<WOEIDEntry>> onAsyncQueryCallBack;
 
-	public DownloadWOIEDDataTaskFromLocation(final Location location, final OnLookupWoeidCallback onLookupWoeidCallback) {
+	public DownloadWOIEDDataTaskFromLocation(final Location location, final OnAsyncQueryCallback<List<WOEIDEntry>> onAsyncQueryCallBack) {
 		this.location = location;
-		this.onLookupWoeidCallback = onLookupWoeidCallback;
+		this.onAsyncQueryCallBack = onAsyncQueryCallBack;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		this.onLookupWoeidCallback.onPreLookup();
+		this.onAsyncQueryCallBack.onPreLookup();
 	}
 
 	@Override
@@ -39,12 +39,7 @@ public class DownloadWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, Lis
 
 	@Override
 	protected void onPostExecute(final List<WOEIDEntry> locations) {
-		this.onLookupWoeidCallback.onPostLookup(locations);
+		this.onAsyncQueryCallBack.onPostLookup(locations);
 	}
 
-	public static abstract class OnLookupWoeidCallback {
-		public abstract void onPreLookup();
-
-		public abstract void onPostLookup(final List<WOEIDEntry> locations);
-	}
 }

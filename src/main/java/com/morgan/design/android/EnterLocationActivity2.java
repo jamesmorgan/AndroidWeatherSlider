@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
@@ -250,7 +252,13 @@ public class EnterLocationActivity2 extends Activity implements SimpleGestureLis
 	}
 
 	public void showProgressDialog(final CharSequence message) {
-		this.progressDialog = ProgressDialog.show(this, "", message, true);
+		this.progressDialog = ProgressDialog.show(this, "", message, true, true, new OnCancelListener() {
+			@Override
+			public void onCancel(final DialogInterface dialog) {
+				stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
+				stopService(new Intent(LocationLookupService.GET_CURRENT_LOCATION_LOOKUP));
+			}
+		});
 	}
 
 	public void dismissLoadingProgress() {

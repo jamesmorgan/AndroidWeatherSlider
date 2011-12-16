@@ -11,7 +11,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.IconFactory;
@@ -80,7 +79,7 @@ public class YahooWeatherNotifcationService extends Service {
 
 		// Time stamp, set 0 to remove value from skin
 		notification.when = 0;
-		notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.DEFAULT_LIGHTS;
+		notification.flags |= Notification.FLAG_FOREGROUND_SERVICE | Notification.DEFAULT_LIGHTS;
 		notification.icon = IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode());
 
 		// Scrolling update text
@@ -93,6 +92,8 @@ public class YahooWeatherNotifcationService extends Service {
 		notification.setLatestEventInfo(this, forcastText, getContent(), pendingIntent);
 
 		this.notificationManager.notify(this.NOTIFICATION, notification);
+
+		// startForeground(this.NOTIFICATION, notification);
 	}
 
 	private PendingIntent createIntent() {
@@ -154,7 +155,6 @@ public class YahooWeatherNotifcationService extends Service {
 
 	public void setWeatherInformation(final YahooWeatherInfo currentWeather) {
 		if (null != currentWeather) {
-			((WeatherSliderApplication) getApplication()).setCurrentWeather(currentWeather);
 			this.currentWeather = currentWeather;
 			showNotification();
 		}
