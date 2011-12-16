@@ -58,7 +58,7 @@ public class PreferenceUtils {
 	}
 
 	public static OverviewMode getOverviewMode(final Context context) {
-		return OverviewMode.to(getPrefs(context).getString(PREF_OVERVIEW_MODE, OverviewMode.WEB.name()));
+		return OverviewMode.to(getPrefs(context).getString(PREF_OVERVIEW_MODE, OverviewMode.OVERVIEW.name()));
 	}
 
 	public static boolean setOverviewMode(final Context context, final String overviewMode) {
