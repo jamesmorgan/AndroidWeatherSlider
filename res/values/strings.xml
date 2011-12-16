@@ -43,4 +43,9 @@
     <string name="feedbackmessagebody_responseno">Does not require a response</string>
     <string name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>
 
+    <!-- Notification IDS -->
+    <string name="weather_notification_service_1">weather_notification_service_1</string>
+    <string name="weather_notification_service_2">weather_notification_service_2</string>
+    <string name="weather_notification_service_3">weather_notification_service_3</string>
+        
 </resources>

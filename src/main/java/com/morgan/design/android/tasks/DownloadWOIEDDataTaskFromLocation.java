@@ -9,9 +9,12 @@ import android.location.Location;
 import android.os.AsyncTask;
 
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.YahooRequestUtils;
 
 public class DownloadWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, List<WOEIDEntry>> {
+
+	private static final String LOG_TAG = "DownloadWOIEDDataTaskFromLocation";
 
 	private final Location location;
 	private final OnAsyncQueryCallback<List<WOEIDEntry>> onAsyncQueryCallBack;
@@ -28,6 +31,8 @@ public class DownloadWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, Lis
 
 	@Override
 	protected List<WOEIDEntry> doInBackground(final Void... params) {
+		Logger.d(LOG_TAG, "Looking WOEID fro lat=[%s], long=[%s]", this.location.getLatitude(), this.location.getLongitude());
+
 		final String url = YahooRequestUtils.getInstance().createQuerryGetWoeid(this.location);
 
 		final RestTemplate restTemplate = new RestTemplate();

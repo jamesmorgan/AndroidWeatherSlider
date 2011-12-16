@@ -1,5 +1,7 @@
 package com.morgan.design.android.service;
 
+import static com.morgan.design.Constants.OPEN_WEATHER_OVERVIEW;
+import static com.morgan.design.android.util.ObjectUtils.isNotZero;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -22,9 +24,8 @@ import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.weatherslider.morgan.design.R;
 
+@Deprecated
 public class YahooWeatherNotifcationService extends Service {
-
-	private static final String OPEN_WEATHER_VIEW = "com.morgan.design.android.action.OPEN_WEATHER_VIEW";
 
 	private NotificationManager notificationManager;
 
@@ -92,8 +93,6 @@ public class YahooWeatherNotifcationService extends Service {
 		notification.setLatestEventInfo(this, forcastText, getContent(), pendingIntent);
 
 		this.notificationManager.notify(this.NOTIFICATION, notification);
-
-		// startForeground(this.NOTIFICATION, notification);
 	}
 
 	private PendingIntent createIntent() {
@@ -137,7 +136,7 @@ public class YahooWeatherNotifcationService extends Service {
 	}
 
 	private PendingIntent createOpenOverviewActivity() {
-		final Intent notifyIntent = new Intent(OPEN_WEATHER_VIEW);
+		final Intent notifyIntent = new Intent(OPEN_WEATHER_OVERVIEW);
 		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
 		return PendingIntent.getActivity(this, 0, notifyIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
@@ -146,6 +145,10 @@ public class YahooWeatherNotifcationService extends Service {
 		final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(this.currentWeather.getLink()));
 		return PendingIntent.getActivity(this, 0, viewIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
+
+	// /////////////////////////////////////////////
+	// ////////// Public methods ///////////////////
+	// /////////////////////////////////////////////
 
 	public void updatePreferences() {
 		if (null != this.currentWeather) {
@@ -160,6 +163,12 @@ public class YahooWeatherNotifcationService extends Service {
 		}
 		else {
 			stopSelf();
+		}
+	}
+
+	public void removeNotification(final int notificationId) {
+		if (isNotZero(notificationId)) {
+			this.notificationManager.cancel(notificationId);
 		}
 	}
 

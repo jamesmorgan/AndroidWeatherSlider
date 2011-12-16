@@ -1,12 +1,13 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.LAST_KNOWN_NOTIFCATION_ID;
+import static com.morgan.design.Constants.REMOVE_CURRENT_NOTIFCATION;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
 
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -59,6 +60,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> If GPS/network is disabled, prompt user to turn it on -> http://advback.com/android/checking-if-gps-is-enabled-android/
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
+	// FIXME -> Option to disable collecting of logs via ACRA
 
 	// FIXME -> Ensure notification tab is always updated
 	// FIXME -> Fix loading
@@ -78,7 +80,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Always update notification when weather service lookup finished
 
 	// Thursday
-	// FIXME -> Add to current sticky service ability to request intent location
+	// FIXME -> Get WOEID from current lat/long
 
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
@@ -132,8 +134,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private CurrentChoiceAdaptor adaptor;
 
-	private NotificationManager notificationManager;
-
 	private SimpleGestureFilter detector;
 	private BroadcastReceiver weatherQueryCompleteBroadcastReceiver;
 
@@ -149,6 +149,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 
 		Changelog.show(this, false);
+		reLoadWoeidChoices();
 	}
 
 	@Override
@@ -172,7 +173,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			};
 			registerReceiver(this.weatherQueryCompleteBroadcastReceiver, new IntentFilter(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 		}
-		reloadCurrentWeatherNotifications();
 	}
 
 	@Override
@@ -264,7 +264,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	public void onAddNewLocation(final View view) {
 		// final Intent intent = new Intent(this, EnterLocationActivity.class);
-		final Intent intent = new Intent(this, EnterLocationActivity2.class);
+		final Intent intent = new Intent(this, EnterLocationActivity.class);
 		startActivityForResult(intent, Constants.ENTER_LOCATION);
 	}
 
@@ -300,26 +300,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		setListAdapter(this.adaptor);
 	}
 
-	private void reloadCurrentWeatherNotifications() {
-		this.woeidChoices = this.woeidChoiceDao.findAllWoeidChoices();
-		if (this.woeidChoices.isEmpty()) {
-			onAddNewLocation(null);
-		}
-		else {
-			this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
-			setListAdapter(this.adaptor);
-		}
-	}
-
 	private void removeItemFromList(final WoeidChoice woeidChoice) {
 		this.adaptor.remove(woeidChoice);
 	}
 
 	private void attemptToKillNotifcation(final WoeidChoice woeidChoice) {
-		if (isNull(this.notificationManager)) {
-			this.notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		}
-		this.notificationManager.cancel(woeidChoice.getLastknownNotifcationId());
+		final Bundle bundle = new Bundle();
+		bundle.putInt(LAST_KNOWN_NOTIFCATION_ID, woeidChoice.getLastknownNotifcationId());
+		sendBroadcast(new Intent(REMOVE_CURRENT_NOTIFCATION).putExtras(bundle));
 	}
 
 	protected WeatherSliderApplication getToLevelApplication() {

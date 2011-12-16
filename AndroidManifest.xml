@@ -2,19 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.weatherslider.morgan.design"
     android:versionCode="1"
-    android:versionName="0.0.1-SNAPSHOT" >
+    android:versionName="0.1" >
 
     <!-- android:debuggable="true" -->
     <application
+        android:name="com.morgan.design.WeatherSliderApplication"
         android:icon="@drawable/icon"
-        android:label="@string/app_name"
-        android:name="com.morgan.design.WeatherSliderApplication" >
+        android:label="@string/app_name" >
 
         <!-- Main activity , can dispatch view on load -->
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.ManageWeatherChoiceActivity" >
-            <intent-filter >
+            android:name="com.morgan.design.android.ManageWeatherChoiceActivity"
+            android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,111 +23,126 @@
 
         <!-- Allows user to enter a location -->
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.EnterLocationActivity" >
-        </activity>
-        <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.EnterLocationActivity2" >
+            android:name="com.morgan.design.android.EnterLocationActivity"
+            android:configChanges="keyboardHidden|orientation" >
         </activity>
 
         <!-- Lists out all known WOEID entries found -->
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.ListLocationsActivity" >
+            android:name="com.morgan.design.android.ListLocationsActivity"
+            android:configChanges="keyboardHidden|orientation" >
         </activity>
 
         <!-- Lists all User Preferences -->
         <activity
+            android:name="com.morgan.design.android.UserPreferencesActivity"
             android:clearTaskOnLaunch="true"
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.UserPreferencesActivity" />
+            android:configChanges="keyboardHidden|orientation" />
 
         <!-- Feedback form -->
         <activity
+            android:name="com.morgan.design.FeedbackFormActivity"
             android:clearTaskOnLaunch="true"
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.FeedbackFormActivity" />
+            android:configChanges="keyboardHidden|orientation" />
 
         <!-- Weather Overview Screen -->
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.WeatherOverviewActivity" >
-            <intent-filter >
-                <action android:name="com.morgan.design.android.action.OPEN_WEATHER_VIEW" />
+            android:name="com.morgan.design.android.WeatherOverviewActivity"
+            android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
+                <action android:name="com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW" />
             </intent-filter>
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 
-        <!-- Weather Forcast Overview Screen -->
+        <!-- Weather Forecast Overview Screens -->
         <activity
-            android:configChanges="keyboardHidden|orientation"
             android:name="com.morgan.design.android.ForecastOverviewActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.ForcastTabCreationActivity" >
+            android:name="com.morgan.design.android.ForcastTabCreationActivity"
+            android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:configChanges="keyboardHidden|orientation"
-            android:name="com.morgan.design.android.ForecastOverviewTabActivity" >
+            android:name="com.morgan.design.android.ForecastOverviewTabActivity"
+            android:configChanges="keyboardHidden|orientation" >
         </activity>
 
         <!-- Service which periodically queries for the latest weather -->
         <service
+            android:name="com.morgan.design.android.service.YahooWeatherLoaderService"
             android:enabled="true"
-            android:label="@string/yahoo_weather_loader_service"
-            android:name="com.morgan.design.android.service.YahooWeatherLoaderService" />
+            android:label="@string/yahoo_weather_loader_service" />
 
-        <!-- Service which gets current GPS location -->
+        <!-- BINDABLE (deprecated) Service which gets current GPS location -->
         <service
+            android:name="com.morgan.design.android.service.GetMyLocationBindableService"
             android:enabled="true"
-            android:label="@string/get_my_location_bindable_service"
-            android:name="com.morgan.design.android.service.GetMyLocationBindableService" />
+            android:label="@string/get_my_location_bindable_service" />
 
-        <!-- Service which gets current GPS location -->
+        <!-- Service which simply determines your current GPS location -->
         <service
+            android:name="com.morgan.design.android.service.LocationLookupService"
             android:enabled="true"
-            android:label="@string/get_my_location_service"
-            android:name="com.morgan.design.android.service.LocationLookupService" >
-            <intent-filter >
+            android:label="@string/get_my_location_service" >
+            <intent-filter>
                 <action android:name="com.morgan.design.android.service.LocationLookupService" />
             </intent-filter>
         </service>
 
         <!-- Service which notifies about changes to the weather -->
         <service
+            android:name="com.morgan.design.android.service.YahooWeatherNotifcationService"
             android:enabled="true"
-            android:label="@string/yahoo_notifcation_service"
-            android:name="com.morgan.design.android.service.YahooWeatherNotifcationService" />
+            android:label="@string/yahoo_notifcation_service" />
 
-        <!-- GPS Weather Service which notifies about changes to the weather -->
+        <!-- Service which finds your GPS location then gets the weather for your location -->
         <service
+            android:name="com.morgan.design.android.service.GpsWeatherLookupService"
             android:enabled="true"
-            android:label="@string/gps_weather_service"
-            android:name="com.morgan.design.android.service.GpsWeatherLookupService" />
+            android:label="@string/gps_weather_service" />
+
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+
+        <service
+            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationControllerService"
+            android:enabled="true" />
+        <service
+            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService1"
+            android:enabled="true"
+            android:label="@string/weather_notification_service_1" />
+        <service
+            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService2"
+            android:enabled="true"
+            android:label="@string/weather_notification_service_2" />
+        <service
+            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService3"
+            android:enabled="true"
+            android:label="@string/weather_notification_service_3" />
+
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+
 
         <!-- Register periodic launcher for connectivity changes and get weather download -->
         <receiver
-            android:label="@string/periodic_reciever"
-            android:name="com.morgan.design.android.broadcast.LaunchReceiver" >
-            <intent-filter >
+            android:name="com.morgan.design.android.broadcast.LaunchController"
+            android:label="@string/periodic_reciever" >
+            <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-            <intent-filter >
-                <action android:name="com.morgan.design.android.broadcast.GET_WEATHER_FORCAST" />
-            </intent-filter>
-        </receiver>
-
-        <!-- Register for phone start-up event in order to start service if enabled -->
-        <receiver
-            android:label="@string/start_up_receiver"
-            android:name="com.morgan.design.android.broadcast.MyStartupIntentReceiver" >
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.ACTION_BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST" />
             </intent-filter>
         </receiver>
     </application>

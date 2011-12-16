@@ -19,9 +19,17 @@ public class Constants {
 
 	// Broadcast receiver actions
 	public static final String LATEST_WEATHER_QUERY_COMPLETE = "com.morgan.design.intent.COMPLETED_LATEST_WEATHER_LOAD";
-	public static final String PREFERENCES_UPDATED = "com.morgan.design.intent.PREFERENCES_UPDATED";
+	public static final String PREFERENCES_UPDATED = "com.morgan.design.android.broadcast.PREFERENCES_UPDATED";
+	public static final String OPEN_WEATHER_OVERVIEW = "com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW";
 
-	public static final String GET_WEATHER_FORCAST = "com.morgan.design.android.broadcast.GET_WEATHER_FORCAST";
+	public static final String REMOVE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.REMOVE_CURRENT_NOTIFCATION";
+
+	/** Triggered when a a request to get the weather is made */
+	public static final String RELOAD_WEATHER_BROADCAST = "com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST";
+
+	// Android inbuilt broadcasts
+	public static final String ANDROID_BOOT_COMPLETED_BROADCAST = "android.intent.action.ACTION_BOOT_COMPLETED";
+	public static final String ANDROID_CONNECTIVITY_CHANGE_BROADCAST = "android.net.conn.CONNECTIVITY_CHANGE";
 
 	// Activity Result codes
 	public static final int ENTER_LOCATION = 1;
@@ -29,13 +37,17 @@ public class Constants {
 	public static final int UPDATED_PREFERENCES = 3;
 
 	// Intent Extras
-	public static final String FROM_LAUNCHER = "FROM_LAUNCHER";
 	public static final String CURRENT_WEATHER_WOEID = "CURRENT_WEATHER_WOEID";
 	public static final String CURRENT_WEATHER = "CURRENT_WEATHER";
 	public static final String WOIED_LOCAITONS = "WOIED_LOCAITONS";
 	public static final String SUCCESSFUL = "SUCCESSFUL";
 	public static final String FORCAST_ENTRY = "FORCAST_ENTRY";
-
 	public static final String TEMPERATURE_UNIT = "TEMPERATURE_UNIT";
+	public static final String LAST_KNOWN_NOTIFCATION_ID = "LAST_KNOWN_NOTIFCATION_ID";
+
+	// Launch Controller Broadcast Intent properties
+	public static final String FROM_BOOT = "FROM_BOOT";
+	public static final String FROM_LAUNCHER = "FROM_LAUNCHER";
+	public static final String CONNECTIVITY_CHANGED = "CONNECTIVITY_CHANGED";
 
 }

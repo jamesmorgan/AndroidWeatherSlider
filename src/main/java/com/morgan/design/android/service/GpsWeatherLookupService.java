@@ -32,7 +32,6 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
 		super.onStartCommand(intent, flags, startId);
 		triggerGetGpsLocation();
-
 		return START_STICKY;
 	}
 
@@ -40,8 +39,6 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 	public void onCreate() {
 		super.onCreate();
 		registerForLocationChangedUpdates();
-		triggerGetGpsLocation();
-
 		this.onWoeidDataCallback = new OnAsyncQueryCallback<List<WOEIDEntry>>() {
 			@Override
 			public void onPostLookup(final List<WOEIDEntry> locations) {
@@ -74,6 +71,7 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 	 * Actually got get the current location via GPS 
 	 */
 	private void triggerGetGpsLocation() {
+		Logger.d(LOG_TAG, "Triggering get GPS location");
 		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_CURRENT_LOCATION_LOOKUP);
 		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
 		startService(findLocationBroadcast);
@@ -102,6 +100,8 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 							}
 						}
 						if (intent.hasExtra(LocationLookupService.CURRENT_LOCAION)) {
+							Logger.d(LOG_TAG, "Current location found, looking up WOEID");
+
 							GpsWeatherLookupService.this.currentLocation =
 									(Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
 							new DownloadWOIEDDataTaskFromLocation(GpsWeatherLookupService.this.currentLocation,

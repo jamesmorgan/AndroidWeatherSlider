@@ -1,5 +1,6 @@
 package com.morgan.design.android.service;
 
+import static com.morgan.design.Constants.LAST_KNOWN_NOTIFCATION_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotBlank;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
@@ -24,6 +25,7 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.WoeidChoice;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
+import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
 import com.morgan.design.android.tasks.DownloadWeatherInfoDataTaskFromWoeid;
 import com.morgan.design.android.tasks.OnAsyncQueryCallback;
 import com.morgan.design.android.util.Logger;
@@ -39,9 +41,14 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 	private static final String LOG_TAG = "AbsrtactBoundWeatherService";
 
 	protected BroadcastReceiver preferencesChangedBroadcastReceiver;
-	protected YahooWeatherNotifcationService mBoundNotificationService;
+	protected BroadcastReceiver removeCurrentNotificationBroadcastReciever;
+
+	// protected YahooWeatherNotifcationService mBoundNotificationService;
+
+	protected WeatherNotificationControllerService mBoundNotificationControllerService;
+
 	protected WoeidChoiceDao woeidChoiceDao;
-	protected boolean mIsNotificatoionServiceBound = false;
+	protected boolean mIsNotificatoionControllerBound = false;
 
 	private AlarmManager alarms;
 	private ConnectivityManager cnnxManager;
@@ -52,13 +59,20 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
 		Logger.d(LOG_TAG, "Successfully loaded weather details");
-		this.mBoundNotificationService = ((YahooWeatherNotifcationService.LocalBinder) service).getService();
+
+		// if (service instanceof YahooWeatherNotifcationService.LocalBinder) {
+		// this.mBoundNotificationService = ((YahooWeatherNotifcationService.LocalBinder) service).getService();
+		// }
+		// if (service instanceof WeatherNotificationControllerService.LocalBinder) {
+		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService.LocalBinder) service).getService();
+		// }
 	}
 
 	@Override
 	public void onServiceDisconnected(final ComponentName className) {
 		Logger.d(LOG_TAG, "Disconnected from weather service");
-		this.mBoundNotificationService = null;
+		// this.mBoundNotificationService = null;
+		this.mBoundNotificationControllerService = null;
 	}
 
 	@Override
@@ -66,15 +80,17 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		super.onCreate();
 		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
 		doBindService();
-		doRegisterPreferenceReciever();
 		doRegisterSystemServices();
+		doRegisterPreferenceReciever();
+		doRegisterRemoveNotificationReciever();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		doUnbindService();
-		doPreferenceReciever();
+		doUnbindPreferenceReciever();
+		doUnbindRemoveNotificationReciever();
 	}
 
 	OnAsyncQueryCallback<YahooWeatherInfo> onGetYahooWeatherDataCallback = new OnAsyncQueryCallback<YahooWeatherInfo>() {
@@ -96,7 +112,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 	protected void loadWeatherInfomation(final YahooWeatherInfo weatherInfo) {
 		this.currentWeather = weatherInfo;
 
-		if (this.mIsNotificatoionServiceBound) {
+		if (this.mIsNotificatoionControllerBound) {
 			setUpdateWeatherInfoForService();
 		}
 	}
@@ -107,7 +123,9 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 			((WeatherSliderApplication) getApplication()).setCurrentWeather(this.currentWeather);
 		}
 
-		this.mBoundNotificationService.setWeatherInformation(this.currentWeather);
+		// this.mBoundNotificationService.setWeatherInformation(this.currentWeather);
+
+		final int serviceId = this.mBoundNotificationControllerService.addService(this.currentWeather);
 
 		// Find one, if not make new one
 		WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeid(this.woeidId);
@@ -118,10 +136,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 			this.woeidChoiceDao.create(woeidChoice);
 		}
 
-		// FIXME -> when allowing more than one notification, get notification Id, plus system millis
-		if (null != this.mBoundNotificationService) {
-			woeidChoice.setLastknownNotifcationId(this.mBoundNotificationService.getCurrentNotifcationId());
-		}
+		woeidChoice.setLastknownNotifcationId(serviceId);
 
 		final Intent broadcastIntent = new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE);
 
@@ -140,9 +155,36 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		sendBroadcast(broadcastIntent);
 	}
 
+	protected void onRemoveNotification(final Context context, final Intent intent) {
+		Logger.d(LOG_TAG, "Recieved: com.morgan.design.android.broadcast.REMOVE_CURRENT_NOTIFCATION");
+
+		if (intent.hasExtra(LAST_KNOWN_NOTIFCATION_ID)) {
+			final int notificationId = intent.getIntExtra(LAST_KNOWN_NOTIFCATION_ID, 0);
+			// AbstractBoundWeatherNotificationService.this.mBoundNotificationService.removeNotification(notificationId);
+			this.mBoundNotificationControllerService.removeNotification(notificationId);
+
+		}
+	}
+
+	protected void onPreferencesChanged(final Context context, final Intent intent) {
+		Logger.d(LOG_TAG, "Recieved: com.morgan.design.intent.PREFERENCES_UPDATED");
+
+		// AbstractBoundWeatherNotificationService.this.mBoundNotificationService.updatePreferences();
+		this.mBoundNotificationControllerService.updatePreferences();
+
+		final String woeidId = getToLevelApplication().getCurrentWoied();
+		if (isNotBlank(woeidId)) {
+			this.woeidId = woeidId;
+			if (isNotBlank(this.woeidId)) {
+				downloadWeatherData(this, woeidId, PreferenceUtils.getTemperatureMode(getApplicationContext()));
+			}
+		}
+	}
+
 	protected void doBindService() {
-		bindService(new Intent(this, YahooWeatherNotifcationService.class), this, Context.BIND_AUTO_CREATE);
-		this.mIsNotificatoionServiceBound = true;
+		// bindService(new Intent(this, YahooWeatherNotifcationService.class), this, Context.BIND_AUTO_CREATE);
+		bindService(new Intent(this, WeatherNotificationControllerService.class), this, Context.BIND_AUTO_CREATE);
+		this.mIsNotificatoionControllerBound = true;
 	}
 
 	private void doRegisterSystemServices() {
@@ -155,8 +197,6 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 			this.preferencesChangedBroadcastReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
-					Logger.d(LOG_TAG, "Recieved: com.morgan.design.intent.PREFERENCES_UPDATED");
-					AbstractBoundWeatherNotificationService.this.mBoundNotificationService.updatePreferences();
 					onPreferencesChanged(context, intent);
 				}
 			};
@@ -164,28 +204,36 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		}
 	}
 
-	protected void onPreferencesChanged(final Context context, final Intent intent) {
-		Logger.d(LOG_TAG, "Recieved: com.morgan.design.intent.PREFERENCES_UPDATED");
-		final String woeidId = getToLevelApplication().getCurrentWoied();
-		if (isNotBlank(woeidId)) {
-			this.woeidId = woeidId;
-			if (isNotBlank(this.woeidId)) {
-				downloadWeatherData(this, woeidId, PreferenceUtils.getTemperatureMode(getApplicationContext()));
-			}
+	private void doRegisterRemoveNotificationReciever() {
+		if (isNull(this.removeCurrentNotificationBroadcastReciever)) {
+			this.removeCurrentNotificationBroadcastReciever = new BroadcastReceiver() {
+				@Override
+				public void onReceive(final Context context, final Intent intent) {
+					onRemoveNotification(context, intent);
+				}
+			};
+			registerReceiver(this.removeCurrentNotificationBroadcastReciever, new IntentFilter(Constants.REMOVE_CURRENT_NOTIFCATION));
 		}
 	}
 
 	protected void doUnbindService() {
-		if (this.mIsNotificatoionServiceBound) {
+		if (this.mIsNotificatoionControllerBound) {
 			unbindService(this);
-			this.mIsNotificatoionServiceBound = false;
+			this.mIsNotificatoionControllerBound = false;
 		}
 	}
 
-	private void doPreferenceReciever() {
+	private void doUnbindPreferenceReciever() {
 		if (isNotNull(this.preferencesChangedBroadcastReceiver)) {
 			unregisterReceiver(this.preferencesChangedBroadcastReceiver);
 			this.preferencesChangedBroadcastReceiver = null;
+		}
+	}
+
+	private void doUnbindRemoveNotificationReciever() {
+		if (isNotNull(this.removeCurrentNotificationBroadcastReciever)) {
+			unregisterReceiver(this.removeCurrentNotificationBroadcastReciever);
+			this.removeCurrentNotificationBroadcastReciever = null;
 		}
 	}
 

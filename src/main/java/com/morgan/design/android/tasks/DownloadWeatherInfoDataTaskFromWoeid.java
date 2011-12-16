@@ -74,7 +74,7 @@ public class DownloadWeatherInfoDataTaskFromWoeid extends AsyncTask<Void, Void, 
 			Logger.e(LOG_TAG, "Unknonw error when running periodic download weather data task", e);
 		}
 		finally {
-			final Intent intentOnAlarm = new Intent(Constants.GET_WEATHER_FORCAST);
+			final Intent intentOnAlarm = new Intent(Constants.RELOAD_WEATHER_BROADCAST);
 			intentOnAlarm.putExtra(Constants.CURRENT_WEATHER_WOEID, this.woeidId);
 			final PendingIntent broadcast = PendingIntent.getBroadcast(this.context, 0, intentOnAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
 

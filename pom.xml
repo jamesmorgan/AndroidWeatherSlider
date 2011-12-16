@@ -193,6 +193,7 @@
 										</versionRange>
 										<goals>
 											<goal>proguard</goal>
+											<goal>manifest-update</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

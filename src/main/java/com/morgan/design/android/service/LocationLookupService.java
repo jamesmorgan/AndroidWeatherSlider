@@ -14,7 +14,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import com.morgan.design.android.util.Logger;
+
 public class LocationLookupService extends Service {
+
+	private static final String LOG_TAG = "LocationLookupService";
 
 	public static final String GET_CURRENT_LOCATION_LOOKUP = "com.morgan.design.android.service.LocationLookupService";
 	public static final String LOCATION_CHANGED_BROADCAST = "com.morgan.design.broadcast.LOCATION_CHANGED";
@@ -61,6 +65,7 @@ public class LocationLookupService extends Service {
 
 	@Override
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
+		Logger.d(LOG_TAG, "Starting lookup location service");
 
 		int locationTimeOut = DEFAULT_LOCATION_TIMEOUT;
 

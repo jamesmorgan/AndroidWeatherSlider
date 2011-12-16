@@ -194,6 +194,11 @@ public final class R {
         public static final int periodic_reciever=0x7f07000f;
         public static final int settings=0x7f070000;
         public static final int start_up_receiver=0x7f070010;
+        /**  Notification IDS 
+         */
+        public static final int weather_notification_service_1=0x7f070023;
+        public static final int weather_notification_service_2=0x7f070024;
+        public static final int weather_notification_service_3=0x7f070025;
         public static final int weather_service_started=0x7f070006;
         public static final int weather_service_stopped=0x7f070007;
         public static final int welcome=0x7f070003;
