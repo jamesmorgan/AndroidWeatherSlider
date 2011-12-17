@@ -21,6 +21,7 @@ public class Constants {
 	public static final String LATEST_WEATHER_QUERY_COMPLETE = "com.morgan.design.intent.COMPLETED_LATEST_WEATHER_LOAD";
 	public static final String PREFERENCES_UPDATED = "com.morgan.design.android.broadcast.PREFERENCES_UPDATED";
 	public static final String OPEN_WEATHER_OVERVIEW = "com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW";
+	public static final String NOTIFICATIONS_FULL = "com.morgan.design.android.broadcast.NOTIFICATIONS_FULL";
 
 	public static final String REMOVE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.REMOVE_CURRENT_NOTIFCATION";
 
@@ -43,7 +44,7 @@ public class Constants {
 	public static final String SUCCESSFUL = "SUCCESSFUL";
 	public static final String FORCAST_ENTRY = "FORCAST_ENTRY";
 	public static final String TEMPERATURE_UNIT = "TEMPERATURE_UNIT";
-	public static final String LAST_KNOWN_NOTIFCATION_ID = "LAST_KNOWN_NOTIFCATION_ID";
+	public static final String LAST_KNOWN_SERVICE_ID = "LAST_KNOWN_SERVICE_ID";
 
 	// Launch Controller Broadcast Intent properties
 	public static final String FROM_BOOT = "FROM_BOOT";

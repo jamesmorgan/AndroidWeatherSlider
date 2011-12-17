@@ -32,7 +32,8 @@ public class WeatherSliderApplication extends Application {
 		return this.currentWeather;
 	}
 
-	public void setCurrentWeather(final YahooWeatherInfo currentWeather) {
+	public void setCurrentWeather(final Integer serviceId, final YahooWeatherInfo currentWeather) {
+		// TODO record weather for service
 		this.currentWeather = currentWeather;
 	}
 

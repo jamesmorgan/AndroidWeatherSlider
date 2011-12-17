@@ -1,6 +1,6 @@
 package com.morgan.design.android;
 
-import static com.morgan.design.Constants.LAST_KNOWN_NOTIFCATION_ID;
+import static com.morgan.design.Constants.LAST_KNOWN_SERVICE_ID;
 import static com.morgan.design.Constants.REMOVE_CURRENT_NOTIFCATION;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
@@ -306,7 +306,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private void attemptToKillNotifcation(final WoeidChoice woeidChoice) {
 		final Bundle bundle = new Bundle();
-		bundle.putInt(LAST_KNOWN_NOTIFCATION_ID, woeidChoice.getLastknownNotifcationId());
+		bundle.putInt(LAST_KNOWN_SERVICE_ID, woeidChoice.getLastknownNotifcationId());
 		sendBroadcast(new Intent(REMOVE_CURRENT_NOTIFCATION).putExtras(bundle));
 	}
 
