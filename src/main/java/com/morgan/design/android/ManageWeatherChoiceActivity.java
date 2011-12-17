@@ -71,12 +71,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	// FIXME -> Add ability to pay for application in-line
 
-	// FIXME -> Pro-guard bug when running on real phone
-	// FIXME -> Update latest maven-android-plugin - 3.0.1
+	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 
 	// Friday
-	// FIXME -> allow for multiple notifications at once (paid version only)
-	// FIXME -> replace single current woeid with concurrent hash map of notification id and woeid when running multiple
 	// FIXME -> Always update notification when weather service lookup finished
 
 	// Thursday
@@ -85,11 +82,22 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 
+	// FIXME -> Ensure all notifications always update correctly
+	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
+
 	// FIXME -> Improve progress/interaction when looking up GPS location
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on
 	// FIXME -> Add ability to launch service on phone start up
 
+	// FIXME -> Record service and current notification in application
+	// FIXME -> Allow re-loading of existing notifications
+	// FIXME -> Allow removal of any notification via home screen
+	// FIXME -> Show active state on home screen
+	// FIXME -> Ensure correct service IDs matched against current weather
+
+	// FIXME -> DONE - allow only maximum number of 3 active notifications at once
+	// FIXME -> DONE - allow for multiple notifications at once (paid version only)
 	// FIXME -> DONE - Check for battery level (15%), active networks (GPS and Mobile), location age
 	// FIXME -> DONE - improve notification when no locations found
 	// FIXME -> DONE - Created none-bindable intent based service
