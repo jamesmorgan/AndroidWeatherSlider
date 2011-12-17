@@ -112,8 +112,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 				service.setValue(true);
 
 				if (null != currentWeather) {
-					// TODO record weather for service
-					((WeatherSliderApplication) getApplication()).setCurrentWeather(serviceId, currentWeather);
+					((WeatherSliderApplication) getApplication()).addWeatherService(serviceId, currentWeather);
 				}
 
 				return serviceId;

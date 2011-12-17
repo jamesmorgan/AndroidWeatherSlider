@@ -21,6 +21,10 @@ public class Logger {
 		android.util.Log.w(LOGTAG, LOG_TAG + ": " + logMe);
 	}
 
+	public static void w(final String LOG_TAG, final String logMe, final Object... values) {
+		android.util.Log.w(LOGTAG, LOG_TAG + ": " + String.format(logMe, values));
+	}
+
 	public static void e(final String LOG_TAG, final String logMe) {
 		android.util.Log.e(LOGTAG, LOG_TAG + ": " + logMe);
 	}

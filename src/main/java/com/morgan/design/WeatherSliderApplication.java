@@ -1,5 +1,8 @@
 package com.morgan.design;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -13,8 +16,9 @@ import com.weatherslider.morgan.design.R;
 @ReportsCrashes(formKey = Constants.ANDROID_DOCS_CRASH_REPORT_KEY, mode = ReportingInteractionMode.TOAST, forceCloseDialogAfterToast = false, resToastText = R.string.crash_toast_text)
 public class WeatherSliderApplication extends Application {
 
+	private static Map<Integer, YahooWeatherInfo> SERVICE_IDS = new HashMap<Integer, YahooWeatherInfo>();
+
 	private GoogleAnalyticsService googleAnalyticsService;
-	private YahooWeatherInfo currentWeather;
 	private String currentWoeid;
 
 	@Override
@@ -28,13 +32,12 @@ public class WeatherSliderApplication extends Application {
 		return this.googleAnalyticsService;
 	}
 
-	public YahooWeatherInfo getCurrentWeather() {
-		return this.currentWeather;
+	public void addWeatherService(final Integer serviceId, final YahooWeatherInfo currentWeather) {
+		SERVICE_IDS.put(serviceId, currentWeather);
 	}
 
-	public void setCurrentWeather(final Integer serviceId, final YahooWeatherInfo currentWeather) {
-		// TODO record weather for service
-		this.currentWeather = currentWeather;
+	public YahooWeatherInfo getWeatherForSerivceId(final int serviceId) {
+		return SERVICE_IDS.get(serviceId);
 	}
 
 	public void setCurrentWoeid(final String currentWoeid) {

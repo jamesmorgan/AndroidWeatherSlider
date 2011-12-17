@@ -90,12 +90,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// FIXME -> Investigate how to ensure service is always started/on
 	// FIXME -> Add ability to launch service on phone start up
 
-	// FIXME -> Record service and current notification in application
 	// FIXME -> Allow re-loading of existing notifications
 	// FIXME -> Allow removal of any notification via home screen
 	// FIXME -> Show active state on home screen
 	// FIXME -> Ensure correct service IDs matched against current weather
 
+	// FIXME -> DONE - Record service and current notification in application
+	// FIXME -> DONE - Update Overview screen to lookup weather
 	// FIXME -> DONE - allow only maximum number of 3 active notifications at once
 	// FIXME -> DONE - allow for multiple notifications at once (paid version only)
 	// FIXME -> DONE - Check for battery level (15%), active networks (GPS and Mobile), location age

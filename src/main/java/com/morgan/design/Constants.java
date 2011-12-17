@@ -42,8 +42,12 @@ public class Constants {
 	public static final String CURRENT_WEATHER = "CURRENT_WEATHER";
 	public static final String WOIED_LOCAITONS = "WOIED_LOCAITONS";
 	public static final String SUCCESSFUL = "SUCCESSFUL";
+
+	// Intent extras used when creating overview screens
 	public static final String FORCAST_ENTRY = "FORCAST_ENTRY";
-	public static final String TEMPERATURE_UNIT = "TEMPERATURE_UNIT";
+	public static final String NUMBER_OF_FORCASTS = "NUMBER_OF_FORCASTS";
+	public static final String SERVICE_ID = "SERVICE_ID";
+
 	public static final String LAST_KNOWN_SERVICE_ID = "LAST_KNOWN_SERVICE_ID";
 
 	// Launch Controller Broadcast Intent properties

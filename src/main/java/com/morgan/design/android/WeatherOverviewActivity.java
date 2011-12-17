@@ -1,7 +1,14 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.SERVICE_ID;
+import static com.morgan.design.android.util.ObjectUtils.isNotEmpty;
+import static com.morgan.design.android.util.ObjectUtils.isNull;
+import static com.morgan.design.android.util.ObjectUtils.isZero;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
+
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,8 +19,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
+import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.Temperature;
@@ -39,17 +48,27 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_overview);
 
-		final WeatherSliderApplication appState = getToLevelApplication();
-		this.googleAnalyticsService = appState.getGoogleAnalyticsService();
+		final Intent intent = getIntent();
+		if (null != intent) {
+			if (intent.hasExtra(SERVICE_ID)) {
+				final int serviceId = intent.getIntExtra(SERVICE_ID, 0);
+				if (isZero(serviceId)) {
+					Logger.w(LOG_TAG, "Service ID is null, this should not happen");
+					finish();
+				}
+				this.currentWeather = getTopLevelApplication().getWeatherForSerivceId(serviceId);
+				if (isNull(this.currentWeather)) {
+					Logger.w(LOG_TAG, "Unable to find weather for service ID [%s], this should not happen", serviceId);
+					finish();
+				}
+			}
+		}
 
-		this.currentWeather = appState.getCurrentWeather();
+		final WeatherSliderApplication appState = getTopLevelApplication();
+		this.googleAnalyticsService = appState.getGoogleAnalyticsService();
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 
-		if (null == this.currentWeather) {
-			Logger.d(LOG_TAG, "Current weather if null, unable to create overview screen");
-			return;
-		}
 		Logger.d(LOG_TAG, this.currentWeather);
 
 		setDescriptionAndImage();
@@ -166,7 +185,7 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		this.last_updated_date_time.setText(DateUtils.dateToSimpleDateFormat(this.currentWeather.getCurrentDate()));
 	}
 
-	protected WeatherSliderApplication getToLevelApplication() {
+	protected WeatherSliderApplication getTopLevelApplication() {
 		return ((WeatherSliderApplication) getApplication());
 	}
 
@@ -185,8 +204,21 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		switch (direction) {
 			case SimpleGestureFilter.SWIPE_LEFT:
 				if (null != this.currentWeather) {
-					final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
-					startActivity(intent);
+
+					final List<ForcastEntry> entries = this.currentWeather.getForcastEntries();
+					if (isNotEmpty(entries)) {
+						// HACK to put forecast details in intent as current weather is not Parcelable
+						final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
+						final Bundle extras = new Bundle();
+						int i = 0;
+						for (final ForcastEntry forcastEntry : entries) {
+							intent.putExtra((Constants.FORCAST_ENTRY + i++), forcastEntry);
+						}
+						intent.putExtra(Constants.NUMBER_OF_FORCASTS, i);
+						intent.putExtras(extras);
+
+						startActivity(intent);
+					}
 				}
 				return;
 		}
