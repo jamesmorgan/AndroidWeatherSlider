@@ -68,6 +68,7 @@ public class ForcastTabCreationActivity extends TabActivity implements SimpleGes
 	}
 
 	private boolean isNotToday(final ForcastEntry forcastEntry) {
+		// TODO fix me -> make this work
 		return true;
 	}
 
