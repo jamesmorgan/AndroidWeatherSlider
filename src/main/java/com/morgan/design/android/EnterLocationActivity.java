@@ -11,6 +11,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -107,27 +108,28 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 					final Bundle extras = intent.getExtras();
 
 					if (null != extras) {
+						boolean providersFound = false;
+						Location location = null;
 						if (intent.hasExtra(LocationLookupService.PROVIDERS_FOUND)) {
-							final boolean providersFound = extras.getBoolean(LocationLookupService.PROVIDERS_FOUND);
-
-							if (providersFound) {
-								Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
-								Toast.makeText(EnterLocationActivity.this,
-										"No location providers found, please check you are have your GPS or mobile network enabled.",
-										Toast.LENGTH_SHORT).show();
-							}
-							else {
-								Logger.d(LOG_TAG, "GPS location not found");
-								Toast.makeText(EnterLocationActivity.this,
-										"Unable to locate you, please ensure you are connected to the network.", Toast.LENGTH_SHORT).show();
-							}
+							providersFound = extras.getBoolean(LocationLookupService.PROVIDERS_FOUND);
+						}
+						if (intent.hasExtra(LocationLookupService.CURRENT_LOCAION)) {
+							location = (Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
 						}
 
-						if (intent.hasExtra(LocationLookupService.CURRENT_LOCAION)) {
-							final Location location = (Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
+						if (!providersFound) {
+							Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
+							createGpsDisabledAlert();
+						}
+						else if (null != location && providersFound) {
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
 									location.getLatitude());
 							new DownloadWOIEDDataTaskFromLocation(location).execute();
+						}
+						else {
+							Logger.d(LOG_TAG, "GPS location not found");
+							Toast.makeText(EnterLocationActivity.this,
+									"Unable to locate you, please ensure you are connected to the network.", Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
@@ -272,6 +274,31 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		if (this.progressDialog != null && !this.destroyed) {
 			this.progressDialog.dismiss();
 		}
+	}
+
+	private void createGpsDisabledAlert() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("No location providers found, Your GPS & Mobile Network is disabled! Would you like to enable it?")
+			.setCancelable(false)
+			.setPositiveButton("Enable GPS", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					showGpsOptions();
+				}
+			});
+		builder.setNegativeButton("Do nothing", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				dialog.cancel();
+			}
+		});
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	private void showGpsOptions() {
+		final Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		startActivity(gpsOptionsIntent);
 	}
 
 	protected WeatherSliderApplication getToLevelApplication() {

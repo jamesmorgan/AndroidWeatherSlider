@@ -28,6 +28,7 @@ public class TODO {
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
 	// FIXME -> Option to disable collecting of logs via ACRA
+	// FIXME -> Check try/catch blocks report to ACRA if required
 
 	// ////////////////
 	// Consideration //
@@ -47,8 +48,9 @@ public class TODO {
 	// FIXME -> Ensure applications re-loads weather data from all angles
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
-	// FIXME -> Improve progress/interaction when looking up GPS location
-	// FIXME -> If GPS/network is disabled, prompt user to turn it on -> http://advback.com/android/checking-if-gps-is-enabled-android/
+	// FIXME -> DONE - Improve progress/interaction when looking up GPS location
+	// FIXME -> DONE - If GPS && network are disabled, prompt user to turn it on ->
+	// http://advback.com/android/checking-if-gps-is-enabled-android/
 
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537

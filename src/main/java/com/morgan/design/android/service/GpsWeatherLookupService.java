@@ -90,22 +90,26 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 					final Bundle extras = intent.getExtras();
 
 					if (null != extras) {
+						boolean providersFound = false;
+						Location location = null;
 						if (intent.hasExtra(LocationLookupService.PROVIDERS_FOUND)) {
-							final boolean providersFound = extras.getBoolean(LocationLookupService.PROVIDERS_FOUND);
-							if (providersFound) {
-								Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
-							}
-							else {
-								Logger.d(LOG_TAG, "GPS location not found");
-							}
+							providersFound = extras.getBoolean(LocationLookupService.PROVIDERS_FOUND);
 						}
 						if (intent.hasExtra(LocationLookupService.CURRENT_LOCAION)) {
-							Logger.d(LOG_TAG, "Current location found, looking up WOEID");
+							location = (Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
+						}
 
-							GpsWeatherLookupService.this.currentLocation =
-									(Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
-							new DownloadWOIEDDataTaskFromLocation(GpsWeatherLookupService.this.currentLocation,
-									GpsWeatherLookupService.this.onWoeidDataCallback).execute();
+						if (!providersFound) {
+							Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
+						}
+						else if (null != location && providersFound) {
+							GpsWeatherLookupService.this.currentLocation = location;
+							new DownloadWOIEDDataTaskFromLocation(location, GpsWeatherLookupService.this.onWoeidDataCallback).execute();
+							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
+									location.getLatitude());
+						}
+						else {
+							Logger.d(LOG_TAG, "GPS location not found");
 						}
 					}
 				}

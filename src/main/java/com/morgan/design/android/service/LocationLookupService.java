@@ -123,12 +123,10 @@ public class LocationLookupService extends Service {
 
 	public void onCurrentLocationFound(final Location location) {
 		final Bundle extras = new Bundle();
+		extras.putBoolean(PROVIDERS_FOUND, true);
 
 		if (null != location) {
 			extras.putParcelable(CURRENT_LOCAION, location);
-		}
-		else {
-			extras.putBoolean(PROVIDERS_FOUND, true);
 		}
 		sendBroadcast(new Intent(LOCATION_CHANGED_BROADCAST).putExtras(extras));
 		stopSelf();
