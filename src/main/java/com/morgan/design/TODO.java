@@ -64,9 +64,10 @@ public class TODO {
 	// FIXME -> Ensure all notifications always update correctly
 	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
 
-	// FIXME -> Get WOEID from current lat/long
+	// FIXME -> DONE - (19/12/2011) - Get WOEID from current lat/long
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
-	// FIXME -> DONE - Fix GPS bug when finding location
+	// FIXME -> DONE - (19/12/2011) - Fix GPS bug when finding location
+	// FIXME -> Add constant feedback on home screen of ongoing lookups/queries e.g. loading
 
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on
@@ -79,7 +80,7 @@ public class TODO {
 	// FIXME -> DONE - (19/12/2011) - Add fields to DB, Active, Latitude, Longitude -> rename to WeatherChoice.java
 	// FIXME -> DONE - (19/12/2011) - Show active state on home screen
 
-	// FIXME -> Allow re-loading of existing notifications
+	// FIXME -> Allow re-loading of existing notifications on start up
 	// FIXME -> Ensure correct service IDs matched against current weather
 
 	// ////////////////////////////////////

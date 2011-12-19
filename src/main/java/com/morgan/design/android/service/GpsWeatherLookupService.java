@@ -3,9 +3,6 @@ package com.morgan.design.android.service;
 import static com.morgan.design.android.util.ObjectUtils.isNotBlank;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
-
-import java.util.List;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +10,8 @@ import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
 
-import com.morgan.design.android.domain.WOEIDEntry;
-import com.morgan.design.android.tasks.DownloadWOIEDDataTaskFromLocation;
+import com.morgan.design.android.domain.GeocodeResult;
+import com.morgan.design.android.tasks.GeocodeWOIEDDataTaskFromLocation;
 import com.morgan.design.android.tasks.OnAsyncQueryCallback;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
@@ -24,7 +21,8 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 	private static final String LOG_TAG = "GpsWeatherLookupService";
 
 	private BroadcastReceiver locationChangedBroadcastReciever;
-	private OnAsyncQueryCallback<List<WOEIDEntry>> onWoeidDataCallback;
+
+	private OnAsyncQueryCallback<GeocodeResult> onGeocodeDataCallback;
 
 	private Location currentLocation;
 
@@ -39,16 +37,11 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 	public void onCreate() {
 		super.onCreate();
 		registerForLocationChangedUpdates();
-		this.onWoeidDataCallback = new OnAsyncQueryCallback<List<WOEIDEntry>>() {
+		this.onGeocodeDataCallback = new OnAsyncQueryCallback<GeocodeResult>() {
 			@Override
-			public void onPostLookup(final List<WOEIDEntry> locations) {
-				// deal with locations
-				Logger.d(LOG_TAG, "onPostLookup -> Locations = %s", locations);
-
-				final WOEIDEntry entry = new WOEIDEntry();
-				entry.setWoeid("12797150");
-
-				startYahooWeatherService(entry);
+			public void onPostLookup(final GeocodeResult geocodeResult) {
+				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", geocodeResult);
+				startYahooWeatherService(geocodeResult);
 			}
 		};
 
@@ -60,7 +53,7 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 		unregisterLocationChangedUpdates();
 	}
 
-	private void startYahooWeatherService(final WOEIDEntry entry) {
+	private void startYahooWeatherService(final GeocodeResult entry) {
 		if (isNotBlank(entry.getWoeid())) {
 			this.woeidId = entry.getWoeid();
 			downloadWeatherData(this, entry.getWoeid(), PreferenceUtils.getTemperatureMode(getApplicationContext()));
@@ -97,6 +90,7 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 						}
 						if (intent.hasExtra(LocationLookupService.CURRENT_LOCAION)) {
 							location = (Location) extras.getParcelable(LocationLookupService.CURRENT_LOCAION);
+
 						}
 
 						if (!providersFound) {
@@ -104,9 +98,9 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 						}
 						else if (null != location && providersFound) {
 							GpsWeatherLookupService.this.currentLocation = location;
-							new DownloadWOIEDDataTaskFromLocation(location, GpsWeatherLookupService.this.onWoeidDataCallback).execute();
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
 									location.getLatitude());
+							new GeocodeWOIEDDataTaskFromLocation(location, GpsWeatherLookupService.this.onGeocodeDataCallback).execute();
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
