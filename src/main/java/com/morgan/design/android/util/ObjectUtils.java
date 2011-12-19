@@ -1,5 +1,6 @@
 package com.morgan.design.android.util;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,12 @@ public final class ObjectUtils {
 	public static String valueOrDefault(final String string, final String defaultValue) {
 		return stringHasValue(string)
 				? string
+				: defaultValue;
+	}
+
+	public static BigDecimal valueOrDefault(final String string, final BigDecimal defaultValue) {
+		return stringHasValue(string)
+				? new BigDecimal(string)
 				: defaultValue;
 	}
 

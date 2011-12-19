@@ -39,6 +39,7 @@ public class TODO {
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Add temperature highs/lows for day on overview screen
 	// FIXME -> DB Version's & Tests
+	// FIXME -> Complete statuses, active, inactive, issues?
 
 	// //////////////////////
 	// Release Version 1.0 //
@@ -63,15 +64,18 @@ public class TODO {
 
 	// FIXME -> Get WOEID from current lat/long
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
+	// FIXME -> Fix GPS bug when finding location
 
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on
 
-	// FIXME -> Add ability to launch service on phone start up
+	// FIXME -> Add ability to launch service on phone start up, check existing functionality
 	// FIXME -> Add ability to pay for application in-line
 
-	// FIXME -> Allow removal not just deletion of any notification via home screen
-	// FIXME -> Show active state on home screen
+	// FIXME -> DONE - Allow removal not just deletion of any notification via home screen
+	// FIXME -> DONE - Broadcast active notifications changed in order to reload choices on home screen
+	// FIXME -> DONE - Add fields to DB, Active, Latitude, Longitude -> rename to WeatherChoice.java
+	// FIXME -> DONE - Show active state on home screen
 
 	// FIXME -> Allow re-loading of existing notifications
 	// FIXME -> Ensure correct service IDs matched against current weather

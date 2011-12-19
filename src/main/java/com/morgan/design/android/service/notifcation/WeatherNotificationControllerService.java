@@ -1,6 +1,7 @@
 package com.morgan.design.android.service.notifcation;
 
 import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
+import static com.morgan.design.Constants.NOTIFICATION_REMOVED;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNotZero;
 
@@ -128,6 +129,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			final BaseNotifcationService baseNotifcationService = this.boundServices.get(serviceId);
 			if (isNotNull(baseNotifcationService)) {
 				baseNotifcationService.removeNotification();
+				sendBroadcast(new Intent(NOTIFICATION_REMOVED));
 			}
 		}
 	}

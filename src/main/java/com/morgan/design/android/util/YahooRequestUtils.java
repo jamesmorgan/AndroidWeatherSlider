@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.location.Location;
 
+import com.morgan.design.Constants;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.Temperature;
@@ -19,6 +20,9 @@ public class YahooRequestUtils {
 
 	private static final String GET_LOCATION_WOEID_FOR_LOCATION =
 			"http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text='%s, %s' | SORT(field='placeTypeName.code')&format=xml";
+
+	private static final String GET_WOEID_FOR_LOCATION = "http://where.yahooapis.com/geocode?q=%s,%s&gflags=R&appid="
+		+ Constants.YAHOO_API_KEY;
 
 	private static final String LOG_TAG = "YahooRequestLoader";
 
@@ -57,7 +61,8 @@ public class YahooRequestUtils {
 		if (location == null) {
 			return null;
 		}
-		return String.format(GET_LOCATION_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
+		// return String.format(GET_LOCATION_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
+		return String.format(GET_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
 	}
 
 	// http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D%2237.416275%2C%20-122.025092%22%20and%20gflags%3D%22R%22&appid=test

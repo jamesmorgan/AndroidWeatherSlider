@@ -3,6 +3,7 @@ package com.morgan.design.android.domain.types;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.weatherslider.morgan.design.R;
 
 public class IconFactory {
@@ -168,5 +169,12 @@ public class IconFactory {
 		return null != imageRes
 				? imageRes
 				: R.drawable.weather_channel_44;
+	}
+
+	public static int getStatus(final WeatherChoice woeidChoice) {
+		if (woeidChoice.isActive()) {
+			return R.drawable.active_circle_green;
+		}
+		return R.drawable.inactive_circle_red;
 	}
 }

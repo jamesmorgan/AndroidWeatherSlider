@@ -11,19 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.morgan.design.android.domain.orm.WoeidChoice;
+import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.util.DateUtils;
 import com.weatherslider.morgan.design.R;
 
-public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
+public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 
 	protected final static String LOG_TAG = "CurrentChoiceAdaptor";
 
-	private final List<WoeidChoice> woeidChoices;
+	private final List<WeatherChoice> woeidChoices;
 	private final Activity context;
 
-	public CurrentChoiceAdaptor(final Activity context, final List<WoeidChoice> woeidChoices) {
+	public CurrentChoiceAdaptor(final Activity context, final List<WeatherChoice> woeidChoices) {
 		super(context, R.layout.woeid_choice_adaptor_layout, woeidChoices);
 		this.context = context;
 		this.woeidChoices = woeidChoices;
@@ -42,13 +42,14 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 			holder.weather_text = (TextView) view.findViewById(R.id.weather_text);
 			holder.last_time_updated = (TextView) view.findViewById(R.id.last_time_updated);
 			holder.location = (TextView) view.findViewById(R.id.location);
+			holder.status_icon = (ImageView) view.findViewById(R.id.status_icon);
 			view.setTag(holder);
 		}
 		else {
 			holder = (ViewHolder) view.getTag();
 		}
 
-		final WoeidChoice woeidChoice = this.woeidChoices.get(position);
+		final WeatherChoice woeidChoice = this.woeidChoices.get(position);
 
 		if (woeidChoice != null) {
 
@@ -63,12 +64,16 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 
 			final ImageView image = (ImageView) view.findViewById(R.id.image);
 			image.setImageResource(IconFactory.getImageResourceFromCode(woeidChoice.getCurrentWeatherCode()));
+
+			final ImageView status_icon = (ImageView) view.findViewById(R.id.status_icon);
+			status_icon.setImageResource(IconFactory.getStatus(woeidChoice));
+
 		}
 		return view;
 	}
 
 	@Override
-	public WoeidChoice getItem(final int position) {
+	public WeatherChoice getItem(final int position) {
 		return this.woeidChoices.get(position);
 	}
 
@@ -79,6 +84,7 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WoeidChoice> {
 
 	class ViewHolder {
 		ImageView image;
+		ImageView status_icon;
 		TextView location;
 		TextView weather_text;
 		TextView last_time_updated;

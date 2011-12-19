@@ -25,9 +25,9 @@ import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.WeatherSliderApplication;
-import com.morgan.design.android.dao.WoeidChoiceDao;
+import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.domain.orm.WoeidChoice;
+import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
@@ -51,7 +51,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 
 	protected WeatherNotificationControllerService mBoundNotificationControllerService;
 
-	protected WoeidChoiceDao woeidChoiceDao;
+	protected WeatherChoiceDao woeidChoiceDao;
 	protected boolean mIsNotificatoionControllerBound = false;
 
 	private AlarmManager alarms;
@@ -75,7 +75,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		this.woeidChoiceDao = new WoeidChoiceDao(getHelper());
+		this.woeidChoiceDao = new WeatherChoiceDao(getHelper());
 		doBindService();
 		doRegisterSystemServices();
 		doRegisterPreferenceReciever();
@@ -121,14 +121,15 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		final int serviceId = this.mBoundNotificationControllerService.addNotificationService(this.currentWeather);
 
 		// Find one, if not make new one
-		WoeidChoice woeidChoice = this.woeidChoiceDao.findByWoeid(this.woeidId);
+		WeatherChoice woeidChoice = this.woeidChoiceDao.findByWoeid(this.woeidId);
 		if (isNull(woeidChoice)) {
-			woeidChoice = new WoeidChoice();
+			woeidChoice = new WeatherChoice();
 			woeidChoice.setWoeid(this.woeidId);
 			woeidChoice.setCreatedDateTime(new Date());
 			this.woeidChoiceDao.create(woeidChoice);
 		}
 
+		woeidChoice.setActive(true);
 		woeidChoice.setLastknownNotifcationId(serviceId);
 
 		final Intent broadcastIntent = new Intent(LATEST_WEATHER_QUERY_COMPLETE);

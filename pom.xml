@@ -136,6 +136,18 @@
 			<artifactId>acra</artifactId>
 			<version>4.2.3</version>
 		</dependency>
+
+		<!-- <dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v4</artifactId>
+			<version>r6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v13</artifactId>
+			<version>r6</version>
+		</dependency> -->
 	</dependencies>
 
 	<build>
