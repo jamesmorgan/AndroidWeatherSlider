@@ -131,11 +131,32 @@ public class WeatherChoiceDao {
 				return getWeatherChoiceDao().delete(woeidChoice);
 			}
 		});
+	}
 
+	public List<WeatherChoice> findActive() {
+		Logger.d(LOG_TAG, "Finding all ACTIVE weather choices");
+		try {
+			final QueryBuilder<WeatherChoice, Integer> queryBuilder = getWeatherChoiceDao().queryBuilder();
+			final Where<WeatherChoice, Integer> where = queryBuilder.where();
+			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE));
+			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
+
+			final PreparedQuery<WeatherChoice> preparedQuery = queryBuilder.prepare();
+
+			final List<WeatherChoice> results = getWeatherChoiceDao().query(preparedQuery);
+			return null != results
+					? results
+					: new ArrayList<WeatherChoice>();
+		}
+		catch (final SQLException exception) {
+			logError(exception);
+		}
+		return new ArrayList<WeatherChoice>();
 	}
 
 	private static void logError(final Exception e) {
 		Logger.e(LOG_TAG, "SQLException ", e);
 		e.printStackTrace();
 	}
+
 }

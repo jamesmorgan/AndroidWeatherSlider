@@ -58,7 +58,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 	private ConnectivityManager cnnxManager;
 
 	private YahooWeatherInfo currentWeather;
-	protected String woeidId;
+	private String woeidId;
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
@@ -102,6 +102,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 	protected void downloadWeatherData(final Context context, final String woeidId, final Temperature temperature) {
 		Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + woeidId);
 		if (isNotBlank(woeidId)) {
+			this.woeidId = woeidId;
 			getToLevelApplication().setCurrentWoeid(woeidId);
 			new DownloadWeatherInfoDataTaskFromWoeid(context, this.cnnxManager, this.alarms, woeidId,
 					PreferenceUtils.getTemperatureMode(getApplicationContext()), this.onGetYahooWeatherDataCallback).execute();

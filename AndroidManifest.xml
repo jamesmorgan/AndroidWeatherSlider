@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <uses-sdk android:minSdkVersion="7" />
-    
+
     <!-- android:debuggable="true" -->
     <application
         android:name="com.morgan.design.WeatherSliderApplication"
@@ -142,12 +142,18 @@
         <!-- Register periodic launcher for connectivity changes and get weather download -->
         <receiver
             android:name="com.morgan.design.android.broadcast.LaunchController"
-            android:label="@string/periodic_reciever" >
+            android:enabled="true"
+            android:exported="false"
+            android:label="@string/periodic_reciever"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_USER_PRESENT" />
             </intent-filter>
             <intent-filter>
                 <action android:name="com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST" />

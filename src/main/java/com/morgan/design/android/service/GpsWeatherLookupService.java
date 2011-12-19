@@ -55,7 +55,6 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 
 	private void startYahooWeatherService(final GeocodeResult entry) {
 		if (isNotBlank(entry.getWoeid())) {
-			this.woeidId = entry.getWoeid();
 			downloadWeatherData(this, entry.getWoeid(), PreferenceUtils.getTemperatureMode(getApplicationContext()));
 		}
 	}

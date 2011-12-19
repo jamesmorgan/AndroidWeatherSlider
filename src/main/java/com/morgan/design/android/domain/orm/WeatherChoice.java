@@ -19,6 +19,7 @@ public class WeatherChoice implements Serializable {
 	private static final long serialVersionUID = 5180330886875011803L;
 
 	public static final String WOEID_ID = "woeid";
+	public static final String ACTIVE = "active";
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -26,7 +27,7 @@ public class WeatherChoice implements Serializable {
 	@DatabaseField(columnName = WOEID_ID)
 	private String woeid;
 
-	@DatabaseField
+	@DatabaseField(columnName = ACTIVE)
 	private boolean active;
 
 	@DatabaseField

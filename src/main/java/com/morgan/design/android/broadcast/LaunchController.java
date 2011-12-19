@@ -14,7 +14,6 @@ import com.morgan.design.android.util.PreferenceUtils;
 public class LaunchController extends BroadcastReceiver {
 
 	public static final String RELOAD_WEATHER_BROADCAST = "com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST";
-	public static final String ANDROID_BOOT_COMPLETED_BROADCAST = "android.intent.action.ACTION_BOOT_COMPLETED";
 	public static final String ANDROID_CONNECTIVITY_CHANGE_BROADCAST = "android.net.conn.CONNECTIVITY_CHANGE";
 
 	public static final String FROM_BOOT = "FROM_BOOT";
@@ -30,6 +29,9 @@ public class LaunchController extends BroadcastReceiver {
 			if (isPhoneStartUpBroadcast(intent)) {
 				launchWeatherServiceIfStartOnBootEnabled(context, intent);
 			}
+			else if (isUserPresentBroadcast(intent)) {
+				// FIXME -> add ability to launch service from wake up i.e. unlock
+			}
 			else if (isPhoneConnectivityChangedBroadcast(intent)) {
 				lauchConnectivityChangeWeatherServiceRequest(context, intent);
 			}
@@ -43,12 +45,7 @@ public class LaunchController extends BroadcastReceiver {
 	private void launchWeatherServiceIfStartOnBootEnabled(final Context context, final Intent intent) {
 		if (PreferenceUtils.shouldStartOnBoot(context)) {
 			Logger.d("LaunchController", "Recieved phone boot broadcast, initiating weather service load");
-
 			final Intent service = new Intent(context, YahooWeatherLoaderService.class);
-			if (intent.hasExtra(Constants.CURRENT_WEATHER_WOEID)) {
-				service.putExtra(Constants.CURRENT_WEATHER_WOEID, intent.getStringExtra(Constants.CURRENT_WEATHER_WOEID));
-			}
-
 			service.putExtra(FROM_BOOT, true);
 			context.startService(service);
 		}
@@ -82,7 +79,7 @@ public class LaunchController extends BroadcastReceiver {
 		if (isNull(intent)) {
 			return false;
 		}
-		return intent.getAction().equals(ANDROID_BOOT_COMPLETED_BROADCAST);
+		return Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction());
 	}
 
 	public static boolean isPhoneConnectivityChangedBroadcast(final Intent intent) {
@@ -97,6 +94,13 @@ public class LaunchController extends BroadcastReceiver {
 			return false;
 		}
 		return intent.getAction().equals(RELOAD_WEATHER_BROADCAST);
+	}
+
+	private boolean isUserPresentBroadcast(final Intent intent) {
+		if (isNull(intent)) {
+			return false;
+		}
+		return Intent.ACTION_USER_PRESENT.equals(intent.getAction());
 	}
 
 	private String getAction(final Intent intent) {

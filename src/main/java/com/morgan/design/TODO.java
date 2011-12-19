@@ -34,6 +34,7 @@ public class TODO {
 	// Consideration //
 	// ////////////////
 
+	// FIXME -> add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Ability to Cancel all active notifications from menu
 	// FIXME -> Improve current notification layout
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
@@ -72,7 +73,7 @@ public class TODO {
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on
 
-	// FIXME -> Add ability to launch service on phone start up, check existing functionality
+	// FIXME -> DONE - (19/12/2011) - Add ability to launch service on phone start up, check existing functionality
 	// FIXME -> Add ability to pay for application in-line
 
 	// FIXME -> DONE - (19/12/2011) - Allow removal not just deletion of any notification via home screen
