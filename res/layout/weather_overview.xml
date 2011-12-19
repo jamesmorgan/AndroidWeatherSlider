@@ -23,6 +23,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="10dip" >
 
             <LinearLayout
@@ -88,6 +89,7 @@
         android:id="@+id/additionaal_details_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:gravity="center_horizontal"
         android:padding="10dip" >
 
@@ -115,24 +117,12 @@
                 android:layout_height="wrap_content"
                 android:text="Humidity" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/pressure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pressure" />
-
-                <ImageView
-                    android:id="@+id/pressure_icon"
-                    android:layout_width="16dip"
-                    android:layout_height="16dip"
-                    android:src="@drawable/pressure_steady" />
-            </LinearLayout>
+                android:drawableLeft="@drawable/pressure_steady"
+                android:text="Pressure" />
         </LinearLayout>
 
         <LinearLayout

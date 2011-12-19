@@ -149,19 +149,17 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 	private TextView temperature;
 	private TextView humidity;
 	private TextView pressure;
-	private ImageView pressure_icon;
 
 	private void setTemperatureDetails() {
 		this.temperature = (TextView) findViewById(R.id.temperature);
 		this.humidity = (TextView) findViewById(R.id.humidity);
 		this.pressure = (TextView) findViewById(R.id.pressure);
-		this.pressure_icon = (ImageView) findViewById(R.id.pressure_icon);
 
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
 			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
 		this.humidity.setText(this.currentWeather.getHumidityPercentage() + "%");
 		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "N/A"));
-		this.pressure_icon.setImageResource(PressureUtils.getPressureStateImage(this.currentWeather.getRising()));
+		this.pressure.setCompoundDrawablesWithIntrinsicBounds(PressureUtils.getPressureStateImage(this.currentWeather.getRising()), 0, 0, 0);
 	}
 
 	private TextView more_information_link;

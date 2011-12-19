@@ -45,6 +45,8 @@ public class TODO {
 	// Release Version 1.0 //
 	// //////////////////////
 
+	// FIXME -> DONE - Remove as much as possible Android Lint warnings/errors
+
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure applications re-loads weather data from all angles
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
