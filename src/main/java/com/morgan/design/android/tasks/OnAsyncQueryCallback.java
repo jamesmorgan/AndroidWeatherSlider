@@ -9,4 +9,8 @@ public abstract class OnAsyncQueryCallback<T> {
 
 	}
 
+	protected void onInitiateExecution() {
+
+	}
+
 }

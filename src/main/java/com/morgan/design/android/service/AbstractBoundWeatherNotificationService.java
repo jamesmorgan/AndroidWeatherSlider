@@ -41,7 +41,8 @@ import com.morgan.design.android.util.PreferenceUtils;
  * 
  * @author James Edward Morgan
  */
-public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
+public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection,
+		ServiceUpdate {
 
 	private static final String LOG_TAG = "AbsrtactBoundWeatherService";
 
@@ -92,11 +93,37 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		doUnbindNotificationsFullBroadcastReciever();
 	}
 
+	@Override
+	public void loading(final CharSequence message) {
+		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.LOADING, message));
+	}
+
+	@Override
+	public void onGoing(final CharSequence message) {
+		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.ONGOING, message));
+	}
+
+	@Override
+	public void complete(final CharSequence message) {
+		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.COMPLETE, message));
+	}
+
 	OnAsyncQueryCallback<YahooWeatherInfo> onGetYahooWeatherDataCallback = new OnAsyncQueryCallback<YahooWeatherInfo>() {
 		@Override
 		public void onPostLookup(final YahooWeatherInfo weatherInfo) {
+			complete("Completed Weather Lookup");
 			loadWeatherInfomation(weatherInfo);
 		}
+
+		@Override
+		protected void onPreLookup() {
+			loading("Initalizing Weather Lookup");
+		}
+
+		@Override
+		protected void onInitiateExecution() {
+			onGoing("Running Weather Lookup");
+		};
 	};
 
 	protected void downloadWeatherData(final Context context, final String woeidId, final Temperature temperature) {
@@ -130,7 +157,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 			this.woeidChoiceDao.create(woeidChoice);
 		}
 
-		woeidChoice.setActive(true);
+		woeidChoice.setActive(0 != serviceId);
 		woeidChoice.setLastknownNotifcationId(serviceId);
 
 		final Intent broadcastIntent = new Intent(LATEST_WEATHER_QUERY_COMPLETE);
@@ -165,7 +192,6 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 
 		this.mBoundNotificationControllerService.updatePreferences();
 
-		// TODO replace with many
 		final String woeidId = getToLevelApplication().getCurrentWoied();
 		if (isNotBlank(woeidId)) {
 			this.woeidId = woeidId;

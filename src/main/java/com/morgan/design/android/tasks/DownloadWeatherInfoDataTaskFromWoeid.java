@@ -48,6 +48,7 @@ public class DownloadWeatherInfoDataTaskFromWoeid extends AsyncTask<Void, Void, 
 
 	@Override
 	protected YahooWeatherInfo doInBackground(final Void... params) {
+		this.asyncQueryCallback.onInitiateExecution();
 
 		try {
 			if (isBlank(this.woeidId)) {
@@ -87,6 +88,11 @@ public class DownloadWeatherInfoDataTaskFromWoeid extends AsyncTask<Void, Void, 
 			this.alarms.set(AlarmManager.ELAPSED_REALTIME, timer, broadcast);
 		}
 		return null;
+	}
+
+	@Override
+	protected void onPreExecute() {
+		this.asyncQueryCallback.onPreLookup();
 	}
 
 	@Override

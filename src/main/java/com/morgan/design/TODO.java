@@ -51,6 +51,7 @@ public class TODO {
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure applications re-loads weather data from all angles
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
+	// FIXME -> DONE - (19/12/2011) - When adding more than 3 weather notifications, don't set active flag to true
 
 	// FIXME -> DONE - (18/12/2011) - Improve progress/interaction when looking up GPS location
 	// FIXME -> DONE - (18/12/2011) - If GPS && network are disabled, prompt user to turn it on ->
@@ -63,12 +64,13 @@ public class TODO {
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
 
 	// FIXME -> Ensure all notifications always update correctly
+	// FIXME -> On preferences updated reload all notifications
 	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
 
 	// FIXME -> DONE - (19/12/2011) - Get WOEID from current lat/long
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
 	// FIXME -> DONE - (19/12/2011) - Fix GPS bug when finding location
-	// FIXME -> Add constant feedback on home screen of ongoing lookups/queries e.g. loading
+	// FIXME -> DONE - (19/12/2011) - Add constant feedback on home screen of ongoing lookups/queries e.g. loading
 
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on

@@ -41,7 +41,18 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 			@Override
 			public void onPostLookup(final GeocodeResult geocodeResult) {
 				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", geocodeResult);
+				complete("Geocode Location Found");
 				startYahooWeatherService(geocodeResult);
+			}
+
+			@Override
+			protected void onPreLookup() {
+				loading("Finding Geocode Location");
+			}
+
+			@Override
+			protected void onInitiateExecution() {
+				onGoing("Lookup Geocode Location");
 			}
 		};
 
@@ -96,7 +107,7 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 							Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
 						}
 						else if (null != location && providersFound) {
-							GpsWeatherLookupService.this.currentLocation = location;
+							setCurrentLocation(location);
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
 									location.getLatitude());
 							new GeocodeWOIEDDataTaskFromLocation(location, GpsWeatherLookupService.this.onGeocodeDataCallback).execute();
@@ -116,6 +127,10 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 			unregisterReceiver(this.locationChangedBroadcastReciever);
 			this.locationChangedBroadcastReciever = null;
 		}
+	}
+
+	public void setCurrentLocation(final Location currentLocation) {
+		this.currentLocation = currentLocation;
 	}
 
 }

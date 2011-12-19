@@ -50,10 +50,10 @@ public class YahooWeatherLoaderService extends AbstractBoundWeatherNotificationS
 			}
 			else {
 				if (intent.hasExtra(CURRENT_WEATHER_WOEID)) {
-					final String woeidId = intent.getStringExtra(CURRENT_WEATHER_WOEID);
-					Logger.d(LOG_TAG, "onStartCommand : Found woeidId: " + woeidId);
-					if (isNotBlank(woeidId)) {
-						downloadWeatherData(this, woeidId, PreferenceUtils.getTemperatureMode(getApplicationContext()));
+					final String woeid = intent.getStringExtra(CURRENT_WEATHER_WOEID);
+					Logger.d(LOG_TAG, "onStartCommand : Found woeidId: " + woeid);
+					if (isNotBlank(woeid)) {
+						downloadWeatherData(this, woeid, PreferenceUtils.getTemperatureMode(getApplicationContext()));
 					}
 				}
 			}

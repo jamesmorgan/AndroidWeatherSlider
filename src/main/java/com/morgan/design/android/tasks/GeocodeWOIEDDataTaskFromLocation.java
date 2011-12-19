@@ -29,6 +29,7 @@ public class GeocodeWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, Geoc
 
 	@Override
 	protected GeocodeResult doInBackground(final Void... params) {
+		this.onAsyncQueryCallBack.onInitiateExecution();
 		Logger.d(LOG_TAG, "Looking WOEID fro lat=[%s], long=[%s]", this.location.getLatitude(), this.location.getLongitude());
 
 		final String url = YahooRequestUtils.getInstance().createGeocodeWoeidQuery(this.location);

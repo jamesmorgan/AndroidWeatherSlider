@@ -7,7 +7,6 @@
     <string name="app_name">WeatherSlider</string>
     <string name="weather_service_started">Service Started</string>
     <string name="yahoo_weather_loader_service">yahoo_weather_loader_service</string>
-    <string name="get_my_location_bindable_service">Bindable Location Look Service</string>
     <string name="get_my_location_service">None-bindable Location Look Service</string>
     <string name="yahoo_notifcation_service">yahoo_notifcation_service</string>
     <string name="gps_weather_service">gps_weather_service</string>

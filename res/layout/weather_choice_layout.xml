@@ -26,7 +26,23 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@android:id/list"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal|bottom"
+        android:paddingTop="2dp" >
+
+        <TextView
+            android:id="@+id/service_update_area"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="@android:color/secondary_text_light"
+            android:typeface="monospace" />
+    </LinearLayout>
 
 </LinearLayout>

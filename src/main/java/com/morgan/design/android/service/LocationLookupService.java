@@ -16,7 +16,7 @@ import android.os.IBinder;
 
 import com.morgan.design.android.util.Logger;
 
-public class LocationLookupService extends Service {
+public class LocationLookupService extends Service implements ServiceUpdate {
 
 	private static final String LOG_TAG = "LocationLookupService";
 
@@ -49,6 +49,21 @@ public class LocationLookupService extends Service {
 		removetLocationListeners();
 	}
 
+	@Override
+	public void loading(final CharSequence message) {
+		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.LOADING, message));
+	}
+
+	@Override
+	public void onGoing(final CharSequence message) {
+		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.ONGOING, message));
+	}
+
+	@Override
+	public void complete(final CharSequence message) {
+		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.COMPLETE, message));
+	}
+
 	LocationListener networkLocationListener = new LocationListenerFacade() {
 		@Override
 		public void onLocationChanged(final Location location) {
@@ -66,6 +81,7 @@ public class LocationLookupService extends Service {
 	@Override
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
 		Logger.d(LOG_TAG, "Starting lookup location service");
+		loading("Initiating GPS lookup");
 
 		int locationTimeOut = DEFAULT_LOCATION_TIMEOUT;
 
@@ -81,6 +97,7 @@ public class LocationLookupService extends Service {
 
 		// don't start listeners if no provider is enabled
 		if (!this.gpsEnabled && !this.networkEnabled) {
+			complete("Failed GPS lookup");
 			onNoProvidersFound();
 			stopSelf();
 		}
@@ -126,8 +143,13 @@ public class LocationLookupService extends Service {
 		extras.putBoolean(PROVIDERS_FOUND, true);
 
 		if (null != location) {
+			complete("GPS Location found");
 			extras.putParcelable(CURRENT_LOCAION, location);
 		}
+		else {
+			complete("GPS Location not found");
+		}
+
 		sendBroadcast(new Intent(LOCATION_CHANGED_BROADCAST).putExtras(extras));
 		stopSelf();
 	}

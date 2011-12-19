@@ -31,6 +31,7 @@ import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
+import com.morgan.design.android.service.ServiceUpdateRegister;
 import com.morgan.design.android.service.YahooWeatherLoaderService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
@@ -56,16 +57,20 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private GoogleAnalyticsService googleAnalyticsService;
 
+	protected ServiceUpdateRegister serviceUpdateRegister;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_choice_layout);
+		Changelog.show(this, false);
+
 		this.woeidChoiceDao = new WeatherChoiceDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
+		this.serviceUpdateRegister = new ServiceUpdateRegister(this);
 
-		Changelog.show(this, false);
 		reLoadWeatherChoices();
 	}
 
@@ -122,6 +127,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.home_menu, menu);
 		return true;
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (isNotNull(this.serviceUpdateRegister)) {
+			this.serviceUpdateRegister.unregisterReceiver();
+		}
 	}
 
 	@Override
