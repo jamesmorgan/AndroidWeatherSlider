@@ -45,14 +45,14 @@ public class TODO {
 	// Release Version 1.0 //
 	// //////////////////////
 
-	// FIXME -> DONE - Remove as much as possible Android Lint warnings/errors
+	// FIXME -> DONE - (19/12/2011) - Remove as much as possible Android Lint warnings/errors
 
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure applications re-loads weather data from all angles
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
-	// FIXME -> DONE - Improve progress/interaction when looking up GPS location
-	// FIXME -> DONE - If GPS && network are disabled, prompt user to turn it on ->
+	// FIXME -> DONE - (18/12/2011) - Improve progress/interaction when looking up GPS location
+	// FIXME -> DONE - (18/12/2011) - If GPS && network are disabled, prompt user to turn it on ->
 	// http://advback.com/android/checking-if-gps-is-enabled-android/
 
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
@@ -66,7 +66,7 @@ public class TODO {
 
 	// FIXME -> Get WOEID from current lat/long
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
-	// FIXME -> Fix GPS bug when finding location
+	// FIXME -> DONE - Fix GPS bug when finding location
 
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on
@@ -74,10 +74,10 @@ public class TODO {
 	// FIXME -> Add ability to launch service on phone start up, check existing functionality
 	// FIXME -> Add ability to pay for application in-line
 
-	// FIXME -> DONE - Allow removal not just deletion of any notification via home screen
-	// FIXME -> DONE - Broadcast active notifications changed in order to reload choices on home screen
-	// FIXME -> DONE - Add fields to DB, Active, Latitude, Longitude -> rename to WeatherChoice.java
-	// FIXME -> DONE - Show active state on home screen
+	// FIXME -> DONE - (19/12/2011) - Allow removal not just deletion of any notification via home screen
+	// FIXME -> DONE - (19/12/2011) - Broadcast active notifications changed in order to reload choices on home screen
+	// FIXME -> DONE - (19/12/2011) - Add fields to DB, Active, Latitude, Longitude -> rename to WeatherChoice.java
+	// FIXME -> DONE - (19/12/2011) - Show active state on home screen
 
 	// FIXME -> Allow re-loading of existing notifications
 	// FIXME -> Ensure correct service IDs matched against current weather

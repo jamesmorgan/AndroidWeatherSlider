@@ -24,7 +24,7 @@ public class YahooRequestUtils {
 	private static final String GET_WOEID_FOR_LOCATION = "http://where.yahooapis.com/geocode?q=%s,%s&gflags=R&appid="
 		+ Constants.YAHOO_API_KEY;
 
-	private static final String LOG_TAG = "YahooRequestLoader";
+	// private static final String LOG_TAG = "YahooRequestLoader";
 
 	private YahooRequestUtils() {
 		super();
@@ -56,16 +56,19 @@ public class YahooRequestUtils {
 		return String.format(GET_LOCATION_WOEID_FOR_TEXT, strQuerry);
 	}
 
-	// http://stackoverflow.com/questions/2502912/using-latitude-longitude-to-get-a-place-with-yahoo
 	public String createQuerryGetWoeid(final Location location) {
 		if (location == null) {
 			return null;
 		}
-		// return String.format(GET_LOCATION_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
-		return String.format(GET_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
+		return String.format(GET_LOCATION_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
 	}
 
-	// http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D%2237.416275%2C%20-122.025092%22%20and%20gflags%3D%22R%22&appid=test
+	public String createGeocodeWoeidQuery(final Location location) {
+		if (location == null) {
+			return null;
+		}
+		return String.format(GET_WOEID_FOR_LOCATION, location.getLatitude(), location.getLongitude());
+	}
 
 	public String createWeatherQuery(final WOEIDEntry woiedEntry, final Temperature temperature) {
 		if (woiedEntry == null) {
