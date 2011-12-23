@@ -1,7 +1,9 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.FROM_INACTIVE_SERVICE;
 import static com.morgan.design.Constants.LAST_KNOWN_SERVICE_ID;
 import static com.morgan.design.Constants.REMOVE_CURRENT_NOTIFCATION;
+import static com.morgan.design.Constants.WOEID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
 
@@ -244,8 +246,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.woeidChoiceDao.update(woeidChoice);
 
 		final Bundle bundle = new Bundle();
-		bundle.putSerializable(Constants.CURRENT_WEATHER_WOEID, woeidChoice.getWoeid());
-		startService(new Intent(this, YahooWeatherLoaderService.class).putExtras(bundle));
+		bundle.putSerializable(WOEID, woeidChoice.getWoeid());
+
+		final Intent service = new Intent(this, YahooWeatherLoaderService.class);
+		service.putExtra(FROM_INACTIVE_SERVICE, true);
+		service.putExtras(bundle);
+
+		startService(service);
 	}
 
 	// //////////////////////////////////////////

@@ -13,6 +13,7 @@ import static com.morgan.design.android.util.ObjectUtils.isNull;
 import java.util.Date;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,12 +22,14 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.dao.WeatherChoiceDao;
-import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.domain.WeatherLookupEntry;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
@@ -57,9 +60,6 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 
 	private AlarmManager alarms;
 	private ConnectivityManager cnnxManager;
-
-	private YahooWeatherInfo currentWeather;
-	private String woeidId;
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
@@ -108,10 +108,11 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.COMPLETE, message));
 	}
 
-	OnAsyncQueryCallback<YahooWeatherInfo> onGetYahooWeatherDataCallback = new OnAsyncQueryCallback<YahooWeatherInfo>() {
+	OnAsyncQueryCallback<WeatherLookupEntry> onGetYahooWeatherDataCallback = new OnAsyncQueryCallback<WeatherLookupEntry>() {
 		@Override
-		public void onPostLookup(final YahooWeatherInfo weatherInfo) {
+		public void onPostLookup(final WeatherLookupEntry weatherInfo) {
 			complete("Completed Weather Lookup");
+			setNextLookupTrigger();
 			loadWeatherInfomation(weatherInfo);
 		}
 
@@ -126,43 +127,52 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		};
 	};
 
-	protected void downloadWeatherData(final Context context, final String woeidId, final Temperature temperature) {
+	protected void downloadWeatherData(final Context context, final String woeidId) {
 		Logger.d("YahooWeatherLoaderService", "onStartCommand : Found woeidId: " + woeidId);
 		if (isNotBlank(woeidId)) {
-			this.woeidId = woeidId;
-			getToLevelApplication().setCurrentWoeid(woeidId);
-			new DownloadWeatherInfoDataTaskFromWoeid(context, this.cnnxManager, this.alarms, woeidId,
-					PreferenceUtils.getTemperatureMode(getApplicationContext()), this.onGetYahooWeatherDataCallback).execute();
+			new DownloadWeatherInfoDataTaskFromWoeid(this.cnnxManager, woeidId, getTempMode(), this.onGetYahooWeatherDataCallback).execute();
 		}
 	}
 
-	protected void loadWeatherInfomation(final YahooWeatherInfo weatherInfo) {
-		this.currentWeather = weatherInfo;
+	protected void setNextLookupTrigger() {
+		final Intent intentOnAlarm = new Intent(Constants.RELOAD_WEATHER_BROADCAST);
+		final PendingIntent broadcast = PendingIntent.getBroadcast(this, 0, intentOnAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
 
+		final int pollingSchedule = Integer.parseInt(PreferenceUtils.getPollingSchedule(this.getApplicationContext()));
+		Logger.d(LOG_TAG, "Polling scheduled [%s]", pollingSchedule);
+
+		final long timer = SystemClock.elapsedRealtime() + (pollingSchedule * (60 * 1000));
+		Logger.d(LOG_TAG, "Adding next repating alarm, timer [%s]", timer);
+
+		this.alarms.set(AlarmManager.ELAPSED_REALTIME, timer, broadcast);
+	}
+
+	protected void loadWeatherInfomation(final WeatherLookupEntry weatherInfo) {
 		if (this.mIsNotificatoionControllerBound) {
-			setUpdateWeatherInfoForService();
+			setUpdateWeatherInfoForService(weatherInfo);
 		}
 	}
 
-	protected void setUpdateWeatherInfoForService() {
+	protected void setUpdateWeatherInfoForService(final WeatherLookupEntry weatherInfo) {
 
-		final int serviceId = this.mBoundNotificationControllerService.addNotificationService(this.currentWeather);
+		// Find it, if not make new one
+		WeatherChoice woeidChoice = this.woeidChoiceDao.findByWoeid(weatherInfo.getWoeid());
 
-		// Find one, if not make new one
-		WeatherChoice woeidChoice = this.woeidChoiceDao.findByWoeid(this.woeidId);
 		if (isNull(woeidChoice)) {
 			woeidChoice = new WeatherChoice();
-			woeidChoice.setWoeid(this.woeidId);
+			woeidChoice.setWoeid(weatherInfo.getWoeid());
 			woeidChoice.setCreatedDateTime(new Date());
 			this.woeidChoiceDao.create(woeidChoice);
 		}
+
+		final int serviceId = this.mBoundNotificationControllerService.addNotificationService(weatherInfo);
 
 		woeidChoice.setActive(0 != serviceId);
 		woeidChoice.setLastknownNotifcationId(serviceId);
 
 		final Intent broadcastIntent = new Intent(LATEST_WEATHER_QUERY_COMPLETE);
 
-		final boolean failed = (null == this.currentWeather);
+		final boolean failed = (null == weatherInfo);
 		if (failed) {
 			broadcastIntent.putExtra(SUCCESSFUL, false);
 			woeidChoice.failedQuery();
@@ -170,7 +180,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		}
 		else {
 			broadcastIntent.putExtra(SUCCESSFUL, true);
-			woeidChoice.successfullyQuery(this.currentWeather);
+			woeidChoice.successfullyQuery(weatherInfo.getWeatherInfo());
 			this.woeidChoiceDao.update(woeidChoice);
 		}
 
@@ -183,7 +193,6 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		if (intent.hasExtra(LAST_KNOWN_SERVICE_ID)) {
 			final int serviceId = intent.getIntExtra(LAST_KNOWN_SERVICE_ID, 0);
 			this.mBoundNotificationControllerService.removeNotification(serviceId);
-
 		}
 	}
 
@@ -191,14 +200,7 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 		Logger.d(LOG_TAG, "Recieved: %s", PREFERENCES_UPDATED);
 
 		this.mBoundNotificationControllerService.updatePreferences();
-
-		final String woeidId = getToLevelApplication().getCurrentWoied();
-		if (isNotBlank(woeidId)) {
-			this.woeidId = woeidId;
-			if (isNotBlank(this.woeidId)) {
-				downloadWeatherData(this, woeidId, PreferenceUtils.getTemperatureMode(getApplicationContext()));
-			}
-		}
+		// TODO reload all weather queries
 	}
 
 	protected void onNotificationsFull(final Context context, final Intent intent) {
@@ -285,6 +287,10 @@ public abstract class AbstractBoundWeatherNotificationService extends OrmLiteBas
 
 	protected WeatherSliderApplication getToLevelApplication() {
 		return ((WeatherSliderApplication) getApplication());
+	}
+
+	protected Temperature getTempMode() {
+		return PreferenceUtils.getTemperatureMode(getApplicationContext());
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import android.os.IBinder;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.WeatherSliderApplication;
-import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.domain.WeatherLookupEntry;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
@@ -96,9 +96,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	// ////////// Public methods ///////////////////
 	// /////////////////////////////////////////////
 
-	public int addNotificationService(final YahooWeatherInfo currentWeather) {
-
-		// Adding brand new ones
+	public int addNotificationService(final WeatherLookupEntry weatherInfo) {
 		for (final Entry<Integer, Boolean> service : SERVICE_IDS.entrySet()) {
 			final Integer serviceId = service.getKey();
 			final Boolean serviceIsActive = service.getValue();
@@ -107,13 +105,13 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 
 			if (!serviceIsActive) {
 				final WeatherNotificationService notifcationService = this.boundServices.get(serviceId);
-				notifcationService.setWeatherInformation(currentWeather);
+				notifcationService.setWeatherInformation(weatherInfo.getWeatherInfo());
 
 				Logger.d(LOG_TAG, "Service [%s] set to active", notifcationService.getClass().getSimpleName());
 				service.setValue(true);
 
-				if (null != currentWeather) {
-					((WeatherSliderApplication) getApplication()).addWeatherService(serviceId, currentWeather);
+				if (null != weatherInfo) {
+					((WeatherSliderApplication) getApplication()).addWeatherService(serviceId, weatherInfo.getWeatherInfo());
 				}
 
 				return serviceId;
@@ -129,6 +127,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			final BaseNotifcationService baseNotifcationService = this.boundServices.get(serviceId);
 			if (isNotNull(baseNotifcationService)) {
 				baseNotifcationService.removeNotification();
+				SERVICE_IDS.put(serviceId, false);
 				sendBroadcast(new Intent(NOTIFICATION_REMOVED));
 			}
 		}

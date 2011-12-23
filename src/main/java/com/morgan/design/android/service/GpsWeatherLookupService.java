@@ -14,7 +14,6 @@ import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.tasks.GeocodeWOIEDDataTaskFromLocation;
 import com.morgan.design.android.tasks.OnAsyncQueryCallback;
 import com.morgan.design.android.util.Logger;
-import com.morgan.design.android.util.PreferenceUtils;
 
 public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationService {
 
@@ -23,8 +22,6 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 	private BroadcastReceiver locationChangedBroadcastReciever;
 
 	private OnAsyncQueryCallback<GeocodeResult> onGeocodeDataCallback;
-
-	private Location currentLocation;
 
 	@Override
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
@@ -66,7 +63,7 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 
 	private void startYahooWeatherService(final GeocodeResult entry) {
 		if (isNotBlank(entry.getWoeid())) {
-			downloadWeatherData(this, entry.getWoeid(), PreferenceUtils.getTemperatureMode(getApplicationContext()));
+			downloadWeatherData(this, entry.getWoeid());
 		}
 	}
 
@@ -107,7 +104,6 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 							Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
 						}
 						else if (null != location && providersFound) {
-							setCurrentLocation(location);
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
 									location.getLatitude());
 							new GeocodeWOIEDDataTaskFromLocation(location, GpsWeatherLookupService.this.onGeocodeDataCallback).execute();
@@ -127,10 +123,6 @@ public class GpsWeatherLookupService extends AbstractBoundWeatherNotificationSer
 			unregisterReceiver(this.locationChangedBroadcastReciever);
 			this.locationChangedBroadcastReciever = null;
 		}
-	}
-
-	public void setCurrentLocation(final Location currentLocation) {
-		this.currentLocation = currentLocation;
 	}
 
 }

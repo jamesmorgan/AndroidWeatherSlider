@@ -18,6 +18,8 @@ public class TODO {
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> Allow users to narrow down location accuracy
 	// FIXME -> Capture all shared preference values on application crash (ARCA)
+	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
+	// FIXME -> Consider signing apk with maven -> http://code.google.com/p/maven-android-plugin/wiki/SigningAPKWithMavenJarsigner
 
 	// ///////////////
 	// Nice To Have //
@@ -35,56 +37,65 @@ public class TODO {
 	// ////////////////
 
 	// FIXME -> add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
-	// FIXME -> Ability to Cancel all active notifications from menu
 	// FIXME -> Improve current notification layout
 	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Add temperature highs/lows for day on overview screen
 	// FIXME -> DB Version's & Tests
+	// FIXME -> Change to native XML parser -> http://android-developers.blogspot.com/2011/12/watch-out-for-xmlpullparsernexttext.html
 	// FIXME -> Complete statuses, active, inactive, issues?
+	// FIXME -> add ability to launch service from wake up i.e. unlock, screen on Launcher line 31
 
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
-	// FIXME -> DONE - (19/12/2011) - Remove as much as possible Android Lint warnings/errors
+	// FIXME -> When generating sources, set debug to false.
 
+	// FIXME -> Add ability to pay for application in-line
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure applications re-loads weather data from all angles
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
-	// FIXME -> DONE - (19/12/2011) - When adding more than 3 weather notifications, don't set active flag to true
-
-	// FIXME -> DONE - (18/12/2011) - Improve progress/interaction when looking up GPS location
-	// FIXME -> DONE - (18/12/2011) - If GPS && network are disabled, prompt user to turn it on ->
-	// http://advback.com/android/checking-if-gps-is-enabled-android/
 
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 
+	// FIXME -> Handle situations when no locations found
+	// FIXME -> Investigate how to ensure service is always started/on
+	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
 	// FIXME -> Allow for roaming location based settings (paid version only) -
-	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html?m=1
+	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
+
+	// FIXME -> Fix bug when parsing RFC822 dates from yahoo ->
+	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat (
+	// "EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 
 	// FIXME -> Ensure all notifications always update correctly
 	// FIXME -> On preferences updated reload all notifications
-	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
+	// FIXME -> Allow re-loading of existing notifications on start up
+	// FIXME -> Ensure correct service IDs matched against current weather
+	// FIXME -> When reloaidng weather ensure still uses same service not creating a new one
+	// FIXME -> Ability to Cancel all active notifications from menu
 
+	// FIXME -> DONE - (22/12/2011) - Added Gmaven plugin in-order synchronise androdi and maven version numbers ->
+	// http://code.google.com/p/maven-android-plugin/wiki/SynchronisingVersionWithGmaven
+	// FIXME -> DONE - (22/12/2011) - ZipAlign apg as part of maven build
+	// -> http://code.google.com/p/maven-android-plugin/wiki/ZipalignAPKBuiltByMAven
+	// -> http://www.simpligility.com/2010/06/maven-android-plugin-with-zipalign-and-improved-verification/
+
+	// FIXME -> DONE - (19/12/2011) - Remove as much as possible Android Lint warnings/errors
+	// FIXME -> DONE - (19/12/2011) - When adding more than 3 weather notifications, don't set active flag to true
 	// FIXME -> DONE - (19/12/2011) - Get WOEID from current lat/long
-	// FIXME -> Fix bug when parsing RFC822 dates from yahoo
 	// FIXME -> DONE - (19/12/2011) - Fix GPS bug when finding location
 	// FIXME -> DONE - (19/12/2011) - Add constant feedback on home screen of ongoing lookups/queries e.g. loading
-
-	// FIXME -> Handle situations when no locations found
-	// FIXME -> Investigate how to ensure service is always started/on
-
 	// FIXME -> DONE - (19/12/2011) - Add ability to launch service on phone start up, check existing functionality
-	// FIXME -> Add ability to pay for application in-line
-
 	// FIXME -> DONE - (19/12/2011) - Allow removal not just deletion of any notification via home screen
 	// FIXME -> DONE - (19/12/2011) - Broadcast active notifications changed in order to reload choices on home screen
 	// FIXME -> DONE - (19/12/2011) - Add fields to DB, Active, Latitude, Longitude -> rename to WeatherChoice.java
 	// FIXME -> DONE - (19/12/2011) - Show active state on home screen
 
-	// FIXME -> Allow re-loading of existing notifications on start up
-	// FIXME -> Ensure correct service IDs matched against current weather
+	// FIXME -> DONE - (18/12/2011) - Improve progress/interaction when looking up GPS location
+	// FIXME -> DONE - (18/12/2011) - If GPS && network are disabled, prompt user to turn it on -
+	// http://advback.com/android/checking-if-gps-is-enabled-android/
 
 	// ////////////////////////////////////
 	// Previously Completed - 18/12/2011 //

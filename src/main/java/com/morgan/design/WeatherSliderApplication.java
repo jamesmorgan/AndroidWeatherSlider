@@ -19,7 +19,6 @@ public class WeatherSliderApplication extends Application {
 	private static Map<Integer, YahooWeatherInfo> SERVICE_IDS = new HashMap<Integer, YahooWeatherInfo>();
 
 	private GoogleAnalyticsService googleAnalyticsService;
-	private String currentWoeid;
 
 	@Override
 	public void onCreate() {
@@ -38,14 +37,6 @@ public class WeatherSliderApplication extends Application {
 
 	public YahooWeatherInfo getWeatherForSerivceId(final int serviceId) {
 		return SERVICE_IDS.get(serviceId);
-	}
-
-	public void setCurrentWoeid(final String currentWoeid) {
-		this.currentWoeid = currentWoeid;
-	}
-
-	public String getCurrentWoied() {
-		return this.currentWoeid;
 	}
 
 }

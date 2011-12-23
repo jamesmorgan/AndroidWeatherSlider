@@ -190,7 +190,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		if (isNot(networkConnected) && isNot(gpsEnabled)) {
 			dismissLoadingProgress();
 			Toast.makeText(this, "Unable to request network location. You are currently not connected.", Toast.LENGTH_SHORT).show();
-			// TODO prompt user to enabled
+			createGpsDisabledAlert();
 			return;
 		}
 

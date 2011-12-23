@@ -39,7 +39,7 @@ public class Constants {
 	public static final int UPDATED_PREFERENCES = 3;
 
 	// Intent Extras
-	public static final String CURRENT_WEATHER_WOEID = "CURRENT_WEATHER_WOEID";
+	public static final String WOEID = "WOEID";
 	public static final String CURRENT_WEATHER = "CURRENT_WEATHER";
 	public static final String WOIED_LOCAITONS = "WOIED_LOCAITONS";
 	public static final String SUCCESSFUL = "SUCCESSFUL";
@@ -55,5 +55,8 @@ public class Constants {
 	public static final String FROM_BOOT = "FROM_BOOT";
 	public static final String FROM_LAUNCHER = "FROM_LAUNCHER";
 	public static final String CONNECTIVITY_CHANGED = "CONNECTIVITY_CHANGED";
+
+	public static final String FROM_INACTIVE_SERVICE = "FROM_INACTIVE_SERVICE";
+	public static final String FROM_LOAD_WEATHER = "FROM_LOAD_WEATHER";
 
 }

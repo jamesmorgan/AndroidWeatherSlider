@@ -1,5 +1,8 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.FROM_LOAD_WEATHER;
+import static com.morgan.design.Constants.WOEID;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,13 +135,15 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 	}
 
 	protected void loadWeatherDataForEntry(final WOEIDEntry entry) {
+
 		final Bundle bundle = new Bundle();
-		bundle.putSerializable(Constants.CURRENT_WEATHER_WOEID, entry.getWoeid());
+		bundle.putSerializable(WOEID, entry.getWoeid());
 
-		final Intent intent = new Intent(this, YahooWeatherLoaderService.class);
-		intent.putExtras(bundle);
+		final Intent service = new Intent(this, YahooWeatherLoaderService.class);
+		service.putExtra(FROM_LOAD_WEATHER, true);
+		service.putExtras(bundle);
 
-		startService(intent);
+		startService(service);
 
 		setResult(RESULT_OK);
 		finish();

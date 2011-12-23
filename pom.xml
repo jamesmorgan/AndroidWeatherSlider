@@ -15,6 +15,10 @@
 		<jackson-version>1.7.2</jackson-version>
 		<simple-version>2.4.1</simple-version>
 		<android-rome-version>1.0.0-r2</android-rome-version>
+
+		<!-- Key store variables -->
+		<!--<keystore.location>path/to/test.keystore</keystore.location> <keystore.password>teststorepass</keystore.password> 
+			<keystore.keypass>testpass</keystore.keypass> <keystore.alias>testkey</keystore.alias> -->
 	</properties>
 
 	<repositories>
@@ -137,25 +141,30 @@
 			<version>4.2.3</version>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>android.support</groupId>
-			<artifactId>compatibility-v4</artifactId>
-			<version>r6</version>
-		</dependency>
-
-		<dependency>
-			<groupId>android.support</groupId>
-			<artifactId>compatibility-v13</artifactId>
-			<version>r6</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>android.support</groupId> <artifactId>compatibility-v4</artifactId> 
+			<version>r6</version> </dependency> <dependency> <groupId>android.support</groupId> 
+			<artifactId>compatibility-v13</artifactId> <version>r6</version> </dependency> -->
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Android Maven build plugin -->
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
 				<version>3.0.0</version>
+
+				<!-- Zip Allign APK -->
+				<executions>
+					<execution>
+						<id>alignApk</id>
+						<phase>install</phase>
+						<goals>
+							<goal>zipalign</goal>
+						</goals>
+					</execution>
+				</executions>
+
 				<configuration>
 					<proguard>
 						<skip>true</skip>
@@ -168,10 +177,20 @@
 						<platform>7</platform>
 					</sdk>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+
+					<!-- Zip Allign Configuration -->
+					<zipalign>
+						<verbose>true</verbose>
+						<skip>false</skip>
+						<inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
+						<outputApk>${project.build.directory}/${project.artifactId}-aligned.apk</outputApk>
+					</zipalign>
+
 				</configuration>
 				<extensions>true</extensions>
 			</plugin>
 
+			<!-- Maven Compile Me -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -180,6 +199,61 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+
+			<!-- Sets the AndroidManifest.xml Version Name to the projects version 
+				number -->
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+						<source>
+								project.modules.each {
+								try {
+								def manifestFile = new File("${it}/AndroidManifest.xml")
+								def ns = new
+								groovy.xml.Namespace("http://schemas.android.com/apk/res/android",
+								"ns")
+								def parser = new groovy.util.XmlParser(false, true)
+								def rootNode = parser.parse(manifestFile)
+								def attributes = rootNode.attributes()
+								attributes[ns.versionName] = "${project.version}"
+								def writer = new groovy.io.GroovyPrintWriter(manifestFile)
+								writer.println('&lt;?xml version="1.0" encoding="UTF-8"?&gt;')
+								def xmlWriter = new groovy.util.XmlNodePrinter(writer)
+								xmlWriter.setPreserveWhitespace(false)
+								xmlWriter.setNamespaceAware(true)
+								xmlWriter.print(rootNode)
+								} catch (FileNotFoundException e)
+								{
+								println('No AndroidManifest.xml file found. Skipping version update.')
+								println('Probably not an Android project, but a library.')
+								println('Skipping version update.')
+								}
+								}
+							</source>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<!-- JAR Signing -->
+			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jarsigner-plugin</artifactId> 
+				<version>1.2</version> <executions> <execution> <id>signing</id> <goals> 
+				<goal>sign</goal> </goals> <phase>package</phase> <inherited>true</inherited> 
+				<configuration> <includes> <include> ${project.build.directory}/target/${project.artifactId}-${project.version}.apk 
+				</include> </includes> <keystore>${keystore.location}</keystore> <storepass>${keystore.password}</storepass> 
+				<keypass>${keystore.keypass}</keypass> <alias>${keystore.alias}</alias> <verbose>true</verbose> 
+				</configuration> </execution> </executions> </plugin> -->
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
