@@ -3,5 +3,6 @@
 
     <string name="settings">Settings</string>
     <string name="change_log">Change Log</string>
+    <string name="cancel_all">Cancel All</string>
 
 </resources>

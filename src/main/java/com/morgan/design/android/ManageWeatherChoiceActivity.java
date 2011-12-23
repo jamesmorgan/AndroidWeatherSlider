@@ -1,5 +1,6 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.CANCEL_ALL_WEATHER_NOTIFICATIONS;
 import static com.morgan.design.Constants.FROM_INACTIVE_SERVICE;
 import static com.morgan.design.Constants.LAST_KNOWN_SERVICE_ID;
 import static com.morgan.design.Constants.REMOVE_CURRENT_NOTIFCATION;
@@ -149,6 +150,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case R.id.home_menu_settings:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_PREFERENCES);
 				PreferenceUtils.openUserPreferenecesActivity(this);
+				return true;
+			case R.id.home_menu_cancel_all:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.CANCEL_ALL);
+				sendBroadcast(new Intent(CANCEL_ALL_WEATHER_NOTIFICATIONS));
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

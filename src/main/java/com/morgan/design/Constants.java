@@ -26,8 +26,11 @@ public class Constants {
 
 	public static final String REMOVE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.REMOVE_CURRENT_NOTIFCATION";
 
-	/** Triggered when a a request to get the weather is made */
+	/** Triggered when a request to get the weather is made */
 	public static final String RELOAD_WEATHER_BROADCAST = "com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST";
+
+	/** Triggered when the user wants to attempt to force close/cancel all active notifications */
+	public static final String CANCEL_ALL_WEATHER_NOTIFICATIONS = "com.morgan.design.android.broadcast.CANCEL_ALL_WEATHER_NOTIFICATIONS";
 
 	// Android inbuilt broadcasts
 	public static final String ANDROID_BOOT_COMPLETED_BROADCAST = "android.intent.action.ACTION_BOOT_COMPLETED";
