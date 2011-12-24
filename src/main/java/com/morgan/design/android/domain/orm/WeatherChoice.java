@@ -1,25 +1,25 @@
 package com.morgan.design.android.domain.orm;
 
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
-import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.morgan.design.android.domain.Woeid;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 
 @DatabaseTable(tableName = "weather_choice")
-public class WeatherChoice implements Serializable {
+public class WeatherChoice implements Serializable, Woeid {
 
 	/** */
 	private static final long serialVersionUID = 5180330886875011803L;
 
 	public static final String WOEID_ID = "woeid";
 	public static final String ACTIVE = "active";
+	public static final String ROAMING = "roaming";
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -30,11 +30,14 @@ public class WeatherChoice implements Serializable {
 	@DatabaseField(columnName = ACTIVE)
 	private boolean active;
 
-	@DatabaseField
-	private BigDecimal latitude;
+	@DatabaseField(columnName = ROAMING)
+	private boolean roaming;
 
 	@DatabaseField
-	private BigDecimal longitude;
+	private float latitude;
+
+	@DatabaseField
+	private float longitude;
 
 	@DatabaseField
 	private int lastknownNotifcationId;
@@ -70,6 +73,7 @@ public class WeatherChoice implements Serializable {
 		this.id = id;
 	}
 
+	@Override
 	public final String getWoeid() {
 		return this.woeid;
 	}
@@ -154,19 +158,19 @@ public class WeatherChoice implements Serializable {
 		return this.lastSuccessfulUpdateDateTime;
 	}
 
-	public BigDecimal getLatitude() {
+	public float getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(final BigDecimal latitude) {
+	public void setLatitude(final float latitude) {
 		this.latitude = latitude;
 	}
 
-	public BigDecimal getLongitude() {
+	public float getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(final BigDecimal longitude) {
+	public void setLongitude(final float longitude) {
 		this.longitude = longitude;
 	}
 
@@ -176,6 +180,14 @@ public class WeatherChoice implements Serializable {
 
 	public void setActive(final boolean active) {
 		this.active = active;
+	}
+
+	public void setRoaming(final boolean roaming) {
+		this.roaming = roaming;
+	}
+
+	public boolean isRoaming() {
+		return this.roaming;
 	}
 
 	public void failedQuery() {
@@ -190,8 +202,6 @@ public class WeatherChoice implements Serializable {
 		this.currentWeatherCode = currentWeather.getCurrentCode();
 		this.lastSuccessfulUpdateDateTime = currentWeather.getCurrentDate();
 		this.currentLocationText = getSafeLocation(currentWeather);
-		this.longitude = valueOrDefault(currentWeather.getLongitude(), new BigDecimal("0"));
-		this.latitude = valueOrDefault(currentWeather.getLatitude(), new BigDecimal("0"));
 	}
 
 	private void recordUdpate() {

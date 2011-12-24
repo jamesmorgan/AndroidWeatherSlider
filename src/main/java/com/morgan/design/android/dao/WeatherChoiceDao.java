@@ -85,11 +85,11 @@ public class WeatherChoiceDao {
 		return null;
 	}
 
-	public void create(final WeatherChoice woeidChoice) {
-		Logger.d(LOG_TAG, "Create new instance, woeidChoice=[%s]", woeidChoice);
-		if (isNotNull(woeidChoice)) {
+	public void create(final WeatherChoice weatherChoice) {
+		Logger.d(LOG_TAG, "Create new instance, weatherChoice=[%s]", weatherChoice);
+		if (isNotNull(weatherChoice)) {
 			try {
-				getWeatherChoiceDao().create(woeidChoice);
+				getWeatherChoiceDao().create(weatherChoice);
 			}
 			catch (final SQLException exception) {
 				logError(exception);
@@ -97,12 +97,12 @@ public class WeatherChoiceDao {
 		}
 	}
 
-	public int update(final WeatherChoice woeidChoice) {
-		Logger.d(LOG_TAG, "Updating WOEID woeid=[%s]", woeidChoice);
+	public int update(final WeatherChoice weatherChoice) {
+		Logger.d(LOG_TAG, "Updating WOEID woeid=[%s]", weatherChoice);
 		return DBUtils.executeInSafety(new Callable<Integer>() {
 			@Override
 			public Integer call() throws Exception {
-				return getWeatherChoiceDao().update(woeidChoice);
+				return getWeatherChoiceDao().update(weatherChoice);
 			}
 		});
 	}
@@ -123,27 +123,27 @@ public class WeatherChoiceDao {
 		});
 	}
 
-	public int delete(final WeatherChoice woeidChoice) {
-		Logger.d(LOG_TAG, "Deleting WOEID, woeid=[%s]", woeidChoice);
+	public int delete(final WeatherChoice weatherChoice) {
+		Logger.d(LOG_TAG, "Deleting WOEID, woeid=[%s]", weatherChoice);
 		return DBUtils.executeInSafety(new Callable<Integer>() {
 			@Override
 			public Integer call() throws Exception {
-				return getWeatherChoiceDao().delete(woeidChoice);
+				return getWeatherChoiceDao().delete(weatherChoice);
 			}
 		});
 	}
 
-	public List<WeatherChoice> findActive() {
+	public List<WeatherChoice> getActiveStaticLocations() {
 		Logger.d(LOG_TAG, "Finding all ACTIVE weather choices");
 		try {
 			final QueryBuilder<WeatherChoice, Integer> queryBuilder = getWeatherChoiceDao().queryBuilder();
 			final Where<WeatherChoice, Integer> where = queryBuilder.where();
-			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE));
+
+			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE)).and().eq(WeatherChoice.ROAMING, new SelectArg(Boolean.FALSE));
+
 			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
 
-			final PreparedQuery<WeatherChoice> preparedQuery = queryBuilder.prepare();
-
-			final List<WeatherChoice> results = getWeatherChoiceDao().query(preparedQuery);
+			final List<WeatherChoice> results = getWeatherChoiceDao().query(queryBuilder.prepare());
 			return null != results
 					? results
 					: new ArrayList<WeatherChoice>();
@@ -154,9 +154,35 @@ public class WeatherChoiceDao {
 		return new ArrayList<WeatherChoice>();
 	}
 
+	public WeatherChoice getActiveRoamingLocation() {
+		try {
+			final QueryBuilder<WeatherChoice, Integer> queryBuilder = getWeatherChoiceDao().queryBuilder();
+			final Where<WeatherChoice, Integer> where = queryBuilder.where();
+
+			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE)).and().eq(WeatherChoice.ROAMING, new SelectArg(Boolean.TRUE));
+
+			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
+
+			return getWeatherChoiceDao().queryForFirst(queryBuilder.prepare());
+		}
+		catch (final SQLException exception) {
+			logError(exception);
+		}
+		return null;
+	}
+
+	public WeatherChoice getById(final int weatherId) {
+		try {
+			return getWeatherChoiceDao().queryForId(weatherId);
+		}
+		catch (final SQLException exception) {
+			logError(exception);
+		}
+		return null;
+	}
+
 	private static void logError(final Exception e) {
 		Logger.e(LOG_TAG, "SQLException ", e);
 		e.printStackTrace();
 	}
-
 }

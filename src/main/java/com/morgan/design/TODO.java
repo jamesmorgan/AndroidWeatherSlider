@@ -70,11 +70,13 @@ public class TODO {
 	// "EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 
 	// FIXME -> Ensure all notifications always update correctly
-	// FIXME -> On preferences updated reload all notifications
+	// FIXME -> DONE - (23/12/2011) - On preferences updated reload all notifications
 	// FIXME -> Allow re-loading of existing notifications on start up
 	// FIXME -> Ensure correct service IDs matched against current weather
 	// FIXME -> When reloading weather ensure still uses same service not creating a new one
 	// FIXME -> DONE - (23/12/2011) - Ability to Cancel all active notifications from home menu
+	// FIXME -> Ensure only one roaming based weather lookup, two optional other locations
+	// FIXME -> add preference for updating on connectivity change (StaticLookupService)
 
 	// FIXME -> DONE - (22/12/2011) - Added Gmaven plugin in-order synchronise androdi and maven version numbers ->
 	// http://code.google.com/p/maven-android-plugin/wiki/SynchronisingVersionWithGmaven

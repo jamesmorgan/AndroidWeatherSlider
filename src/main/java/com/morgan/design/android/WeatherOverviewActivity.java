@@ -2,7 +2,6 @@ package com.morgan.design.android;
 
 import static com.morgan.design.Constants.SERVICE_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotEmpty;
-import static com.morgan.design.android.util.ObjectUtils.isNull;
 import static com.morgan.design.android.util.ObjectUtils.isZero;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
@@ -56,11 +55,12 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 					Logger.w(LOG_TAG, "Service ID is null, this should not happen");
 					finish();
 				}
-				this.currentWeather = getTopLevelApplication().getWeatherForSerivceId(serviceId);
-				if (isNull(this.currentWeather)) {
-					Logger.w(LOG_TAG, "Unable to find weather for service ID [%s], this should not happen", serviceId);
-					finish();
-				}
+				// final WeatherLookupEntry lookupEntry = getTopLevelApplication().getWeatherForSerivceId(serviceId);
+				// this.currentWeather = lookupEntry.getWeatherInfo();
+				// if (isNull(this.currentWeather)) {
+				// Logger.w(LOG_TAG, "Unable to find weather for service ID [%s], this should not happen", serviceId);
+				// finish();
+				// }
 			}
 		}
 

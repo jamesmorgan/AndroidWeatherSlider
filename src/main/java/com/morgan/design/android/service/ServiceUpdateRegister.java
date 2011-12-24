@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
-public class ServiceUpdateRegister extends BroadcastReceiver implements ServiceUpdate {
+public class ServiceUpdateRegister extends BroadcastReceiver {
 
 	private static final int THREE_SECONDS = 3000;
 
@@ -53,37 +53,21 @@ public class ServiceUpdateRegister extends BroadcastReceiver implements ServiceU
 		final String action = intent.getAction();
 		if (ACTION.equals(action)) {
 			if (intent.hasExtra(LOADING)) {
-				loading(intent.getStringExtra(LOADING));
+				final String loading = intent.getStringExtra(LOADING);
+				Logger.d(LOG_TAG, "Loading : " + loading);
+				setNewText(loading);
 			}
 			else if (intent.hasExtra(ONGOING)) {
-				onGoing(intent.getStringExtra(ONGOING));
+				final String ongoing = intent.getStringExtra(ONGOING);
+				Logger.d(LOG_TAG, "onGoing : " + ongoing);
+				setNewText(ongoing);
 			}
 			else if (intent.hasExtra(COMPLETE)) {
-				complete(intent.getStringExtra(COMPLETE));
+				final String complete = intent.getStringExtra(COMPLETE);
+				Logger.d(LOG_TAG, "Complete : " + complete);
+				setNewText(complete);
 			}
 		}
-	}
-
-	// /////////////////////////////////////////////
-	// ////////// Display Service Update ///////////
-	// /////////////////////////////////////////////
-
-	@Override
-	public void loading(final CharSequence message) {
-		Logger.d(LOG_TAG, "Loading : " + message);
-		setNewText(message);
-	}
-
-	@Override
-	public void onGoing(final CharSequence message) {
-		Logger.d(LOG_TAG, "onGoing : " + message);
-		setNewText(message);
-	}
-
-	@Override
-	public void complete(final CharSequence message) {
-		Logger.d(LOG_TAG, "Complete : " + message);
-		setNewText(message);
 	}
 
 	private void setNewText(final CharSequence message) {

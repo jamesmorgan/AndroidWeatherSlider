@@ -1,14 +1,14 @@
 package com.morgan.design.android;
 
-import static com.morgan.design.Constants.FROM_LOAD_WEATHER;
-import static com.morgan.design.Constants.WOEID;
+import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
+import static com.morgan.design.Constants.WEATHER_ID;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,19 +16,24 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Constants;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.WOIEDAdaptor;
+import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.WOEIDEntry;
-import com.morgan.design.android.service.YahooWeatherLoaderService;
+import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.repository.DatabaseHelper;
+import com.morgan.design.android.service.StaticLookupService;
 import com.weatherslider.morgan.design.R;
 
-public class ListLocationsActivity extends ListActivity implements SimpleGestureListener {
+public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
 
 	private WOIEDAdaptor adaptor;
 
 	private List<WOEIDEntry> WOIEDlocations;
 	private SimpleGestureFilter detector;
+	protected WeatherChoiceDao weatherDao;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -37,6 +42,7 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 		setContentView(R.layout.woied_list);
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
+		this.weatherDao = new WeatherChoiceDao(getHelper());
 
 		final Bundle extras = getIntent().getExtras();
 		if (null != extras) {
@@ -136,14 +142,16 @@ public class ListLocationsActivity extends ListActivity implements SimpleGesture
 
 	protected void loadWeatherDataForEntry(final WOEIDEntry entry) {
 
+		final WeatherChoice choice = new WeatherChoice();
+		choice.setWoeid(entry.getWoeid());
+		choice.setCreatedDateTime(new Date());
+		choice.setActive(true);
+		this.weatherDao.create(choice);
+
 		final Bundle bundle = new Bundle();
-		bundle.putSerializable(WOEID, entry.getWoeid());
+		bundle.putSerializable(WEATHER_ID, choice.getId());
 
-		final Intent service = new Intent(this, YahooWeatherLoaderService.class);
-		service.putExtra(FROM_LOAD_WEATHER, true);
-		service.putExtras(bundle);
-
-		startService(service);
+		startService(new Intent(this, StaticLookupService.class).putExtra(FROM_INACTIVE_LOCATION, true).putExtras(bundle));
 
 		setResult(RESULT_OK);
 		finish();

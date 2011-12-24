@@ -25,6 +25,7 @@ public class Constants {
 	public static final String NOTIFICATION_REMOVED = "com.morgan.design.android.broadcast.NOTIFICATION_REMOVED";
 
 	public static final String REMOVE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.REMOVE_CURRENT_NOTIFCATION";
+	public static final String DELETE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.DELETE_CURRENT_NOTIFCATION";
 
 	/** Triggered when a request to get the weather is made */
 	public static final String RELOAD_WEATHER_BROADCAST = "com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST";
@@ -52,14 +53,13 @@ public class Constants {
 	public static final String NUMBER_OF_FORCASTS = "NUMBER_OF_FORCASTS";
 	public static final String SERVICE_ID = "SERVICE_ID";
 
-	public static final String LAST_KNOWN_SERVICE_ID = "LAST_KNOWN_SERVICE_ID";
+	public static final String WEATHER_ID = "WEATHER_ID";
 
 	// Launch Controller Broadcast Intent properties
-	public static final String FROM_BOOT = "FROM_BOOT";
-	public static final String FROM_LAUNCHER = "FROM_LAUNCHER";
+	public static final String PHONE_BOOT = "PHONE_BOOT";
+	public static final String RELOAD_WEATHER = "RELOAD_WEATHER";
 	public static final String CONNECTIVITY_CHANGED = "CONNECTIVITY_CHANGED";
-
-	public static final String FROM_INACTIVE_SERVICE = "FROM_INACTIVE_SERVICE";
-	public static final String FROM_LOAD_WEATHER = "FROM_LOAD_WEATHER";
+	public static final String FROM_INACTIVE_LOCATION = "FROM_INACTIVE_LOCATION";
+	public static final String FROM_FRESH_LOOKUP = "FROM_FRESH_LOOKUP";
 
 }

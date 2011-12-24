@@ -43,10 +43,10 @@ public class YahooGeocodeParser implements Parser<GeocodeResult> {
 					final Element element = (Element) elementObject;
 
 					if (element.getName().equals("latitude")) {
-						geocodeResult.setLatitude(element.getValue());
+						geocodeResult.setLatitude(Float.parseFloat(element.getValue()));
 					}
 					if (element.getName().equals("longitude")) {
-						geocodeResult.setLonditude(element.getValue());
+						geocodeResult.setLonditude(Float.parseFloat(element.getValue()));
 					}
 					if (element.getName().equals("woeid")) {
 						geocodeResult.setWoeid(element.getValue());

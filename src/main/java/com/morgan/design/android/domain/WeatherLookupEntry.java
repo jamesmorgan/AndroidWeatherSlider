@@ -1,5 +1,6 @@
 package com.morgan.design.android.domain;
 
+@Deprecated
 public class WeatherLookupEntry {
 
 	private final String woeid;

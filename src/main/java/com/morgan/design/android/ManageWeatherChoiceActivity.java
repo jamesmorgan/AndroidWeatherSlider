@@ -1,10 +1,10 @@
 package com.morgan.design.android;
 
 import static com.morgan.design.Constants.CANCEL_ALL_WEATHER_NOTIFICATIONS;
-import static com.morgan.design.Constants.FROM_INACTIVE_SERVICE;
-import static com.morgan.design.Constants.LAST_KNOWN_SERVICE_ID;
+import static com.morgan.design.Constants.DELETE_CURRENT_NOTIFCATION;
+import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
 import static com.morgan.design.Constants.REMOVE_CURRENT_NOTIFCATION;
-import static com.morgan.design.Constants.WOEID;
+import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
 
@@ -34,8 +34,9 @@ import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
+import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.ServiceUpdateRegister;
-import com.morgan.design.android.service.YahooWeatherLoaderService;
+import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
@@ -47,7 +48,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
 
-	private WeatherChoiceDao woeidChoiceDao;
+	private WeatherChoiceDao weatherDao;
 
 	private List<WeatherChoice> woeidChoices;
 
@@ -68,7 +69,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		setContentView(R.layout.weather_choice_layout);
 		Changelog.show(this, false);
 
-		this.woeidChoiceDao = new WeatherChoiceDao(getHelper());
+		this.weatherDao = new WeatherChoiceDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
@@ -201,7 +202,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Remove", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
-					onRemoveWeatherChoice(woeidChoice);
+					attemptToKillNotifcation(woeidChoice);
 				}
 			});
 		}
@@ -217,7 +218,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Delete", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
-				onDeleteWeatherChoice(woeidChoice);
+				attemptToDeleteNotifcation(woeidChoice);
 			}
 		});
 
@@ -234,29 +235,19 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		startActivityForResult(intent, Constants.ENTER_LOCATION);
 	}
 
-	protected void onRemoveWeatherChoice(final WeatherChoice woeidChoice) {
-		woeidChoice.setActive(false);
-		this.woeidChoiceDao.update(woeidChoice);
-		attemptToKillNotifcation(woeidChoice);
-	}
-
-	protected void onDeleteWeatherChoice(final WeatherChoice woeidChoice) {
-		this.woeidChoiceDao.delete(woeidChoice);
-		attemptToKillNotifcation(woeidChoice);
-		removeItemFromList(woeidChoice);
-	}
-
 	protected void onLoadWeatherChoice(final WeatherChoice woeidChoice) {
 		woeidChoice.setActive(true);
-		this.woeidChoiceDao.update(woeidChoice);
+		this.weatherDao.update(woeidChoice);
 
 		final Bundle bundle = new Bundle();
-		bundle.putSerializable(WOEID, woeidChoice.getWoeid());
+		bundle.putSerializable(WEATHER_ID, woeidChoice.getId());
 
-		final Intent service = new Intent(this, YahooWeatherLoaderService.class);
-		service.putExtra(FROM_INACTIVE_SERVICE, true);
+		final Intent service = woeidChoice.isRoaming()
+				? new Intent(this, RoamingLookupService.class)
+				: new Intent(this, StaticLookupService.class);
+
+		service.putExtra(FROM_INACTIVE_LOCATION, true);
 		service.putExtras(bundle);
-
 		startService(service);
 	}
 
@@ -271,19 +262,22 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	private void reLoadWeatherChoices() {
-		this.woeidChoices = this.woeidChoiceDao.findAllWoeidChoices();
+		this.woeidChoices = this.weatherDao.findAllWoeidChoices();
 		this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
 		setListAdapter(this.adaptor);
 	}
 
-	private void removeItemFromList(final WeatherChoice woeidChoice) {
-		this.adaptor.remove(woeidChoice);
-	}
-
 	private void attemptToKillNotifcation(final WeatherChoice woeidChoice) {
 		final Bundle bundle = new Bundle();
-		bundle.putInt(LAST_KNOWN_SERVICE_ID, woeidChoice.getLastknownNotifcationId());
+		bundle.putInt(WEATHER_ID, woeidChoice.getId());
 		sendBroadcast(new Intent(REMOVE_CURRENT_NOTIFCATION).putExtras(bundle));
+	}
+
+	private void attemptToDeleteNotifcation(final WeatherChoice woeidChoice) {
+		final Bundle bundle = new Bundle();
+		bundle.putInt(WEATHER_ID, woeidChoice.getId());
+		sendBroadcast(new Intent(DELETE_CURRENT_NOTIFCATION).putExtras(bundle));
+		this.adaptor.remove(woeidChoice);
 	}
 
 	protected WeatherSliderApplication getToLevelApplication() {

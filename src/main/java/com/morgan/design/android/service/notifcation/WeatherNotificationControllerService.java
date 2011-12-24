@@ -17,8 +17,8 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.morgan.design.WeatherSliderApplication;
-import com.morgan.design.android.domain.WeatherLookupEntry;
+import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
@@ -96,30 +96,39 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	// ////////// Public methods ///////////////////
 	// /////////////////////////////////////////////
 
-	public int addNotificationService(final WeatherLookupEntry weatherInfo) {
-		for (final Entry<Integer, Boolean> service : SERVICE_IDS.entrySet()) {
-			final Integer serviceId = service.getKey();
-			final Boolean serviceIsActive = service.getValue();
+	public int addWeatherNotification(final WeatherChoice weatherChoice, final YahooWeatherInfo weatherInfo) {
 
-			Logger.d(LOG_TAG, "Service ID [%s] is active [%s]", serviceId, serviceIsActive);
+		// Get existing service, check not present
+		final BaseNotifcationService existingService = this.boundServices.get(weatherChoice.getLastknownNotifcationId());
+		if (null != existingService) {
+			existingService.setWeatherInformation(weatherInfo);
 
-			if (!serviceIsActive) {
-				final WeatherNotificationService notifcationService = this.boundServices.get(serviceId);
-				notifcationService.setWeatherInformation(weatherInfo.getWeatherInfo());
+			return weatherChoice.getLastknownNotifcationId();
+		}
+		// Try initiate another weather notification service
+		else {
+			for (final Entry<Integer, Boolean> service : SERVICE_IDS.entrySet()) {
+				final Integer serviceId = service.getKey();
+				final Boolean serviceIsActive = service.getValue();
 
-				Logger.d(LOG_TAG, "Service [%s] set to active", notifcationService.getClass().getSimpleName());
-				service.setValue(true);
+				Logger.d(LOG_TAG, "Service ID [%s] is active [%s]", serviceId, serviceIsActive);
 
-				if (null != weatherInfo) {
-					((WeatherSliderApplication) getApplication()).addWeatherService(serviceId, weatherInfo.getWeatherInfo());
+				if (!serviceIsActive) {
+					final WeatherNotificationService notifcationService = this.boundServices.get(serviceId);
+					notifcationService.setWeatherInformation(weatherInfo);
+
+					Logger.d(LOG_TAG, "Service [%s] set to active", notifcationService.getClass().getSimpleName());
+					service.setValue(true);
+
+					return serviceId;
 				}
-
-				return serviceId;
 			}
 		}
 
+		// No available notification services left
 		sendBroadcast(new Intent(NOTIFICATIONS_FULL));
 		return 0;
+
 	}
 
 	public void removeNotification(final int serviceId) {
@@ -141,6 +150,22 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 
 	public int getMaxAllowedNotifications() {
 		return this.boundServices.size();
+	}
+
+	public boolean notificationsAreFull() {
+		int countActive = 0;
+		for (final Entry<Integer, Boolean> service : SERVICE_IDS.entrySet()) {
+			if (service.getValue()) {
+				countActive++;
+			}
+		}
+		return this.boundServices.size() == countActive;
+
+	}
+
+	class Notification {
+		int id;
+		int serviceId;
 	}
 
 }

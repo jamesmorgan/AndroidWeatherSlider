@@ -1,5 +1,6 @@
 package com.morgan.design.android.tasks;
 
+@Deprecated
 public abstract class OnAsyncQueryCallback<T> {
 	protected void onPreLookup() {
 

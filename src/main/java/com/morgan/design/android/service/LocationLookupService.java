@@ -16,12 +16,15 @@ import android.os.IBinder;
 
 import com.morgan.design.android.util.Logger;
 
-public class LocationLookupService extends Service implements ServiceUpdate {
+public class LocationLookupService extends Service {
 
 	private static final String LOG_TAG = "LocationLookupService";
 
-	public static final String GET_CURRENT_LOCATION_LOOKUP = "com.morgan.design.android.service.LocationLookupService";
-	public static final String LOCATION_CHANGED_BROADCAST = "com.morgan.design.broadcast.LOCATION_CHANGED";
+	public static final String GET_ROAMING_LOCATION_LOOKUP = "com.morgan.design.android.service.GET_ROAMING_LOCATION_LOOKUP";
+	public static final String ROAMING_LOCATION_FOUND_BROADCAST = "com.morgan.design.broadcast.LOCATION_CHANGED";
+
+	public static final String ONE_OFF_LOCATION_FOUND_BROADCAST = "com.morgan.design.broadcast.ONE_OFF_LOCATION_FOUND_BROADCAST";
+	public static final String GET_ONE_OFF_CURRENT_LOCATION = "com.morgan.design.android.service.GET_ONE_OFF_CURRENT_LOCATION";
 
 	public static final String PROVIDERS_FOUND = "PROVIDERS_FOUND";
 	public static final String CURRENT_LOCAION = "CURRENT_LOCATION";
@@ -33,12 +36,16 @@ public class LocationLookupService extends Service implements ServiceUpdate {
 	LocationManager locationManager;
 	Timer timer;
 
+	boolean oneOffLocationUpdate = false;
+
 	boolean gpsEnabled = false;
 	boolean networkEnabled = false;
+	private ServiceUpdateBroadcaster serviceUpdate;
 
 	@Override
 	public void onCreate() {
 		this.locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 	}
 
 	@Override
@@ -47,21 +54,6 @@ public class LocationLookupService extends Service implements ServiceUpdate {
 			this.timer.cancel();
 		}
 		removetLocationListeners();
-	}
-
-	@Override
-	public void loading(final CharSequence message) {
-		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.LOADING, message));
-	}
-
-	@Override
-	public void onGoing(final CharSequence message) {
-		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.ONGOING, message));
-	}
-
-	@Override
-	public void complete(final CharSequence message) {
-		sendBroadcast(new Intent(ServiceUpdateRegister.ACTION).putExtra(ServiceUpdateRegister.COMPLETE, message));
 	}
 
 	LocationListener networkLocationListener = new LocationListenerFacade() {
@@ -81,7 +73,9 @@ public class LocationLookupService extends Service implements ServiceUpdate {
 	@Override
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
 		Logger.d(LOG_TAG, "Starting lookup location service");
-		loading("Initiating GPS lookup");
+		this.serviceUpdate.loading("Initiating GPS lookup");
+
+		this.oneOffLocationUpdate = intent.getAction().equals(GET_ONE_OFF_CURRENT_LOCATION);
 
 		int locationTimeOut = DEFAULT_LOCATION_TIMEOUT;
 
@@ -97,7 +91,7 @@ public class LocationLookupService extends Service implements ServiceUpdate {
 
 		// don't start listeners if no provider is enabled
 		if (!this.gpsEnabled && !this.networkEnabled) {
-			complete("Failed GPS lookup");
+			this.serviceUpdate.complete("Failed GPS lookup");
 			onNoProvidersFound();
 			stopSelf();
 		}
@@ -134,7 +128,10 @@ public class LocationLookupService extends Service implements ServiceUpdate {
 	public void onNoProvidersFound() {
 		final Bundle extras = new Bundle();
 		extras.putBoolean(PROVIDERS_FOUND, false);
-		sendBroadcast(new Intent(LOCATION_CHANGED_BROADCAST).putExtras(extras));
+
+		sendBroadcast(this.oneOffLocationUpdate
+				? new Intent(ONE_OFF_LOCATION_FOUND_BROADCAST).putExtras(extras)
+				: new Intent(ROAMING_LOCATION_FOUND_BROADCAST).putExtras(extras));
 		stopSelf();
 	}
 
@@ -143,14 +140,16 @@ public class LocationLookupService extends Service implements ServiceUpdate {
 		extras.putBoolean(PROVIDERS_FOUND, true);
 
 		if (null != location) {
-			complete("GPS Location found");
+			this.serviceUpdate.complete("GPS Location found");
 			extras.putParcelable(CURRENT_LOCAION, location);
 		}
 		else {
-			complete("GPS Location not found");
+			this.serviceUpdate.complete("GPS Location not found");
 		}
 
-		sendBroadcast(new Intent(LOCATION_CHANGED_BROADCAST).putExtras(extras));
+		sendBroadcast(this.oneOffLocationUpdate
+				? new Intent(ONE_OFF_LOCATION_FOUND_BROADCAST).putExtras(extras)
+				: new Intent(ROAMING_LOCATION_FOUND_BROADCAST).putExtras(extras));
 		stopSelf();
 	}
 

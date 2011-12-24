@@ -15,9 +15,9 @@ public class GeocodeWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, Geoc
 	private static final String LOG_TAG = "GeocodeWOIEDDataTaskFromLocation";
 
 	private final Location location;
-	private final OnAsyncQueryCallback<GeocodeResult> onAsyncQueryCallBack;
+	private final OnAsyncCallback<GeocodeResult> onAsyncQueryCallBack;
 
-	public GeocodeWOIEDDataTaskFromLocation(final Location location, final OnAsyncQueryCallback<GeocodeResult> onAsyncQueryCallBack) {
+	public GeocodeWOIEDDataTaskFromLocation(final Location location, final OnAsyncCallback<GeocodeResult> onAsyncQueryCallBack) {
 		this.location = location;
 		this.onAsyncQueryCallBack = onAsyncQueryCallBack;
 	}

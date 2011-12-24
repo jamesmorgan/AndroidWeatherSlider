@@ -1,5 +1,6 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.FROM_FRESH_LOOKUP;
 import static com.morgan.design.android.util.ObjectUtils.isNot;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
@@ -34,8 +35,8 @@ import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.WOEIDEntry;
-import com.morgan.design.android.service.GpsWeatherLookupService;
 import com.morgan.design.android.service.LocationLookupService;
+import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.Utils;
@@ -134,7 +135,8 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 					}
 				}
 			};
-			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(LocationLookupService.LOCATION_CHANGED_BROADCAST));
+			registerReceiver(this.locationChangedBroadcastReciever,
+					new IntentFilter(LocationLookupService.ONE_OFF_LOCATION_FOUND_BROADCAST));
 		}
 	}
 
@@ -202,7 +204,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		}
 
 		// Allow for overriding default timeout
-		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_CURRENT_LOCATION_LOOKUP);
+		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_ONE_OFF_CURRENT_LOCATION);
 		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
 		startService(findLocationBroadcast);
 	}
@@ -229,12 +231,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		Toast.makeText(this, "Attempting to lookup your GPS location and find the weather.", Toast.LENGTH_SHORT).show();
 
-		final Bundle bundle = new Bundle();
-		final Intent intent = new Intent(this, GpsWeatherLookupService.class);
-		intent.putExtras(bundle);
-
-		startService(intent);
-
+		startService(new Intent(this, RoamingLookupService.class).putExtra(FROM_FRESH_LOOKUP, true));
 		setResult(RESULT_OK);
 		finish();
 	}
@@ -265,7 +262,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			@Override
 			public void onCancel(final DialogInterface dialog) {
 				stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
-				stopService(new Intent(LocationLookupService.GET_CURRENT_LOCATION_LOOKUP));
+				stopService(new Intent(LocationLookupService.GET_ONE_OFF_CURRENT_LOCATION));
 			}
 		});
 	}

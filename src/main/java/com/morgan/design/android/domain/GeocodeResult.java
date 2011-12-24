@@ -1,12 +1,12 @@
 package com.morgan.design.android.domain;
 
-public class GeocodeResult {
+public class GeocodeResult implements Woeid {
 
 	private boolean error;
 	private String errorMessage;
 	private int quality;
-	private String latitude;
-	private String londitude;
+	private float latitude;
+	private float londitude;
 	private String woeid;
 
 	public boolean isError() {
@@ -33,22 +33,23 @@ public class GeocodeResult {
 		this.quality = quality;
 	}
 
-	public final String getLatitude() {
+	public final float getLatitude() {
 		return this.latitude;
 	}
 
-	public final void setLatitude(final String latitude) {
+	public final void setLatitude(final float latitude) {
 		this.latitude = latitude;
 	}
 
-	public final String getLonditude() {
+	public final float getLonditude() {
 		return this.londitude;
 	}
 
-	public final void setLonditude(final String londitude) {
+	public final void setLonditude(final float londitude) {
 		this.londitude = londitude;
 	}
 
+	@Override
 	public final String getWoeid() {
 		return this.woeid;
 	}
