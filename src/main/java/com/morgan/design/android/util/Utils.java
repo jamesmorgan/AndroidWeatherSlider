@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.morgan.design.FeedbackFormActivity;
+import com.morgan.design.android.domain.types.Abrev;
 import com.weatherslider.morgan.design.R;
 
 /**
@@ -74,6 +75,12 @@ public class Utils {
 	public static boolean isGpsEnabled(final ContentResolver contentResolver) {
 		final String gpsProviders = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 		return (null != gpsProviders && !"".equals(gpsProviders));
+	}
+
+	public static final String abrev(final Abrev abrev) {
+		return null != abrev
+				? abrev.abrev()
+				: "";
 	}
 
 }

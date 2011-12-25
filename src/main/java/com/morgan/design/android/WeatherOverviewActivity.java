@@ -30,6 +30,7 @@ import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PressureUtils;
+import com.morgan.design.android.util.Utils;
 import com.weatherslider.morgan.design.R;
 
 public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> implements SimpleGestureListener {
@@ -84,7 +85,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 		this.weather_description.setText(valueOrDefault(this.currentWeather.getCurrentText(), "N/A"));
 		this.main_temperature.setText(this.currentWeather.getCurrentTemp()
-			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
+			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.weather_image.setImageResource(IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode()));
 	}
 
@@ -124,7 +125,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 		this.wind_speed.setText(WindSpeed.fromSpeedAndUnit(this, this.currentWeather.getWindSpeed(), this.currentWeather.getWindSpeedUnit()));
 		this.wind_chill.setText(this.currentWeather.getWindChill()
-			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
+			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.wind_direction.setText(Wind.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
 	}
 
@@ -149,7 +150,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.pressure = (TextView) findViewById(R.id.pressure);
 
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
-			+ Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev()));
+			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.humidity.setText(this.currentWeather.getHumidityPercentage() + "%");
 		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "N/A"));
 		this.pressure.setCompoundDrawablesWithIntrinsicBounds(PressureUtils.getPressureStateImage(this.currentWeather.getRising()), 0, 0, 0);

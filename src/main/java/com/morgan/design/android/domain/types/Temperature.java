@@ -2,7 +2,7 @@ package com.morgan.design.android.domain.types;
 
 import com.morgan.design.android.util.Logger;
 
-public enum Temperature {
+public enum Temperature implements Abrev {
 
 	// f: Fahrenheit
 	// c: Celsius
@@ -23,7 +23,7 @@ public enum Temperature {
 
 	public static Temperature to(final String temp) {
 		for (final Temperature type : values()) {
-			if (type.getAbrev().equalsIgnoreCase(temp)) {
+			if (type.abrev().equalsIgnoreCase(temp)) {
 				return type;
 			}
 		}
@@ -31,7 +31,8 @@ public enum Temperature {
 		return Temperature.CELSIUS;
 	}
 
-	public String getAbrev() {
+	@Override
+	public String abrev() {
 		return this.abrev;
 	}
 

@@ -2,7 +2,7 @@ package com.morgan.design.android.domain.types;
 
 import com.morgan.design.android.util.Logger;
 
-public enum DayOfWeek {
+public enum DayOfWeek implements Abrev {
 
 	// Mon Tue Wed Thu Fri Sat Sun
 
@@ -54,6 +54,7 @@ public enum DayOfWeek {
 		return this.full;
 	}
 
+	@Override
 	public String abrev() {
 		return this.abrev;
 	}

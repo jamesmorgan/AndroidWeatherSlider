@@ -66,7 +66,7 @@ public class PreferenceUtils {
 	}
 
 	public static Temperature getTemperatureMode(final Context context) {
-		return Temperature.to(getPrefs(context).getString(PREF_TEMPERATURE_MODE, Temperature.CELSIUS.getAbrev()));
+		return Temperature.to(getPrefs(context).getString(PREF_TEMPERATURE_MODE, Temperature.CELSIUS.abrev()));
 	}
 
 	public static boolean setTemperatureMode(final Context context, final String temperature) {

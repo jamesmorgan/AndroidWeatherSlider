@@ -11,6 +11,7 @@ import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.Utils;
 import com.weatherslider.morgan.design.R;
 
 public class ForecastOverviewTabActivity extends Activity {
@@ -24,7 +25,7 @@ public class ForecastOverviewTabActivity extends Activity {
 		if (isNotNull(extras)) {
 
 			final ForcastEntry forcastEntry = (ForcastEntry) extras.getSerializable(Constants.FORCAST_ENTRY);
-			final String tempUnit = PreferenceUtils.getTemperatureMode(this).getAbrev();
+			final String tempUnit = Utils.abrev(PreferenceUtils.getTemperatureMode(this));
 
 			final TextView description = (TextView) findViewById(R.id.description);
 			description.setText(forcastEntry.getText());

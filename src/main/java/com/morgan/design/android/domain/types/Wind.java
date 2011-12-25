@@ -41,12 +41,25 @@ public class Wind {
 		//@formatter:on
 
 	public static String fromDegreeToHumanDirection(final String degree) {
-		final double pDegree = Double.parseDouble(degree);
-		return CONVERTER_HUMAN[(int) Math.floor((pDegree % 360) / 22.5)];
+		try {
+			final double pDegree = Double.parseDouble(degree);
+			return CONVERTER_HUMAN[(int) Math.floor((pDegree % 360) / 22.5)];
+		}
+		catch (final Exception exception) {
+			// In-case error
+		}
+		return "";
 	}
 
 	public static String fromDegreeToAbbreviation(final String degree) {
-		final double pDegree = Double.parseDouble(degree);
-		return CONVERTER_ABREVIATION[(int) Math.floor((pDegree % 360) / 22.5)];
+		try {
+
+			final double pDegree = Double.parseDouble(degree);
+			return CONVERTER_ABREVIATION[(int) Math.floor((pDegree % 360) / 22.5)];
+		}
+		catch (final Exception exception) {
+			// In-case error
+		}
+		return "";
 	}
 }

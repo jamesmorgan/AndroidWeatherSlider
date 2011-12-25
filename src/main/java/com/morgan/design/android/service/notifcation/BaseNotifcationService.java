@@ -20,6 +20,7 @@ import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.Utils;
 
 public abstract class BaseNotifcationService extends Service implements WeatherNotificationService {
 
@@ -140,15 +141,12 @@ public abstract class BaseNotifcationService extends Service implements WeatherN
 		if (OverviewMode.OVERVIEW.equals(overviewMode)) {
 			return createOpenOverviewActivity();
 		}
-		else if (OverviewMode.WEB.equals(overviewMode)) {
-			return createOpenWebLinkPendingIntent();
-		}
-		return null;
+		return createOpenWebLinkPendingIntent();
 	}
 
 	private String getContent() {
 		final String temp =
-				this.currentWeather.getCurrentTemp() + Temperature.withDegree(this.currentWeather.getTemperatureUnit().getAbrev());
+				this.currentWeather.getCurrentTemp() + Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit()));
 		final String wind =
 				WindSpeed.fromSpeedAndUnit(this, this.currentWeather.getWindSpeed(), this.currentWeather.getWindSpeedUnit()) + " ("
 					+ Wind.fromDegreeToAbbreviation(this.currentWeather.getWindDirection()).toLowerCase() + ")";

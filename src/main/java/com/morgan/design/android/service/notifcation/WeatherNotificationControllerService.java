@@ -131,6 +131,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			else {
 				// No notification available
 				sendBroadcast(new Intent(NOTIFICATIONS_FULL));
+				return false;
 			}
 		}
 		return false;
@@ -159,6 +160,6 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	public boolean notificationsAreFull() {
 		// Check available notifications
 		// TODO replace with hidden preference
-		return this.notificationDao.getNumberOfNotifications() > 3;
+		return this.notificationDao.getNumberOfNotifications() >= 3;
 	}
 }

@@ -88,7 +88,7 @@ public class YahooRequestUtils {
 		if (woeidId == null) {
 			return null;
 		}
-		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.getAbrev());
+		return String.format(URL_YAHOO_API_WEATHER, woeidId, temperature.abrev());
 	}
 
 }
