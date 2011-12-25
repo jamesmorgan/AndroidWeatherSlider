@@ -18,11 +18,10 @@ public class Constants {
 	public static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
 
 	// Broadcast receiver actions
-	public static final String LATEST_WEATHER_QUERY_COMPLETE = "com.morgan.design.intent.COMPLETED_LATEST_WEATHER_LOAD";
 	public static final String PREFERENCES_UPDATED = "com.morgan.design.android.broadcast.PREFERENCES_UPDATED";
 	public static final String OPEN_WEATHER_OVERVIEW = "com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW";
+	public static final String UPDATE_WEATHER_LIST = "com.morgan.design.android.broadcast.UPDATE_WEATHER_LIST";
 	public static final String NOTIFICATIONS_FULL = "com.morgan.design.android.broadcast.NOTIFICATIONS_FULL";
-	public static final String NOTIFICATION_REMOVED = "com.morgan.design.android.broadcast.NOTIFICATION_REMOVED";
 
 	public static final String REMOVE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.REMOVE_CURRENT_NOTIFCATION";
 	public static final String DELETE_CURRENT_NOTIFCATION = "com.morgan.design.android.broadcast.DELETE_CURRENT_NOTIFCATION";

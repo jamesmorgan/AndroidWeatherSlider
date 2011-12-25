@@ -1,7 +1,7 @@
 package com.morgan.design.android.service.notifcation;
 
 import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
-import static com.morgan.design.Constants.NOTIFICATION_REMOVED;
+import static com.morgan.design.Constants.UPDATE_WEATHER_LIST;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -147,7 +147,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			weatherChoice.setActive(false);
 			this.weatherDao.update(weatherChoice);
 			this.notificationDao.delete(notification);
-			sendBroadcast(new Intent(NOTIFICATION_REMOVED));
+			sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
 		}
 	}
 

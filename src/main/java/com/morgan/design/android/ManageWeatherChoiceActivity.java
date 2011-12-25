@@ -30,6 +30,7 @@ import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
+import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
@@ -37,7 +38,6 @@ import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.ServiceUpdateRegister;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
-import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.weatherslider.morgan.design.R;
@@ -54,8 +54,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private SimpleGestureFilter detector;
 
-	private BroadcastReceiver weatherQueryCompleteBroadcastReceiver;
-	private BroadcastReceiver notificationRemovedBroadcastReciever;
+	private BroadcastReceiver updateWeatherListBroadcastReceiver;
 
 	private GoogleAnalyticsService googleAnalyticsService;
 
@@ -79,39 +78,24 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (isNull(this.weatherQueryCompleteBroadcastReceiver)) {
-			this.weatherQueryCompleteBroadcastReceiver = new BroadcastReceiver() {
+		if (isNull(this.updateWeatherListBroadcastReceiver)) {
+			this.updateWeatherListBroadcastReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved : %s", intent.getAction());
 					reLoadWeatherChoices();
 				}
 			};
-			registerReceiver(this.weatherQueryCompleteBroadcastReceiver, new IntentFilter(Constants.LATEST_WEATHER_QUERY_COMPLETE));
-		}
-
-		if (isNull(this.notificationRemovedBroadcastReciever)) {
-			this.notificationRemovedBroadcastReciever = new BroadcastReceiver() {
-				@Override
-				public void onReceive(final Context context, final Intent intent) {
-					Logger.d(LOG_TAG, "Recieved : %s", intent.getAction());
-					reLoadWeatherChoices();
-				}
-			};
-			registerReceiver(this.notificationRemovedBroadcastReciever, new IntentFilter(Constants.NOTIFICATION_REMOVED));
+			registerReceiver(this.updateWeatherListBroadcastReceiver, new IntentFilter(Constants.UPDATE_WEATHER_LIST));
 		}
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (isNotNull(this.weatherQueryCompleteBroadcastReceiver)) {
-			unregisterReceiver(this.weatherQueryCompleteBroadcastReceiver);
-			this.weatherQueryCompleteBroadcastReceiver = null;
-		}
-		if (isNotNull(this.notificationRemovedBroadcastReciever)) {
-			unregisterReceiver(this.notificationRemovedBroadcastReciever);
-			this.notificationRemovedBroadcastReciever = null;
+		if (isNotNull(this.updateWeatherListBroadcastReceiver)) {
+			unregisterReceiver(this.updateWeatherListBroadcastReceiver);
+			this.updateWeatherListBroadcastReceiver = null;
 		}
 	}
 
@@ -225,9 +209,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	protected void onLoadWeatherChoice(final WeatherChoice woeidChoice) {
-		// woeidChoice.setActive(true);
-		// this.weatherDao.update(woeidChoice);
-
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, woeidChoice.getId());
 

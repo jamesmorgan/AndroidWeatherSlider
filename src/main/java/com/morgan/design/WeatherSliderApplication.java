@@ -8,11 +8,11 @@ import org.acra.annotation.ReportsCrashes;
 import android.app.Application;
 import android.content.Intent;
 
+import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.BuildUtils;
-import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.weatherslider.morgan.design.R;
 
 @ReportsCrashes(formKey = Constants.ANDROID_DOCS_CRASH_REPORT_KEY, mode = ReportingInteractionMode.TOAST, forceCloseDialogAfterToast = false, resToastText = R.string.crash_toast_text)

@@ -2,11 +2,9 @@ package com.morgan.design.android.service;
 
 import static com.morgan.design.Constants.CONNECTIVITY_CHANGED;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
-import static com.morgan.design.Constants.LATEST_WEATHER_QUERY_COMPLETE;
-import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
-import static com.morgan.design.Constants.NOTIFICATION_REMOVED;
 import static com.morgan.design.Constants.PHONE_BOOT;
 import static com.morgan.design.Constants.RELOAD_WEATHER;
+import static com.morgan.design.Constants.UPDATE_WEATHER_LIST;
 import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotZero;
 
@@ -96,21 +94,29 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 
 			final int id = intent.getIntExtra(WEATHER_ID, 0);
 			if (isNotZero(id)) {
-				if (this.mBoundNotificationControllerService.notificationsAreFull()) {
 
-					final WeatherChoice choice = this.weatherDao.getById(id);
-					choice.setRoaming(false);
-					this.weatherDao.update(choice);
-
-					sendBroadcast(new Intent(NOTIFICATIONS_FULL));
-					sendBroadcast(new Intent(NOTIFICATION_REMOVED));
-				}
-				else {
-					final WeatherChoice choice = this.weatherDao.getById(id);
+				final WeatherChoice choice = this.weatherDao.getById(id);
+				if (null != choice) {
 					choice.setRoaming(false);
 					this.weatherDao.update(choice);
 					getWeather(choice);
 				}
+
+				// if (this.mBoundNotificationControllerService.notificationsAreFull()) {
+				//
+				// final WeatherChoice choice = this.weatherDao.getById(id);
+				// choice.setRoaming(false);
+				// this.weatherDao.update(choice);
+				//
+				// sendBroadcast(new Intent(NOTIFICATIONS_FULL));
+				// // sendBroadcast(new Intent(NOTIFICATION_REMOVED));
+				// }
+				// else {
+				// final WeatherChoice choice = this.weatherDao.getById(id);
+				// choice.setRoaming(false);
+				// this.weatherDao.update(choice);
+				// getWeather(choice);
+				// }
 			}
 		}
 
@@ -157,7 +163,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		this.weatherDao.update(choice);
 		this.weatherChoice = this.weatherDao.getActiveStaticLocations();
 
-		sendBroadcast(new Intent(LATEST_WEATHER_QUERY_COMPLETE));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
 	}
 
 	@Override

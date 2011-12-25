@@ -2,7 +2,7 @@ package com.morgan.design.android.service;
 
 import static com.morgan.design.Constants.FROM_FRESH_LOOKUP;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
-import static com.morgan.design.Constants.LATEST_WEATHER_QUERY_COMPLETE;
+import static com.morgan.design.Constants.UPDATE_WEATHER_LIST;
 import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNotZero;
@@ -187,7 +187,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		this.weatherDao.update(this.weatherChoice);
 
-		sendBroadcast(new Intent(LATEST_WEATHER_QUERY_COMPLETE));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
 
 		// TODO add repeating alarm
 	}

@@ -34,10 +34,10 @@ import android.widget.Toast;
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
+import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.LocationLookupService;
 import com.morgan.design.android.service.RoamingLookupService;
-import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.Utils;
 import com.morgan.design.android.util.YahooRequestUtils;
@@ -93,7 +93,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			unregisterReceiver(this.locationChangedBroadcastReciever);
 			this.locationChangedBroadcastReciever = null;
 		}
-		stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
+		// stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 	}
 
 	@Override
@@ -261,7 +261,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		this.progressDialog = ProgressDialog.show(this, "", message, true, true, new OnCancelListener() {
 			@Override
 			public void onCancel(final DialogInterface dialog) {
-				stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
+				// stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 				stopService(new Intent(LocationLookupService.GET_ONE_OFF_CURRENT_LOCATION));
 			}
 		});
