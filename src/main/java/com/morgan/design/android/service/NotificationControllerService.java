@@ -85,10 +85,6 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 				if (delete) {
 					this.weatherDao.delete(weatherChoice);
 				}
-				// else {
-				// weatherChoice.setActive(false);
-				// this.weatherDao.update(weatherChoice);
-				// }
 			}
 		}
 	}

@@ -13,14 +13,11 @@ import com.weatherslider.morgan.design.R;
 
 public class UserPreferencesActivity extends PreferenceActivity {
 
-	// FIXME -> preferences
-	// TODO -> Option to start on boot, paid version only?
 	// TODO -> Option to show up to 3 notifications, paid version only
 	// TODO -> On notification click option, open web or open overview dialog with link, possible option can show sample?
 	// http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se
 	// TODO -> Option to disable adds?
 	// TODO -> Option to pick API, e.g. Google/Yahoo
-	// TODO -> Show change log on start
 
 	private static final String LOG_TAG = "UserPreferencesActivity";
 
@@ -120,6 +117,18 @@ public class UserPreferencesActivity extends PreferenceActivity {
 				}
 			});
 		}
+
+		if (pref.getKey().equals(PreferenceUtils.PREF_RELOAD_ON_CONNECTIVITY_CHANGED)) {
+			findPreference(PreferenceUtils.PREF_RELOAD_ON_CONNECTIVITY_CHANGED).setOnPreferenceChangeListener(
+					new Preference.OnPreferenceChangeListener() {
+						@Override
+						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+							UserPreferencesActivity.this.hasChanged = true;
+							return PreferenceUtils.setShouldReloadOnConnectivityChanged(getApplicationContext(), (Boolean) clicked);
+						}
+					});
+		}
+
 		return super.onPreferenceTreeClick(preferenceScreen, pref);
 	}
 }

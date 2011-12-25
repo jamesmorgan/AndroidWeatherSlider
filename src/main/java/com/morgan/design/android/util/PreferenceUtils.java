@@ -23,6 +23,7 @@ public class PreferenceUtils {
 	public static final String PREF_TEMPERATURE_MODE = "temperatureMode";
 	public static final String PREF_WIND_MODE = "windSpeedMode";
 	public static final String PREF_APP_VERSION = "app.version";
+	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
@@ -91,6 +92,16 @@ public class PreferenceUtils {
 		return getPrefs(context).edit().putBoolean(PREF_START_ON_BOOT, shouldStartOnBoot).commit();
 	}
 
+	public static boolean shouldReloadOnConnectivityChanged(final Context context) {
+		final boolean shouldReloadOnConnectivityChanged = getPrefs(context).getBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, true);
+		Logger.d("PreferenceUtils", "shouldReloadOnConnectivityChanged [%s]", shouldReloadOnConnectivityChanged);
+		return shouldReloadOnConnectivityChanged;
+	}
+
+	public static boolean setShouldReloadOnConnectivityChanged(final Context context, final boolean shouldReloadOnConnectivityChanged) {
+		return getPrefs(context).edit().putBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, shouldReloadOnConnectivityChanged).commit();
+	}
+
 	public static int getAppVersionPref(final Context context) {
 		return getPrefs(context).getInt(PREF_APP_VERSION, 0);
 	}
@@ -98,4 +109,5 @@ public class PreferenceUtils {
 	public static boolean setAppVersionPref(final Context context, final int value) {
 		return getPrefs(context).edit().putInt(PREF_APP_VERSION, value).commit();
 	}
+
 }

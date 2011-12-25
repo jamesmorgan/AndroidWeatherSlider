@@ -42,6 +42,7 @@
             android:key="pollingSchedule"
             android:summary="Configure when you check of weather updates"
             android:title="Update Interval" />
+        
     </PreferenceCategory>
 
     <!-- TODO - Option to show up to 3 notifications, paid version only -->
@@ -56,6 +57,12 @@
             android:key="startOnBoot"
             android:summary="Enable this to start on first boot"
             android:title="Start On First Boot" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="reloadOnConnectivityChanged"
+            android:summary="Enable this to reload weather everytime your connectivty changes"
+            android:title="Reload On Connectivity Changed" />
 
         <CheckBoxPreference
             android:defaultValue="true"

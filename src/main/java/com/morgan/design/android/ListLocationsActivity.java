@@ -147,7 +147,6 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		final WeatherChoice choice = new WeatherChoice();
 		choice.setWoeid(entry.getWoeid());
 		choice.setCreatedDateTime(new Date());
-		// choice.setActive(true);
 		choice.setCurrentLocationText(getSimpleLocation(entry));
 		choice.setCurrentWeatherText("N/A");
 
@@ -166,6 +165,6 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		final String location = valueOrDefault(entry.getName(), "");
 		return stringHasValue(location)
 				? location + ", " + valueOrDefault(entry.getCountry(), "")
-				: location;
+				: valueOrDefault(entry.getCountry(), "");
 	}
 }

@@ -35,6 +35,8 @@ import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.RoamingLookupService;
+import com.morgan.design.android.service.ServiceUpdateBroadcaster;
+import com.morgan.design.android.service.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.service.ServiceUpdateRegister;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
@@ -59,6 +61,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	private GoogleAnalyticsService googleAnalyticsService;
 
 	protected ServiceUpdateRegister serviceUpdateRegister;
+	private ServiceUpdateBroadcaster serviceUpdate;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
+		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.serviceUpdateRegister = new ServiceUpdateRegister(this);
 
 		reLoadWeatherChoices();
@@ -80,6 +84,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 					onLoadWeatherChoice(choice);
 				}
 			}
+			this.serviceUpdate.onGoing("Loading existing notifications");
 		}
 	}
 
@@ -160,6 +165,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case Constants.UPDATED_PREFERENCES:
 				if (resultCode == RESULT_OK) {
 					sendBroadcast(new Intent(Constants.PREFERENCES_UPDATED));
+					this.serviceUpdate.onGoing("Preferences changed, updating...");
 				}
 				break;
 			default:

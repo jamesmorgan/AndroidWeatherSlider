@@ -13,7 +13,7 @@ import com.weatherslider.morgan.design.R;
 
 public class ServiceUpdateRegister extends BroadcastReceiver {
 
-	private static final int THREE_SECONDS = 3000;
+	private static final int SEVEN_SECONDS = 7000;
 
 	private static final String LOG_TAG = "ServiceUpdateRegister";
 
@@ -73,7 +73,7 @@ public class ServiceUpdateRegister extends BroadcastReceiver {
 	private void setNewText(final CharSequence message) {
 		this.handler.removeCallbacks(this.clearTextRunnable);
 		this.service_update_area.setText(message);
-		this.handler.postDelayed(this.clearTextRunnable, THREE_SECONDS);
+		this.handler.postDelayed(this.clearTextRunnable, SEVEN_SECONDS);
 	}
 
 }

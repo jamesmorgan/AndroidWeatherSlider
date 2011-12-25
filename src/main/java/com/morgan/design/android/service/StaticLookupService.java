@@ -86,8 +86,10 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 			}
 		}
 		else if (fromConnectivityChanged(intent)) {
-			Logger.d(LOG_TAG, "Loading weather data, triggered from connectivity changed");
-			reloadAll();
+			if (PreferenceUtils.shouldReloadOnConnectivityChanged(this)) {
+				Logger.d(LOG_TAG, "Loading weather data, triggered from connectivity changed");
+				reloadAll();
+			}
 		}
 		else if (fromInactiveLocation(intent)) {
 			Logger.d(LOG_TAG, "Loading weather data, triggered from inacitve notification load");
@@ -101,22 +103,6 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 					this.weatherDao.update(choice);
 					getWeather(choice);
 				}
-
-				// if (this.mBoundNotificationControllerService.notificationsAreFull()) {
-				//
-				// final WeatherChoice choice = this.weatherDao.getById(id);
-				// choice.setRoaming(false);
-				// this.weatherDao.update(choice);
-				//
-				// sendBroadcast(new Intent(NOTIFICATIONS_FULL));
-				// // sendBroadcast(new Intent(NOTIFICATION_REMOVED));
-				// }
-				// else {
-				// final WeatherChoice choice = this.weatherDao.getById(id);
-				// choice.setRoaming(false);
-				// this.weatherDao.update(choice);
-				// getWeather(choice);
-				// }
 			}
 		}
 
