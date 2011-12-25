@@ -225,8 +225,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	protected void onLoadWeatherChoice(final WeatherChoice woeidChoice) {
-		woeidChoice.setActive(true);
-		this.weatherDao.update(woeidChoice);
+		// woeidChoice.setActive(true);
+		// this.weatherDao.update(woeidChoice);
 
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, woeidChoice.getId());

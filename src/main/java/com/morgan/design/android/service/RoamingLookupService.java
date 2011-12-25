@@ -138,9 +138,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			this.weatherDao.create(this.weatherChoice);
 		}
 
-		this.weatherChoice.setActive(true);
 		this.weatherChoice.setRoaming(true);
-
 		this.weatherDao.update(this.weatherChoice);
 
 		triggerGetGpsLocation();
@@ -148,13 +146,11 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	public void initiateRoamingWeatherProcess(final int weatherId) {
 		if (null != this.weatherChoice) {
-			this.weatherChoice.setActive(false);
 			this.weatherChoice.setRoaming(false);
 			this.weatherDao.update(this.weatherChoice);
 		}
 
 		this.weatherChoice = this.weatherDao.getById(weatherId);
-		this.weatherChoice.setActive(true);
 		this.weatherChoice.setRoaming(true);
 		this.weatherDao.update(this.weatherChoice);
 		triggerGetGpsLocation();

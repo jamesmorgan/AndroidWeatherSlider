@@ -99,7 +99,6 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 				if (this.mBoundNotificationControllerService.notificationsAreFull()) {
 
 					final WeatherChoice choice = this.weatherDao.getById(id);
-					choice.setActive(false);
 					choice.setRoaming(false);
 					this.weatherDao.update(choice);
 
@@ -108,7 +107,6 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 				}
 				else {
 					final WeatherChoice choice = this.weatherDao.getById(id);
-					choice.setActive(true);
 					choice.setRoaming(false);
 					this.weatherDao.update(choice);
 					getWeather(choice);

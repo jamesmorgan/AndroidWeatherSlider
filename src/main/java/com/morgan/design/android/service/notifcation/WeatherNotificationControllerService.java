@@ -16,6 +16,7 @@ import android.os.IBinder;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.NotificationDao;
+import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.orm.Notification;
 import com.morgan.design.android.domain.orm.WeatherChoice;
@@ -36,6 +37,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	protected BaseNotifcationService mBoundNotificationService3;
 
 	private NotificationDao notificationDao;
+	private WeatherChoiceDao weatherDao;
 
 	@Override
 	public IBinder onBind(final Intent intent) {
@@ -83,6 +85,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	public void onCreate() {
 		super.onCreate();
 		this.notificationDao = new NotificationDao(getHelper());
+		this.weatherDao = new WeatherChoiceDao(getHelper());
 		bindService(new Intent(this, WeatherNotificationService1.class), this, Context.BIND_AUTO_CREATE);
 		bindService(new Intent(this, WeatherNotificationService2.class), this, Context.BIND_AUTO_CREATE);
 		bindService(new Intent(this, WeatherNotificationService3.class), this, Context.BIND_AUTO_CREATE);
@@ -140,6 +143,8 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			if (null != service) {
 				service.removeNotification();
 			}
+			weatherChoice.setActive(false);
+			this.weatherDao.update(weatherChoice);
 			this.notificationDao.delete(notification);
 			sendBroadcast(new Intent(NOTIFICATION_REMOVED));
 		}
