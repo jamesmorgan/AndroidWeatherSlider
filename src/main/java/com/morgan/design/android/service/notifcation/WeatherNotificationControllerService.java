@@ -119,10 +119,10 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 					if (!service.isActive()) {
 						service.setWeatherInformation(weatherInfo);
 						notification.setServiceId(service.getNotifcationId());
+						this.notificationDao.addNotification(notification);
 						break;
 					}
 				}
-				this.notificationDao.addNotification(notification);
 				return true;
 			}
 			else {
@@ -136,11 +136,11 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	public void removeNotification(final WeatherChoice weatherChoice) {
 		final Notification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
 		if (null != notification) {
-
 			final BaseNotifcationService service = this.boundServices.get(notification.getServiceId());
-			service.removeNotification();
+			if (null != service) {
+				service.removeNotification();
+			}
 			this.notificationDao.delete(notification);
-
 			sendBroadcast(new Intent(NOTIFICATION_REMOVED));
 		}
 	}

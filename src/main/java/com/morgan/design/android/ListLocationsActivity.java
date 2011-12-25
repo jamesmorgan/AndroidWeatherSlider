@@ -2,6 +2,8 @@ package com.morgan.design.android;
 
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
 import static com.morgan.design.Constants.WEATHER_ID;
+import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
+import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -146,6 +148,9 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		choice.setWoeid(entry.getWoeid());
 		choice.setCreatedDateTime(new Date());
 		choice.setActive(true);
+		choice.setCurrentLocationText(getSimpleLocation(entry));
+		choice.setCurrentWeatherText("N/A");
+
 		this.weatherDao.create(choice);
 
 		final Bundle bundle = new Bundle();
@@ -157,4 +162,10 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		finish();
 	}
 
+	private String getSimpleLocation(final WOEIDEntry entry) {
+		final String location = valueOrDefault(entry.getName(), "");
+		return stringHasValue(location)
+				? location + ", " + valueOrDefault(entry.getCountry(), "")
+				: location;
+	}
 }

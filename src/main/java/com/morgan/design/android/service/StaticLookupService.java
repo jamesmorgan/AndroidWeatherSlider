@@ -99,7 +99,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 				if (this.mBoundNotificationControllerService.notificationsAreFull()) {
 
 					final WeatherChoice choice = this.weatherDao.getById(id);
-					choice.setActive(true);
+					choice.setActive(false);
 					choice.setRoaming(false);
 					this.weatherDao.update(choice);
 
@@ -140,19 +140,6 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 	public void onPostLookup(final YahooWeatherLookup weatherLookup) {
 		this.serviceUpdate.complete("Completed Weather Lookup");
 
-		// final int serviceId = this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo);
-		// choice.setActive(0 != serviceId);
-		// choice.setLastknownNotifcationId(serviceId);
-		//
-		// if (null != weatherInfo) {
-		// broadcastIntent.putExtra(SUCCESSFUL, true);
-		// choice.successfullyQuery(weatherInfo);
-		// }
-		// else {
-		// choice.failedQuery();
-		// broadcastIntent.putExtra(SUCCESSFUL, false);
-		// }
-
 		final YahooWeatherInfo weatherInfo = weatherLookup.getWeatherInfo();
 		final WeatherChoice choice = weatherLookup.getWeatherChoice();
 
@@ -185,19 +172,19 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 	}
 
 	private boolean fromInactiveLocation(final Intent intent) {
-		return intent.hasExtra(FROM_INACTIVE_LOCATION) && intent.getBooleanExtra(FROM_INACTIVE_LOCATION, false);
+		return null != intent && intent.hasExtra(FROM_INACTIVE_LOCATION) && intent.getBooleanExtra(FROM_INACTIVE_LOCATION, false);
 	}
 
 	private boolean fromReloadWeather(final Intent intent) {
-		return intent.hasExtra(RELOAD_WEATHER) && intent.getBooleanExtra(RELOAD_WEATHER, false);
+		return null != intent && intent.hasExtra(RELOAD_WEATHER) && intent.getBooleanExtra(RELOAD_WEATHER, false);
 	}
 
 	private boolean fromConnectivityChanged(final Intent intent) {
-		return intent.hasExtra(CONNECTIVITY_CHANGED) && intent.getBooleanExtra(CONNECTIVITY_CHANGED, false);
+		return null != intent && intent.hasExtra(CONNECTIVITY_CHANGED) && intent.getBooleanExtra(CONNECTIVITY_CHANGED, false);
 	}
 
 	private boolean fromPhoneBoot(final Intent intent) {
-		return intent.hasExtra(PHONE_BOOT) && intent.getBooleanExtra(PHONE_BOOT, false);
+		return null != intent && intent.hasExtra(PHONE_BOOT) && intent.getBooleanExtra(PHONE_BOOT, false);
 	}
 
 	// //////////////////

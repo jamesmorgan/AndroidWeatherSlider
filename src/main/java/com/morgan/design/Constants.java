@@ -52,9 +52,6 @@ public class Constants {
 	public static final String NUMBER_OF_FORCASTS = "NUMBER_OF_FORCASTS";
 	public static final String WEATHER_ID = "WEATHER_ID";
 
-	@Deprecated
-	public static final String SERVICE_ID = "SERVICE_ID";
-
 	// Launch Controller Broadcast Intent properties
 	public static final String PHONE_BOOT = "PHONE_BOOT";
 	public static final String RELOAD_WEATHER = "RELOAD_WEATHER";

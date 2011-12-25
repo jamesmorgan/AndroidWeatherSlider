@@ -1,14 +1,11 @@
 package com.morgan.design.android;
 
-import static com.morgan.design.Constants.SERVICE_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotEmpty;
-import static com.morgan.design.android.util.ObjectUtils.isZero;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
@@ -27,13 +25,14 @@ import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
+import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PressureUtils;
 import com.weatherslider.morgan.design.R;
 
-public class WeatherOverviewActivity extends Activity implements SimpleGestureListener {
+public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> implements SimpleGestureListener {
 
 	private static final String LOG_TAG = "WeatherOverviewActivity";
 
@@ -47,16 +46,16 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_overview);
 
-		final Intent intent = getIntent();
-		if (null != intent) {
-			if (intent.hasExtra(SERVICE_ID)) {
-				final int serviceId = intent.getIntExtra(SERVICE_ID, 0);
-				if (isZero(serviceId)) {
-					Logger.w(LOG_TAG, "Service ID is null, this should not happen");
-					finish();
-				}
-			}
-		}
+		// final Intent intent = getIntent();
+		// if (null != intent) {
+		// if (intent.hasExtra(SERVICE_ID)) {
+		// final int serviceId = intent.getIntExtra(SERVICE_ID, 0);
+		// if (isZero(serviceId)) {
+		// Logger.w(LOG_TAG, "Service ID is null, this should not happen");
+		// finish();
+		// }
+		// }
+		// }
 
 		final WeatherSliderApplication appState = getTopLevelApplication();
 		this.googleAnalyticsService = appState.getGoogleAnalyticsService();

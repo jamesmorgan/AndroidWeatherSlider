@@ -1,7 +1,6 @@
 package com.morgan.design.android.service.notifcation;
 
 import static com.morgan.design.Constants.OPEN_WEATHER_OVERVIEW;
-import static com.morgan.design.Constants.SERVICE_ID;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -178,7 +177,7 @@ public abstract class BaseNotifcationService extends Service implements WeatherN
 
 	private PendingIntent createOpenOverviewActivity() {
 		final Intent notifyIntent = new Intent(OPEN_WEATHER_OVERVIEW);
-		notifyIntent.putExtra(SERVICE_ID, getNotifcationId());
+		// notifyIntent.putExtra(SERVICE_ID, getNotifcationId());
 		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
 		return PendingIntent.getActivity(this, getNotifcationId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
