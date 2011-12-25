@@ -14,6 +14,7 @@ import android.util.Log;
 import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.DayOfWeek;
+import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.util.DateUtils;
@@ -174,7 +175,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 	private void extractCurrentConditionData(final YahooWeatherInfo info, final Element element) {
 		if (element.getName().equals(CONDITION)) {
 			info.setCurrentText(element.getAttributeValue(CURRENT_TEXT));
-			info.setCurrentCode(valueOrZero(element.getAttributeValue(CURRENT_CODE)));
+			info.setCurrentCode(valueOrDefault(element.getAttributeValue(CURRENT_CODE), IconFactory.NA));
 			info.setCurrentTemp(valueOrZero(element.getAttributeValue(CURRENT_TEMP)));
 			info.setCurrentDate(DateUtils.fromRFC822(element.getAttributeValue(CURRENT_DATE)));
 		}
@@ -262,6 +263,17 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 		}
 		catch (final Exception e) {
 			return 0f;
+		}
+	}
+
+	private int valueOrDefault(final String attributeValue, final int defaultVal) {
+		try {
+			return isNotBlank(attributeValue)
+					? Integer.parseInt(attributeValue)
+					: defaultVal;
+		}
+		catch (final Exception e) {
+			return defaultVal;
 		}
 	}
 

@@ -8,6 +8,9 @@ import com.weatherslider.morgan.design.R;
 
 public class IconFactory {
 	public static final Map<Integer, Integer> WEATHER_MAP;
+
+	public static final int NA = R.drawable.weather_channel_44;
+
 	static {
 		WEATHER_MAP = new HashMap<Integer, Integer>();
 
