@@ -48,7 +48,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private WeatherChoiceDao weatherDao;
 
-	private List<WeatherChoice> woeidChoices;
+	private List<WeatherChoice> weatherChoices;
 
 	private CurrentChoiceAdaptor adaptor;
 
@@ -73,6 +73,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.serviceUpdateRegister = new ServiceUpdateRegister(this);
 
 		reLoadWeatherChoices();
+
+		if (PreferenceUtils.shouldStartOnBoot(this)) {
+			for (final WeatherChoice choice : this.weatherChoices) {
+				if (choice.isActive()) {
+					onLoadWeatherChoice(choice);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -162,7 +170,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		super.onListItemClick(l, v, position, id);
-		final WeatherChoice woeidChoice = this.woeidChoices.get(position);
+		final WeatherChoice woeidChoice = this.weatherChoices.get(position);
 
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 		alertDialog.setTitle("Manage Location");
@@ -226,8 +234,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// //////////////////////////////////////////
 
 	private void reLoadWeatherChoices() {
-		this.woeidChoices = this.weatherDao.findAllWoeidChoices();
-		this.adaptor = new CurrentChoiceAdaptor(this, this.woeidChoices);
+		this.weatherChoices = this.weatherDao.findAllWoeidChoices();
+		this.adaptor = new CurrentChoiceAdaptor(this, this.weatherChoices);
 		setListAdapter(this.adaptor);
 	}
 

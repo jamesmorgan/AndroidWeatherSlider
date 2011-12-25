@@ -75,9 +75,12 @@ public class TODO {
 	// FIXME -> Ensure max 3 notifications, only one roaming based weather lookup, 2-3 optional other locations
 	// FIXME -> Set maximum number of allowed notifications in preference
 
-	// FIXME -> Allow re-loading of existing notifications on start up
 	// FIXME -> add preference for updating on connectivity change (StaticLookupService)
 	// FIXME -> Fixed bug showing weather icon when no present
+
+	// FIXME -> DONE - (25/12/2011) - Allow re-loading of existing notifications on start up
+	// FIXME -> Deal with service restarts
+
 	// FIXME -> DONE - (24/12/2011) - Disable ACRA if running emulator
 
 	// FIXME -> DONE - (23/12/2011) - On preferences updated reload all notifications

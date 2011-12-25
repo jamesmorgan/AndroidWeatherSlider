@@ -261,7 +261,6 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		this.progressDialog = ProgressDialog.show(this, "", message, true, true, new OnCancelListener() {
 			@Override
 			public void onCancel(final DialogInterface dialog) {
-				// stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 				stopService(new Intent(LocationLookupService.GET_ONE_OFF_CURRENT_LOCATION));
 			}
 		});
