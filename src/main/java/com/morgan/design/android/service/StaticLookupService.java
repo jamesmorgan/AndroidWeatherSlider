@@ -7,7 +7,6 @@ import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
 import static com.morgan.design.Constants.NOTIFICATION_REMOVED;
 import static com.morgan.design.Constants.PHONE_BOOT;
 import static com.morgan.design.Constants.RELOAD_WEATHER;
-import static com.morgan.design.Constants.SUCCESSFUL;
 import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotZero;
 
@@ -20,6 +19,7 @@ import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.WeatherChoiceDao;
@@ -33,6 +33,7 @@ import com.morgan.design.android.tasks.OnAsyncCallback;
 import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.TimeUtils;
 
 public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection,
 		OnAsyncCallback<YahooWeatherLookup> {
@@ -139,29 +140,39 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 	public void onPostLookup(final YahooWeatherLookup weatherLookup) {
 		this.serviceUpdate.complete("Completed Weather Lookup");
 
-		final Intent broadcastIntent = new Intent(LATEST_WEATHER_QUERY_COMPLETE);
+		// final int serviceId = this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo);
+		// choice.setActive(0 != serviceId);
+		// choice.setLastknownNotifcationId(serviceId);
+		//
+		// if (null != weatherInfo) {
+		// broadcastIntent.putExtra(SUCCESSFUL, true);
+		// choice.successfullyQuery(weatherInfo);
+		// }
+		// else {
+		// choice.failedQuery();
+		// broadcastIntent.putExtra(SUCCESSFUL, false);
+		// }
 
 		final YahooWeatherInfo weatherInfo = weatherLookup.getWeatherInfo();
 		final WeatherChoice choice = weatherLookup.getWeatherChoice();
 
-		final int serviceId = this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo);
-		choice.setActive(0 != serviceId);
-		choice.setLastknownNotifcationId(serviceId);
-
 		if (null != weatherInfo) {
-			broadcastIntent.putExtra(SUCCESSFUL, true);
+			choice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo));
 			choice.successfullyQuery(weatherInfo);
 		}
 		else {
+			Toast.makeText(
+					this,
+					String.format("Unable to get weather details at present, will try again in %s",
+							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
+				.show();
 			choice.failedQuery();
-			broadcastIntent.putExtra(SUCCESSFUL, false);
 		}
 
 		this.weatherDao.update(choice);
-
 		this.weatherChoice = this.weatherDao.getActiveStaticLocations();
 
-		sendBroadcast(broadcastIntent);
+		sendBroadcast(new Intent(LATEST_WEATHER_QUERY_COMPLETE));
 	}
 
 	@Override

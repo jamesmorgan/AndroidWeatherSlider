@@ -55,12 +55,6 @@ public class WeatherOverviewActivity extends Activity implements SimpleGestureLi
 					Logger.w(LOG_TAG, "Service ID is null, this should not happen");
 					finish();
 				}
-				// final WeatherLookupEntry lookupEntry = getTopLevelApplication().getWeatherForSerivceId(serviceId);
-				// this.currentWeather = lookupEntry.getWeatherInfo();
-				// if (isNull(this.currentWeather)) {
-				// Logger.w(LOG_TAG, "Unable to find weather for service ID [%s], this should not happen", serviceId);
-				// finish();
-				// }
 			}
 		}
 

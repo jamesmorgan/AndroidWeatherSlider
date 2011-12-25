@@ -28,6 +28,7 @@ public abstract class BaseNotifcationService extends Service implements WeatherN
 	private YahooWeatherInfo currentWeather;
 
 	private boolean isBound = false;
+	private boolean isActive = false;
 
 	// //////////////////////////////////////////////
 	// ////////// Service methods ///////////////////
@@ -82,10 +83,12 @@ public abstract class BaseNotifcationService extends Service implements WeatherN
 	@Override
 	public void setWeatherInformation(final YahooWeatherInfo currentWeather) {
 		if (null != currentWeather) {
+			this.isActive = true;
 			this.currentWeather = currentWeather;
 			showNotification();
 		}
 		else {
+			this.isActive = false;
 			stopSelf();
 		}
 	}
@@ -93,6 +96,7 @@ public abstract class BaseNotifcationService extends Service implements WeatherN
 	@Override
 	public void removeNotification() {
 		this.notificationManager.cancel(getNotifcationId());
+		this.isActive = false;
 		stopForeground(true);
 		stopSelf();
 	}
@@ -100,6 +104,11 @@ public abstract class BaseNotifcationService extends Service implements WeatherN
 	@Override
 	public boolean isBound() {
 		return this.isBound;
+	}
+
+	@Override
+	public boolean isActive() {
+		return this.isActive;
 	}
 
 	// /////////////////////////////////////////////

@@ -10,6 +10,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.morgan.design.android.domain.orm.Notification;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
@@ -30,6 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	private Dao<WeatherChoice, Integer> weatherChoiceDao = null;
+	private Dao<Notification, Integer> notificationDao = null;
 
 	@Override
 	public void onCreate(final SQLiteDatabase db, final ConnectionSource connectionSource) {
@@ -37,6 +39,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			dropTablesIfExists(connectionSource);
 			TableUtils.createTableIfNotExists(connectionSource, WeatherChoice.class);
+			TableUtils.createTableIfNotExists(connectionSource, Notification.class);
 		}
 		catch (final SQLException e) {
 			Logger.e(LOG_TAG, "Can't create database", e);
@@ -89,16 +92,22 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	private void dropTablesIfExists(final ConnectionSource connectionSource) throws SQLException {
 		TableUtils.dropTable(connectionSource, WeatherChoice.class, true);
+		TableUtils.dropTable(connectionSource, Notification.class, true);
 	}
 
 	@Override
 	public void close() {
 		super.close();
 		this.weatherChoiceDao = null;
+		this.notificationDao = null;
 	}
 
 	public Dao<WeatherChoice, Integer> getWeatherChoiceDao() throws SQLException {
 		return loadDao(this.weatherChoiceDao, WeatherChoice.class);
+	}
+
+	public Dao<Notification, Integer> getNotificationDao() throws SQLException {
+		return loadDao(this.notificationDao, Notification.class);
 	}
 
 	private <T> Dao<T, Integer> loadDao(Dao<T, Integer> t, final Class<T> clazz) throws SQLException {

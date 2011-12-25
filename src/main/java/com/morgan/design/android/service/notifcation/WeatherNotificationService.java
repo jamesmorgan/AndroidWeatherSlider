@@ -12,4 +12,6 @@ public interface WeatherNotificationService {
 
 	public boolean isBound();
 
+	public boolean isActive();
+
 }

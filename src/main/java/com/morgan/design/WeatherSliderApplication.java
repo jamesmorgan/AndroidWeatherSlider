@@ -1,6 +1,7 @@
 package com.morgan.design;
 
 import org.acra.ACRA;
+import org.acra.ErrorReporter;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
@@ -10,6 +11,7 @@ import android.content.Intent;
 import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
+import com.morgan.design.android.util.BuildUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.weatherslider.morgan.design.R;
 
@@ -22,6 +24,11 @@ public class WeatherSliderApplication extends Application {
 	public void onCreate() {
 		ACRA.init(this);
 		super.onCreate();
+
+		if (BuildUtils.isRunningEmmulator()) {
+			ErrorReporter.getInstance().disable();
+		}
+
 		this.googleAnalyticsService = GoogleAnalyticsService.create(getApplicationContext());
 		startService(new Intent(this, NotificationControllerService.class));
 		startService(new Intent(this, StaticLookupService.class));

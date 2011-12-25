@@ -39,9 +39,6 @@ public class WeatherChoice implements Serializable, Woeid {
 	@DatabaseField
 	private float longitude;
 
-	@DatabaseField
-	private int lastknownNotifcationId;
-
 	@DatabaseField(dataType = DataType.DATE)
 	private Date createdDateTime;
 
@@ -120,14 +117,6 @@ public class WeatherChoice implements Serializable, Woeid {
 
 	public void setCurrentWeatherCode(final int currentWeatherCode) {
 		this.currentWeatherCode = currentWeatherCode;
-	}
-
-	public int getLastknownNotifcationId() {
-		return this.lastknownNotifcationId;
-	}
-
-	public void setLastknownNotifcationId(final int lastknownNotifcationId) {
-		this.lastknownNotifcationId = lastknownNotifcationId;
 	}
 
 	public int getCurrentTemperature() {
@@ -245,8 +234,6 @@ public class WeatherChoice implements Serializable, Woeid {
 			.append(this.latitude)
 			.append(", longitude=")
 			.append(this.longitude)
-			.append(", lastknownNotifcationId=")
-			.append(this.lastknownNotifcationId)
 			.append(", createdDateTime=")
 			.append(this.createdDateTime)
 			.append(", lastUpdatedDateTime=")

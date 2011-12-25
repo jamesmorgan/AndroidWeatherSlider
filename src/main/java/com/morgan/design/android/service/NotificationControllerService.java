@@ -81,7 +81,7 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 			final int weatherId = intent.getIntExtra(WEATHER_ID, 0);
 			if (isNotZero(weatherId)) {
 				final WeatherChoice weatherChoice = this.weatherDao.getById(weatherId);
-				this.mBoundNotificationControllerService.removeNotification(weatherChoice.getLastknownNotifcationId());
+				this.mBoundNotificationControllerService.removeNotification(weatherChoice);
 				if (delete) {
 					this.weatherDao.delete(weatherChoice);
 				}
@@ -100,10 +100,10 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 
 	protected void onNotificationsFull(final Context context) {
 		Logger.d(LOG_TAG, "Recieved: %s ", NOTIFICATIONS_FULL);
-		Toast.makeText(
-				context,
-				String.format("Unable to add more weather notifications, please remove one first, maximum of %s notifications allowed",
-						this.mBoundNotificationControllerService.getMaxAllowedNotifications()), Toast.LENGTH_SHORT).show();
+		// TODO Replace with hidden preference
+		Toast.makeText(context,
+				String.format("Unable to add more weather notifications, please remove one first, maximum of %s notifications allowed", 3),
+				Toast.LENGTH_SHORT).show();
 	}
 
 	protected void onCancelAllNotifications() {
@@ -111,7 +111,7 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 		for (final WeatherChoice weatherChoice : allWoeidChoices) {
 			weatherChoice.setActive(false);
 			this.weatherDao.update(weatherChoice);
-			this.mBoundNotificationControllerService.removeNotification(weatherChoice.getLastknownNotifcationId());
+			this.mBoundNotificationControllerService.removeNotification(weatherChoice);
 		}
 	}
 

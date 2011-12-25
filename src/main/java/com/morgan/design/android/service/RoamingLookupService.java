@@ -3,7 +3,6 @@ package com.morgan.design.android.service;
 import static com.morgan.design.Constants.FROM_FRESH_LOOKUP;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
 import static com.morgan.design.Constants.LATEST_WEATHER_QUERY_COMPLETE;
-import static com.morgan.design.Constants.SUCCESSFUL;
 import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNotZero;
@@ -20,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.WeatherChoiceDao;
@@ -34,6 +34,7 @@ import com.morgan.design.android.tasks.OnAsyncCallback;
 import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.TimeUtils;
 
 public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
 		ServiceConnection {
@@ -149,7 +150,6 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		if (null != this.weatherChoice) {
 			this.weatherChoice.setActive(false);
 			this.weatherChoice.setRoaming(false);
-			this.weatherChoice.setLastknownNotifcationId(0);
 			this.weatherDao.update(this.weatherChoice);
 		}
 
@@ -170,10 +170,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	public void onPostLookup(final YahooWeatherInfo weather) {
 		this.serviceUpdate.complete("Completed Weather Lookup");
 
-		final Intent broadcastIntent = new Intent(LATEST_WEATHER_QUERY_COMPLETE);
-
 		if (null != weather) {
-
 			// Set updated lat/long and woeid
 			this.weatherChoice.setWoeid(this.geocodeResult.getWoeid());
 			this.weatherChoice.setLatitude(this.geocodeResult.getLatitude());
@@ -181,29 +178,20 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 			// Successful execution
 			this.weatherChoice.successfullyQuery(weather);
-			broadcastIntent.putExtra(SUCCESSFUL, true);
-
-			// Add notification
-			final int serviceId = this.mBoundNotificationControllerService.addWeatherNotification(this.weatherChoice, weather);
-
-			// Successfully created notification
-			if (0 != serviceId) {
-				this.weatherChoice.setActive(true);
-				this.weatherChoice.setLastknownNotifcationId(serviceId);
-			}
-			else {
-				this.weatherChoice.setActive(false);
-			}
+			this.weatherChoice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(this.weatherChoice, weather));
 		}
 		else {
-
-			// Failed execution
+			Toast.makeText(
+					this,
+					String.format("Unable to get weather details at present, will try again in %s",
+							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
+				.show();
 			this.weatherChoice.failedQuery();
-			broadcastIntent.putExtra(SUCCESSFUL, false);
 		}
+
 		this.weatherDao.update(this.weatherChoice);
 
-		sendBroadcast(broadcastIntent);
+		sendBroadcast(new Intent(LATEST_WEATHER_QUERY_COMPLETE));
 
 		// TODO add repeating alarm
 	}

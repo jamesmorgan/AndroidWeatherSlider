@@ -2,8 +2,6 @@ package com.morgan.design.android.service.notifcation;
 
 import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
 import static com.morgan.design.Constants.NOTIFICATION_REMOVED;
-import static com.morgan.design.android.util.ObjectUtils.isNotNull;
-import static com.morgan.design.android.util.ObjectUtils.isNotZero;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +15,9 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.domain.YahooWeatherInfo;
+import com.morgan.design.android.domain.orm.Notification;
 import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
@@ -29,18 +29,13 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 
 	private final IBinder mBinder = new LocalBinder();
 
-	private static Map<Integer, Boolean> SERVICE_IDS = new HashMap<Integer, Boolean>();
-	static {
-		SERVICE_IDS.put(R.string.weather_notification_service_1, false);
-		SERVICE_IDS.put(R.string.weather_notification_service_2, false);
-		SERVICE_IDS.put(R.string.weather_notification_service_3, false);
-	}
-
 	private final Map<Integer, BaseNotifcationService> boundServices = new HashMap<Integer, BaseNotifcationService>();
 
 	protected BaseNotifcationService mBoundNotificationService1;
 	protected BaseNotifcationService mBoundNotificationService2;
 	protected BaseNotifcationService mBoundNotificationService3;
+
+	private NotificationDao notificationDao;
 
 	@Override
 	public IBinder onBind(final Intent intent) {
@@ -87,6 +82,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		this.notificationDao = new NotificationDao(getHelper());
 		bindService(new Intent(this, WeatherNotificationService1.class), this, Context.BIND_AUTO_CREATE);
 		bindService(new Intent(this, WeatherNotificationService2.class), this, Context.BIND_AUTO_CREATE);
 		bindService(new Intent(this, WeatherNotificationService3.class), this, Context.BIND_AUTO_CREATE);
@@ -96,49 +92,56 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	// ////////// Public methods ///////////////////
 	// /////////////////////////////////////////////
 
-	public int addWeatherNotification(final WeatherChoice weatherChoice, final YahooWeatherInfo weatherInfo) {
+	public boolean addWeatherNotification(final WeatherChoice weatherChoice, final YahooWeatherInfo weatherInfo) {
 
-		// Get existing service, check not present
-		final BaseNotifcationService existingService = this.boundServices.get(weatherChoice.getLastknownNotifcationId());
-		if (null != existingService) {
-			existingService.setWeatherInformation(weatherInfo);
+		Notification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
 
-			return weatherChoice.getLastknownNotifcationId();
-		}
-		// Try initiate another weather notification service
-		else {
-			for (final Entry<Integer, Boolean> service : SERVICE_IDS.entrySet()) {
-				final Integer serviceId = service.getKey();
-				final Boolean serviceIsActive = service.getValue();
+		// Existing notification
+		if (null != notification) {
+			final BaseNotifcationService existingService = this.boundServices.get(notification.getServiceId());
 
-				Logger.d(LOG_TAG, "Service ID [%s] is active [%s]", serviceId, serviceIsActive);
-
-				if (!serviceIsActive) {
-					final WeatherNotificationService notifcationService = this.boundServices.get(serviceId);
-					notifcationService.setWeatherInformation(weatherInfo);
-
-					Logger.d(LOG_TAG, "Service [%s] set to active", notifcationService.getClass().getSimpleName());
-					service.setValue(true);
-
-					return serviceId;
-				}
+			// Rebind -> update weather
+			if (null != existingService) {
+				existingService.setWeatherInformation(weatherInfo);
+				return true;
 			}
 		}
+		// New notification
+		else {
+			// Check available notifications
+			if (!notificationsAreFull()) {
 
-		// No available notification services left
-		sendBroadcast(new Intent(NOTIFICATIONS_FULL));
-		return 0;
+				notification = new Notification();
+				notification.setFkWeatherChoiceId(weatherChoice.getId());
 
+				// Find available service
+				for (final BaseNotifcationService service : this.boundServices.values()) {
+					if (!service.isActive()) {
+						service.setWeatherInformation(weatherInfo);
+						notification.setServiceId(service.getNotifcationId());
+						break;
+					}
+				}
+				this.notificationDao.addNotification(notification);
+				return true;
+			}
+			else {
+				// No notification available
+				sendBroadcast(new Intent(NOTIFICATIONS_FULL));
+			}
+		}
+		return false;
 	}
 
-	public void removeNotification(final int serviceId) {
-		if (isNotZero(serviceId)) {
-			final BaseNotifcationService baseNotifcationService = this.boundServices.get(serviceId);
-			if (isNotNull(baseNotifcationService)) {
-				baseNotifcationService.removeNotification();
-				SERVICE_IDS.put(serviceId, false);
-				sendBroadcast(new Intent(NOTIFICATION_REMOVED));
-			}
+	public void removeNotification(final WeatherChoice weatherChoice) {
+		final Notification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
+		if (null != notification) {
+
+			final BaseNotifcationService service = this.boundServices.get(notification.getServiceId());
+			service.removeNotification();
+			this.notificationDao.delete(notification);
+
+			sendBroadcast(new Intent(NOTIFICATION_REMOVED));
 		}
 	}
 
@@ -148,24 +151,9 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		}
 	}
 
-	public int getMaxAllowedNotifications() {
-		return this.boundServices.size();
-	}
-
 	public boolean notificationsAreFull() {
-		int countActive = 0;
-		for (final Entry<Integer, Boolean> service : SERVICE_IDS.entrySet()) {
-			if (service.getValue()) {
-				countActive++;
-			}
-		}
-		return this.boundServices.size() == countActive;
-
+		// Check available notifications
+		// TODO replace with hidden preference
+		return this.notificationDao.getNumberOfNotifications() > 3;
 	}
-
-	class Notification {
-		int id;
-		int serviceId;
-	}
-
 }

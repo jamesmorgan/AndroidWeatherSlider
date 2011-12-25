@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Changelog;
@@ -41,7 +40,6 @@ import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.GoogleAnalyticsService;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
-import com.morgan.design.android.util.TimeUtils;
 import com.weatherslider.morgan.design.R;
 
 public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
@@ -86,16 +84,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved : %s", intent.getAction());
-					final Bundle extras = intent.getExtras();
-					if (isNotNull(extras)) {
-						final boolean successful = extras.getBoolean(Constants.SUCCESSFUL);
-						if (successful) {
-							reLoadWeatherChoices();
-						}
-						else {
-							displayFailedQuery();
-						}
-					}
+					reLoadWeatherChoices();
 				}
 			};
 			registerReceiver(this.weatherQueryCompleteBroadcastReceiver, new IntentFilter(Constants.LATEST_WEATHER_QUERY_COMPLETE));
@@ -254,12 +243,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// //////////////////////////////////////////
 	// ///////////// General / Utility //////////
 	// //////////////////////////////////////////
-
-	private void displayFailedQuery() {
-		final String schedule = TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this));
-		Toast.makeText(this, String.format("Unable to get weather details at present, will try again in %s", schedule), Toast.LENGTH_SHORT)
-			.show();
-	}
 
 	private void reLoadWeatherChoices() {
 		this.woeidChoices = this.weatherDao.findAllWoeidChoices();
