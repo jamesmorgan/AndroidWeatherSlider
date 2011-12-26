@@ -28,7 +28,7 @@ public class ReloadingAlarmService extends IntentService {
 		Logger.d(LOG_TAG, "Reloading Alarm Service Initiated -> may set new one");
 
 		final AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		final PendingIntent pi = PendingIntent.getService(this, 0, new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"), 0);
+		final PendingIntent pi = PendingIntent.getBroadcast(this, 0, new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"), 0);
 
 		boolean hasNotifications = false;
 
