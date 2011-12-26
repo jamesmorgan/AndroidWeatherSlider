@@ -20,6 +20,7 @@ public class TODO {
 	// FIXME -> Capture all shared preference values on application crash (ARCA)
 	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
 	// FIXME -> Consider signing apk with maven -> http://code.google.com/p/maven-android-plugin/wiki/SigningAPKWithMavenJarsigner
+	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
 
 	// ///////////////
 	// Nice To Have //
@@ -44,6 +45,9 @@ public class TODO {
 	// FIXME -> Change to native XML parser -> http://android-developers.blogspot.com/2011/12/watch-out-for-xmlpullparsernexttext.html
 	// FIXME -> Complete statuses, active, inactive, issues?
 	// FIXME -> add ability to launch service from wake up i.e. unlock, screen on Launcher line 31
+	// FIXME -> Add fine grained user control to location services ->
+	// http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
+	// FIXME -> Improve location based service
 
 	// //////////////////////
 	// Release Version 1.0 //
@@ -69,13 +73,16 @@ public class TODO {
 	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat (
 	// "EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 
-	// FIXME -> Ensure all notifications always update correctly
-	// FIXME -> Ensure correct service IDs matched against current weather
-	// FIXME -> When reloading weather ensure still uses same service not creating a new one
 	// FIXME -> Set maximum number of allowed notifications in preference
-
 	// FIXME -> Deal with service restarts
 
+	// FIXME -> Ensure all notifications always update correctly
+	// FIXME -> Add phone boot alarm service & option
+	// FIXME -> Remove alarm when no active notifications
+	// FIXME -> Set alarm on initial notification creation
+	// FIXME -> DONE - (25/12/2011) - Add alarm service
+
+	// FIXME -> DONE - (25/12/2011) - When reloading weather ensure still uses same service not creating a new one
 	// FIXME -> DONE - (25/12/2011) - Add preference for updating on connectivity change (StaticLookupService)
 	// FIXME -> DONE - (25/12/2011) - Ensure max 3 notifications, only one roaming based weather lookup, 2-3 optional other locations
 	// FIXME -> DONE - (25/12/2011) - Added protection if no weather icon code found after query

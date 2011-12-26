@@ -9,10 +9,10 @@ import org.springframework.web.client.RestTemplate;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.YahooWeatherLookup;
-import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.Temperature;
 
 public class HttpWeatherLookupFactory {

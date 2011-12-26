@@ -1,4 +1,4 @@
-package com.morgan.design.android.domain.orm;
+package com.morgan.design.android.dao.orm;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

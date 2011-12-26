@@ -17,14 +17,16 @@ import android.os.IBinder;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.dao.WeatherChoiceDao;
+import com.morgan.design.android.dao.orm.Notification;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.domain.orm.Notification;
-import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
 public class WeatherNotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
+
+	private static final int MAX_NUMBER_OF_NOTIFICATIONS = 3;
 
 	private static final String LOG_TAG = "WeatherNotificationControllerService";
 
@@ -160,6 +162,6 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	public boolean notificationsAreFull() {
 		// Check available notifications
 		// TODO replace with hidden preference
-		return this.notificationDao.getNumberOfNotifications() >= 3;
+		return this.notificationDao.getNumberOfNotifications() >= MAX_NUMBER_OF_NOTIFICATIONS;
 	}
 }

@@ -10,7 +10,7 @@ import android.content.Intent;
 
 import com.morgan.design.android.util.Logger;
 
-public class LaunchController extends BroadcastReceiver {
+public class LaunchControllerReceiver extends BroadcastReceiver {
 
 	private static final String LOG_TAG = "LaunchController";
 

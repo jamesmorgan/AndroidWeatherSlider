@@ -10,8 +10,8 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.morgan.design.android.domain.orm.Notification;
-import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.Notification;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
 

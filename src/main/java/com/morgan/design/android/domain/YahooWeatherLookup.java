@@ -1,6 +1,6 @@
 package com.morgan.design.android.domain;
 
-import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 
 public class YahooWeatherLookup {
 

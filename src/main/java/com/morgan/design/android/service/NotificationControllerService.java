@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.WeatherChoiceDao;
-import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
 import com.morgan.design.android.util.Logger;

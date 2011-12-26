@@ -14,6 +14,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
+import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.util.Logger;
 
 public class LocationLookupService extends Service {
@@ -40,7 +42,7 @@ public class LocationLookupService extends Service {
 
 	boolean gpsEnabled = false;
 	boolean networkEnabled = false;
-	private ServiceUpdateBroadcaster serviceUpdate;
+	private IServiceUpdateBroadcaster serviceUpdate;
 
 	@Override
 	public void onCreate() {

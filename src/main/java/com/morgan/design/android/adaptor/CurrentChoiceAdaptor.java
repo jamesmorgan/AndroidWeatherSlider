@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.util.DateUtils;
 import com.weatherslider.morgan.design.R;

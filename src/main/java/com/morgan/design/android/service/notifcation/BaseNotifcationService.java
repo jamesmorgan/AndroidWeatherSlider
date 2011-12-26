@@ -22,7 +22,7 @@ import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
 
-public abstract class BaseNotifcationService extends Service implements WeatherNotificationService {
+public abstract class BaseNotifcationService extends Service implements IWeatherNotificationService {
 
 	private NotificationManager notificationManager;
 	private YahooWeatherInfo currentWeather;

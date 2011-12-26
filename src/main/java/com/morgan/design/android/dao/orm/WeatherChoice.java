@@ -1,4 +1,4 @@
-package com.morgan.design.android.domain.orm;
+package com.morgan.design.android.dao.orm;
 
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 

@@ -14,7 +14,7 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
-import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
@@ -160,5 +160,20 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 			logError(exception);
 		}
 		return null;
+	}
+
+	public boolean hasActiveNotifications() {
+		try {
+			final PreparedQuery<WeatherChoice> preparedQuery =
+					this.dao.queryBuilder().setCountOf(true).where().eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE)).prepare();
+
+			Logger.d(LOG_TAG, preparedQuery.getStatement());
+
+			return 0 != this.dao.countOf(preparedQuery);
+		}
+		catch (final SQLException exception) {
+			logError(exception);
+		}
+		return false;
 	}
 }

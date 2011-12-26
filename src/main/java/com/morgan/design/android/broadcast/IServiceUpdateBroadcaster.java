@@ -1,6 +1,6 @@
-package com.morgan.design.android.service;
+package com.morgan.design.android.broadcast;
 
-public interface ServiceUpdateBroadcaster {
+public interface IServiceUpdateBroadcaster {
 
 	void loading(CharSequence message);
 

@@ -151,9 +151,26 @@
             android:enabled="true"
             android:label="@string/weather_notification_service_2" />
         <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService3"
+            android:name="com.morgan.design.android.notifcation.service.WeatherNotificationService3"
             android:enabled="true"
             android:label="@string/weather_notification_service_3" />
+
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+
+        <!-- Service intent checks for active notifications and reloads them -->
+        <service android:name="com.morgan.design.android.service.ReloadingAlarmService" />
+
+        <!-- Periodic alarm receiver -->
+        <receiver
+            android:name="com.morgan.design.android.broadcast.LookupAlarmReciever"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.morgan.design.android.broadcast.LOOPING_ALARM" />
+            </intent-filter>
+        </receiver>
 
         <!-- ////////////////// -->
         <!-- ////////////////// -->
@@ -162,7 +179,7 @@
 
         <!-- Register periodic launcher for connectivity changes and get weather download -->
         <receiver
-            android:name="com.morgan.design.android.broadcast.LaunchController"
+            android:name="com.morgan.design.android.broadcast.LaunchControllerReceiver"
             android:enabled="true"
             android:exported="false"
             android:label="@string/periodic_reciever"

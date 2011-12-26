@@ -31,13 +31,13 @@ import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
+import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
+import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
+import com.morgan.design.android.broadcast.ServiceUpdateReceiver;
 import com.morgan.design.android.dao.WeatherChoiceDao;
-import com.morgan.design.android.domain.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.RoamingLookupService;
-import com.morgan.design.android.service.ServiceUpdateBroadcaster;
-import com.morgan.design.android.service.ServiceUpdateBroadcasterImpl;
-import com.morgan.design.android.service.ServiceUpdateRegister;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
@@ -60,8 +60,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private GoogleAnalyticsService googleAnalyticsService;
 
-	protected ServiceUpdateRegister serviceUpdateRegister;
-	private ServiceUpdateBroadcaster serviceUpdate;
+	protected ServiceUpdateReceiver serviceUpdateRegister;
+	private IServiceUpdateBroadcaster serviceUpdate;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.detector.setEnabled(true);
 		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
-		this.serviceUpdateRegister = new ServiceUpdateRegister(this);
+		this.serviceUpdateRegister = new ServiceUpdateReceiver(this);
 
 		reLoadWeatherChoices();
 
@@ -101,6 +101,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			};
 			registerReceiver(this.updateWeatherListBroadcastReceiver, new IntentFilter(Constants.UPDATE_WEATHER_LIST));
 		}
+
+		sendBroadcast(new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"));
 	}
 
 	@Override

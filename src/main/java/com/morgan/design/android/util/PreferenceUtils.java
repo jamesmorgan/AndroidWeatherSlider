@@ -50,8 +50,8 @@ public class PreferenceUtils {
 		return getPrefs(context).edit().putBoolean(PREF_ENABLE_GOOGLE_ANALYTICS, value).commit();
 	}
 
-	public static String getPollingSchedule(final Context context) {
-		return getPrefs(context).getString(PREF_POLLING_SCHEDULE, "15");
+	public static int getPollingSchedule(final Context context) {
+		return Integer.valueOf(getPrefs(context).getString(PREF_POLLING_SCHEDULE, "15"));
 	}
 
 	public static boolean setPollingSchedule(final Context context, final String minutes) {

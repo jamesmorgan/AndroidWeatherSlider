@@ -1,4 +1,4 @@
-package com.morgan.design.android.service;
+package com.morgan.design.android.broadcast;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
-public class ServiceUpdateRegister extends BroadcastReceiver {
+public class ServiceUpdateReceiver extends BroadcastReceiver {
 
 	private static final int SEVEN_SECONDS = 7000;
 
@@ -30,7 +30,7 @@ public class ServiceUpdateRegister extends BroadcastReceiver {
 
 	private final Runnable clearTextRunnable;
 
-	public ServiceUpdateRegister(final Activity context) {
+	public ServiceUpdateReceiver(final Activity context) {
 		this.context = context;
 		this.service_update_area = (TextView) this.context.findViewById(R.id.service_update_area);
 		this.context.registerReceiver(this, new IntentFilter(ACTION));
@@ -38,7 +38,7 @@ public class ServiceUpdateRegister extends BroadcastReceiver {
 		this.clearTextRunnable = new Runnable() {
 			@Override
 			public void run() {
-				ServiceUpdateRegister.this.service_update_area.setText("");
+				ServiceUpdateReceiver.this.service_update_area.setText("");
 			}
 		};
 	}

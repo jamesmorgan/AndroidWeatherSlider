@@ -22,10 +22,13 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
+import com.morgan.design.android.broadcast.ReloadWeatherReciever;
+import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.dao.WeatherChoiceDao;
+import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.domain.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
@@ -44,11 +47,13 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	private BroadcastReceiver locationChangedBroadcastReciever;
 	private OnAsyncCallback<GeocodeResult> onGeocodeDataCallback;
 
-	private ServiceUpdateBroadcaster serviceUpdate;
+	private IServiceUpdateBroadcaster serviceUpdate;
 	private ConnectivityManager cnnxManager;
 
 	protected WeatherChoiceDao weatherDao;
 	protected WeatherNotificationControllerService mBoundNotificationControllerService;
+
+	private ReloadWeatherReciever reloadWeatherReciever;
 
 	// ///////////////////////////////////
 	// Service creation and destruction //
@@ -60,6 +65,12 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.cnnxManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.weatherDao = new WeatherChoiceDao(getHelper());
+		this.reloadWeatherReciever = new ReloadWeatherReciever(this, new ReloadWeatherReciever.OnReloadWeather() {
+			@Override
+			public void onReload() {
+				Logger.d(LOG_TAG, "Alarm recieved");
+			}
+		});
 
 		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
 
@@ -90,6 +101,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		super.onDestroy();
 		unregisterLocationChangedUpdates();
 		unbindService(this);
+		this.reloadWeatherReciever.unregister();
 	}
 
 	@Override

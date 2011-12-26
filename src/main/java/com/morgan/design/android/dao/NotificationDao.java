@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
-import com.morgan.design.android.domain.orm.Notification;
+import com.morgan.design.android.dao.orm.Notification;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
