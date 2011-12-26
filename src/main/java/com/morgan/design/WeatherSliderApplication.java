@@ -1,5 +1,7 @@
 package com.morgan.design;
 
+import static com.morgan.design.Constants.LOOPING_ALARM;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +41,7 @@ public class WeatherSliderApplication extends Application {
 		startService(new Intent(this, NotificationControllerService.class));
 		startService(new Intent(this, StaticLookupService.class));
 		startService(new Intent(this, RoamingLookupService.class));
+		sendBroadcast(new Intent(LOOPING_ALARM));
 	}
 
 	@Override

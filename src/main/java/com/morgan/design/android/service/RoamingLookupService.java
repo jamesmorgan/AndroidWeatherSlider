@@ -2,6 +2,7 @@ package com.morgan.design.android.service;
 
 import static com.morgan.design.Constants.FROM_FRESH_LOOKUP;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
+import static com.morgan.design.Constants.LOOPING_ALARM;
 import static com.morgan.design.Constants.UPDATE_WEATHER_LIST;
 import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
@@ -68,12 +69,13 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.reloadWeatherReciever = new ReloadWeatherReciever(this, new ReloadWeatherReciever.OnReloadWeather() {
 			@Override
 			public void onReload() {
-				Logger.d(LOG_TAG, "Alarm recieved");
+				Logger.d(LOG_TAG, "Alarm recieved, reloading roaming weathers");
 				reload();
 			}
 		});
 
 		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
+		sendBroadcast(new Intent(LOOPING_ALARM));
 
 		registerForLocationChangedUpdates();
 
@@ -100,9 +102,9 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	private void reload() {
 		if (null == this.weatherChoice) {
 			this.weatherChoice = this.weatherDao.getActiveRoamingLocation();
-			if (null != this.weatherChoice) {
-				triggerGetGpsLocation();
-			}
+		}
+		if (null != this.weatherChoice) {
+			triggerGetGpsLocation();
 		}
 	}
 
@@ -204,14 +206,13 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 					String.format("Unable to get weather details at present, will try again in %s",
 							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
 				.show();
+			this.weatherChoice.setActive(false);
 			this.weatherChoice.failedQuery();
 		}
 
 		this.weatherDao.update(this.weatherChoice);
 
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
-		// sendBroadcast(new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"));
-		// TODO add alarm
 	}
 
 	@Override

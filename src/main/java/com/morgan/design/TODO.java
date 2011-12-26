@@ -73,16 +73,14 @@ public class TODO {
 	// FIXME -> Handle situations when no locations found
 	// FIXME -> Investigate how to ensure service is always started/on
 	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
-	// FIXME -> Allow for roaming location based settings (paid version only) -
-	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
+	// FIXME -> Allow for roaming location based settings (paid version only) - http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
 
-
+	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts
-	// FIXME -> Ensure all notifications always update correctly
-	// FIXME -> Remove alarm when no active notifications
-	// FIXME -> Set alarm on initial notification creation
 
+	// FIXME -> DONE - (26/12/2011) - Alarm control via application start, ensuring services both register for alarm updates
+	// FIXME -> DONE - (26/12/2011) - Added service update to alarm service so GUI updates with info about on going refresh
 	// FIXME -> DONE - (26/12/2011) - Change yahoo date to string as no computation needed, update overview and notification
 	// FIXME -> DONE - (26/12/2011) - Fix overview screens in-line with latest changes, no long passes object to activity
 	// FIXME -> DONE - (26/12/2011) - Add phone boot alarm service & option - http://it-ride.blogspot.com/2010/10/android-implementing-notification.html

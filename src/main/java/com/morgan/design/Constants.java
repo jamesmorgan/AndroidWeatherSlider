@@ -29,12 +29,11 @@ public class Constants {
 	/** Triggered when a request to get the weather is made */
 	public static final String RELOAD_WEATHER_BROADCAST = "com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST";
 
+	/** Broadcast used to periodically check active notifications and if so, perform an update */
+	public static final String LOOPING_ALARM = "com.morgan.design.android.broadcast.LOOPING_ALARM";
+
 	/** Triggered when the user wants to attempt to force close/cancel all active notifications */
 	public static final String CANCEL_ALL_WEATHER_NOTIFICATIONS = "com.morgan.design.android.broadcast.CANCEL_ALL_WEATHER_NOTIFICATIONS";
-
-	// Android inbuilt broadcasts
-	public static final String ANDROID_BOOT_COMPLETED_BROADCAST = "android.intent.action.ACTION_BOOT_COMPLETED";
-	public static final String ANDROID_CONNECTIVITY_CHANGE_BROADCAST = "android.net.conn.CONNECTIVITY_CHANGE";
 
 	// Activity Result codes
 	public static final int ENTER_LOCATION = 1;
