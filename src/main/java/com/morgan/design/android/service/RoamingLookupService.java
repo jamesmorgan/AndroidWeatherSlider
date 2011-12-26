@@ -69,6 +69,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			@Override
 			public void onReload() {
 				Logger.d(LOG_TAG, "Alarm recieved");
+				reload();
 			}
 		});
 
@@ -94,6 +95,15 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 				RoamingLookupService.this.serviceUpdate.onGoing("Lookup Geocode Location");
 			}
 		};
+	}
+
+	private void reload() {
+		if (null == this.weatherChoice) {
+			this.weatherChoice = this.weatherDao.getActiveRoamingLocation();
+			if (null != this.weatherChoice) {
+				triggerGetGpsLocation();
+			}
+		}
 	}
 
 	@Override
@@ -200,8 +210,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.weatherDao.update(this.weatherChoice);
 
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
-
-		// TODO add repeating alarm
+		// sendBroadcast(new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"));
+		// TODO add alarm
 	}
 
 	@Override

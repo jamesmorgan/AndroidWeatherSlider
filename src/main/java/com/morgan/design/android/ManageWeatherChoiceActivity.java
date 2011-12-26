@@ -101,8 +101,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			};
 			registerReceiver(this.updateWeatherListBroadcastReceiver, new IntentFilter(Constants.UPDATE_WEATHER_LIST));
 		}
-
-		sendBroadcast(new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"));
 	}
 
 	@Override

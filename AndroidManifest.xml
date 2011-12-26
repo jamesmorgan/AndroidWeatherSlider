@@ -147,6 +147,7 @@
         <!-- ////////////////// -->
         <!-- ////////////////// -->
 
+
         <!-- Service intent checks for active notifications and reloads them -->
         <service android:name="com.morgan.design.android.service.ReloadingAlarmService" />
 
@@ -159,6 +160,14 @@
                 <action android:name="com.morgan.design.android.broadcast.LOOPING_ALARM" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name="com.morgan.design.android.broadcast.BootReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <!-- ////////////////// -->
         <!-- ////////////////// -->
@@ -166,7 +175,7 @@
 
 
         <!-- Register periodic launcher for connectivity changes and get weather download -->
-        <receiver
+       <receiver
             android:name="com.morgan.design.android.broadcast.LaunchControllerReceiver"
             android:enabled="true"
             android:exported="false"
@@ -180,9 +189,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_USER_PRESENT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST" />
             </intent-filter>
         </receiver>
     </application>

@@ -21,8 +21,6 @@ public class ReloadingAlarmService extends IntentService {
 		super("com.morgan.design.android.service.ReloadingAlarmService");
 	}
 
-	// http://it-ride.blogspot.com/2010/10/android-implementing-notification.html
-
 	@Override
 	protected void onHandleIntent(final Intent intent) {
 		Logger.d(LOG_TAG, "Reloading Alarm Service Initiated -> may set new one");

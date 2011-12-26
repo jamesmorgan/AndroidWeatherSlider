@@ -71,6 +71,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 			@Override
 			public void onReload() {
 				Logger.d(LOG_TAG, "Alarm recieved");
+				reloadAll();
 			}
 		});
 	}
@@ -162,6 +163,8 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		this.weatherChoice = this.weatherDao.getActiveStaticLocations();
 
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
+		// sendBroadcast(new Intent("com.morgan.design.android.broadcast.LOOPING_ALARM"));
+		// TODO add alarm
 	}
 
 	@Override

@@ -4,6 +4,8 @@ public class TODO {
 	private TODO() {
 	}
 
+	//@formatter:off
+
 	// /////////
 	// Future //
 	// /////////
@@ -48,6 +50,8 @@ public class TODO {
 	// FIXME -> Add fine grained user control to location services ->
 	// http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
 	// FIXME -> Improve location based service
+	// FIXME -> Add user present option -> can reload services on user present
+	// FIXME -> Add connectivity change receiver -> can reload when connectivity change or cancel when not present
 
 	// //////////////////////
 	// Release Version 1.0 //
@@ -70,18 +74,16 @@ public class TODO {
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
 
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo ->
-	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat (
-	// "EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
+	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts
-
 	// FIXME -> Ensure all notifications always update correctly
-	// FIXME -> Add phone boot alarm service & option
+	// FIXME -> DONE - (26/12/2011) - Add phone boot alarm service & option - http://it-ride.blogspot.com/2010/10/android-implementing-notification.html
 	// FIXME -> Remove alarm when no active notifications
 	// FIXME -> Set alarm on initial notification creation
-	// FIXME -> DONE - (25/12/2011) - Add alarm service
 
+	// FIXME -> DONE - (25/12/2011) - Add alarm service
 	// FIXME -> DONE - (25/12/2011) - When reloading weather ensure still uses same service not creating a new one
 	// FIXME -> DONE - (25/12/2011) - Add preference for updating on connectivity change (StaticLookupService)
 	// FIXME -> DONE - (25/12/2011) - Ensure max 3 notifications, only one roaming based weather lookup, 2-3 optional other locations
@@ -157,4 +159,7 @@ public class TODO {
 	// FIXME -> DONE - swipe navigation path - (add to manual)
 	// FIXME -> DONE - periodically query for weather
 	// FIXME -> DONE - check phone has Internet before launching
+
+	//@formatter:on
+
 }
