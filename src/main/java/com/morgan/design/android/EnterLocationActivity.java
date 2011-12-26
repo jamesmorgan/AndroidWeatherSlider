@@ -8,9 +8,6 @@ import static com.morgan.design.android.util.ObjectUtils.isNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -39,6 +36,7 @@ import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.service.LocationLookupService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.RestTemplateFactory;
 import com.morgan.design.android.util.Utils;
 import com.morgan.design.android.util.YahooRequestUtils;
 import com.weatherslider.morgan.design.R;
@@ -322,11 +320,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		protected List<WOEIDEntry> doInBackground(final Void... params) {
 			final String url = YahooRequestUtils.getInstance().createQuerryGetWoeid(this.location);
 
-			final RestTemplate restTemplate = new RestTemplate();
-			restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
-			final String woiedResponse = restTemplate.getForObject(url, String.class);
-			return YahooRequestUtils.getInstance().parseWOIEDResults(woiedResponse);
+			return YahooRequestUtils.getInstance().parseWOIEDResults(RestTemplateFactory.createAndQuery(url));
 		}
 
 		@Override
@@ -354,11 +348,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		protected List<WOEIDEntry> doInBackground(final Void... params) {
 			final String url = YahooRequestUtils.getInstance().createQuerryGetWoeid(this.location);
 
-			final RestTemplate restTemplate = new RestTemplate();
-			restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
-			final String woiedResponse = restTemplate.getForObject(url, String.class);
-			return YahooRequestUtils.getInstance().parseWOIEDResults(woiedResponse);
+			return YahooRequestUtils.getInstance().parseWOIEDResults(RestTemplateFactory.createAndQuery(url));
 		}
 
 		@Override

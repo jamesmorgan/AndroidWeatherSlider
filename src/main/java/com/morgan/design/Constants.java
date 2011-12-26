@@ -17,6 +17,9 @@ public class Constants {
 	// Web URL's
 	public static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
 
+	// Rest Template timeout
+	public static final int READ_TIMEOUT = 30000;
+
 	// Broadcast receiver actions
 	public static final String PREFERENCES_UPDATED = "com.morgan.design.android.broadcast.PREFERENCES_UPDATED";
 	public static final String OPEN_WEATHER_OVERVIEW = "com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW";

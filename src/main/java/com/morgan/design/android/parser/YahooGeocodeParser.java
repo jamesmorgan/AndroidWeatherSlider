@@ -8,6 +8,8 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
+import android.util.Log;
+
 import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.util.Logger;
 
@@ -30,6 +32,10 @@ public class YahooGeocodeParser implements Parser<GeocodeResult> {
 
 	@Override
 	public GeocodeResult parse(final String result) {
+		if (null == result) {
+			Log.e(LOG_TAG, "Invalid results");
+			return null;
+		}
 		try {
 			final GeocodeResult geocodeResult = new GeocodeResult();
 

@@ -2,10 +2,6 @@ package com.morgan.design.android.util;
 
 import static com.morgan.design.android.util.ObjectUtils.isBlank;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
-
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -35,11 +31,8 @@ public class HttpWeatherLookupFactory {
 
 				final String url = YahooRequestUtils.getInstance().createWeatherQuery(weatherChoice.getWoeid(), temperature);
 
-				final RestTemplate restTemplate = new RestTemplate();
-				restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
-				final String weatherResponse = restTemplate.getForObject(url, String.class);
-				final YahooWeatherInfo weatherInfo = YahooRequestUtils.getInstance().getWeatherInfo(weatherResponse);
+				final YahooWeatherInfo weatherInfo =
+						YahooRequestUtils.getInstance().getWeatherInfo(RestTemplateFactory.createAndQuery(url));
 				return new YahooWeatherLookup(weatherChoice, weatherInfo);
 			}
 		}
@@ -67,11 +60,7 @@ public class HttpWeatherLookupFactory {
 
 				final String url = YahooRequestUtils.getInstance().createWeatherQuery(woeidId, temperature);
 
-				final RestTemplate restTemplate = new RestTemplate();
-				restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
-				final String weatherResponse = restTemplate.getForObject(url, String.class);
-				return YahooRequestUtils.getInstance().getWeatherInfo(weatherResponse);
+				return YahooRequestUtils.getInstance().getWeatherInfo(RestTemplateFactory.createAndQuery(url));
 			}
 		}
 		catch (final Throwable e) {

@@ -1,13 +1,11 @@
 package com.morgan.design.android.tasks;
 
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
-
 import android.location.Location;
 import android.os.AsyncTask;
 
 import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.RestTemplateFactory;
 import com.morgan.design.android.util.YahooRequestUtils;
 
 public class GeocodeWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, GeocodeResult> {
@@ -34,11 +32,7 @@ public class GeocodeWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, Geoc
 
 		final String url = YahooRequestUtils.getInstance().createGeocodeWoeidQuery(this.location);
 
-		final RestTemplate restTemplate = new RestTemplate();
-		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
-		final String woiedResponse = restTemplate.getForObject(url, String.class);
-		return YahooRequestUtils.getInstance().parseGeocodeWOIEDResult(woiedResponse);
+		return YahooRequestUtils.getInstance().parseGeocodeWOIEDResult(RestTemplateFactory.createAndQuery(url));
 	}
 
 	@Override

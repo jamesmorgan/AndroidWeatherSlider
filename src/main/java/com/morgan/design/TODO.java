@@ -79,6 +79,7 @@ public class TODO {
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts
 
+	// FIXME -> DONE - (26/12/2011) - Set read time out on rest template, move all rest calls to RestTemplateFactory.class
 	// FIXME -> DONE - (26/12/2011) - Alarm control via application start, ensuring services both register for alarm updates
 	// FIXME -> DONE - (26/12/2011) - Added service update to alarm service so GUI updates with info about on going refresh
 	// FIXME -> DONE - (26/12/2011) - Change yahoo date to string as no computation needed, update overview and notification
@@ -97,9 +98,9 @@ public class TODO {
 	// FIXME -> DONE - (23/12/2011) - On preferences updated reload all notifications
 	// FIXME -> DONE - (23/12/2011) - Ability to Cancel all active notifications from home menu
 
-	// FIXME -> DONE - (22/12/2011) - Added Gmaven plugin in-order synchronise android and maven version numbers ->
-	// http://code.google.com/p/maven-android-plugin/wiki/SynchronisingVersionWithGmaven
-	// FIXME -> DONE - (22/12/2011) - ZipAlign apg as part of maven build
+	// FIXME -> DONE - (22/12/2011) - Added Gmaven plugin in-order synchronise android and maven version numbers 
+	// -> http://code.google.com/p/maven-android-plugin/wiki/SynchronisingVersionWithGmaven
+	// FIXME -> DONE - (22/12/2011) - ZipAlign apg as part of maven build 
 	// -> http://code.google.com/p/maven-android-plugin/wiki/ZipalignAPKBuiltByMAven
 	// -> http://www.simpligility.com/2010/06/maven-android-plugin-with-zipalign-and-improved-verification/
 
