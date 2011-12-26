@@ -80,12 +80,6 @@
             android:configChanges="keyboardHidden|orientation" >
         </activity>
 
-        <!-- Service which periodically queries for the latest weather -->
-        <service
-            android:name="com.morgan.design.android.service.YahooWeatherLoaderService"
-            android:enabled="true"
-            android:label="@string/yahoo_weather_loader_service" />
-
         <!-- Service which simply determines your current GPS location -->
         <service
             android:name="com.morgan.design.android.service.LocationLookupService"
@@ -98,12 +92,6 @@
                 <action android:name="com.morgan.design.android.service.GET_ONE_OFF_CURRENT_LOCATION" />
             </intent-filter>
         </service>
-
-        <!-- Service which notifies about changes to the weather -->
-        <service
-            android:name="com.morgan.design.android.service.YahooWeatherNotifcationService"
-            android:enabled="true"
-            android:label="@string/yahoo_notifcation_service" />
 
         <!-- Service which finds your GPS location then gets the weather for your location -->
         <service
@@ -151,7 +139,7 @@
             android:enabled="true"
             android:label="@string/weather_notification_service_2" />
         <service
-            android:name="com.morgan.design.android.notifcation.service.WeatherNotificationService3"
+            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService3"
             android:enabled="true"
             android:label="@string/weather_notification_service_3" />
 

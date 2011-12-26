@@ -6,9 +6,7 @@
     <string name="home_instructions">Please enter your location to get started: \n - Enter a location e.g. postal code or town \n - Or request your location via GPS/Network \n - Or tick Use GPS to always try find your location</string>
     <string name="app_name">WeatherSlider</string>
     <string name="weather_service_started">Service Started</string>
-    <string name="yahoo_weather_loader_service">yahoo_weather_loader_service</string>
     <string name="get_my_location_service">None-bindable Location Look Service</string>
-    <string name="yahoo_notifcation_service">yahoo_notifcation_service</string>
     <string name="gps_weather_service">gps_weather_service</string>
     <string name="add_new_location_text">Add more locations</string>
     <string name="modify_loaded_locaitons">Click location to modify</string>
