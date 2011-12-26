@@ -6,13 +6,14 @@ import static com.morgan.design.android.util.ObjectUtils.isNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class DateUtils {
 
 	private static final String LOG_TAG = "DateUtils";
 
 	/**
-	 * COnvert date to string
+	 * Convert date to string
 	 * 
 	 * @param date the {@link Date}
 	 * @return String in the format of <code>Wed, 4 Jul 2011 12:08 am</code>
@@ -26,13 +27,34 @@ public class DateUtils {
 	}
 
 	// Fri, 09 Dec 2011 12:18 pm GMT
+	// Mon, 26 Dec 2011 3:00 am CST
+	// Wed, 30 Nov 2005 1:56 pm PST
+	// Sun, 13 Nov 2011 9:19 am GMT
+
+	// zone
+	// / "UT" / "GMT" ; Universal Time; North American : UT
+	// / "EST" / "EDT" ; Eastern: - 5/ - 4
+	// / "CST" / "CDT" ; Central: - 6/ - 5
+	// / "MST" / "MDT" ; Mountain: - 7/ - 6
+	// / "PST" / "PDT" ; Pacific: - 8/ - 7
+
 	public static Date fromRFC822(final String date) {
 		if (isBlank(date)) {
 			return null;
-		}
+		}// New SimpleDateFormat ( "EEE, dd MMM yyyy hh: mm az" Locale.US)
 		try {
-			final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a z");
-			return dateFormat.parse(date);
+			// final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy H:mm a z");
+			// final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy H:mm a");
+			// return dateFormat.parse(date);
+
+			final SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy H:mm a Z");
+
+			// explicitly set the timezone
+			final TimeZone timeZone = TimeZone.getTimeZone(date.substring(date.length() - 3, date.length()));
+
+			format.setTimeZone(timeZone);
+
+			return format.parse(date);
 		}
 		catch (final ParseException e) {
 			Logger.e(LOG_TAG, "ParseException: ", e);

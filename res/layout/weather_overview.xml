@@ -143,17 +143,22 @@
                 android:layout_height="wrap_content"
                 android:text="Chill" />
 
-            <TextView
-                android:id="@+id/wind_speed"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Speed" />
+                android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Speed" />
 
-            <TextView
-                android:id="@+id/wind_direction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Direction" />
+                <TextView
+                    android:id="@+id/wind_direction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="->" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -207,12 +212,19 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/last_updated_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
+        android:text="Last Updated:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/last_updated_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
         android:text="Last Update Datetime"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

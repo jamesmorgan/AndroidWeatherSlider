@@ -49,6 +49,8 @@ public class Constants {
 	// Intent extras used when creating overview screens
 	public static final String FORCAST_ENTRY = "FORCAST_ENTRY";
 	public static final String NUMBER_OF_FORCASTS = "NUMBER_OF_FORCASTS";
+	public static final String NOTIFICATION_ID = "NOTIFICATION_ID";
+
 	public static final String WEATHER_ID = "WEATHER_ID";
 
 	// Launch Controller Broadcast Intent properties

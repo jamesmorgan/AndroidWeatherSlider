@@ -45,8 +45,8 @@ public class WeatherChoice implements Serializable, Woeid {
 	@DatabaseField(dataType = DataType.DATE)
 	private Date lastUpdatedDateTime;
 
-	@DatabaseField(dataType = DataType.DATE)
-	private Date lastSuccessfulUpdateDateTime;
+	@DatabaseField
+	private String weatherUpdatedDateTimeString;
 
 	@DatabaseField
 	private int numberOfTimesUpdated = 0;
@@ -139,12 +139,12 @@ public class WeatherChoice implements Serializable, Woeid {
 		return null == this.createdDateTime;
 	}
 
-	public void setLastSuccessfulUpdateDateTime(final Date lastSuccessfulUpdateDateTime) {
-		this.lastSuccessfulUpdateDateTime = lastSuccessfulUpdateDateTime;
+	public String getWeatherUpdatedDateTimeString() {
+		return this.weatherUpdatedDateTimeString;
 	}
 
-	public Date getLastSuccessfulUpdateDateTime() {
-		return this.lastSuccessfulUpdateDateTime;
+	public void setWeatherUpdatedDateTimeString(final String weatherUpdatedDateTimeString) {
+		this.weatherUpdatedDateTimeString = weatherUpdatedDateTimeString;
 	}
 
 	public float getLatitude() {
@@ -189,7 +189,7 @@ public class WeatherChoice implements Serializable, Woeid {
 		this.currentWeatherText = currentWeather.getCurrentText();
 		this.currentTemperature = currentWeather.getCurrentTemp();
 		this.currentWeatherCode = currentWeather.getCurrentCode();
-		this.lastSuccessfulUpdateDateTime = currentWeather.getCurrentDate();
+		this.weatherUpdatedDateTimeString = currentWeather.getCurrentDate();
 		this.currentLocationText = getSafeLocation(currentWeather);
 	}
 
@@ -239,7 +239,7 @@ public class WeatherChoice implements Serializable, Woeid {
 			.append(", lastUpdatedDateTime=")
 			.append(this.lastUpdatedDateTime)
 			.append(", lastSuccessfulUpdateDateTime=")
-			.append(this.lastSuccessfulUpdateDateTime)
+			.append(this.weatherUpdatedDateTimeString)
 			.append(", numberOfTimesUpdated=")
 			.append(this.numberOfTimesUpdated)
 			.append(", currentWeatherCode=")

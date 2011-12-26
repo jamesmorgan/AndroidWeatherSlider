@@ -52,7 +52,10 @@ public class TODO {
 	// FIXME -> Improve location based service
 	// FIXME -> Add user present option -> can reload services on user present
 	// FIXME -> Add connectivity change receiver -> can reload when connectivity change or cancel when not present
-
+	// FIXME -> Fix bug when parsing RFC822 dates from yahoo ->
+	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
+	// FIXME -> Add option to stop lookup if battery % to low -> http://code.google.com/p/android-notifier/source/browse/AndroidNotifier/src/org/damazio/notifier/event/receivers/battery/BatteryEventReceiver.java
+	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
@@ -73,15 +76,16 @@ public class TODO {
 	// FIXME -> Allow for roaming location based settings (paid version only) -
 	// http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
 
-	// FIXME -> Fix bug when parsing RFC822 dates from yahoo ->
-	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts
 	// FIXME -> Ensure all notifications always update correctly
-	// FIXME -> DONE - (26/12/2011) - Add phone boot alarm service & option - http://it-ride.blogspot.com/2010/10/android-implementing-notification.html
 	// FIXME -> Remove alarm when no active notifications
 	// FIXME -> Set alarm on initial notification creation
+
+	// FIXME -> DONE - (26/12/2011) - Change yahoo date to string as no computation needed, update overview and notification
+	// FIXME -> DONE - (26/12/2011) - Fix overview screens in-line with latest changes, no long passes object to activity
+	// FIXME -> DONE - (26/12/2011) - Add phone boot alarm service & option - http://it-ride.blogspot.com/2010/10/android-implementing-notification.html
 
 	// FIXME -> DONE - (25/12/2011) - Add alarm service
 	// FIXME -> DONE - (25/12/2011) - When reloading weather ensure still uses same service not creating a new one

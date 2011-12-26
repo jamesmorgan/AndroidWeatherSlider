@@ -1,5 +1,6 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.NOTIFICATION_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotEmpty;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
@@ -27,7 +28,6 @@ import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PressureUtils;
 import com.morgan.design.android.util.Utils;
@@ -39,26 +39,28 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 	private YahooWeatherInfo currentWeather;
 	private SimpleGestureFilter detector;
-
 	private GoogleAnalyticsService googleAnalyticsService;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_overview);
-
-		// final Intent intent = getIntent();
-		// if (null != intent) {
-		// if (intent.hasExtra(SERVICE_ID)) {
-		// final int serviceId = intent.getIntExtra(SERVICE_ID, 0);
-		// if (isZero(serviceId)) {
-		// Logger.w(LOG_TAG, "Service ID is null, this should not happen");
-		// finish();
-		// }
-		// }
-		// }
-
 		final WeatherSliderApplication appState = getTopLevelApplication();
+
+		final Intent intent = getIntent();
+		if (null == intent) {
+			finish();
+		}
+		if (!intent.hasExtra(NOTIFICATION_ID)) {
+			finish();
+		}
+
+		final YahooWeatherInfo weather = appState.getWeather(intent.getIntExtra(NOTIFICATION_ID, 0));
+		if (null == weather) {
+			finish();
+		}
+		this.currentWeather = weather;
+
 		this.googleAnalyticsService = appState.getGoogleAnalyticsService();
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
@@ -126,7 +128,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.wind_speed.setText(WindSpeed.fromSpeedAndUnit(this, this.currentWeather.getWindSpeed(), this.currentWeather.getWindSpeedUnit()));
 		this.wind_chill.setText(this.currentWeather.getWindChill()
 			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
-		this.wind_direction.setText(Wind.fromDegreeToHumanDirection(this.currentWeather.getWindDirection()));
+		this.wind_direction.setText(" (" + Wind.fromDegreeToAbbreviation(this.currentWeather.getWindDirection()) + ")");
 	}
 
 	private TextView sun_rise;
@@ -174,7 +176,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());
 
 		this.last_updated_date_time = (TextView) findViewById(R.id.last_updated_date_time);
-		this.last_updated_date_time.setText(DateUtils.dateToSimpleDateFormat(this.currentWeather.getCurrentDate()));
+		this.last_updated_date_time.setText(this.currentWeather.getCurrentDate());
 	}
 
 	protected WeatherSliderApplication getTopLevelApplication() {

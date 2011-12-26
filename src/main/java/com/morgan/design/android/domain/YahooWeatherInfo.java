@@ -2,7 +2,6 @@ package com.morgan.design.android.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.morgan.design.Constants;
@@ -34,7 +33,7 @@ public class YahooWeatherInfo implements Serializable {
 
 	private int currentTemp;
 	private Temperature temperatureUnit;
-	private Date currentDate;
+	private String currentDate;
 	private int currentCode;
 	private String currentText;
 	private String latitude;
@@ -193,11 +192,11 @@ public class YahooWeatherInfo implements Serializable {
 		return this.currentTemp;
 	}
 
-	public void setCurrentDate(final Date currentDate) {
+	public void setCurrentDate(final String currentDate) {
 		this.currentDate = currentDate;
 	}
 
-	public Date getCurrentDate() {
+	public String getCurrentDate() {
 		return this.currentDate;
 	}
 

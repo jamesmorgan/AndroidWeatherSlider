@@ -177,7 +177,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 			info.setCurrentText(element.getAttributeValue(CURRENT_TEXT));
 			info.setCurrentCode(valueOrDefault(element.getAttributeValue(CURRENT_CODE), IconFactory.NA));
 			info.setCurrentTemp(valueOrZero(element.getAttributeValue(CURRENT_TEMP)));
-			info.setCurrentDate(DateUtils.fromRFC822(element.getAttributeValue(CURRENT_DATE)));
+			info.setCurrentDate(element.getAttributeValue(CURRENT_DATE));
 		}
 	}
 

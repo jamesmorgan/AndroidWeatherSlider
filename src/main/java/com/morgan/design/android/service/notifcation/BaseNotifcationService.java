@@ -1,5 +1,6 @@
 package com.morgan.design.android.service.notifcation;
 
+import static com.morgan.design.Constants.NOTIFICATION_ID;
 import static com.morgan.design.Constants.OPEN_WEATHER_OVERVIEW;
 import static com.morgan.design.android.util.ObjectUtils.stringHasValue;
 import android.app.Notification;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Binder;
 import android.util.Log;
 
+import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.IconFactory;
@@ -18,7 +20,6 @@ import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
-import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
 
@@ -85,6 +86,7 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 		if (null != currentWeather) {
 			this.isActive = true;
 			this.currentWeather = currentWeather;
+			((WeatherSliderApplication) getApplication()).setWeather(getNotifcationId(), currentWeather);
 			showNotification();
 		}
 		else {
@@ -120,7 +122,7 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 		final Notification notification = new Notification();
 
 		// Time stamp, set 0 to remove value from skin
-		notification.when = 0;
+		// notification.when = System.currentTimeMillis();
 		notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.DEFAULT_LIGHTS;
 		notification.icon = IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode());
 
@@ -154,9 +156,9 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 		final String humidity = this.currentWeather.getHumidityPercentage() + "% (Humdity)";
 		// final String pressure = valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "");
 
-		final String time = DateUtils.dateToTime(this.currentWeather.getCurrentDate());
+		// final String time = DateUtils.dateToTime(this.currentWeather.getCurrentDate());
 
-		return temp + " | " + wind + "  | " + humidity + " | " + time;
+		return temp + " | " + wind + "  | " + humidity;
 	}
 
 	private String getSafeLocation() {
@@ -175,7 +177,7 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 
 	private PendingIntent createOpenOverviewActivity() {
 		final Intent notifyIntent = new Intent(OPEN_WEATHER_OVERVIEW);
-		// notifyIntent.putExtra(SERVICE_ID, getNotifcationId());
+		notifyIntent.putExtra(NOTIFICATION_ID, getNotifcationId());
 		notifyIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
 		return PendingIntent.getActivity(this, getNotifcationId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}

@@ -1,5 +1,8 @@
 package com.morgan.design;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.acra.ACRA;
 import org.acra.ErrorReporter;
 import org.acra.ReportingInteractionMode;
@@ -9,6 +12,7 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
+import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
@@ -19,6 +23,8 @@ import com.weatherslider.morgan.design.R;
 public class WeatherSliderApplication extends Application {
 
 	private GoogleAnalyticsService googleAnalyticsService;
+
+	private static Map<Integer, YahooWeatherInfo> WEATHERS = new HashMap<Integer, YahooWeatherInfo>();
 
 	@Override
 	public void onCreate() {
@@ -43,6 +49,16 @@ public class WeatherSliderApplication extends Application {
 
 	public GoogleAnalyticsService getGoogleAnalyticsService() {
 		return this.googleAnalyticsService;
+	}
+
+	public YahooWeatherInfo getWeather(final int notificationId) {
+		return WEATHERS.get(notificationId);
+	}
+
+	public void setWeather(final int notifcationId, final YahooWeatherInfo weatherInfo) {
+		if (0 != notifcationId && null != weatherInfo) {
+			WEATHERS.put(notifcationId, weatherInfo);
+		}
 	}
 
 }
