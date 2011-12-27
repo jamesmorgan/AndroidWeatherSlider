@@ -2,7 +2,7 @@ package com.morgan.design.android.domain;
 
 import java.io.Serializable;
 
-public class WOEIDEntry implements Serializable {
+public class WOEIDEntry implements Serializable, Woeid {
 
 	private static final long serialVersionUID = 6471458930942344285L;
 
@@ -19,6 +19,7 @@ public class WOEIDEntry implements Serializable {
 	private String locality1;
 	private String locality2;
 
+	@Override
 	public final String getWoeid() {
 		return this.woeid;
 	}

@@ -91,7 +91,6 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 			unregisterReceiver(this.locationChangedBroadcastReciever);
 			this.locationChangedBroadcastReciever = null;
 		}
-		// stopService(new Intent(Constants.LATEST_WEATHER_QUERY_COMPLETE));
 	}
 
 	@Override

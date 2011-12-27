@@ -41,14 +41,15 @@ public class TODO {
 	// Consideration //
 	// ////////////////
 
-	// FIXME -> add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
+	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
+	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Improve current notification layout
-	// FIXME -> new providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
+	// FIXME -> New providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Add temperature highs/lows for day on overview screen
 	// FIXME -> DB Version's & Tests
 	// FIXME -> Change to native XML parser -> http://android-developers.blogspot.com/2011/12/watch-out-for-xmlpullparsernexttext.html
 	// FIXME -> Complete statuses, active, inactive, issues?
-	// FIXME -> add ability to launch service from wake up i.e. unlock, screen on Launcher line 31
+	// FIXME -> Add ability to launch service from wake up i.e. unlock, screen on Launcher line 31
 	// FIXME -> Add fine grained user control to location services ->
 	// http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
 	// FIXME -> Improve location based service
@@ -79,11 +80,13 @@ public class TODO {
 
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 
-	// FIXME -> Handle situations when no locations found
 	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts
 
+	// FIXME -> DONE - (27/12/2011) - Handle situations when no locations found
+	// FIXME -> DONE - (27/12/2011) - Added interface of Woeid when creating weather requests
+	
 	// FIXME -> DONE - (26/12/2011) - Fixed NPE when unable to find Geocode location 
 	// FIXME -> DONE - (26/12/2011) - Set read time out on rest template, move all rest calls to RestTemplateFactory.class
 	// FIXME -> DONE - (26/12/2011) - Alarm control via application start, ensuring services both register for alarm updates

@@ -29,7 +29,7 @@ public class HttpWeatherLookupFactory {
 			else {
 				Logger.d(LOG_TAG, "Looking up weather details for woeid=[%s]", weatherChoice.getWoeid());
 
-				final String url = YahooRequestUtils.getInstance().createWeatherQuery(weatherChoice.getWoeid(), temperature);
+				final String url = YahooRequestUtils.getInstance().createWeatherQuery(weatherChoice, temperature);
 
 				final YahooWeatherInfo weatherInfo =
 						YahooRequestUtils.getInstance().getWeatherInfo(RestTemplateFactory.createAndQuery(url));
@@ -58,7 +58,7 @@ public class HttpWeatherLookupFactory {
 			else {
 				Logger.d(LOG_TAG, "Looking up weather details for woeid=[%s]", woeidId);
 
-				final String url = YahooRequestUtils.getInstance().createWeatherQuery(woeidId, temperature);
+				final String url = YahooRequestUtils.getInstance().createWeatherQuery(geocodeResult, temperature);
 
 				return YahooRequestUtils.getInstance().getWeatherInfo(RestTemplateFactory.createAndQuery(url));
 			}
