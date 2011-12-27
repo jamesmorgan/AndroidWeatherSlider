@@ -79,6 +79,7 @@ public class TODO {
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts
 
+	// FIXME -> DONE - (26/12/2011) - Fixed NPE when unable to find Geocode location 
 	// FIXME -> DONE - (26/12/2011) - Set read time out on rest template, move all rest calls to RestTemplateFactory.class
 	// FIXME -> DONE - (26/12/2011) - Alarm control via application start, ensuring services both register for alarm updates
 	// FIXME -> DONE - (26/12/2011) - Added service update to alarm service so GUI updates with info about on going refresh

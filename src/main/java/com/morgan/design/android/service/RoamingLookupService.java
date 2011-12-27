@@ -83,8 +83,13 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			@Override
 			public void onPostLookup(final GeocodeResult geocodeResult) {
 				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", geocodeResult);
-				RoamingLookupService.this.serviceUpdate.complete("Geocode Location Found");
-				onLocationFound(geocodeResult);
+				if (null == geocodeResult) {
+					RoamingLookupService.this.serviceUpdate.complete("Geocode Location Found");
+				}
+				else {
+					RoamingLookupService.this.serviceUpdate.complete("Unable to fina Geocode Location");
+					onLocationFound(geocodeResult);
+				}
 			}
 
 			@Override
@@ -309,10 +314,12 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		private final Temperature temperature;
 		private final ConnectivityManager cnnxManager;
 		private final OnAsyncCallback<YahooWeatherInfo> asyncCallback;
+		private final GeocodeResult result;
 
 		public GetYahooWeatherInformationTask(final ConnectivityManager cnnxManager, final GeocodeResult result,
 				final Temperature temperature, final OnAsyncCallback<YahooWeatherInfo> asyncCallback) {
 			this.cnnxManager = cnnxManager;
+			this.result = result;
 			this.asyncCallback = asyncCallback;
 			this.temperature = temperature;
 		}
@@ -320,7 +327,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		@Override
 		protected YahooWeatherInfo doInBackground(final Void... params) {
 			this.asyncCallback.onInitiateExecution();
-			return HttpWeatherLookupFactory.getForGeocodeResult(RoamingLookupService.this.geocodeResult, this.temperature, this.cnnxManager);
+			return HttpWeatherLookupFactory.getForGeocodeResult(this.result, this.temperature, this.cnnxManager);
 		}
 
 		@Override

@@ -44,9 +44,9 @@ public class HttpWeatherLookupFactory {
 
 	public static YahooWeatherInfo getForGeocodeResult(final GeocodeResult geocodeResult, final Temperature temperature,
 			final ConnectivityManager cnnxManager) {
-		final String woeidId = geocodeResult.getWoeid();
-
 		try {
+			final String woeidId = geocodeResult.getWoeid();
+
 			if (isBlank(woeidId)) {
 				Logger.e(LOG_TAG, "No locaiton WOIED found. Skipping pulse action.");
 				return null;
