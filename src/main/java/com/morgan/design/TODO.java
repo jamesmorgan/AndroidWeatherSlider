@@ -61,6 +61,9 @@ public class TODO {
 	// FIXME -> Monitor service to prevent services stopping
 	// FIXME -> Hook into search button to enter a location
 	// FIXME -> Lazy load service, are they needed -> is this possible?
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	// FIXME -> Deal with service restarts, monitor services-to-service
+	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -75,14 +78,8 @@ public class TODO {
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 
-	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
-	// FIXME -> Allow for roaming location based settings (paid version only) - http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
-
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-
 	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
-	// FIXME -> Deal with service restarts
 
 	// FIXME -> DONE - (27/12/2011) - Handle situations when no locations found
 	// FIXME -> DONE - (27/12/2011) - Added interface of Woeid when creating weather requests
@@ -96,6 +93,7 @@ public class TODO {
 	// FIXME -> DONE - (26/12/2011) - Add phone boot alarm service & option - http://it-ride.blogspot.com/2010/10/android-implementing-notification.html
 
 	// FIXME -> DONE - (25/12/2011) - Add alarm service
+	// FIXME -> DONE - (25/12/2011) - Allow for roaming location based weather (paid version only) - http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
 	// FIXME -> DONE - (25/12/2011) - When reloading weather ensure still uses same service not creating a new one
 	// FIXME -> DONE - (25/12/2011) - Add preference for updating on connectivity change (StaticLookupService)
 	// FIXME -> DONE - (25/12/2011) - Ensure max 3 notifications, only one roaming based weather lookup, 2-3 optional other locations

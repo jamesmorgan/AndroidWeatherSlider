@@ -191,24 +191,35 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.serviceUpdate.complete("Completed Weather Lookup");
 
 		if (null != weather) {
-			// Set updated lat/long and woeid
-			this.weatherChoice.setWoeid(this.geocodeResult.getWoeid());
-			this.weatherChoice.setLatitude(this.geocodeResult.getLatitude());
-			this.weatherChoice.setLongitude(this.geocodeResult.getLonditude());
-
-			// Successful execution
-			this.weatherChoice.successfullyQuery(weather);
-			this.weatherChoice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(this.weatherChoice, weather));
+			onSuccessfulLookup(weather);
 		}
 		else {
-			Toast.makeText(
-					this,
-					String.format("Unable to get weather details at present, will try again in %s",
-							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
-				.show();
-			this.weatherChoice.setActive(false);
-			this.weatherChoice.failedQuery();
+			onFailedLookup();
 		}
+	}
+
+	private void onFailedLookup() {
+		Toast.makeText(
+				this,
+				String.format("Unable to get weather details at present, will try again in %s",
+						TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
+		this.weatherChoice.setActive(false);
+		this.weatherChoice.failedQuery();
+		this.weatherDao.update(this.weatherChoice);
+
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
+	}
+
+	private void onSuccessfulLookup(final YahooWeatherInfo weather) {
+
+		// Set updated lat/long and woeid
+		this.weatherChoice.setWoeid(this.geocodeResult.getWoeid());
+		this.weatherChoice.setLatitude(this.geocodeResult.getLatitude());
+		this.weatherChoice.setLongitude(this.geocodeResult.getLonditude());
+
+		// Successful execution
+		this.weatherChoice.successfullyQuery(weather);
+		this.weatherChoice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(this.weatherChoice, weather));
 
 		this.weatherDao.update(this.weatherChoice);
 
@@ -267,6 +278,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
+							onFailedLookup();
 						}
 					}
 				}

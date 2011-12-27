@@ -125,10 +125,9 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 						service.setWeatherInformation(weatherInfo);
 						notification.setServiceId(service.getNotifcationId());
 						this.notificationDao.addNotification(notification);
-						break;
+						return true;
 					}
 				}
-				return true;
 			}
 			else {
 				// No notification available
