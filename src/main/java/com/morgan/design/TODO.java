@@ -23,6 +23,8 @@ public class TODO {
 	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
 	// FIXME -> Consider signing apk with maven -> http://code.google.com/p/maven-android-plugin/wiki/SigningAPKWithMavenJarsigner
 	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
+	// FIXME -> Think about using a remote service and client for all operations -> http://saigeethamn.blogspot.com/2009/09/android-developer-tutorial-part-9.html
+	// FIXME -> Consider alternative solution to service based notification system
 
 	// ///////////////
 	// Nice To Have //
@@ -55,6 +57,9 @@ public class TODO {
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo ->
 	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 	// FIXME -> Add option to stop lookup if battery % to low -> http://code.google.com/p/android-notifier/source/browse/AndroidNotifier/src/org/damazio/notifier/event/receivers/battery/BatteryEventReceiver.java
+	// FIXME -> Monitor service to prevent services stopping
+	// FIXME -> Hook into search button to enter a location
+	// FIXME -> Lazy load service, are they needed -> is this possible?
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -64,17 +69,17 @@ public class TODO {
 
 	// FIXME -> Add ability to pay for application in-line
 	// FIXME -> Change default preferences before go-live
-	// FIXME -> Ensure applications re-loads weather data from all angles
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 
-	// FIXME -> Handle situations when no locations found
-	// FIXME -> Investigate how to ensure service is always started/on
 	// FIXME -> Listen for 3rd party GPS position updated so can notifications if required.
 	// FIXME -> Allow for roaming location based settings (paid version only) - http://android-developers.blogspot.com/2011/06/deep-dive-into-location.html
 
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+
+	// FIXME -> Handle situations when no locations found
 	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
 	// FIXME -> Deal with service restarts

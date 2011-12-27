@@ -35,7 +35,7 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 
 public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection,
-		OnAsyncCallback<YahooWeatherLookup> {
+		OnAsyncCallback<YahooWeatherLookup>, ReloadWeatherReciever.OnReloadWeather {
 
 	private static final String LOG_TAG = "StaticLookupService";
 
@@ -65,14 +65,14 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		this.weatherDao = new WeatherChoiceDao(getHelper());
 		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
 		this.cnnxManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		this.reloadWeatherReciever = new ReloadWeatherReciever(this, new ReloadWeatherReciever.OnReloadWeather() {
-			@Override
-			public void onReload() {
-				Logger.d(LOG_TAG, "Alarm recieved, reloading all static weathers");
-				reloadAll();
-			}
-		});
+		this.reloadWeatherReciever = new ReloadWeatherReciever(this, this);
 		sendBroadcast(new Intent(LOOPING_ALARM));
+	}
+
+	@Override
+	public void onReload() {
+		Logger.d(LOG_TAG, "Alarm recieved, reloading all static weathers");
+		reloadAll();
 	}
 
 	@Override

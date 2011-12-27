@@ -91,7 +91,6 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 		}
 		else {
 			this.isActive = false;
-			stopSelf();
 		}
 	}
 
@@ -136,6 +135,7 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 		notification.setLatestEventInfo(this, forcastText, getContent(), pendingIntent);
 
 		this.notificationManager.notify(getNotifcationId(), notification);
+		stopSelf();
 	}
 
 	private PendingIntent createIntent() {

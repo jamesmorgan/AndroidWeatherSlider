@@ -41,7 +41,7 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 
 public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
-		ServiceConnection {
+		ServiceConnection, ReloadWeatherReciever.OnReloadWeather {
 
 	private static final String LOG_TAG = "RoamingLookupService";
 
@@ -66,13 +66,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.cnnxManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.weatherDao = new WeatherChoiceDao(getHelper());
-		this.reloadWeatherReciever = new ReloadWeatherReciever(this, new ReloadWeatherReciever.OnReloadWeather() {
-			@Override
-			public void onReload() {
-				Logger.d(LOG_TAG, "Alarm recieved, reloading roaming weathers");
-				reload();
-			}
-		});
+		this.reloadWeatherReciever = new ReloadWeatherReciever(this, this);
 
 		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
 		sendBroadcast(new Intent(LOOPING_ALARM));
@@ -104,7 +98,9 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		};
 	}
 
-	private void reload() {
+	@Override
+	public void onReload() {
+		Logger.d(LOG_TAG, "Alarm recieved, reloading roaming weathers");
 		if (null == this.weatherChoice) {
 			this.weatherChoice = this.weatherDao.getActiveRoamingLocation();
 		}
@@ -169,7 +165,6 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		this.weatherChoice.setRoaming(true);
 		this.weatherDao.update(this.weatherChoice);
-
 		triggerGetGpsLocation();
 	}
 
