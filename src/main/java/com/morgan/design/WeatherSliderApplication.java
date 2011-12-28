@@ -37,6 +37,11 @@ public class WeatherSliderApplication extends Application {
 			ErrorReporter.getInstance().disable();
 		}
 
+		// SETUP three available notifications
+		WEATHERS.put(R.string.weather_notification_service_1, null);
+		WEATHERS.put(R.string.weather_notification_service_2, null);
+		WEATHERS.put(R.string.weather_notification_service_3, null);
+
 		this.googleAnalyticsService = GoogleAnalyticsService.create(getApplicationContext());
 		startService(new Intent(this, NotificationControllerService.class));
 		startService(new Intent(this, StaticLookupService.class));
@@ -52,6 +57,10 @@ public class WeatherSliderApplication extends Application {
 
 	public GoogleAnalyticsService getGoogleAnalyticsService() {
 		return this.googleAnalyticsService;
+	}
+
+	public Map<Integer, YahooWeatherInfo> getWeathers() {
+		return WEATHERS;
 	}
 
 	public YahooWeatherInfo getWeather(final int notificationId) {

@@ -10,7 +10,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.morgan.design.android.dao.orm.Notification;
+import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
@@ -31,7 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	private Dao<WeatherChoice, Integer> weatherChoiceDao = null;
-	private Dao<Notification, Integer> notificationDao = null;
+	private Dao<WeatherNotification, Integer> notificationDao = null;
 
 	@Override
 	public void onCreate(final SQLiteDatabase db, final ConnectionSource connectionSource) {
@@ -39,7 +39,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			dropTablesIfExists(connectionSource);
 			TableUtils.createTableIfNotExists(connectionSource, WeatherChoice.class);
-			TableUtils.createTableIfNotExists(connectionSource, Notification.class);
+			TableUtils.createTableIfNotExists(connectionSource, WeatherNotification.class);
 		}
 		catch (final SQLException e) {
 			Logger.e(LOG_TAG, "Can't create database", e);
@@ -92,7 +92,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	private void dropTablesIfExists(final ConnectionSource connectionSource) throws SQLException {
 		TableUtils.dropTable(connectionSource, WeatherChoice.class, true);
-		TableUtils.dropTable(connectionSource, Notification.class, true);
+		TableUtils.dropTable(connectionSource, WeatherNotification.class, true);
 	}
 
 	@Override
@@ -106,8 +106,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		return loadDao(this.weatherChoiceDao, WeatherChoice.class);
 	}
 
-	public Dao<Notification, Integer> getNotificationDao() throws SQLException {
-		return loadDao(this.notificationDao, Notification.class);
+	public Dao<WeatherNotification, Integer> getNotificationDao() throws SQLException {
+		return loadDao(this.notificationDao, WeatherNotification.class);
 	}
 
 	private <T> Dao<T, Integer> loadDao(Dao<T, Integer> t, final Class<T> clazz) throws SQLException {

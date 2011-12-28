@@ -17,13 +17,14 @@ import android.os.IBinder;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.dao.WeatherChoiceDao;
-import com.morgan.design.android.dao.orm.Notification;
 import com.morgan.design.android.dao.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
+@Deprecated
 public class WeatherNotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
 
 	private static final int MAX_NUMBER_OF_NOTIFICATIONS = 3;
@@ -99,7 +100,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 
 	public boolean addWeatherNotification(final WeatherChoice weatherChoice, final YahooWeatherInfo weatherInfo) {
 
-		Notification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
+		WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
 
 		// Existing notification
 		if (null != notification) {
@@ -116,7 +117,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			// Check available notifications
 			if (!notificationsAreFull()) {
 
-				notification = new Notification();
+				notification = new WeatherNotification();
 				notification.setFkWeatherChoiceId(weatherChoice.getId());
 
 				// Find available service
@@ -139,7 +140,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	}
 
 	public void removeNotification(final WeatherChoice weatherChoice) {
-		final Notification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
+		final WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
 		if (null != notification) {
 			final BaseNotifcationService service = this.boundServices.get(notification.getServiceId());
 			if (null != service) {

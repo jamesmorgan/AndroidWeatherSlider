@@ -7,12 +7,12 @@ import java.util.concurrent.Callable;
 
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
-import com.morgan.design.android.dao.orm.Notification;
+import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
 
-public class NotificationDao extends AbstractDao<Notification, Integer> {
+public class NotificationDao extends AbstractDao<WeatherNotification, Integer> {
 
 	private static final String LOG_TAG = "NotificationDao";
 
@@ -20,10 +20,10 @@ public class NotificationDao extends AbstractDao<Notification, Integer> {
 		super(databaseHelper);
 	}
 
-	public Notification findNotificationForWeatherId(final int weatherChoiceId) {
+	public WeatherNotification findNotificationForWeatherId(final int weatherChoiceId) {
 		try {
-			final QueryBuilder<Notification, Integer> queryBuilder = this.dao.queryBuilder();
-			queryBuilder.where().eq(Notification.FK_WEATHER_CHOICE_ID, new SelectArg(weatherChoiceId));
+			final QueryBuilder<WeatherNotification, Integer> queryBuilder = this.dao.queryBuilder();
+			queryBuilder.where().eq(WeatherNotification.FK_WEATHER_CHOICE_ID, new SelectArg(weatherChoiceId));
 
 			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
 			return this.dao.queryForFirst(queryBuilder.prepare());
@@ -34,7 +34,7 @@ public class NotificationDao extends AbstractDao<Notification, Integer> {
 		return null;
 	}
 
-	public int delete(final Notification notification) {
+	public int delete(final WeatherNotification notification) {
 		Logger.d(LOG_TAG, "Deleting notification, notification=[%s]", notification);
 		return DBUtils.executeInSafety(new Callable<Integer>() {
 			@Override
@@ -53,7 +53,7 @@ public class NotificationDao extends AbstractDao<Notification, Integer> {
 		});
 	}
 
-	public void addNotification(final Notification notification) {
+	public void addNotification(final WeatherNotification notification) {
 		Logger.d(LOG_TAG, "Create new instance, notification=[%s]", notification);
 		if (isNotNull(notification)) {
 			try {

@@ -23,6 +23,7 @@ import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
 
+@Deprecated
 public abstract class BaseNotifcationService extends Service implements IWeatherNotificationService {
 
 	private NotificationManager notificationManager;

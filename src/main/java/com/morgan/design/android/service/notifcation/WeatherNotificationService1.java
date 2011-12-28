@@ -5,6 +5,7 @@ import android.os.IBinder;
 
 import com.weatherslider.morgan.design.R;
 
+@Deprecated
 public class WeatherNotificationService1 extends BaseNotifcationService {
 
 	private final LocalBinder<WeatherNotificationService1> mBinder = new LocalBinder<WeatherNotificationService1>() {

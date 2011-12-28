@@ -32,7 +32,7 @@ import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
+import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService2;
 import com.morgan.design.android.tasks.GeocodeWOIEDDataTaskFromLocation;
 import com.morgan.design.android.tasks.OnAsyncCallback;
 import com.morgan.design.android.util.HttpWeatherLookupFactory;
@@ -52,7 +52,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	private ConnectivityManager cnnxManager;
 
 	protected WeatherChoiceDao weatherDao;
-	protected WeatherNotificationControllerService mBoundNotificationControllerService;
+	protected WeatherNotificationControllerService2 mBoundNotificationControllerService;
 
 	private ReloadWeatherReciever reloadWeatherReciever;
 
@@ -68,7 +68,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.weatherDao = new WeatherChoiceDao(getHelper());
 		this.reloadWeatherReciever = new ReloadWeatherReciever(this, this);
 
-		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
+		bindService(new Intent(this, WeatherNotificationControllerService2.class), this, BIND_AUTO_CREATE);
 		sendBroadcast(new Intent(LOOPING_ALARM));
 
 		registerForLocationChangedUpdates();
@@ -119,7 +119,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
-		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService.LocalBinder) service).getService();
+		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService2.LocalBinder) service).getService();
 	}
 
 	@Override

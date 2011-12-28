@@ -25,14 +25,15 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
+import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService2;
 import com.morgan.design.android.util.Logger;
 
 public class NotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
 
 	private static final String LOG_TAG = "NotificationControllerService";
 
-	protected WeatherNotificationControllerService mBoundNotificationControllerService;
+	// protected WeatherNotificationControllerService mBoundNotificationControllerService;
+	protected WeatherNotificationControllerService2 mBoundNotificationControllerService;
 
 	protected BroadcastReceiver preferencesChangedBroadcastReceiver;
 	protected BroadcastReceiver deleteCurrentNotificationBroadcastReciever;
@@ -44,7 +45,7 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
-		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService.LocalBinder) service).getService();
+		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService2.LocalBinder) service).getService();
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
+		bindService(new Intent(this, WeatherNotificationControllerService2.class), this, BIND_AUTO_CREATE);
 		this.weatherDao = new WeatherChoiceDao(getHelper());
 		doRegisterPreferenceReciever();
 		doRegisterRemoveNotificationReciever();
