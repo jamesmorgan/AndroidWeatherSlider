@@ -118,6 +118,8 @@ public abstract class BaseNotifcationService extends Service implements IWeather
 
 	private void showNotification() {
 
+		this.notificationManager.cancel(getNotifcationId());
+
 		final Notification notification = new Notification();
 
 		// Time stamp, set 0 to remove value from skin

@@ -76,10 +76,12 @@ public class TODO {
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
-	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
 
 	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
+
+	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
+	// FIXME -> BUG - When changing GPS location notifications are not updated correctly
 
 	// FIXME -> DONE - (27/12/2011) - Handle situations when no locations found
 	// FIXME -> DONE - (27/12/2011) - Added interface of Woeid when creating weather requests
@@ -123,8 +125,7 @@ public class TODO {
 	// FIXME -> DONE - (19/12/2011) - Show active state on home screen
 
 	// FIXME -> DONE - (18/12/2011) - Improve progress/interaction when looking up GPS location
-	// FIXME -> DONE - (18/12/2011) - If GPS && network are disabled, prompt user to turn it on -
-	// http://advback.com/android/checking-if-gps-is-enabled-android/
+	// FIXME -> DONE - (18/12/2011) - If GPS && network are disabled, prompt user to turn it on - http://advback.com/android/checking-if-gps-is-enabled-android/
 
 	// ////////////////////////////////////
 	// Previously Completed - 18/12/2011 //

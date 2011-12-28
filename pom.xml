@@ -141,9 +141,12 @@
 			<version>4.2.3</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>android.support</groupId> <artifactId>compatibility-v4</artifactId> 
-			<version>r6</version> </dependency> <dependency> <groupId>android.support</groupId> 
-			<artifactId>compatibility-v13</artifactId> <version>r6</version> </dependency> -->
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v13</artifactId>
+			<version>r6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -214,28 +217,37 @@
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-						<source>
+							<source>
 								project.modules.each {
 								try {
-								def manifestFile = new File("${it}/AndroidManifest.xml")
+								def manifestFile = new
+								File("${it}/AndroidManifest.xml")
 								def ns = new
 								groovy.xml.Namespace("http://schemas.android.com/apk/res/android",
 								"ns")
 								def parser = new groovy.util.XmlParser(false, true)
-								def rootNode = parser.parse(manifestFile)
-								def attributes = rootNode.attributes()
-								attributes[ns.versionName] = "${project.version}"
-								def writer = new groovy.io.GroovyPrintWriter(manifestFile)
+								def
+								rootNode = parser.parse(manifestFile)
+								def attributes =
+								rootNode.attributes()
+								attributes[ns.versionName] =
+								"${project.version}"
+								def writer = new
+								groovy.io.GroovyPrintWriter(manifestFile)
 								writer.println('&lt;?xml version="1.0" encoding="UTF-8"?&gt;')
 								def xmlWriter = new groovy.util.XmlNodePrinter(writer)
 								xmlWriter.setPreserveWhitespace(false)
 								xmlWriter.setNamespaceAware(true)
 								xmlWriter.print(rootNode)
-								} catch (FileNotFoundException e)
+								}
+								catch (FileNotFoundException e)
 								{
-								println('No AndroidManifest.xml file found. Skipping version update.')
-								println('Probably not an Android project, but a library.')
-								println('Skipping version update.')
+								println('No AndroidManifest.xml
+								file found. Skipping version update.')
+								println('Probably not an
+								Android project, but a library.')
+								println('Skipping version
+								update.')
 								}
 								}
 							</source>

@@ -17,13 +17,17 @@ public class HttpWeatherLookupFactory {
 
 	public static YahooWeatherLookup getForWeatherChoice(final WeatherChoice weatherChoice, final Temperature temperature,
 			final ConnectivityManager cnnxManager) {
+		if (null == weatherChoice) {
+			Logger.i(LOG_TAG, "WeatherChoice is null, no WOIED found. Unable to get yahoo weather info.");
+			return null;
+		}
 		try {
 			if (isBlank(weatherChoice.getWoeid())) {
-				Logger.e(LOG_TAG, "No locaiton WOIED found. Skipping pulse action.");
+				Logger.i(LOG_TAG, "No locaiton WOIED found.");
 				return null;
 			}
 			if (isNotConnectedToNetwork(cnnxManager)) {
-				Logger.e(LOG_TAG, "No usable network. Skipping pulse action.");
+				Logger.i(LOG_TAG, "No usable network.");
 				return null;
 			}
 			else {
@@ -37,22 +41,26 @@ public class HttpWeatherLookupFactory {
 			}
 		}
 		catch (final Throwable e) {
-			Logger.e(LOG_TAG, "Unknonw error when running periodic download weather data task", e);
+			Logger.i(LOG_TAG, "Unknonw error when getting weather data task", e);
 		}
 		return null;
 	}
 
 	public static YahooWeatherInfo getForGeocodeResult(final GeocodeResult geocodeResult, final Temperature temperature,
 			final ConnectivityManager cnnxManager) {
+		if (null == geocodeResult) {
+			Logger.i(LOG_TAG, "GeocodeResult is null, no WOIED found. Unable to get yahoo weather info.");
+			return null;
+		}
 		try {
 			final String woeidId = geocodeResult.getWoeid();
 
 			if (isBlank(woeidId)) {
-				Logger.e(LOG_TAG, "No locaiton WOIED found. Skipping pulse action.");
+				Logger.i(LOG_TAG, "No locaiton WOIED found.");
 				return null;
 			}
 			if (isNotConnectedToNetwork(cnnxManager)) {
-				Logger.e(LOG_TAG, "No usable network. Skipping pulse action.");
+				Logger.i(LOG_TAG, "No usable network.");
 				return null;
 			}
 			else {
@@ -64,7 +72,7 @@ public class HttpWeatherLookupFactory {
 			}
 		}
 		catch (final Throwable e) {
-			Logger.e(LOG_TAG, "Unknonw error when running periodic download weather data task", e);
+			Logger.i(LOG_TAG, "Unknonw error when getting weather data task", e);
 		}
 		return null;
 	}
