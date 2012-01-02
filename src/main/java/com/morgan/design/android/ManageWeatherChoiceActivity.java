@@ -154,12 +154,15 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	public boolean onPrepareOptionsMenu(final Menu menu) {
 		menu.clear();
 		final MenuInflater inflater = getMenuInflater();
-		if (null != this.weatherChoices && !this.weatherChoices.isEmpty()) {
-			inflater.inflate(R.menu.home_menu_with_notifcations, menu);
+		if (null != this.weatherChoices) {
+			for (final WeatherChoice choice : this.weatherChoices) {
+				if (choice.isActive()) {
+					inflater.inflate(R.menu.home_menu_with_notifcations, menu);
+					return true;
+				}
+			}
 		}
-		else {
-			inflater.inflate(R.menu.home_menu, menu);
-		}
+		inflater.inflate(R.menu.home_menu, menu);
 		return true;
 	}
 
