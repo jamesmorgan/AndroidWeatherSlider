@@ -95,9 +95,7 @@ public class TODO {
 	// FIXME -> DONE - (02/01/2012) - Add ability to force update all active notifications from home menu
 	// FIXME -> DONE - (02/01/2012) - Add ability to force update individual locations from context menu
 	// FIXME -> DONE - (02/01/2012) - Removal of old notification services 
-	
-	// FIXME -> Call finish on back press on overview, should not go back to management screen.
-	// FIXME -> Multi click on overview needs to not call oncreate as multiple overviews need to be created
+	// FIXME -> DONE - (02/01/2012) - Set correct flags on overview screen as to not keep old data
 	
 	// FIXME -> DONE - (28/12/2011) - Trailing single notification service, deprecated old ones
 	

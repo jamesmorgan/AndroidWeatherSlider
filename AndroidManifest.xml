@@ -28,12 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.morgan.design.android.MainPagerActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
-        
         <activity
             android:name="com.morgan.design.android.ManageWeatherChoiceActivity"
             android:configChanges="keyboardHidden|orientation" >
@@ -71,7 +69,10 @@
         <!-- Weather Overview Screen -->
         <activity
             android:name="com.morgan.design.android.WeatherOverviewActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:alwaysRetainTaskState="false"
+            android:configChanges="keyboardHidden|orientation"
+            android:noHistory="true"
+            android:stateNotNeeded="false" >
             <intent-filter>
                 <action android:name="com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW" />
             </intent-filter>
@@ -124,7 +125,8 @@
         <!-- ////////////////// -->
         <!-- ////////////////// -->
 
-		<!-- Service which deals with launching and removing existing notifications  -->
+
+        <!-- Service which deals with launching and removing existing notifications -->
         <service
             android:name="com.morgan.design.android.service.notifcation.WeatherNotificationControllerService"
             android:enabled="true" />
@@ -179,7 +181,7 @@
 
 
         <!-- Register periodic launcher for connectivity changes and get weather download -->
-       <receiver
+        <receiver
             android:name="com.morgan.design.android.broadcast.LaunchControllerReceiver"
             android:enabled="true"
             android:exported="false"
