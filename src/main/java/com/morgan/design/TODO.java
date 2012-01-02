@@ -88,12 +88,14 @@ public class TODO {
 	// FIXME -> BUG - Not allowed to add multiple notifications bug
 
 	// FIXME -> Don't use notification services
-	// FIXME -> Improve cancel all, verbose cancellation if three types
+	
 	// FIXME -> Add roaming symbol /icon to roaming notifications on management and sliders.
+	
+	// FIXME -> DONE - (02/01/2012) - Improve cancel all, verbose cancellation if three types
 	// FIXME -> Add ability to force update all
 	// FIXME -> Add ability to force update individual locations 
-
 	// FIXME -> Call finish on back press on overview, should not go back to management screen.
+
 	// FIXME -> Multi click on overview needs to not call oncreate as multiple overviews need to be created
 	
 	// FIXME -> DONE - (28/12/2011) - Trailing single notification service, deprecated old ones
