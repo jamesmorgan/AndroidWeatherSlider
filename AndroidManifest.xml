@@ -120,6 +120,15 @@
             android:enabled="true"
             android:label="@string/gps_weather_service" />
 
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+        <!-- ////////////////// -->
+
+		<!-- Service which deals with launching and removing existing notifications  -->
+        <service
+            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationControllerService"
+            android:enabled="true" />
+
         <!-- Service deals with all common tasks related to controlling notifications -->
         <service
             android:name="com.morgan.design.android.service.NotificationControllerService"
@@ -137,29 +146,6 @@
                 <action android:name="com.morgan.design.android.broadcast.CANCEL_ALL_WEATHER_NOTIFICATIONS" />
             </intent-filter>
         </service>
-
-        <!-- ////////////////// -->
-        <!-- ////////////////// -->
-        <!-- ////////////////// -->
-
-        <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationControllerService2"
-            android:enabled="true" />
-        <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationControllerService"
-            android:enabled="true" />
-        <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService1"
-            android:enabled="true"
-            android:label="@string/weather_notification_service_1" />
-        <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService2"
-            android:enabled="true"
-            android:label="@string/weather_notification_service_2" />
-        <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationService3"
-            android:enabled="true"
-            android:label="@string/weather_notification_service_3" />
 
         <!-- ////////////////// -->
         <!-- ////////////////// -->

@@ -27,7 +27,7 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.YahooWeatherLookup;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService2;
+import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
 import com.morgan.design.android.tasks.OnAsyncCallback;
 import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
@@ -43,14 +43,14 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 	private List<WeatherChoice> weatherChoice;
 
 	private ConnectivityManager cnnxManager;
-	protected WeatherNotificationControllerService2 mBoundNotificationControllerService;
+	protected WeatherNotificationControllerService mBoundNotificationControllerService;
 	protected WeatherChoiceDao weatherDao;
 
 	private ReloadWeatherReciever reloadWeatherReciever;
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
-		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService2.LocalBinder) service).getService();
+		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService.LocalBinder) service).getService();
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		super.onCreate();
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.weatherDao = new WeatherChoiceDao(getHelper());
-		bindService(new Intent(this, WeatherNotificationControllerService2.class), this, BIND_AUTO_CREATE);
+		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
 		this.cnnxManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		this.reloadWeatherReciever = new ReloadWeatherReciever(this, this);
 		sendBroadcast(new Intent(LOOPING_ALARM));

@@ -113,13 +113,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(final Menu menu) {
-		final MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.home_menu, menu);
-		return true;
-	}
-
-	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		if (isNotNull(this.serviceUpdateRegister)) {
@@ -145,6 +138,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(final Menu menu) {
+		menu.clear();
+		final MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.home_menu, menu);
+		return true;
 	}
 
 	@Override
@@ -186,6 +187,12 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.setMessage(dialogText);
 
 		if (woeidChoice.isActive()) {
+			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Reload", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					onLoadWeatherChoice(woeidChoice);
+				}
+			});
 			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Remove", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {

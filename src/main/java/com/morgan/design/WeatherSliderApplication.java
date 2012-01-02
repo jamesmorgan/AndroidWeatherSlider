@@ -73,4 +73,10 @@ public class WeatherSliderApplication extends Application {
 		}
 	}
 
+	public void clearAll() {
+		WEATHERS.put(R.string.weather_notification_service_1, null);
+		WEATHERS.put(R.string.weather_notification_service_2, null);
+		WEATHERS.put(R.string.weather_notification_service_3, null);
+	}
+
 }
