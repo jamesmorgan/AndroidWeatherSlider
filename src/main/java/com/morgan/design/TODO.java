@@ -80,9 +80,24 @@ public class TODO {
 	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
 
-	// FIXME -> change tabs for view pager -> http://blog.stylingandroid.com/archives/537
+	// FIXME -> change tabs for view pager 
+	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
+	// -> http://blog.stylingandroid.com/archives/537
+	
 	// FIXME -> BUG - When changing GPS location notifications are not updated correctly
+	// FIXME -> BUG - Not allowed to add multiple notifications bug
 
+	// FIXME -> Don't use notification services
+	// FIXME -> Improve cancel all, verbose cancellation if three types
+	// FIXME -> Add roaming symbol /icon to roaming notifications on management and sliders.
+	// FIXME -> Add ability to force update all
+	// FIXME -> Add ability to force update individual locations 
+
+	// FIXME -> Call finish on back press on overview, should not go back to management screen.
+	// FIXME -> Multi click on overview needs to not call oncreate as multiple overviews need to be created
+	
+	// FIXME -> DONE - (28/12/2011) - Trailing single notification service, deprecated old ones
+	
 	// FIXME -> DONE - (27/12/2011) - Handle situations when no locations found
 	// FIXME -> DONE - (27/12/2011) - Added interface of Woeid when creating weather requests
 	

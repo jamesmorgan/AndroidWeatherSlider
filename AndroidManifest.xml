@@ -29,6 +29,21 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.morgan.design.android.MainPagerActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        
+        <activity
+            android:name="com.morgan.design.android.ManageWeatherChoiceActivity"
+            android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- Allows user to enter a location -->
         <activity
             android:name="com.morgan.design.android.EnterLocationActivity"

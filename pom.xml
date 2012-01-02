@@ -66,6 +66,12 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+
+		<repository>
+			<id>com.jakewharton</id>
+			<url>http://r.jakewharton.com/maven/release</url>
+		</repository>
+
 	</repositories>
 
 	<dependencies>
@@ -145,6 +151,13 @@
 			<groupId>android.support</groupId>
 			<artifactId>compatibility-v13</artifactId>
 			<version>r6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.viewpagerindicator</groupId>
+			<artifactId>library</artifactId>
+			<version>2.2.0</version>
+			<type>apklib</type>
 		</dependency>
 
 	</dependencies>

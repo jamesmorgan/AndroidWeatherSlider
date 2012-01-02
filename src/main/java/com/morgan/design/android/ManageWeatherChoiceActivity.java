@@ -272,6 +272,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case SimpleGestureFilter.SWIPE_LEFT:
 				onAddNewLocation(null);
 				break;
+			case SimpleGestureFilter.SWIPE_RIGHT:
+				startActivity(new Intent(this, MainPagerActivity.class));
+				break;
 		}
 	}
 
