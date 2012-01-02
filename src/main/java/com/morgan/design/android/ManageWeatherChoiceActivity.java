@@ -135,6 +135,16 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.CANCEL_ALL);
 				sendBroadcast(new Intent(CANCEL_ALL_WEATHER_NOTIFICATIONS));
 				return true;
+			case R.id.home_menu_reload_all:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.RELOAD_ALL_ACTIVE);
+				if (null != this.weatherChoices) {
+					for (final WeatherChoice choice : this.weatherChoices) {
+						if (choice.isActive()) {
+							onLoadWeatherChoice(choice);
+						}
+					}
+				}
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -144,7 +154,12 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	public boolean onPrepareOptionsMenu(final Menu menu) {
 		menu.clear();
 		final MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.home_menu, menu);
+		if (null != this.weatherChoices && !this.weatherChoices.isEmpty()) {
+			inflater.inflate(R.menu.home_menu_with_notifcations, menu);
+		}
+		else {
+			inflater.inflate(R.menu.home_menu, menu);
+		}
 		return true;
 	}
 

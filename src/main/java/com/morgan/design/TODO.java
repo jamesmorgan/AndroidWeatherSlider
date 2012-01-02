@@ -92,9 +92,10 @@ public class TODO {
 	// FIXME -> Add roaming symbol /icon to roaming notifications on management and sliders.
 	
 	// FIXME -> DONE - (02/01/2012) - Improve cancel all, verbose cancellation if three types
-	// FIXME -> Add ability to force update all
-	// FIXME -> DONE - (02/01/2012) - Add ability to force update individual locations 
+	// FIXME -> DONE - (02/01/2012) - Add ability to force update all active notifications from home menu
+	// FIXME -> DONE - (02/01/2012) - Add ability to force update individual locations from context menu
 	// FIXME -> DONE - (02/01/2012) - Removal of old notification services 
+	
 	// FIXME -> Call finish on back press on overview, should not go back to management screen.
 	// FIXME -> Multi click on overview needs to not call oncreate as multiple overviews need to be created
 	

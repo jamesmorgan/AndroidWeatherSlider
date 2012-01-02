@@ -8,8 +8,4 @@
         android:id="@+id/home_menu_changelog"
         android:title="@string/change_log"/>
     
-    <item
-        android:id="@+id/home_menu_cancel_all"
-        android:title="@string/cancel_all"/>
-
 </menu>
