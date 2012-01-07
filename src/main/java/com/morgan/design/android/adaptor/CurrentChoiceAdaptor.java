@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 			holder.weather_text = (TextView) view.findViewById(R.id.weather_text);
 			holder.last_time_updated = (TextView) view.findViewById(R.id.last_time_updated);
 			holder.location = (TextView) view.findViewById(R.id.location);
-			holder.status_icon = (ImageView) view.findViewById(R.id.status_icon);
+			// holder.status_icon = (ImageView) view.findViewById(R.id.status_icon);
 			view.setTag(holder);
 		}
 		else {
@@ -62,12 +63,11 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 			final TextView location = (TextView) view.findViewById(R.id.location);
 			location.setText(woeidChoice.getCurrentLocationText());
 
+			final Drawable status = getContext().getResources().getDrawable(IconFactory.getStatus(woeidChoice));
+			location.setCompoundDrawablesWithIntrinsicBounds(null, null, status, null);
+
 			final ImageView image = (ImageView) view.findViewById(R.id.image);
 			image.setImageResource(IconFactory.getImageResourceFromCode(woeidChoice.getCurrentWeatherCode()));
-
-			final ImageView status_icon = (ImageView) view.findViewById(R.id.status_icon);
-			status_icon.setImageResource(IconFactory.getStatus(woeidChoice));
-
 		}
 		return view;
 	}
@@ -84,7 +84,6 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 
 	class ViewHolder {
 		ImageView image;
-		ImageView status_icon;
 		TextView location;
 		TextView weather_text;
 		TextView last_time_updated;

@@ -82,11 +82,11 @@ public class TODO {
 	
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
-	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
 	// FIXME -> Set maximum number of allowed notifications in preference
 
 	// FIXME -> Add roaming symbol/icon to roaming notifications on management and sliders.
-	
+
+	// FIXME -> DONE - (07/01/2012) - Moved active icon on home screen
 	// FIXME -> DONE - (07/01/2012) - Updated Change log to indicate initial release, confirm still works via menu and start up
 	// FIXME -> DONE - (07/01/2012) - Improved cancel all notifications so force deletes all.
 	// FIXME -> DONE - (07/01/2012) - Don't use notification services
