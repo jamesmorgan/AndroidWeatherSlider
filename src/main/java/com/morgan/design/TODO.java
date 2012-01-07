@@ -36,6 +36,8 @@ public class TODO {
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
 	// FIXME -> Option to disable collecting of logs via ACRA
 	// FIXME -> Check try/catch blocks report to ACRA if required
+	// FIXME -> Add "About" OR "Credits" section
+	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc
 
 	// ////////////////
 	// Consideration //
@@ -84,8 +86,7 @@ public class TODO {
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> Set maximum number of allowed notifications in preference
 
-	// FIXME -> Add roaming symbol/icon to roaming notifications on management and sliders.
-
+	// FIXME -> DONE - (07/01/2012) - Add roaming symbol/icon to roaming notifications.
 	// FIXME -> DONE - (07/01/2012) - Moved active icon on home screen
 	// FIXME -> DONE - (07/01/2012) - Updated Change log to indicate initial release, confirm still works via menu and start up
 	// FIXME -> DONE - (07/01/2012) - Improved cancel all notifications so force deletes all.

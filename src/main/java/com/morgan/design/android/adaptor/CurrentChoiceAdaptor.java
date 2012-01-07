@@ -4,7 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +43,6 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 			holder.weather_text = (TextView) view.findViewById(R.id.weather_text);
 			holder.last_time_updated = (TextView) view.findViewById(R.id.last_time_updated);
 			holder.location = (TextView) view.findViewById(R.id.location);
-			// holder.status_icon = (ImageView) view.findViewById(R.id.status_icon);
 			view.setTag(holder);
 		}
 		else {
@@ -53,18 +52,24 @@ public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 		final WeatherChoice woeidChoice = this.woeidChoices.get(position);
 
 		if (woeidChoice != null) {
+			final Resources resources = getContext().getResources();
 
 			final TextView weatherText = (TextView) view.findViewById(R.id.weather_text);
 			weatherText.setText(woeidChoice.getCurrentWeatherText());
 
+			final TextView location = (TextView) view.findViewById(R.id.location);
+			location.setText(woeidChoice.getCurrentLocationText());
+			location.setCompoundDrawablesWithIntrinsicBounds(null, null, resources.getDrawable(IconFactory.getStatus(woeidChoice)), null);
+
 			final TextView lastTimeUpdated = (TextView) view.findViewById(R.id.last_time_updated);
 			lastTimeUpdated.setText(DateUtils.dateToSimpleDateFormat(woeidChoice.getLastUpdatedDateTime()));
 
-			final TextView location = (TextView) view.findViewById(R.id.location);
-			location.setText(woeidChoice.getCurrentLocationText());
-
-			final Drawable status = getContext().getResources().getDrawable(IconFactory.getStatus(woeidChoice));
-			location.setCompoundDrawablesWithIntrinsicBounds(null, null, status, null);
+			if (woeidChoice.isRoaming()) {
+				lastTimeUpdated.setCompoundDrawablesWithIntrinsicBounds(null, null, resources.getDrawable(R.drawable.roaming), null);
+			}
+			else {
+				lastTimeUpdated.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+			}
 
 			final ImageView image = (ImageView) view.findViewById(R.id.image);
 			image.setImageResource(IconFactory.getImageResourceFromCode(woeidChoice.getCurrentWeatherCode()));
