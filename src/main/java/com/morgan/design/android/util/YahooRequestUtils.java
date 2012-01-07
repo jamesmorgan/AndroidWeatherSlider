@@ -16,18 +16,21 @@ import com.morgan.design.android.parser.YahooWeatherInfoParser;
 
 public class YahooRequestUtils {
 
-	private static final String URL_YAHOO_API_WEATHER = "http://weather.yahooapis.com/forecastrss?w=%s&u=%s";
+	//@formatter:off
+	
+	private static final String URL_YAHOO_API_WEATHER = 
+			"http://weather.yahooapis.com/forecastrss?w=%s&u=%s";
 
-	private static final String GET_LOCATION_WOEID_FOR_TEXT =
-			"http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text='%s' | SORT(field='placeTypeName.code')&format=xml";
+	private static final String GET_LOCATION_WOEID_FOR_TEXT = 
+			"http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text='%s' " + YahooPlaceTypes.SAFE_LOCAITON + " | SORT(field='placeTypeName.code')&format=xml";
 
-	private static final String GET_LOCATION_WOEID_FOR_LOCATION =
-			"http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text='%s, %s' | SORT(field='placeTypeName.code')&format=xml";
+	private static final String GET_LOCATION_WOEID_FOR_LOCATION = 
+			"http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text='%s, %s' " + YahooPlaceTypes.SAFE_LOCAITON + " | SORT(field='placeTypeName.code')&format=xml";
 
-	private static final String GEOCODE_WOEID_FOR_LOCATION = "http://where.yahooapis.com/geocode?q=%s,%s&count=1&gflags=R&appid="
-		+ Constants.YAHOO_API_KEY;
+	private static final String GEOCODE_WOEID_FOR_LOCATION = 
+			"http://where.yahooapis.com/geocode?q=%s,%s&count=1&gflags=R&appid=" + Constants.YAHOO_API_KEY;
 
-	// private static final String LOG_TAG = "YahooRequestLoader";
+	//@formatter:on
 
 	private YahooRequestUtils() {
 		super();

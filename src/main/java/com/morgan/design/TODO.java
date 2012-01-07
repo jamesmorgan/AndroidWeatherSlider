@@ -10,7 +10,7 @@ public class TODO {
 	// Future //
 	// /////////
 
-	// FIXME -> add provider
+	// FIXME -> add provider -> add switcher -> http://mvn.egoclean.com/
 	// FIXME -> localisation
 	// FIXME -> debug mode on/off for deployment
 	// FIXME -> add flags for each country
@@ -64,32 +64,35 @@ public class TODO {
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Deal with service restarts, monitor services-to-service
 	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
+	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
 	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
+	// FIXME -> Add ability to pay for application in-line
+
 	// FIXME -> When generating sources, set debug to false.
 
-	// FIXME -> Add ability to pay for application in-line
-	// FIXME -> Change default preferences before go-live
-	// FIXME -> Ensure all necessary data is being stored/recorded correctly
-
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
-
-	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
-	// FIXME -> Set maximum number of allowed notifications in preference
 
 	// FIXME -> change tabs for view pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
 	
-	// FIXME -> BUG - When changing GPS location notifications are not updated correctly
-	// FIXME -> BUG - Not allowed to add multiple notifications bug
+	// FIXME -> Change default preferences before go-live
+	// FIXME -> Ensure all necessary data is being stored/recorded correctly
+	// FIXME -> Check for existing roaming notification when adding new ones, disable if exists
+	// FIXME -> Set maximum number of allowed notifications in preference
+	// FIXME -> Updated Change log to indicate initial release, confirm still works via menua nd start up
 
-	// FIXME -> Don't use notification services
+	// FIXME -> Add roaming symbol/icon to roaming notifications on management and sliders.
 	
-	// FIXME -> Add roaming symbol /icon to roaming notifications on management and sliders.
+	// FIXME -> DONE - (07/01/2012) - Improved cancel all notifications so force deletes all.
+	// FIXME -> DONE - (07/01/2012) - Don't use notification services
+	// FIXME -> DONE - (07/01/2012) - BUG - Not allowed to add multiple notifications bug
+	// FIXME -> DONE - (07/01/2012) - BUG - When changing GPS location notifications are not updated correctly
+	// FIXME -> DONE - (07/01/2012) - Bug relates to locations which have a WOEID but yahoo returns no weather, reduced scope of Geocode and GPS lookup YahooPlaceTypes
 	
 	// FIXME -> DONE - (02/01/2012) - Improve cancel all, verbose cancellation if three types
 	// FIXME -> DONE - (02/01/2012) - Add ability to force update all active notifications from home menu

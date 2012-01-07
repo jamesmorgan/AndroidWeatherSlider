@@ -1,4 +1,4 @@
-package com.morgan.design.android.service.notifcation;
+package com.morgan.design.android.service;
 
 import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
 import static com.morgan.design.Constants.NOTIFICATION_ID;
@@ -152,8 +152,6 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	}
 
 	public boolean notificationsAreFull() {
-		// Check available notifications
-		// TODO replace with hidden preference
 		return this.notificationDao.getNumberOfNotifications() >= MAX_NUMBER_OF_NOTIFICATIONS;
 	}
 
@@ -162,6 +160,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			this.notificationManager.cancelAll();
 		}
 		this.applicaiton.clearAll();
+		this.notificationDao.clearAll();
 	}
 
 	private boolean showNotification(final int serviceId, final YahooWeatherInfo weatherInfo) {
@@ -232,5 +231,4 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 				? location.append(", ").append(weatherInfo.getCountry()).toString()
 				: location.toString();
 	}
-
 }

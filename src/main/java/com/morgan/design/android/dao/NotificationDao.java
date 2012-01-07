@@ -3,6 +3,7 @@ package com.morgan.design.android.dao;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -62,6 +63,21 @@ public class NotificationDao extends AbstractDao<WeatherNotification, Integer> {
 			catch (final SQLException exception) {
 				logError(exception);
 			}
+		}
+	}
+
+	public void clearAll() {
+		try {
+			final List<WeatherNotification> all = this.dao.queryForAll();
+			if (null == all) {
+				return;
+			}
+			for (final WeatherNotification weatherNotification : all) {
+				this.dao.delete(weatherNotification);
+			}
+		}
+		catch (final SQLException exception) {
+			logError(exception);
 		}
 	}
 }

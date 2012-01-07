@@ -27,7 +27,6 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.YahooWeatherLookup;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.service.notifcation.WeatherNotificationControllerService;
 import com.morgan.design.android.tasks.OnAsyncCallback;
 import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;

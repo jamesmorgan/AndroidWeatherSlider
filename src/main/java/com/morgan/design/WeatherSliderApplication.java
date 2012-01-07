@@ -68,7 +68,7 @@ public class WeatherSliderApplication extends Application {
 	}
 
 	public void setWeather(final int notifcationId, final YahooWeatherInfo weatherInfo) {
-		if (0 != notifcationId && null != weatherInfo) {
+		if (0 != notifcationId) {
 			WEATHERS.put(notifcationId, weatherInfo);
 		}
 	}

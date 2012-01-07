@@ -28,10 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.morgan.design.android.MainPagerActivity"
-            android:configChanges="keyboardHidden|orientation" >
-        </activity>
+        
         <activity
             android:name="com.morgan.design.android.ManageWeatherChoiceActivity"
             android:configChanges="keyboardHidden|orientation" >
@@ -128,7 +125,7 @@
 
         <!-- Service which deals with launching and removing existing notifications -->
         <service
-            android:name="com.morgan.design.android.service.notifcation.WeatherNotificationControllerService"
+            android:name="com.morgan.design.android.service.WeatherNotificationControllerService"
             android:enabled="true" />
 
         <!-- Service deals with all common tasks related to controlling notifications -->
