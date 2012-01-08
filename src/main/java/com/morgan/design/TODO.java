@@ -67,10 +67,11 @@ public class TODO {
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
 	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
-	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA
+	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather
 	// FIXME -> change tabs for view pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
+	// FIXME -> Proper error handling when no weather details found, parse response.
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -84,8 +85,6 @@ public class TODO {
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> Set maximum number of allowed notifications in preference
-
-	// FIXME -> Proper error handling when no weather details found, parse response.
 
 	// FIXME -> DONE - (08/01/2012) - Set main menu view to default sort weathers by active, alphabetical
 	// FIXME -> DONE - (08/01/2012) - Added "About" section, Me, Twitter, Morgan-Design, Market Link
