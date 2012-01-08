@@ -270,7 +270,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// //////////////////////////////////////////
 
 	private void reLoadWeatherChoices() {
-		this.weatherChoices = this.weatherDao.findAllWoeidChoices();
+		this.weatherChoices = this.weatherDao.findAllWeathers();
 		this.adaptor = new CurrentChoiceAdaptor(this, this.weatherChoices);
 		setListAdapter(this.adaptor);
 	}

@@ -89,14 +89,24 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 	}
 
 	/**
-	 * @return {@link List} {@link WeatherChoice}, never null
+	 * @return {@link List} {@link WeatherChoice}, order by active, location name, never null
 	 */
-	public List<WeatherChoice> findAllWoeidChoices() {
-		Logger.d(LOG_TAG, "Finding all woeid");
+	public List<WeatherChoice> findAllWeathers() {
+		Logger.d(LOG_TAG, "Finding all weathers");
 		return DBUtils.executeInSafety(new Callable<List<WeatherChoice>>() {
 			@Override
 			public List<WeatherChoice> call() throws Exception {
-				final List<WeatherChoice> woeidChoices = WeatherChoiceDao.this.dao.queryForAll();
+
+				final PreparedQuery<WeatherChoice> orderBy =
+						WeatherChoiceDao.this.dao.queryBuilder()
+							.orderBy(WeatherChoice.ACTIVE, false)
+							.orderBy(WeatherChoice.WEATHER_LOCATION, true)
+							.prepare();
+
+				Logger.d(LOG_TAG, orderBy.getStatement());
+
+				final List<WeatherChoice> woeidChoices = WeatherChoiceDao.this.dao.query(orderBy);
+
 				return null != woeidChoices
 						? woeidChoices
 						: new ArrayList<WeatherChoice>();

@@ -86,8 +86,8 @@ public class TODO {
 	// FIXME -> Set maximum number of allowed notifications in preference
 
 	// FIXME -> Proper error handling when no weather details found, parse response.
-	// FIXME -> Set main menu view to default sort weathers by active, alphabetical
 
+	// FIXME -> DONE - (08/01/2012) - Set main menu view to default sort weathers by active, alphabetical
 	// FIXME -> DONE - (08/01/2012) - Added "About" section, Me, Twitter, Morgan-Design, Market Link
 	// FIXME -> DONE - (08/01/2012) - Ensure on reload -> cancel -> reload, all ongoing commands are cancelled
 	// FIXME -> DONE - (08/01/2012) - Prevent no Location details shown when roaming service fails to find location on first attempt.

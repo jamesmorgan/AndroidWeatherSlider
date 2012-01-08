@@ -107,7 +107,7 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 
 	@Override
 	public void onCancelAll() {
-		final List<WeatherChoice> allWoeidChoices = this.weatherDao.findAllWoeidChoices();
+		final List<WeatherChoice> allWoeidChoices = this.weatherDao.findAllWeathers();
 		// Cancel all known weather notifications
 		for (final WeatherChoice weatherChoice : allWoeidChoices) {
 			weatherChoice.setActive(false);

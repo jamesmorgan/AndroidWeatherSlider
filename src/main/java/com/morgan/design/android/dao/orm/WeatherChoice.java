@@ -20,6 +20,7 @@ public class WeatherChoice implements Serializable, Woeid {
 	public static final String WOEID_ID = "woeid";
 	public static final String ACTIVE = "active";
 	public static final String ROAMING = "roaming";
+	public static final String WEATHER_LOCATION = "currentLocationText";
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -54,7 +55,7 @@ public class WeatherChoice implements Serializable, Woeid {
 	@DatabaseField
 	private int currentWeatherCode;
 
-	@DatabaseField
+	@DatabaseField(columnName = WEATHER_LOCATION)
 	private String currentLocationText;
 
 	@DatabaseField
