@@ -72,6 +72,7 @@ public class TODO {
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> Proper error handling when no weather details found, parse response.
+	// FIXME -> Set maximum number of allowed notifications in preference
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -81,10 +82,8 @@ public class TODO {
 
 	// FIXME -> When generating sources, set debug to false.
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
-	
-	// FIXME -> Change default preferences before go-live
-	// FIXME -> Set maximum number of allowed notifications in preference
 
+	// FIXME -> DONE - (08/01/2012) - Clean up preferences, check defaults before go-live
 	// FIXME -> DONE - (08/01/2012) - Ensure all necessary data is being stored correctly, missing created datetime for roaming notifications
 	// FIXME -> DONE - (08/01/2012) - Set main menu view to default sort weathers by active, alphabetical
 	// FIXME -> DONE - (08/01/2012) - Added "About" section, Me, Twitter, Morgan-Design, Market Link

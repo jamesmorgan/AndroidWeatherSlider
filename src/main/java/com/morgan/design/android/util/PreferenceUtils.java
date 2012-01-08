@@ -109,5 +109,4 @@ public class PreferenceUtils {
 	public static boolean setAppVersionPref(final Context context, final int value) {
 		return getPrefs(context).edit().putInt(PREF_APP_VERSION, value).commit();
 	}
-
 }

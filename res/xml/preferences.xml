@@ -3,9 +3,6 @@
 
     <PreferenceCategory android:title="Interface Options" >
 
-        <!-- TODO - On notification click option, open web or open overview dialog with link, possible option can show sample? -->
-        <!-- http://stackoverflow.com/questions/7313852/android-how-can-i-launch-a-popup-dialog-from-an-notification-or-long-pressed-se -->
-
         <ListPreference
             android:defaultValue="OVERVIEW"
             android:entries="@array/overview_mode"
@@ -34,7 +31,6 @@
     <PreferenceCategory android:title="Refresh Options" >
 
         <!-- When to check for weather updates from API -->
-
         <ListPreference
             android:defaultValue="15"
             android:entries="@array/polling_time"
@@ -45,12 +41,7 @@
         
     </PreferenceCategory>
 
-    <!-- TODO - Option to show up to 3 notifications, paid version only -->
-    <!-- TODO - Option to pick API, e.g. Google/Yahoo -->
-
     <PreferenceCategory android:title="General Options" >
-
-        <!-- TODO -> Option to start on boot, paid version only -->
 
         <CheckBoxPreference
             android:defaultValue="true"
