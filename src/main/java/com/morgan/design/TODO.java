@@ -5,83 +5,82 @@ public class TODO {
 	}
 
 	//@formatter:off
-
-	// /////////
-	// Future //
-	// /////////
-
-	// FIXME -> add provider -> add switcher -> http://mvn.egoclean.com/
-	// FIXME -> localisation
-	// FIXME -> debug mode on/off for deployment
-	// FIXME -> add flags for each country
-	// FIXME -> add option for date format
+	
+	// ////////////////////////
+	// Build / Configuration //
+	// ////////////////////////
+	
+	// FIXME -> Debug mode on/off for deployment
 	// FIXME -> Configure build process, updating versions/ debug enabled/ keys/ changelog etc
-	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
-	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
-	// FIXME -> Allow users to narrow down location accuracy
-	// FIXME -> Capture all shared preference values on application crash (ARCA)
-	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
 	// FIXME -> Consider signing apk with maven -> http://code.google.com/p/maven-android-plugin/wiki/SigningAPKWithMavenJarsigner
-	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
-	// FIXME -> Think about using a remote service and client for all operations -> http://saigeethamn.blogspot.com/2009/09/android-developer-tutorial-part-9.html
-
-	// ///////////////
-	// Nice To Have //
-	// ///////////////
-
-	// FIXME -> turn sun set and rise in time objects
-	// FIXME -> Show location on a small map in overview mode?
-	// FIXME -> Open location on map from notification click handler
-	// FIXME -> Potentially show accuracy and time when looking up GPS location
-	// FIXME -> Option to disable collecting of logs via ACRA
-	// FIXME -> Check try/catch blocks report to ACRA if required
-	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc
-	// FIXME -> Overlay weather on google maps
+	// FIXME -> When generating sources, set debug to false.
+	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 	
 	// ////////////////
 	// Consideration //
 	// ////////////////
 
+	// FIXME -> Show location on a small map in overview mode?
+	// FIXME -> Open location on map from notification click handler
+	// FIXME -> Turn sun set and rise in time objects
+	// FIXME -> Fix bug when parsing RFC822 dates from yahoo -> http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
-	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
-	// FIXME -> Improve current notification layout
 	// FIXME -> New providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Add temperature highs/lows for day on overview screen
 	// FIXME -> DB Version's & Tests
 	// FIXME -> Change to native XML parser -> http://android-developers.blogspot.com/2011/12/watch-out-for-xmlpullparsernexttext.html
 	// FIXME -> Complete statuses, active, inactive, issues?
-	// FIXME -> Add ability to launch service from wake up i.e. unlock, screen on Launcher line 31
-	// FIXME -> Add fine grained user control to location services ->
-	// http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
+	// FIXME -> Add fine grained user control to location services -> http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
 	// FIXME -> Improve location based service
-	// FIXME -> Add user present option -> can reload services on user present
-	// FIXME -> Add connectivity change receiver -> can reload when connectivity change or cancel when not present
-	// FIXME -> Fix bug when parsing RFC822 dates from yahoo ->
-	// http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 	// FIXME -> Add option to stop lookup if battery % to low -> http://code.google.com/p/android-notifier/source/browse/AndroidNotifier/src/org/damazio/notifier/event/receivers/battery/BatteryEventReceiver.java
 	// FIXME -> Monitor service to prevent services stopping
-	// FIXME -> Hook into search button to enter a location
 	// FIXME -> Lazy load service, are they needed -> is this possible?
 	// FIXME -> Deal with service restarts, monitor services-to-service
-	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
+	// FIXME -> Set maximum number of allowed notifications in preference
+	// FIXME -> Think about using a remote service and client for all operations -> http://saigeethamn.blogspot.com/2009/09/android-developer-tutorial-part-9.html
+	// FIXME -> Add provider -> add switcher -> http://mvn.egoclean.com/
+	// FIXME -> Add option for date format
+	// FIXME -> Allow users to narrow down location accuracy
+	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
+	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
+	
+	// ///////////////
+	// Nice To Have //
+	// ///////////////
+	
+	// FIXME -> Potentially show accuracy and time when looking up GPS location
+	// FIXME -> Option to disable collecting of logs via ACRA
+	// FIXME -> Check try/catch blocks report to ACRA if required
+	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc
+	// FIXME -> Overlay weather on google maps
+	// FIXME -> Proper error handling when no weather details found, parse response.
+	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
+	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
-	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather
-	// FIXME -> change tabs for view pager 
+	
+	// ///////////////////
+	// Next Version ?.? //
+	// ///////////////////
+	
+	// FIXME -> Complete localisation
+	// FIXME -> Add flags for each country
+	// FIXME -> Change tabs for view pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
-	// FIXME -> Proper error handling when no weather details found, parse response.
-	// FIXME -> Set maximum number of allowed notifications in preference
+	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	// FIXME -> Hook into search button to enter a location, search-able activity
+	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
+	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
+	// FIXME -> Improve current notification layout
+	// FIXME -> Capture all shared preference values on application crash (ARCA)
 	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
 	// FIXME -> Add ability to pay for application in-line
-
-	// FIXME -> When generating sources, set debug to false.
-	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
 
 	// FIXME -> DONE - (08/01/2012) - Clean up preferences, check defaults before go-live
 	// FIXME -> DONE - (08/01/2012) - Ensure all necessary data is being stored correctly, missing created datetime for roaming notifications
