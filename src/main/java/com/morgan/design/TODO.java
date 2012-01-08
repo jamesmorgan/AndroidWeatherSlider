@@ -75,11 +75,7 @@ public class TODO {
 	// FIXME -> Add ability to pay for application in-line
 
 	// FIXME -> When generating sources, set debug to false.
-
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
-	// FIXME -> Proper error handling when no weather details found, parse response.
-	
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 
 	// FIXME -> change tabs for view pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
@@ -88,7 +84,10 @@ public class TODO {
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> Set maximum number of allowed notifications in preference
-	// FIXME -> Fix bug when roaming service fails to find location on first load.
+
+	// FIXME -> Proper error handling when no weather details found, parse response.
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	// FIXME -> DONE - (08/01/2012) - Prevent no Location details shown when roaming service fails to find location on first attempt.
 	
 	// FIXME -> DONE - (07/01/2012) - Open location on map from overview screen
 	// FIXME -> DONE - (07/01/2012) - Add roaming symbol/icon to roaming notifications.

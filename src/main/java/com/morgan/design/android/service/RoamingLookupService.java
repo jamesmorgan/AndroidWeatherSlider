@@ -197,14 +197,23 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	}
 
 	private void onFailedLookup() {
-		Toast.makeText(
-				this,
-				String.format("Unable to get weather details at present, will try again in %s",
-						TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
-		this.weatherChoice.setActive(false);
-		this.weatherChoice.failedQuery();
-		this.weatherDao.update(this.weatherChoice);
 
+		// Remove immediately if cannot find find location
+		if (this.weatherChoice.isFirstAttempt()) {
+			Toast.makeText(this, "Unable to find the weather for your location, please try agin.", Toast.LENGTH_SHORT).show();
+			this.weatherDao.delete(this.weatherChoice);
+		}
+		// If active and failed, report failure and inform user of re-try
+		else {
+			Toast.makeText(
+					this,
+					String.format("Unable to get weather details at present, will try again in %s",
+							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
+				.show();
+			this.weatherChoice.setActive(false);
+			this.weatherChoice.failedQuery();
+			this.weatherDao.update(this.weatherChoice);
+		}
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
 	}
 

@@ -135,10 +135,6 @@ public class WeatherChoice implements Serializable, Woeid {
 		this.currentWeatherText = currentWeatherText;
 	}
 
-	public boolean isFirstAttempt() {
-		return null == this.createdDateTime;
-	}
-
 	public String getWeatherUpdatedDateTimeString() {
 		return this.weatherUpdatedDateTimeString;
 	}
@@ -177,6 +173,10 @@ public class WeatherChoice implements Serializable, Woeid {
 
 	public boolean isRoaming() {
 		return this.roaming;
+	}
+
+	public boolean isFirstAttempt() {
+		return 0 == this.numberOfTimesUpdated;
 	}
 
 	public void failedQuery() {
