@@ -1,6 +1,5 @@
 package com.morgan.design.android.service;
 
-import static com.morgan.design.Constants.CANCEL_ALL_WEATHER_NOTIFICATIONS;
 import static com.morgan.design.Constants.DELETE_CURRENT_NOTIFCATION;
 import static com.morgan.design.Constants.NOTIFICATIONS_FULL;
 import static com.morgan.design.Constants.PREFERENCES_UPDATED;
@@ -22,25 +21,27 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 
-public class NotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
+public class NotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnCancelAll {
 
 	private static final String LOG_TAG = "NotificationControllerService";
 
-	// protected WeatherNotificationControllerService mBoundNotificationControllerService;
 	protected WeatherNotificationControllerService mBoundNotificationControllerService;
 
 	protected BroadcastReceiver preferencesChangedBroadcastReceiver;
 	protected BroadcastReceiver deleteCurrentNotificationBroadcastReciever;
 	protected BroadcastReceiver removeCurrentNotificationBroadcastReciever;
 	protected BroadcastReceiver notificationsFullBroadcastReciever;
-	protected BroadcastReceiver cancelAllNotificationsBroadcastReciever;
 
 	protected WeatherChoiceDao weatherDao;
+
+	protected CancelAllLookupsReciever cancelAllLookupsReciever;
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
@@ -57,11 +58,12 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 		super.onCreate();
 		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
 		this.weatherDao = new WeatherChoiceDao(getHelper());
+		this.cancelAllLookupsReciever = new CancelAllLookupsReciever(this, this);
+
 		doRegisterPreferenceReciever();
 		doRegisterRemoveNotificationReciever();
 		doRegisterDeleteNotificationReciever();
 		doRegisterNotificationsFullBroadcastReciever();
-		doRegisterCancelAllNotificationsBroadcastReciever();
 	}
 
 	@Override
@@ -71,7 +73,8 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 		doUnbindDeleteNotificationReciever();
 		doUnbindRemoveNotificationReciever();
 		doUnbindNotificationsFullBroadcastReciever();
-		doUnbindCancelAllNotificationsBroadcastReciever();
+
+		this.cancelAllLookupsReciever.unregister();
 	}
 
 	protected void onRemoveNotification(final Intent intent, final boolean delete) {
@@ -102,7 +105,8 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 				Toast.LENGTH_SHORT).show();
 	}
 
-	protected void onCancelAllNotifications() {
+	@Override
+	public void onCancelAll() {
 		final List<WeatherChoice> allWoeidChoices = this.weatherDao.findAllWoeidChoices();
 		// Cancel all known weather notifications
 		for (final WeatherChoice weatherChoice : allWoeidChoices) {
@@ -162,18 +166,6 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 		}
 	}
 
-	private void doRegisterCancelAllNotificationsBroadcastReciever() {
-		if (isNull(this.cancelAllNotificationsBroadcastReciever)) {
-			this.cancelAllNotificationsBroadcastReciever = new BroadcastReceiver() {
-				@Override
-				public void onReceive(final Context context, final Intent intent) {
-					onCancelAllNotifications();
-				}
-			};
-			registerReceiver(this.cancelAllNotificationsBroadcastReciever, new IntentFilter(CANCEL_ALL_WEATHER_NOTIFICATIONS));
-		}
-	}
-
 	private void doUnbindPreferenceReciever() {
 		if (isNotNull(this.preferencesChangedBroadcastReceiver)) {
 			unregisterReceiver(this.preferencesChangedBroadcastReceiver);
@@ -199,13 +191,6 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 		if (isNotNull(this.notificationsFullBroadcastReciever)) {
 			unregisterReceiver(this.notificationsFullBroadcastReciever);
 			this.notificationsFullBroadcastReciever = null;
-		}
-	}
-
-	private void doUnbindCancelAllNotificationsBroadcastReciever() {
-		if (isNotNull(this.cancelAllNotificationsBroadcastReciever)) {
-			unregisterReceiver(this.cancelAllNotificationsBroadcastReciever);
-			this.cancelAllNotificationsBroadcastReciever = null;
 		}
 	}
 

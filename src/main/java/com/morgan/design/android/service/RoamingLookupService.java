@@ -23,8 +23,11 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever;
+import com.morgan.design.android.broadcast.ReloadWeatherReciever.OnReloadWeather;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
@@ -40,7 +43,7 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 
 public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
-		ServiceConnection, ReloadWeatherReciever.OnReloadWeather {
+		ServiceConnection, OnReloadWeather, OnCancelAll {
 
 	private static final String LOG_TAG = "RoamingLookupService";
 
@@ -54,6 +57,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	protected WeatherNotificationControllerService mBoundNotificationControllerService;
 
 	private ReloadWeatherReciever reloadWeatherReciever;
+	protected CancelAllLookupsReciever cancelAllLookupsReciever;
 
 	// ///////////////////////////////////
 	// Service creation and destruction //
@@ -66,6 +70,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.weatherDao = new WeatherChoiceDao(getHelper());
 		this.reloadWeatherReciever = new ReloadWeatherReciever(this, this);
+		this.cancelAllLookupsReciever = new CancelAllLookupsReciever(this, this);
 
 		bindService(new Intent(this, WeatherNotificationControllerService.class), this, BIND_AUTO_CREATE);
 		sendBroadcast(new Intent(LOOPING_ALARM));
@@ -109,11 +114,17 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	}
 
 	@Override
+	public void onCancelAll() {
+		stopService(new Intent(LocationLookupService.GET_ROAMING_LOCATION_LOOKUP));
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		unregisterLocationChangedUpdates();
 		unbindService(this);
 		this.reloadWeatherReciever.unregister();
+		this.cancelAllLookupsReciever.unregister();
 	}
 
 	@Override

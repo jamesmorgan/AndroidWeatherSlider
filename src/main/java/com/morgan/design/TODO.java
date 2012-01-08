@@ -67,6 +67,7 @@ public class TODO {
 	// FIXME -> Deal with service restarts, monitor services-to-service
 	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
 	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
+	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -87,6 +88,8 @@ public class TODO {
 
 	// FIXME -> Proper error handling when no weather details found, parse response.
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	
+	// FIXME -> DONE - (08/01/2012) - Ensure on reload -> cancel -> reload, all ongoing commands are cancelled
 	// FIXME -> DONE - (08/01/2012) - Prevent no Location details shown when roaming service fails to find location on first attempt.
 	
 	// FIXME -> DONE - (07/01/2012) - Open location on map from overview screen
