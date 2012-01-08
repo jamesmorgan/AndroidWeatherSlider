@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.provider.Settings;
 import android.view.View;
@@ -38,6 +39,17 @@ public class Utils {
 		catch (final Exception e) {
 			shortToast(activity, "Unable to open feedback");
 			Logger.e(LOG_TAG, "Unable to open feedback: ", e);
+		}
+	}
+
+	public static void openGoogleMaps(final Activity activity, final String latitude, final String longitude) {
+		try {
+			final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:%s,%s?z=15", latitude, longitude)));
+			activity.startActivity(intent);
+		}
+		catch (final Exception e) {
+			shortToast(activity, "Unable to open google maps");
+			Logger.e(LOG_TAG, "Unable to open google maps: ", e);
 		}
 	}
 

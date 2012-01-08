@@ -74,6 +74,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		setTemperatureDetails();
 
 		setUpMoreInformationLink();
+		setUpOpenMapLink();
 	}
 
 	private TextView weather_description;
@@ -177,6 +178,19 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 		this.last_updated_date_time = (TextView) findViewById(R.id.last_updated_date_time);
 		this.last_updated_date_time.setText(this.currentWeather.getCurrentDate());
+	}
+
+	private TextView open_map_link;
+
+	private void setUpOpenMapLink() {
+		this.open_map_link = (TextView) findViewById(R.id.open_map_link);
+		this.open_map_link.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				Utils.openGoogleMaps(WeatherOverviewActivity.this, WeatherOverviewActivity.this.currentWeather.getLatitude(),
+						WeatherOverviewActivity.this.currentWeather.getLongitude());
+			}
+		});
 	}
 
 	protected WeatherSliderApplication getTopLevelApplication() {

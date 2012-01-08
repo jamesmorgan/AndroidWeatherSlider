@@ -38,7 +38,8 @@ public class TODO {
 	// FIXME -> Check try/catch blocks report to ACRA if required
 	// FIXME -> Add "About" OR "Credits" section
 	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc
-
+	// FIXME -> Overlay weather on google maps
+	
 	// ////////////////
 	// Consideration //
 	// ////////////////
@@ -63,7 +64,6 @@ public class TODO {
 	// FIXME -> Monitor service to prevent services stopping
 	// FIXME -> Hook into search button to enter a location
 	// FIXME -> Lazy load service, are they needed -> is this possible?
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Deal with service restarts, monitor services-to-service
 	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
 	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
@@ -77,6 +77,9 @@ public class TODO {
 	// FIXME -> When generating sources, set debug to false.
 
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
+	// FIXME -> Proper error handling when no weather details found, parse response.
+	
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 
 	// FIXME -> change tabs for view pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
@@ -85,7 +88,9 @@ public class TODO {
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> Set maximum number of allowed notifications in preference
-
+	// FIXME -> Fix bug when roaming service fails to find location on first load.
+	
+	// FIXME -> DONE - (07/01/2012) - Open location on map from overview screen
 	// FIXME -> DONE - (07/01/2012) - Add roaming symbol/icon to roaming notifications.
 	// FIXME -> DONE - (07/01/2012) - Moved active icon on home screen
 	// FIXME -> DONE - (07/01/2012) - Updated Change log to indicate initial release, confirm still works via menu and start up
