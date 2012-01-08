@@ -24,7 +24,6 @@ public class TODO {
 	// FIXME -> Consider signing apk with maven -> http://code.google.com/p/maven-android-plugin/wiki/SigningAPKWithMavenJarsigner
 	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
 	// FIXME -> Think about using a remote service and client for all operations -> http://saigeethamn.blogspot.com/2009/09/android-developer-tutorial-part-9.html
-	// FIXME -> Consider alternative solution to service based notification system
 
 	// ///////////////
 	// Nice To Have //
@@ -36,7 +35,6 @@ public class TODO {
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
 	// FIXME -> Option to disable collecting of logs via ACRA
 	// FIXME -> Check try/catch blocks report to ACRA if required
-	// FIXME -> Add "About" OR "Credits" section
 	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc
 	// FIXME -> Overlay weather on google maps
 	
@@ -66,8 +64,13 @@ public class TODO {
 	// FIXME -> Lazy load service, are they needed -> is this possible?
 	// FIXME -> Deal with service restarts, monitor services-to-service
 	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
 	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
+	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA
+	// FIXME -> change tabs for view pager 
+	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
+	// -> http://blog.stylingandroid.com/archives/537
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -77,18 +80,15 @@ public class TODO {
 
 	// FIXME -> When generating sources, set debug to false.
 	// FIXME -> Pro-guard bug when running on real phone -> Update latest maven-android-plugin - 3.0.1
-
-	// FIXME -> change tabs for view pager 
-	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
-	// -> http://blog.stylingandroid.com/archives/537
 	
 	// FIXME -> Change default preferences before go-live
 	// FIXME -> Ensure all necessary data is being stored/recorded correctly
 	// FIXME -> Set maximum number of allowed notifications in preference
 
 	// FIXME -> Proper error handling when no weather details found, parse response.
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-	
+	// FIXME -> Set main menu view to default sort weathers by active, alphabetical
+
+	// FIXME -> DONE - (08/01/2012) - Added "About" section, Me, Twitter, Morgan-Design, Market Link
 	// FIXME -> DONE - (08/01/2012) - Ensure on reload -> cancel -> reload, all ongoing commands are cancelled
 	// FIXME -> DONE - (08/01/2012) - Prevent no Location details shown when roaming service fails to find location on first attempt.
 	

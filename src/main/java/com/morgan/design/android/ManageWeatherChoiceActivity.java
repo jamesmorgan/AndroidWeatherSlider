@@ -42,6 +42,7 @@ import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.Utils;
 import com.weatherslider.morgan.design.R;
 
 public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
@@ -130,6 +131,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case R.id.home_menu_settings:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_PREFERENCES);
 				PreferenceUtils.openUserPreferenecesActivity(this);
+				return true;
+			case R.id.home_menu_about:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_ABOUT);
+				Utils.openAbout(this);
 				return true;
 			case R.id.home_menu_cancel_all:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.CANCEL_ALL);

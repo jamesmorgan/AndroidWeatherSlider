@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.morgan.design.AboutActivity;
 import com.morgan.design.FeedbackFormActivity;
 import com.morgan.design.android.domain.types.Abrev;
 import com.weatherslider.morgan.design.R;
@@ -42,6 +43,16 @@ public class Utils {
 		}
 	}
 
+	public static void openAbout(final Activity activity) {
+		try {
+			activity.startActivity(new Intent(activity, AboutActivity.class));
+		}
+		catch (final Exception e) {
+			shortToast(activity, "Unable to about activity");
+			Logger.e(LOG_TAG, "Unable to about activity: ", e);
+		}
+	}
+
 	public static void openGoogleMaps(final Activity activity, final String latitude, final String longitude) {
 		try {
 			final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:%s,%s?z=15", latitude, longitude)));
@@ -50,6 +61,16 @@ public class Utils {
 		catch (final Exception e) {
 			shortToast(activity, "Unable to open google maps");
 			Logger.e(LOG_TAG, "Unable to open google maps: ", e);
+		}
+	}
+
+	public static void openUrl(final Activity activity, final String url) {
+		try {
+			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+		}
+		catch (final Exception e) {
+			Utils.shortToast(activity, "Unable to open URL");
+			Logger.e(LOG_TAG, "Unable to open URL: [%s], excpetion= [%s]", url, e.getMessage());
 		}
 	}
 

@@ -2,7 +2,11 @@ package com.morgan.design.android.util;
 
 import android.app.Activity;
 import android.content.pm.PackageInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+
+import com.morgan.design.android.repository.DatabaseHelper;
 
 public class BuildUtils {
 
@@ -39,5 +43,27 @@ public class BuildUtils {
 
 	public static boolean isRunningEmmulator() {
 		return "sdk".equals(Build.PRODUCT);
+	}
+
+	public static String getSQLLiteVersion() {
+		try {
+			final SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(":memory:", null);
+			final Cursor cursor = db.rawQuery("select sqlite_version() AS sqlite_version", null);
+			String sqliteVersion = "";
+			while (cursor.moveToNext()) {
+				sqliteVersion += cursor.getString(0);
+			}
+			cursor.close();
+			db.close();
+			return sqliteVersion;
+		}
+		catch (final Exception e) {
+			// suppress error
+		}
+		return "N/A";
+	}
+
+	public static int getDbVersion() {
+		return DatabaseHelper.DATABASE_VERSION;
 	}
 }

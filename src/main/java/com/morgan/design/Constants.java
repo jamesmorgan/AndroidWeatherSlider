@@ -17,6 +17,13 @@ public class Constants {
 	// Web URL's
 	public static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
 
+	// About -> website links
+	public static final String DONATE_URL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QMZWPL26PY5GW";
+	public static final String ANDROID_MARKET = "http://market.android.com/";
+	public static final String MORGAN_DESIGN = "http://www.morgan-design.com";
+	public static final String TWITTER_URL = "http://www.twitter.com/jimbob_87";
+	public static final String MARKET_LINK_URL = "market://search?q=pname:com.morgan.design";
+
 	// Rest Template timeout
 	public static final int READ_TIMEOUT = 30000;
 

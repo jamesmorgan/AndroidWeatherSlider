@@ -10,8 +10,8 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.dao.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
 
@@ -21,7 +21,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final String DATABASE_NAME = "weather_slider.db";
 
 	// TODO reset to 1 for release
-	private static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 1;
 
 	private final Context context;
 
