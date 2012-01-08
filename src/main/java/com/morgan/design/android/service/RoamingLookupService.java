@@ -8,6 +8,9 @@ import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNotZero;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
+
+import java.util.Date;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -170,6 +173,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		if (isNull(this.weatherChoice)) {
 			this.weatherChoice = new WeatherChoice();
+			this.weatherChoice.setCreatedDateTime(new Date());
 			this.weatherDao.create(this.weatherChoice);
 		}
 
