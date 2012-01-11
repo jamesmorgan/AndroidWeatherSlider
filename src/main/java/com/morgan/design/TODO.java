@@ -44,6 +44,13 @@ public class TODO {
 	// FIXME -> Allow users to narrow down location accuracy
 	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
 	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
+	// FIXME -> Possible calandar intergration for weather messages, warnings
+	// FIXME -> Possible notification triggered on daily alarm with tip of the day about weather
+	// FIXME -> How is the weather goign to affect me e.g. travel plans, car, plane, bus etc?
+	// FIXME -> Look into hooking into alarm providers?
+	// FIXME -> Try 'Add Location' at bottom of the screen
+	// FIXME -> Always have GPS at the top, then last update time OR A_z
+	// FIXME -> Potentially local time not last updated time in each notification, would require user option?
 	
 	// ///////////////
 	// Nice To Have //
@@ -52,12 +59,18 @@ public class TODO {
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
 	// FIXME -> Option to disable collecting of logs via ACRA
 	// FIXME -> Check try/catch blocks report to ACRA if required
-	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc
-	// FIXME -> Overlay weather on google maps
+	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc, Always have GPS at the top, then last update time OR A_z?
+	// FIXME -> Overlay weather on google maps -> http://www.androidhive.info/2012/01/android-working-with-google-maps/
 	// FIXME -> Proper error handling when no weather details found, parse response.
 	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
+	// FIXME -> Weather annimations?
+	// FIXME -> Add in 3-5 day summary of weather
+	// FIXME -> Create weather tips section, e.g. wear a coat it raining, it may take you longer to get to work, etc. -> opt-in & opt-out
+	// FIXME -> Add ability to pay for application in-line
+	// FIXME -> The home screen and notification order should always match the same ordering
+	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
 	
 	// ///////////////////
 	// Next Version ?.? //
@@ -75,13 +88,75 @@ public class TODO {
 	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Improve current notification layout
 	// FIXME -> Capture all shared preference values on application crash (ARCA)
+	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons?
+	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
+	// FIXME -> Long click open management pop-up menu & short click open overview mode
+	// FIXME -> Auto presets option, e.g. GPS, London, Tokoyo, New York, GPS?
 	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
-	// FIXME -> Add ability to pay for application in-line
-
+	// FIXME -> Add Application on Android Market
+	// FIXME -> Style up Market page once deployed
+	
+	// FIXME -> BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
+	// FIXME -> BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
+	// FIXME -> Confirm Google Analytics intergration complete, make sure present on all areas possible, about, feedback form, all menu items
+	// FIXME -> Update change log, mentioning 'swipe gestures throughout'
+	// FIXME -> Create Application Icon
+	
+	// FIXME -> Rename loaded notifications button labels -> "Refresh, Disable, Delete"
+	// FIXME -> On application load/start, if no weathers set, show enter location screen first
+	// FIXME -> Standard menu on overview screen
+	
+	// Cosmetics:
+	// FIXME -> Grey out text when weather is disabled (keep red light)
+	// FIXME -> Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
+	// FIXME -> Make overview update time title bold
+	// FIXME -> Remove info from overview titles
+	// FIXME -> Add location name to overview screen, replace current text e.g. Manchester, UK
+	// FIXME -> Buttons not links on overview screen, potential bug with clickable links, needs fixing.
+	
+	// /////////////////////////////////
+	// User Feedback Version 1.0-BETA //
+	// /////////////////////////////////
+	/**
+	 * --------------------------
+	 * Captured - (10/01/2012) --
+	 * --------------------------
+	 *
+	 * (+) Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
+	 * (C) Try 'Add Location' at bottom of the screen
+	 * (/) On application load/start, if no weathers set, show enter location screen first
+	 * (C) Always have GPS at the top, then last update time OR A_z 
+	 * (NTH) The home screen and notification order should always match the same ordering
+	 * (x) Red/warning if server weather
+	 * (+) Long click open management pop-up menu & short click open overview mode
+	 * (C) Potentially local time not last updated time in each notification, would require user option?
+	 * (/) Add location name to overview screen, replace current text e.g. Manchester, UK
+	 * (/) Buttons not links on overview screen, potential bug with clickable links, needs fixing.
+	 * (/) Standard menu on overview screen
+	 * (C) Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
+	 * (+) Auto presets option, e.g. GPS, London, Tokoyo, New York, GPS?
+	 * (/) Menu Icons
+	 *
+	 * --------------------------
+	 * Captured - (09/01/2012) --
+	 * --------------------------
+	 *
+	 * (/) Create Icon for application -> http://android-ui-utils.googlecode.com/hg/asset-studio/dist/icons-launcher.html
+	 * (/) Rename loaded notifications button labels -> "Refresh, Disable, Delete"
+	 * (/) Grey out text when weather is disabled (keep red light)
+	 * (/) Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
+	 * (/) Make overview update time title bold
+	 * (/) Remove info from overview titles
+	 **/
+	
+	// //////////////////////////////////////////
+	// Release Version 1.0-BETA - (08/01/2012) //
+	// //////////////////////////////////////////
+	
 	// FIXME -> DONE - (08/01/2012) - Clean up preferences, check defaults before go-live
 	// FIXME -> DONE - (08/01/2012) - Ensure all necessary data is being stored correctly, missing created datetime for roaming notifications
 	// FIXME -> DONE - (08/01/2012) - Set main menu view to default sort weathers by active, alphabetical
