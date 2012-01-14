@@ -111,6 +111,7 @@ public class TODO {
 	// FIXME -> On application load/start, if no weathers set, show enter location screen first
 	// FIXME -> Standard menu on overview screen
 	// FIXME -> DONE - (14/01/2012) - Update ORMLite 4.33
+	// FIXME -> DONE - (14/01/2012) - Allow move to SD feature, upgrade to android 2.2, level 8
 	
 	// Cosmetics:
 	// FIXME -> Grey out text when weather is disabled (keep red light)
