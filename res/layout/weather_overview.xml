@@ -5,12 +5,21 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/location_a"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:padding="10dip"
-        android:text="Current Weather Overview"
+        android:paddingTop="10dip"
+        android:text="Place Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/location_b"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dip"
+        android:text="City"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TableLayout
@@ -59,29 +68,11 @@
             android:layout_height="wrap_content"
             android:padding="10dip" >
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <TextView
+                android:id="@+id/location_lat_long"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/location_a"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Place Name" />
-
-                <TextView
-                    android:id="@+id/location_b"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="City" />
-
-                <TextView
-                    android:id="@+id/location_lat_long"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="long &amp; Lat" />
-            </LinearLayout>
+                android:text="long &amp; Lat" />
         </TableRow>
     </TableLayout>
 
@@ -102,7 +93,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Temp Info"
+                android:text="Temp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -134,7 +125,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Wind Info "
+                android:text=" Wind "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -147,6 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
+
                 <TextView
                     android:id="@+id/wind_speed"
                     android:layout_width="wrap_content"
@@ -170,7 +162,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Sun Info "
+                android:text=" Sun "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <LinearLayout
@@ -219,6 +211,7 @@
         android:paddingTop="10dip"
         android:text="Last Updated:"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <TextView
         android:id="@+id/last_updated_date_time"
         android:layout_width="wrap_content"
@@ -237,7 +230,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="More Information..."
+        android:text="Further Details..."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -249,7 +242,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="Open Location In Google Map..."
+        android:text="Open Google Maps..."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

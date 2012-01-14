@@ -1,57 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:padding="10dip" >
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dip"
-        android:text="@string/home_instructions" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:background="#3399FF" />
-
+    android:layout_height="fill_parent" >
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="clip_horizontal|clip_vertical"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="1.0" >
+        android:padding="15dip" >
 
-        <LinearLayout
-            android:id="@+id/enter_location_container"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="15dip"
-            android:paddingTop="15dip" >
+            android:text="Add a new location"            android:paddingTop="15dp"
+            
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <EditText
-                android:id="@+id/locationText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.00"
-                android:hint="Enter Location..."
-                android:maxLines="1" >
-
-                <requestFocus />
-            </EditText>
-
-            <Button
-                android:id="@+id/lookUpLocationButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:onClick="onGetLocation"
-                android:text="Lookup..." />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="Enter a location or use your GPS..."
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <View
             android:layout_width="fill_parent"
@@ -59,95 +32,148 @@
             android:background="#3399FF" />
 
         <LinearLayout
-            android:id="@+id/lookup_location_container"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_gravity="clip_horizontal|clip_vertical"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="13dip"
-            android:paddingTop="13dip" >
+            android:orientation="vertical"
+            android:weightSum="1.0" >
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.00"
-                android:orientation="vertical" >
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="15dip"
+                android:paddingTop="15dip" >
+
+                <LinearLayout
+                    android:id="@+id/text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/locationText"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Enter Location..."
+                        android:maxLines="1" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <Button
+                        android:id="@+id/lookUpLocationButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onGetLocation"
+                        android:text="Lookup..." />
+                </LinearLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="e.g. Postal Code or Town"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <LinearLayout
+                android:id="@+id/lookup_location_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|clip_vertical"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dip"
+                android:paddingTop="13dip" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.00"
-                    android:text="Find your location"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:orientation="vertical" >
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Find your location"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Find your current location via GPS"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/getMyLocationButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Find your current location now via GPS &amp; Mobile"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:onClick="onGetCurrentMyLocation"
+                    android:text="Lookup..." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/getMyLocationButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onGetCurrentMyLocation"
-                android:text="Lookup..." />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <LinearLayout
-            android:id="@+id/use_gps_location_container"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_horizontal|clip_vertical"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="13dip"
-            android:paddingTop="13dip" >
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/use_gps_location_container"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.00"
-                android:orientation="vertical" >
+                android:layout_gravity="clip_horizontal|clip_vertical"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dip"
+                android:paddingTop="13dip" >
 
-                <CheckBox
-                    android:id="@+id/use_gps"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.00"
+                    android:orientation="vertical" >
+
+                    <CheckBox
+                        android:id="@+id/use_gps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onEnabledGpsLocation"
+                        android:text="Always Use GPS"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Always find your location via GPS"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/alwaysUseGpsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onEnabledGpsLocation"
-                    android:text="Always Use GPS"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Tick to always find your location via GPS &amp; Mobile"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:onClick="onAlwaysUseGpsForLocation"
+                    android:text="Lookup..." />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/alwaysUseGpsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:enabled="false"
-                android:onClick="onAlwaysUseGpsForLocation"
-                android:text="Lookup..." />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
         </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

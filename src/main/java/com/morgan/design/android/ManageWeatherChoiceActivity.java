@@ -210,13 +210,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.setMessage(dialogText);
 
 		if (woeidChoice.isActive()) {
-			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Reload", new DialogInterface.OnClickListener() {
+			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Refresh", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					onLoadWeatherChoice(woeidChoice);
 				}
 			});
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Remove", new DialogInterface.OnClickListener() {
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Disable", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					attemptToKillNotifcation(woeidChoice);
@@ -224,7 +224,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			});
 		}
 		else {
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Load", new DialogInterface.OnClickListener() {
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Enable", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					onLoadWeatherChoice(woeidChoice);

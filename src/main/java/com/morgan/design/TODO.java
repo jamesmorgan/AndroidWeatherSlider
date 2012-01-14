@@ -102,20 +102,22 @@ public class TODO {
 	
 	// FIXME -> BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
 	// FIXME -> BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
-	// FIXME -> Confirm Google Analytics intergration complete, make sure present on all areas possible, about, feedback form, all menu items
-	// FIXME -> Update change log, mentioning 'swipe gestures throughout'
+	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
+	// FIXME -> DONE - (14/01/2012) - Update change log, mentioning 'swipe gestures throughout'
 	// FIXME -> Create Application Icon
+	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	
-	// FIXME -> Rename loaded notifications button labels -> "Refresh, Disable, Delete"
+	// FIXME -> DONE - (14/01/2012) - Rename loaded notifications button labels -> "Refresh, Disable, Delete"
 	// FIXME -> On application load/start, if no weathers set, show enter location screen first
 	// FIXME -> Standard menu on overview screen
+	// FIXME -> DONE - (14/01/2012) - Update ORMLite 4.33
 	
 	// Cosmetics:
 	// FIXME -> Grey out text when weather is disabled (keep red light)
-	// FIXME -> Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
+	// FIXME -> DONE - (11/01/2012) - Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
 	// FIXME -> Make overview update time title bold
-	// FIXME -> Remove info from overview titles
-	// FIXME -> Add location name to overview screen, replace current text e.g. Manchester, UK
+	// FIXME -> DONE - (11/01/2012) - Remove info from overview titles
+	// FIXME -> DONE - (11/01/2012) - Add location name to overview screen, replace current text e.g. Manchester, UK
 	// FIXME -> Buttons not links on overview screen, potential bug with clickable links, needs fixing.
 	
 	// /////////////////////////////////
