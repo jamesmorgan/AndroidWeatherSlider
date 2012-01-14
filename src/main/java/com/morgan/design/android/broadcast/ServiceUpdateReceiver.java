@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.morgan.design.android.util.Logger;
@@ -25,6 +27,7 @@ public class ServiceUpdateReceiver extends BroadcastReceiver {
 
 	private final Activity context;
 	private final TextView service_update_area;
+	private final LinearLayout service_update_area_container;
 
 	private final Handler handler;
 
@@ -33,12 +36,15 @@ public class ServiceUpdateReceiver extends BroadcastReceiver {
 	public ServiceUpdateReceiver(final Activity context) {
 		this.context = context;
 		this.service_update_area = (TextView) this.context.findViewById(R.id.service_update_area);
+		this.service_update_area_container = (LinearLayout) this.context.findViewById(R.id.service_update_area_container);
+
 		this.context.registerReceiver(this, new IntentFilter(ACTION));
 		this.handler = new Handler();
 		this.clearTextRunnable = new Runnable() {
 			@Override
 			public void run() {
 				ServiceUpdateReceiver.this.service_update_area.setText("");
+				ServiceUpdateReceiver.this.service_update_area_container.setVisibility(View.GONE);
 			}
 		};
 	}
@@ -51,6 +57,9 @@ public class ServiceUpdateReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(final Context context, final Intent intent) {
 		final String action = intent.getAction();
+		if (View.GONE == this.service_update_area_container.getVisibility()) {
+			this.service_update_area_container.setVisibility(View.VISIBLE);
+		}
 		if (ACTION.equals(action)) {
 			if (intent.hasExtra(LOADING)) {
 				final String loading = intent.getStringExtra(LOADING);

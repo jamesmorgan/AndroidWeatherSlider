@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/top_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_location_text" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/add_new_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onAddNewLocation"
-        android:text="Add New Location..." >
-    </Button>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_location_text" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/modify_loaded_locaitons" />
+        <Button
+            android:id="@+id/add_new_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onAddNewLocation"
+            android:text="Add New Location..." >
+        </Button>
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modify_loaded_locaitons" />
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/service_update_area_container"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@android:id/list"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="5dp"
+        android:background="@drawable/main_service_register_shape"
         android:gravity="center_horizontal|bottom"
         android:paddingTop="2dp" >
 
@@ -40,9 +44,17 @@
             android:id="@+id/service_update_area"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corners"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="@android:color/secondary_text_light_nodisable"
             android:typeface="monospace" />
     </LinearLayout>
 
-</LinearLayout>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/service_update_area_container"
+        android:layout_below="@id/top_container" />
+
+</RelativeLayout>

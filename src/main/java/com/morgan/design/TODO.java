@@ -88,9 +88,9 @@ public class TODO {
 	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Improve current notification layout
 	// FIXME -> Capture all shared preference values on application crash (ARCA)
-	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
 	// FIXME -> Long click open management pop-up menu & short click open overview mode
 	// FIXME -> Auto presets option, e.g. GPS, London, Tokoyo, New York, GPS?
+	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -99,17 +99,19 @@ public class TODO {
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
 	
-	// FIXME -> BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
-	// FIXME -> DONE - (14/01/2012) - BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
+	// FIXME -> Standard menu on overview screen
+	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
 	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
-	// FIXME -> DONE - (14/01/2012) - Update change log, mentioning 'swipe gestures throughout'
 	// FIXME -> Create Application Icon
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
-	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
-	
-	// FIXME -> DONE - (14/01/2012) - Rename loaded notifications button labels -> "Refresh, Disable, Delete"
 	// FIXME -> On application load/start, if no weathers set, show enter location screen first
-	// FIXME -> Standard menu on overview screen
+
+	// FIXME -> DONE - (14/01/2012) - BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
+	// FIXME -> DONE - (14/01/2012) - Re styled Service update area
+
+	// FIXME -> DONE - (14/01/2012) - BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
+	// FIXME -> DONE - (14/01/2012) - Update change log, mentioning 'swipe gestures throughout'
+	// FIXME -> DONE - (14/01/2012) - Rename loaded notifications button labels -> "Refresh, Disable, Delete"
 	// FIXME -> DONE - (14/01/2012) - Update ORMLite 4.33
 	// FIXME -> DONE - (14/01/2012) - Allow move to SD feature, upgrade to android 2.2, level 8
 	// FIXME -> DONE - (14/01/2012) - Reduce size of install, remove unused/unneeded libraries from pom
