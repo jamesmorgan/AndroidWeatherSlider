@@ -11,64 +11,9 @@
 	<name>WeatherSlider</name>
 
 	<properties>
-		<spring-android-version>1.0.0.M2</spring-android-version>
-		<jackson-version>1.7.2</jackson-version>
+		<spring-android-version>1.0.0.M4</spring-android-version>
 		<simple-version>2.4.1</simple-version>
-		<android-rome-version>1.0.0-r2</android-rome-version>
-
-		<!-- Key store variables -->
-		<!--<keystore.location>path/to/test.keystore</keystore.location> <keystore.password>teststorepass</keystore.password> 
-			<keystore.keypass>testpass</keystore.keypass> <keystore.alias>testkey</keystore.alias> -->
 	</properties>
-
-	<repositories>
-		<!-- For developing with Android ROME Feed Reader -->
-		<repository>
-			<id>android-rome-feed-reader-repository</id>
-			<name>Android ROME Feed Reader Repository</name>
-			<url>https://android-rome-feed-reader.googlecode.com/svn/maven2/releases</url>
-		</repository>
-		<!-- For testing against latest Spring snapshots -->
-		<repository>
-			<id>org.springframework.maven.snapshot</id>
-			<name>Spring Maven Snapshot Repository</name>
-			<url>http://maven.springframework.org/snapshot</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<!-- For developing against latest Spring milestones -->
-		<repository>
-			<id>org.springframework.maven.milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<!-- Google Android crash reporting tool -->
-		<repository>
-			<id>acra-releases</id>
-			<url>http://acra.googlecode.com/svn/repository/releases</url>
-		</repository>
-
-		<repository>
-			<id>maven-android-plugin</id>
-			<name>android mvn repo</name>
-			<url>http://rgladwell.github.com/m2e-android/updates/master</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-
-
-	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -81,7 +26,39 @@
 		<dependency>
 			<groupId>org.springframework.android</groupId>
 			<artifactId>spring-android-rest-template</artifactId>
-			<version>1.0.0.BUILD-SNAPSHOT</version>
+			<version>${spring-android-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.android</groupId>
+			<artifactId>spring-android-core</artifactId>
+			<version>${spring-android-version}</version>
+		</dependency>
+		<dependency>
+			<!-- Using Simple for XML marshaling -->
+			<groupId>org.simpleframework</groupId>
+			<artifactId>simple-xml</artifactId>
+			<version>${simple-version}</version>
+			<exclusions>
+				<!-- StAX is not available on Android -->
+				<exclusion>
+					<artifactId>stax</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<!-- Provided by Android -->
+				<exclusion>
+					<artifactId>xpp3</artifactId>
+					<groupId>xpp3</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1.1-android-fork</version>
 		</dependency>
 
 		<dependency>
@@ -95,37 +72,6 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<!-- Using Jackson for JSON marshaling -->
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson-version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<!-- Using Simple for XML marshaling -->
-			<groupId>org.simpleframework</groupId>
-			<artifactId>simple-xml</artifactId>
-			<version>${simple-version}</version>
-			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>stax</artifactId>
-					<groupId>stax</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>stax-api</artifactId>
-					<groupId>stax</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom</artifactId>
-			<version>1.1.1-android-fork</version>
 		</dependency>
 
 		<dependency>
@@ -146,12 +92,15 @@
 			<version>r6</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.viewpagerindicator</groupId>
-			<artifactId>library</artifactId>
-			<version>2.2.2</version>
-			<type>apklib</type>
-		</dependency>
+		<!-- <dependency> <groupId>org.simpleframework</groupId> <artifactId>simple-xml</artifactId> 
+			<version>${simple-version}</version> </dependency> -->
+		<!-- <dependency> <groupId>com.viewpagerindicator</groupId> <artifactId>library</artifactId> 
+			<version>2.2.2</version> <type>apklib</type> </dependency> -->
+		<!--<dependency> -->
+		<!-- Using Jackson for JSON marshaling -->
+		<!--<groupId>org.codehaus.jackson</groupId> <artifactId>jackson-mapper-asl</artifactId> 
+			<version>1.7.3</version> <scope>compile</scope> -->
+		<!--</dependency> -->
 
 	</dependencies>
 
@@ -262,16 +211,6 @@
 				</executions>
 			</plugin>
 
-
-			<!-- JAR Signing -->
-			<!--<plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jarsigner-plugin</artifactId> 
-				<version>1.2</version> <executions> <execution> <id>signing</id> <goals> 
-				<goal>sign</goal> </goals> <phase>package</phase> <inherited>true</inherited> 
-				<configuration> <includes> <include> ${project.build.directory}/target/${project.artifactId}-${project.version}.apk 
-				</include> </includes> <keystore>${keystore.location}</keystore> <storepass>${keystore.password}</storepass> 
-				<keypass>${keystore.keypass}</keypass> <alias>${keystore.alias}</alias> <verbose>true</verbose> 
-				</configuration> </execution> </executions> </plugin> -->
-
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -311,4 +250,51 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+
+	<repositories>
+		<!-- For testing against latest Spring snapshots -->
+		<!-- For developing with Android ROME Feed Reader -->
+		<repository>
+			<id>android-rome-feed-reader-repository</id>
+			<name>Android ROME Feed Reader Repository</name>
+			<url>https://android-rome-feed-reader.googlecode.com/svn/maven2/releases</url>
+		</repository>
+
+		<!-- <repository> <id>org.springframework.maven.snapshot</id> <name>Spring 
+			Maven Snapshot Repository</name> <url>http://maven.springframework.org/snapshot</url> 
+			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
+			</snapshots> </repository> -->
+		<!-- For developing against latest Spring milestones -->
+
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring 
+			Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<!-- Google Android crash reporting tool -->
+		<repository>
+			<id>acra-releases</id>
+			<url>http://acra.googlecode.com/svn/repository/releases</url>
+		</repository>
+
+		<repository>
+			<id>maven-android-plugin</id>
+			<name>android mvn repo</name>
+			<url>http://rgladwell.github.com/m2e-android/updates/master</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
 </project>
