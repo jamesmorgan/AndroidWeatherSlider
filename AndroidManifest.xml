@@ -64,9 +64,7 @@
         <activity
             android:name="com.morgan.design.android.WeatherOverviewActivity"
             android:alwaysRetainTaskState="false"
-            android:configChanges="keyboardHidden|orientation"
-            android:noHistory="true"
-            android:stateNotNeeded="false" >
+            android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="com.morgan.design.android.broadcast.OPEN_WEATHER_OVERVIEW" />
             </intent-filter>

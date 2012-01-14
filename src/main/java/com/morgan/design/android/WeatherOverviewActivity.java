@@ -225,7 +225,6 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 						}
 						intent.putExtra(Constants.NUMBER_OF_FORCASTS, i);
 						intent.putExtras(extras);
-
 						startActivity(intent);
 					}
 				}

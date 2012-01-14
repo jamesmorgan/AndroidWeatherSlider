@@ -100,7 +100,7 @@ public class TODO {
 	// FIXME -> Style up Market page once deployed
 	
 	// FIXME -> BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
-	// FIXME -> BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
+	// FIXME -> DONE - (14/01/2012) - BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
 	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 	// FIXME -> DONE - (14/01/2012) - Update change log, mentioning 'swipe gestures throughout'
 	// FIXME -> Create Application Icon
