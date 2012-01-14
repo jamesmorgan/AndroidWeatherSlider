@@ -116,8 +116,8 @@ public class TODO {
 	
 	// Cosmetics:
 	// FIXME -> DONE - (14/01/2012) - Grey out text when weather is disabled (keep red light)
-	// FIXME -> Make overview update time title bold
-	// FIXME -> Buttons not links on overview screen, potential bug with clickable links, needs fixing.
+	// FIXME -> DONE - (14/01/2012) - Make overview update time title bold
+	// FIXME -> DONE - (14/01/2012) - Re-style clickable links on overview screen
 	// FIXME -> DONE - (11/01/2012) - Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
 	// FIXME -> DONE - (11/01/2012) - Remove info from overview titles
 	// FIXME -> DONE - (11/01/2012) - Add location name to overview screen, replace current text e.g. Manchester, UK

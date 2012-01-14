@@ -208,9 +208,9 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:text="Last Updated:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:paddingTop="5dip"
+        android:text="Updated"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/last_updated_date_time"
@@ -231,7 +231,8 @@
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:text="Further Details..."
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#3399FF" />
 
     <TextView
         android:id="@+id/open_map_link"
@@ -243,6 +244,7 @@
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:text="Open Google Maps..."
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#3399FF" />
 
 </LinearLayout>

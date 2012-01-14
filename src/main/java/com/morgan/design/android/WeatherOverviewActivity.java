@@ -191,6 +191,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 						WeatherOverviewActivity.this.currentWeather.getLongitude());
 			}
 		});
+		this.open_map_link.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	protected WeatherSliderApplication getTopLevelApplication() {
