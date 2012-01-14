@@ -203,11 +203,11 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	public void onPostLookup(final YahooWeatherInfo weather) {
 		this.serviceUpdate.complete("Completed Weather Lookup");
 
-		if (null != weather) {
-			onSuccessfulLookup(weather);
+		if (null == weather || weather.isError()) {
+			onFailedLookup();
 		}
 		else {
-			onFailedLookup();
+			onSuccessfulLookup(weather);
 		}
 	}
 

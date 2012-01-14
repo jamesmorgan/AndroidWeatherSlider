@@ -100,15 +100,16 @@ public class TODO {
 	// FIXME -> Style up Market page once deployed
 	
 	// FIXME -> Standard menu on overview screen
+	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
 	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
 	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 	// FIXME -> Create Application Icon
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> On application load/start, if no weathers set, show enter location screen first
 
-	// FIXME -> DONE - (14/01/2012) - BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
+	// FIXME -> DONE - (14/01/2012) - Fix bug when no weather found for successful location woeid lookup. -> http://weather.yahooapis.com/forecastrss?w=2175446&u=c
 	// FIXME -> DONE - (14/01/2012) - Re styled Service update area
-
+	// FIXME -> DONE - (14/01/2012) - BUG - Service update text lost when more than X numbers of weathers, needs to be sticky
 	// FIXME -> DONE - (14/01/2012) - BUG - Swipe left from "Today" overview screen goes to enter screen, should return to Overview
 	// FIXME -> DONE - (14/01/2012) - Update change log, mentioning 'swipe gestures throughout'
 	// FIXME -> DONE - (14/01/2012) - Rename loaded notifications button labels -> "Refresh, Disable, Delete"

@@ -7,6 +7,7 @@ import java.util.List;
 import com.morgan.design.Constants;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.WindSpeed;
+import com.morgan.design.android.parser.WeatherError;
 
 public class YahooWeatherInfo implements Serializable {
 
@@ -46,6 +47,8 @@ public class YahooWeatherInfo implements Serializable {
 
 	private int visiblityDistance;
 	private String distanceUnit;
+
+	private WeatherError weatherError;
 
 	public final String getSunRise() {
 		return this.sunRise;
@@ -256,6 +259,18 @@ public class YahooWeatherInfo implements Serializable {
 		return this.distanceUnit;
 	}
 
+	public WeatherError getWeatherError() {
+		return this.weatherError;
+	}
+
+	public void setWeatherError(final WeatherError weatherError) {
+		this.weatherError = weatherError;
+	}
+
+	public final boolean isError() {
+		return null != this.weatherError;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
@@ -309,6 +324,8 @@ public class YahooWeatherInfo implements Serializable {
 			.append(this.visiblityDistance)
 			.append(", distanceUnit=")
 			.append(this.distanceUnit)
+			.append(", weatherError=")
+			.append(this.weatherError)
 			.append("]");
 		return builder.toString();
 	}

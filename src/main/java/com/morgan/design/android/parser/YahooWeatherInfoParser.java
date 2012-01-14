@@ -98,6 +98,10 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 
 			final List<?> channelContentElements = document.getRootElement().getChild("channel").getContent();
 
+			if (isError(channelContentElements, weatherBean)) {
+				return weatherBean;
+			}
+
 			for (final Object outerElement : channelContentElements) {
 
 				if (outerElement instanceof Element) {
@@ -138,6 +142,47 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 			Log.e(TAG, e.getMessage());
 		}
 		return null;
+	}
+
+	private boolean isError(final List<?> channelContentElements, final YahooWeatherInfo weatherBean) {
+
+		String reason = null;
+		String description = null;
+
+		for (final Object outerElement : channelContentElements) {
+
+			if (outerElement instanceof Element) {
+				final Element element = (Element) outerElement;
+
+				if (element.getName().equals("description")) {
+					reason = element.getValue();
+				}
+
+				// if (element.getName().equals("title")) {
+				// Logger.d("TEST", element.getValue());
+				// }
+
+				if (element.getName().equals("item")) {
+					for (final Object object : element.getContent()) {
+						final Element innerContent = (Element) object;
+						if (innerContent.getName().equals("title")) {
+							// Logger.d("TEST", innerContent.getValue());
+							description = innerContent.getValue();
+						}
+						// if (innerContent.getName().equals("description")) {
+						// Logger.d("TEST", innerContent.getValue());
+						// }
+					}
+				}
+			}
+		}
+
+		if (null == reason && null == description) {
+			return false;
+		}
+
+		weatherBean.setWeatherError(new WeatherError(description, reason));
+		return true;
 	}
 
 	// yweather:forecast The weather forecast for a specific day. The item element contains multiple forecast elements for today and

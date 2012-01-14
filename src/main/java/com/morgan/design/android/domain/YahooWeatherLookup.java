@@ -20,4 +20,15 @@ public class YahooWeatherLookup {
 		return this.weatherInfo;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("YahooWeatherLookup [weatherChoice=")
+			.append(this.weatherChoice)
+			.append(", weatherInfo=")
+			.append(this.weatherInfo)
+			.append("]");
+		return builder.toString();
+	}
+
 }

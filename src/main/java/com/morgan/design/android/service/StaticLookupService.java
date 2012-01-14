@@ -131,12 +131,15 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 			final YahooWeatherInfo weatherInfo = weatherLookup.getWeatherInfo();
 			final WeatherChoice choice = weatherLookup.getWeatherChoice();
 
-			if (null != weatherInfo) {
-				choice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo));
-				choice.successfullyQuery(weatherInfo);
+			if (null == weatherInfo) {
+				choice.failedQuery();
+			}
+			else if (weatherInfo.isError()) {
+				choice.invalidQuery(weatherInfo.getWeatherError());
 			}
 			else {
-				choice.failedQuery();
+				choice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo));
+				choice.successfullyQuery(weatherInfo);
 			}
 
 			this.weatherDao.update(choice);
