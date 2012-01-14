@@ -164,6 +164,10 @@ public class WeatherChoice implements Serializable, Woeid {
 		return this.active;
 	}
 
+	public final boolean isNotActive() {
+		return !this.active;
+	}
+
 	public void setActive(final boolean active) {
 		this.active = active;
 	}

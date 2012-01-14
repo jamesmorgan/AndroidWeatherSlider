@@ -115,12 +115,12 @@ public class TODO {
 	// FIXME -> DONE - (14/01/2012) - Reduce size of install, remove unused/unneeded libraries from pom
 	
 	// Cosmetics:
-	// FIXME -> Grey out text when weather is disabled (keep red light)
-	// FIXME -> DONE - (11/01/2012) - Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
+	// FIXME -> DONE - (14/01/2012) - Grey out text when weather is disabled (keep red light)
 	// FIXME -> Make overview update time title bold
+	// FIXME -> Buttons not links on overview screen, potential bug with clickable links, needs fixing.
+	// FIXME -> DONE - (11/01/2012) - Clear up enter screen, reduce clutter at the top, move e.g. to below each one, add title?
 	// FIXME -> DONE - (11/01/2012) - Remove info from overview titles
 	// FIXME -> DONE - (11/01/2012) - Add location name to overview screen, replace current text e.g. Manchester, UK
-	// FIXME -> Buttons not links on overview screen, potential bug with clickable links, needs fixing.
 	
 	// /////////////////////////////////
 	// User Feedback Version 1.0-BETA //
