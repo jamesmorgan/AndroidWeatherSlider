@@ -8,7 +8,6 @@ import com.morgan.design.android.util.PreferenceUtils;
 
 public class GoogleAnalyticsService {
 
-	public static final String WEATHER_OVERVIEW = "WeatherOverviewActivity";
 	public static final String GET_LOCATION = "GetLocation";
 	public static final String ALWAYS_USE_GPS_LOCATION = "AlwaysUseGpsLocation";
 	public static final String GET_GPS_LOCATION = "GetGpsLocation";
@@ -20,6 +19,9 @@ public class GoogleAnalyticsService {
 	public static final String OPEN_ABOUT = "OpenAbout";
 	public static final String RELOAD_ALL_ACTIVE = "ReloadAllActiveNotifications";
 	public static final String CANCEL_ALL = "CancelAllNotifications";
+	public static final String SEND_FEEDBACK = "SendFeedback";
+	public static final String OPEN_GOOGLE_MAPS = "OpenGoogleMaps";
+	public static final String MORE_INFO = "MoreInfo";
 
 	private static GoogleAnalyticsService INSTANCE;
 

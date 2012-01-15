@@ -84,15 +84,15 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.overview_menu_settings:
-				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_PREFERENCES);
+				trackPageView(GoogleAnalyticsService.OPEN_PREFERENCES);
 				PreferenceUtils.openUserPreferenecesActivity(this);
 				return true;
 			case R.id.overview_menu_feedback:
-				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_FEEDBACK);
+				trackPageView(GoogleAnalyticsService.OPEN_FEEDBACK);
 				Utils.openFeedback(this);
 				return true;
 			case R.id.overview_menu_home:
-				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_HOME);
+				trackPageView(GoogleAnalyticsService.OPEN_HOME);
 				startActivity(new Intent(this, ManageWeatherChoiceActivity.class));
 				return true;
 			default:
@@ -200,8 +200,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				final Intent browserIntent =
 						new Intent(Intent.ACTION_VIEW, Uri.parse(WeatherOverviewActivity.this.currentWeather.getLink()));
 				startActivity(browserIntent);
-				WeatherOverviewActivity.this.googleAnalyticsService.trackPageView(WeatherOverviewActivity.this,
-						GoogleAnalyticsService.WEATHER_OVERVIEW);
+				trackPageView(GoogleAnalyticsService.MORE_INFO);
 			}
 		});
 		this.more_information_link.setMovementMethod(LinkMovementMethod.getInstance());
@@ -219,6 +218,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 			public void onClick(final View v) {
 				Utils.openGoogleMaps(WeatherOverviewActivity.this, WeatherOverviewActivity.this.currentWeather.getLatitude(),
 						WeatherOverviewActivity.this.currentWeather.getLongitude());
+				trackPageView(GoogleAnalyticsService.OPEN_GOOGLE_MAPS);
 			}
 		});
 		this.open_map_link.setMovementMethod(LinkMovementMethod.getInstance());
@@ -226,6 +226,10 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 	protected WeatherSliderApplication getTopLevelApplication() {
 		return ((WeatherSliderApplication) getApplication());
+	}
+
+	public void trackPageView(final String page) {
+		this.googleAnalyticsService.trackPageView(this, page);
 	}
 
 	// /////////////////////////////////////////////

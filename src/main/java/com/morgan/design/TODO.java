@@ -105,8 +105,9 @@ public class TODO {
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> Standard menu on overview screen
 	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
-	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 	// FIXME -> Create Application Icon
+
+	// FIXME -> DONE - (15/01/2012) - Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 
 	// FIXME -> DONE - (15/01/2012) - Add menu to overview screen
 	// FIXME -> DONE - (15/01/2012) - Re-ordered menu on home screen

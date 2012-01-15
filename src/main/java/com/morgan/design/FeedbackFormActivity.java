@@ -10,18 +10,24 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.util.BuildUtils;
 import com.weatherslider.morgan.design.R;
 
 public class FeedbackFormActivity extends Activity {
 
+	private GoogleAnalyticsService googleAnalyticsService;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.feedback_form);
+
+		this.googleAnalyticsService = ((WeatherSliderApplication) getApplication()).getGoogleAnalyticsService();
 	}
 
 	public void onSendFeedback(final View button) {
+		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.SEND_FEEDBACK);
 
 		final EditText nameField = (EditText) findViewById(R.id.EditTextName);
 		final String name = nameField.getText().toString();
