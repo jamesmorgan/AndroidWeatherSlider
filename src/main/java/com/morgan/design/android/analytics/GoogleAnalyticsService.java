@@ -15,6 +15,8 @@ public class GoogleAnalyticsService {
 	public static final String ADD_NEW_LOCATION = "AddNewLocation";
 	public static final String OPEN_CHANGE_LOG = "OpenChangeLog";
 	public static final String OPEN_PREFERENCES = "OpenPreferences";
+	public static final String OPEN_FEEDBACK = "OpenFeedback";
+	public static final String OPEN_HOME = "OpenHome";
 	public static final String OPEN_ABOUT = "OpenAbout";
 	public static final String RELOAD_ALL_ACTIVE = "ReloadAllActiveNotifications";
 	public static final String CANCEL_ALL = "CancelAllNotifications";

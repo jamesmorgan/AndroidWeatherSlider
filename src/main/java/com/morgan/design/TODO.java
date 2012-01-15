@@ -51,6 +51,7 @@ public class TODO {
 	// FIXME -> Try 'Add Location' at bottom of the screen
 	// FIXME -> Always have GPS at the top, then last update time OR A_z
 	// FIXME -> Potentially local time not last updated time in each notification, would require user option?
+	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
 	
 	// ///////////////
 	// Nice To Have //
@@ -101,13 +102,14 @@ public class TODO {
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
 	
+	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> Standard menu on overview screen
 	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
-	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
 	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 	// FIXME -> Create Application Icon
-	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 
+	// FIXME -> DONE - (15/01/2012) - Add menu to overview screen
+	// FIXME -> DONE - (15/01/2012) - Re-ordered menu on home screen
 	// FIXME -> DONE - (15/01/2012) - On application load/start, if no weathers set, show enter location screen first
 	// FIXME -> DONE - (15/01/2012) - Change home screen ordering, roaming at top, errors at bottom 
 	// FIXME -> DONE - (15/01/2012) - Put all strings in strings.xml for localisation, fixed typos

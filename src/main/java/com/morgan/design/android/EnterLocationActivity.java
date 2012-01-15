@@ -27,6 +27,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.morgan.design.Changelog;
 import com.morgan.design.Constants;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
@@ -64,6 +65,8 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.enter_location);
+		Changelog.show(this, false);
+
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
 

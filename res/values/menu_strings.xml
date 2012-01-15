@@ -6,5 +6,6 @@
     <string name="about">About</string>
     <string name="cancel_all">Cancel All</string>
     <string name="reload_all">Reload All</string>
+    <string name="reload">Reload</string>
 
 </resources>

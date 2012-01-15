@@ -68,7 +68,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_choice_layout);
-		Changelog.show(this, false);
 
 		this.weatherDao = new WeatherChoiceDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
@@ -93,6 +92,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		// Launch enter screen if no active/existing locations found
 		if (null == this.weatherChoices || this.weatherChoices.isEmpty()) {
 			onAddNewLocation(null);
+		}
+		else {
+			Changelog.show(this, false);
 		}
 	}
 
@@ -138,6 +140,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case R.id.home_menu_settings:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_PREFERENCES);
 				PreferenceUtils.openUserPreferenecesActivity(this);
+				return true;
+			case R.id.home_menu_feedback:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_FEEDBACK);
+				Utils.openFeedback(this);
 				return true;
 			case R.id.home_menu_about:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_ABOUT);

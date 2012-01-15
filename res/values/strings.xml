@@ -17,6 +17,7 @@
     <!-- Button -->
     <string name="okay">Okay</string>
     <string name="feedback">Feedback</string>
+    <string name="home">Home</string>
 
     <!-- General -->
     <string name="not_available">N/A</string>

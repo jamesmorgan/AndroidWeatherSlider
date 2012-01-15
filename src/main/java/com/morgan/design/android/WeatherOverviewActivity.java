@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.PressureUtils;
 import com.morgan.design.android.util.Utils;
 import com.weatherslider.morgan.design.R;
@@ -75,6 +78,32 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 		setUpMoreInformationLink();
 		setUpOpenMapLink();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.overview_menu_settings:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_PREFERENCES);
+				PreferenceUtils.openUserPreferenecesActivity(this);
+				return true;
+			case R.id.overview_menu_feedback:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_FEEDBACK);
+				Utils.openFeedback(this);
+				return true;
+			case R.id.overview_menu_home:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_HOME);
+				startActivity(new Intent(this, ManageWeatherChoiceActivity.class));
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(final Menu menu) {
+		getMenuInflater().inflate(R.menu.overview_menu, menu);
+		return true;
 	}
 
 	private TextView weather_description;
@@ -155,7 +184,8 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
 			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.humidity.setText(this.currentWeather.getHumidityPercentage() + "%");
-		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), getString(R.string.not_available)));
+		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(),
+				getString(R.string.not_available)));
 		this.pressure.setCompoundDrawablesWithIntrinsicBounds(PressureUtils.getPressureStateImage(this.currentWeather.getRising()), 0, 0, 0);
 	}
 
