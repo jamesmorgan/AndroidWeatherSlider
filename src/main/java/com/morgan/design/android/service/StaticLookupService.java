@@ -18,6 +18,7 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.RateMe;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever.OnReloadWeather;
@@ -141,6 +142,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 			else {
 				choice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(choice, weatherInfo));
 				choice.successfullyQuery(weatherInfo);
+				RateMe.setSuccessIfRequired(this);
 			}
 
 			this.weatherDao.update(choice);

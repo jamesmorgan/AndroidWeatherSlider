@@ -3,9 +3,7 @@
 
     <!-- Android Mainifest -->
     <string name="crash_toast_text">Sorry! The application has died, a report has been sent to the developer in order to fix the issue!</string>
-    <string name="home_instructions">Please enter your location to get started: \n - Enter a location e.g. postal code or town \n - Or request your location via GPS/Network \n - Or tick Use GPS to always try find your location</string>
     <string name="app_name">Weather Slider</string>
-    <string name="weather_service_started">Service Started</string>
     <string name="get_my_location_service">None-bindable Location Look Service</string>
     <string name="gps_weather_service">gps_weather_service</string>
     <string name="periodic_reciever">Register periodic launcher for connectivity changes and get weather download</string>
@@ -14,12 +12,14 @@
     <string name="changelog_title">Change Log</string>
     <string name="changelog_filename">changelog.html</string>
 
-    <!-- Button -->
+    <!-- Rate Me -->
+    <string name="rate_me_title">Would you like to rate the application?</string>
+
+    <!-- Button / General -->
+    <string name="no_thanks">No Thanks</string>
     <string name="okay">Okay</string>
     <string name="feedback">Feedback</string>
     <string name="home">Home</string>
-
-    <!-- General -->
     <string name="not_available">N/A</string>
     <string name="alert_yes">Yes</string>
     <string name="alert_no">No</string>

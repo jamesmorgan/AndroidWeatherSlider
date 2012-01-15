@@ -203,15 +203,15 @@ public final class R {
         public static final int alert_title_manage_location=0x7f060039;
         public static final int alert_yes=0x7f060013;
         public static final int always_use_gps_summary=0x7f06004b;
-        public static final int app_name=0x7f060008;
+        public static final int app_name=0x7f060007;
         public static final int button_add_new_location=0x7f06003e;
         public static final int button_lookup=0x7f060046;
         public static final int cancel_all=0x7f060003;
         public static final int change_log=0x7f060001;
-        public static final int changelog_filename=0x7f06000e;
+        public static final int changelog_filename=0x7f06000c;
         /**  Change Log 
          */
-        public static final int changelog_title=0x7f06000d;
+        public static final int changelog_title=0x7f06000b;
         public static final int chkbox_always_use_gps=0x7f06004a;
         /**  Android Mainifest 
          */
@@ -243,20 +243,18 @@ public final class R {
         /**  Weather Overview activity 
          */
         public static final int further_details=0x7f060027;
-        public static final int get_my_location_service=0x7f06000a;
-        public static final int gps_weather_service=0x7f06000b;
+        public static final int get_my_location_service=0x7f060008;
+        public static final int gps_weather_service=0x7f060009;
         public static final int home=0x7f060011;
-        public static final int home_instructions=0x7f060007;
         public static final int modify_loaded_locaitons=0x7f06003f;
         public static final int no_email_clients_installed=0x7f060023;
-        /**  General 
+        /**  Button / General 
          */
+        public static final int no_thanks=0x7f06000e;
         public static final int not_available=0x7f060012;
-        /**  Button 
-         */
         public static final int okay=0x7f06000f;
         public static final int open_google_maps=0x7f060028;
-        public static final int periodic_reciever=0x7f06000c;
+        public static final int periodic_reciever=0x7f06000a;
         public static final int pref_changelog_summary=0x7f060037;
         public static final int pref_changelog_title=0x7f060038;
         public static final int pref_google_analytics_summary=0x7f060035;
@@ -275,6 +273,9 @@ public final class R {
         public static final int pref_temp_mode_title=0x7f06002c;
         public static final int pref_wind_mode_summary=0x7f06002d;
         public static final int pref_wind_mode_title=0x7f06002e;
+        /**  Rate Me 
+         */
+        public static final int rate_me_title=0x7f06000d;
         public static final int reload=0x7f060005;
         public static final int reload_all=0x7f060004;
         public static final int service_update_attempting_to_refresh_weather=0x7f06005e;
@@ -322,7 +323,6 @@ public final class R {
         public static final int weather_notification_service_1=0x7f060024;
         public static final int weather_notification_service_2=0x7f060025;
         public static final int weather_notification_service_3=0x7f060026;
-        public static final int weather_service_started=0x7f060009;
     }
     public static final class style {
         public static final int NotificationText=0x7f070000;

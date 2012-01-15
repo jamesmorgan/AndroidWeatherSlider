@@ -26,6 +26,7 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.RateMe;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
@@ -245,6 +246,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		this.weatherChoice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(this.weatherChoice, weather));
 
 		this.weatherDao.update(this.weatherChoice);
+
+		RateMe.setSuccessIfRequired(this);
 
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
 	}

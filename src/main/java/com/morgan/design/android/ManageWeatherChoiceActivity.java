@@ -27,6 +27,7 @@ import android.widget.ListView;
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Changelog;
 import com.morgan.design.Constants;
+import com.morgan.design.RateMe;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.CurrentChoiceAdaptor;
@@ -84,9 +85,11 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 					onLoadWeatherChoice(choice);
 				}
 			}
-			if (null != this.weatherChoices && !this.weatherChoices.isEmpty()) {
-				this.serviceUpdate.onGoing(getString(R.string.service_update_loading_existing_notifications));
-			}
+		}
+
+		if (null != this.weatherChoices && !this.weatherChoices.isEmpty()) {
+			this.serviceUpdate.onGoing(getString(R.string.service_update_loading_existing_notifications));
+			RateMe.showOnFirstSuccess(this);
 		}
 
 		// Launch enter screen if no active/existing locations found
@@ -103,6 +106,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		super.onResume();
 		if (isNull(this.updateWeatherListBroadcastReceiver)) {
 			this.updateWeatherListBroadcastReceiver = new BroadcastReceiver() {
+
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved : %s", intent.getAction());

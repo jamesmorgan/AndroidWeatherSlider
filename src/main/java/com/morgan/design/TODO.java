@@ -107,9 +107,8 @@ public class TODO {
 	// User Feedback Version 1.0-BETA-2 //
 	// ///////////////////////////////////
 	
-	// FIXME -> On first successful weather loaded, present user with rate me link to market.
-	// FIXME -> Bug connectivity change broadcast not handled
-	
+	// FIXME -> DONE - (15/01/2012) - On first successful weather loaded, present user with rate me link to market.
+	// FIXME -> DONE - (15/01/2012) - Bug connectivity change broadcast not handled
 	// FIXME -> DONE - (15/01/2012) - Create Application Icon
 	// FIXME -> DONE - (15/01/2012) - Clean up home screen
 	// FIXME -> DONE - (15/01/2012) - Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items

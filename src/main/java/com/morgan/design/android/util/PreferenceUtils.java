@@ -24,6 +24,7 @@ public class PreferenceUtils {
 	public static final String PREF_WIND_MODE = "windSpeedMode";
 	public static final String PREF_APP_VERSION = "app.version";
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
+	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
@@ -108,5 +109,13 @@ public class PreferenceUtils {
 
 	public static boolean setAppVersionPref(final Context context, final int value) {
 		return getPrefs(context).edit().putInt(PREF_APP_VERSION, value).commit();
+	}
+
+	public static boolean hasSuccessfulWeatherLookup(final Context context) {
+		return getPrefs(context).getBoolean(PREF_FIRST_LOOKUP, false);
+	}
+
+	public static boolean setHasHadFirstSuccessfulLookup(final Context context, final boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_FIRST_LOOKUP, value).commit();
 	}
 }
