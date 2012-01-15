@@ -108,7 +108,8 @@ public class TODO {
 	// FIXME -> Create Application Icon
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> On application load/start, if no weathers set, show enter location screen first
-	
+
+	// FIXME -> DONE - (15/01/2012) - Change home screen ordering, roaming at top, errors at bottom 
 	// FIXME -> DONE - (15/01/2012) - Put all strings in strings.xml for localisation, fixed typos
 
 	// FIXME -> DONE - (14/01/2012) - Fix bug when no weather found for successful location woeid lookup. -> http://weather.yahooapis.com/forecastrss?w=2175446&u=c

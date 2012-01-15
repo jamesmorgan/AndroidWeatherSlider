@@ -273,18 +273,16 @@ public final class R {
         public static final int reload_all=0x7f060004;
         public static final int service_update_attempting_to_refresh_weather=0x7f06005d;
         public static final int service_update_completed_weather_lookup=0x7f06005a;
-        public static final int service_update_failed_gps_lookup=0x7f060063;
+        public static final int service_update_failed_gps_lookup=0x7f060061;
         public static final int service_update_failed_to_refresh_weather=0x7f06005e;
         public static final int service_update_getting_current_location=0x7f060056;
         /**  Service Updates 
          */
         public static final int service_update_getting_your_location=0x7f060054;
-        public static final int service_update_gps_location_found=0x7f060064;
-        public static final int service_update_gps_location_not_found=0x7f060065;
+        public static final int service_update_gps_location_found=0x7f060062;
+        public static final int service_update_gps_location_not_found=0x7f060063;
         public static final int service_update_initalizing_weather_lookup=0x7f060059;
-        /**  WeatherNotificationControllerService 
-         */
-        public static final int service_update_initiating_gps_lookup=0x7f060062;
+        public static final int service_update_initiating_gps_lookup=0x7f060060;
         public static final int service_update_loading_existing_notifications=0x7f060057;
         public static final int service_update_location_found_looking_up_area=0x7f060055;
         public static final int service_update_preferences_changed_updating=0x7f060058;
@@ -302,11 +300,11 @@ public final class R {
         public static final int toast_low_battery_warning=0x7f06004e;
         /**  NotificationControllerService 
          */
-        public static final int toast_max_notifications_reached=0x7f060061;
+        public static final int toast_max_notifications_reached=0x7f060065;
         public static final int toast_please_enter_a_location=0x7f06004c;
         /**  StaticLookupService 
          */
-        public static final int toast_unable_to_get_weather_details=0x7f060060;
+        public static final int toast_unable_to_get_weather_details=0x7f060064;
         public static final int toast_unable_to_locate_you=0x7f06004b;
         public static final int toast_unable_to_request_network_location=0x7f06004d;
         /**  Notification IDS 

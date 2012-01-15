@@ -22,6 +22,7 @@ public class WeatherChoice implements Serializable, Woeid {
 	public static final String WOEID_ID = "woeid";
 	public static final String ACTIVE = "active";
 	public static final String ROAMING = "roaming";
+	public static final String VALID = "valid";
 	public static final String WEATHER_LOCATION = "currentLocationText";
 
 	@DatabaseField(generatedId = true)
@@ -35,6 +36,9 @@ public class WeatherChoice implements Serializable, Woeid {
 
 	@DatabaseField(columnName = ROAMING)
 	private boolean roaming;
+
+	@DatabaseField(columnName = VALID)
+	private boolean valid;
 
 	@DatabaseField
 	private float latitude;
@@ -182,16 +186,24 @@ public class WeatherChoice implements Serializable, Woeid {
 		return this.roaming;
 	}
 
+	public boolean getValid() {
+		return this.valid;
+	}
+
+	public void setValid(final boolean valid) {
+		this.valid = valid;
+	}
+
 	public boolean isFirstAttempt() {
 		return 0 == this.numberOfTimesUpdated;
 	}
 
 	public void failedQuery() {
-		recordUdpate();
+		recordUdpate(true);
 	}
 
 	public void invalidQuery(final WeatherError weatherError) {
-		recordUdpate();
+		recordUdpate(false);
 
 		this.currentWeatherCode = IconFactory.NOTE_FOUND;
 		this.currentWeatherText = weatherError.getReason();
@@ -199,7 +211,7 @@ public class WeatherChoice implements Serializable, Woeid {
 	}
 
 	public void successfullyQuery(final YahooWeatherInfo currentWeather) {
-		recordUdpate();
+		recordUdpate(true);
 
 		this.currentWeatherText = currentWeather.getCurrentText();
 		this.currentTemperature = currentWeather.getCurrentTemp();
@@ -208,9 +220,10 @@ public class WeatherChoice implements Serializable, Woeid {
 		this.currentLocationText = getSafeLocation(currentWeather);
 	}
 
-	private void recordUdpate() {
+	private void recordUdpate(final boolean valid) {
 		this.lastUpdatedDateTime = new Date();
 		this.numberOfTimesUpdated++;
+		this.valid = valid;
 	}
 
 	private String getSafeLocation(final YahooWeatherInfo currentWeather) {
