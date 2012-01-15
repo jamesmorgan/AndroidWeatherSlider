@@ -79,7 +79,7 @@ public class FeedbackFormActivity extends Activity {
 			startActivity(messageIntent);
 		}
 		catch (final android.content.ActivityNotFoundException ex) {
-			Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.no_email_clients_installed, Toast.LENGTH_SHORT).show();
 		}
 	}
 }

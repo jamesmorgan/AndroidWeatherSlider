@@ -34,10 +34,10 @@ public class ForecastOverviewTabActivity extends Activity {
 			weather_image.setImageResource(IconFactory.getImageResourceFromCode(forcastEntry.getCode()));
 
 			final TextView high_temp = (TextView) findViewById(R.id.high_temp);
-			high_temp.setText("Highs of " + forcastEntry.getHigh() + tempUnit);
+			high_temp.setText(getString(R.string.forecast_overview_highs_of) + forcastEntry.getHigh() + tempUnit);
 
 			final TextView low_temp = (TextView) findViewById(R.id.low_temp);
-			low_temp.setText("Lows of " + forcastEntry.getLow() + tempUnit);
+			low_temp.setText(getString(R.string.forecast_overview_lows_of) + forcastEntry.getLow() + tempUnit);
 
 			final TextView date = (TextView) findViewById(R.id.date);
 			date.setText(DateUtils.toSimpleDate(forcastEntry.getDate()));

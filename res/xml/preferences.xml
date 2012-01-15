@@ -1,71 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <!-- All options involved with how the application looks -->
     <PreferenceCategory android:title="Interface Options" >
-
         <ListPreference
             android:defaultValue="OVERVIEW"
             android:entries="@array/overview_mode"
             android:entryValues="@array/overview_mode_values"
             android:key="overviewMode"
-            android:summary="Change what happens when you click on each notification"
-            android:title="Web or Overview mode" />
-
+            android:summary="@string/pref_overview_mode_summary"
+            android:title="@string/pref_overview_mode_title" />
         <ListPreference
             android:defaultValue="c"
             android:entries="@array/temperature_mode"
             android:entryValues="@array/temperature_mode_values"
             android:key="temperatureMode"
-            android:summary="Show temperature in Celcius or Fahrenheit"
-            android:title="Temperature" />
-
+            android:summary="@string/pref_temp_mode_summary"
+            android:title="@string/pref_temp_mode_title" />
         <ListPreference
             android:defaultValue="mph"
             android:entries="@array/wind_mode"
             android:entryValues="@array/wind_mode_values"
             android:key="windSpeedMode"
-            android:summary="Show speed in mph or kph"
-            android:title="Wind Speed" />
+            android:summary="@string/pref_wind_mode_summary"
+            android:title="@string/pref_wind_mode_title" />
     </PreferenceCategory>
 
+    <!-- All options involved with how often we check for weather updates -->
     <PreferenceCategory android:title="Refresh Options" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="startOnBoot"
+            android:summary="@string/pref_start_on_boot_summary"
+            android:title="@string/pref_start_on_boot_title" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="reloadOnConnectivityChanged"
+            android:summary="@string/pref_reload_on_connectivity_change_summary"
+            android:title="@string/pref_reload_on_connectivity_change_title" />
 
-        <!-- When to check for weather updates from API -->
         <ListPreference
             android:defaultValue="15"
             android:entries="@array/polling_time"
             android:entryValues="@array/polling_time_values"
             android:key="pollingSchedule"
-            android:summary="Configure when you check of weather updates"
-            android:title="Update Interval" />
-        
+            android:summary="@string/pref_polling_time_summary"
+            android:title="@string/pref_polling_time_title" />
     </PreferenceCategory>
 
+    <!-- All options which effect how the application runs -->
     <PreferenceCategory android:title="General Options" >
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="startOnBoot"
-            android:summary="Enable this to start on first boot"
-            android:title="Start On First Boot" />
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="reloadOnConnectivityChanged"
-            android:summary="Enable this to reload weather everytime your connectivty changes"
-            android:title="Reload On Connectivity Changed" />
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="enableGoogleAnalytics"
-            android:summary="Thanks for helping improve this applicaiton"
-            android:title="Enhable Google Analytics" />
-
+            android:summary="@string/pref_google_analytics_summary"
+            android:title="@string/pref_google_analytics_title" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="changelog"
-            android:summary="Show Change Log On Version Upgrade"
-            android:title="Change Log" />
+            android:summary="@string/pref_changelog_summary"
+            android:title="@string/pref_changelog_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

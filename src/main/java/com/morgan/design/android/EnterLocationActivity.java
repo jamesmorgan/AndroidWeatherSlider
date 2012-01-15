@@ -20,7 +20,6 @@ import android.content.IntentFilter;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -126,8 +125,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
-							Toast.makeText(EnterLocationActivity.this,
-									"Unable to locate you, please ensure you are connected to the network.", Toast.LENGTH_SHORT).show();
+							Toast.makeText(EnterLocationActivity.this, R.string.toast_unable_to_locate_you, Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
@@ -169,7 +167,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	public void onGetLocation(final View v) {
 		final String location = this.location.getText().toString();
 		if (null == location || "".equals(location)) {
-			Toast.makeText(this, "Please enter a location.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.toast_please_enter_a_location, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_LOCATION);
@@ -181,14 +179,14 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_GPS_LOCATION);
 
-		showProgressDialog("Getting Current Location. Please wait...");
+		showProgressDialog(getString(R.string.service_update_getting_current_location));
 
 		// Ensure network is active/connected in order to use
 		final boolean networkConnected = Utils.isConnectedOrConnecting(getApplicationContext());
 		final boolean gpsEnabled = Utils.isGpsEnabled(getContentResolver());
 		if (isNot(networkConnected) && isNot(gpsEnabled)) {
 			dismissLoadingProgress();
-			Toast.makeText(this, "Unable to request network location. You are currently not connected.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.toast_unable_to_request_network_location, Toast.LENGTH_SHORT).show();
 			createGpsDisabledAlert();
 			return;
 		}
@@ -196,7 +194,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		// Ensure have at-least 15% battery power left
 		if (15.00 > Utils.getBatteryLevel(getApplicationContext())) {
 			dismissLoadingProgress();
-			Toast.makeText(this, "Low battery, unable to use location services.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.toast_low_battery_warning, Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -226,7 +224,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		Logger.d(LOG_TAG, "Ticked always use GPS, launching GpsWeatherLookupService");
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.ALWAYS_USE_GPS_LOCATION);
 
-		Toast.makeText(this, "Attempting to lookup your GPS location and find the weather.", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, R.string.toast_attempting_to_lookup_your_gps_location, Toast.LENGTH_SHORT).show();
 
 		startService(new Intent(this, RoamingLookupService.class).putExtra(FROM_FRESH_LOOKUP, true));
 		setResult(RESULT_OK);
@@ -239,10 +237,11 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 	public void refreshAvailableLocations(final List<WOEIDEntry> locations) {
 		this.WOIEDlocations = new ArrayList<WOEIDEntry>(locations);
-		Log.d("HelloAndroidActivity", String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
+		Logger.d(LOG_TAG, String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
 
 		if (null == locations || locations.isEmpty()) {
-			Toast.makeText(this, String.format("Unable to find %s, please try again.", this.location.getText()), Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, String.format(getString(R.string.toast_error_unable_to_find_you), this.location.getText()),
+					Toast.LENGTH_SHORT).show();
 		}
 		else {
 			final Bundle extras = new Bundle();
@@ -271,15 +270,15 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 	private void createGpsDisabledAlert() {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("No location providers found, Your GPS & Mobile Network is disabled! Would you like to enable it?")
+		builder.setMessage(R.string.alaert_enabled_gps_provider)
 			.setCancelable(false)
-			.setPositiveButton("Enable GPS", new DialogInterface.OnClickListener() {
+			.setPositiveButton(R.string.alert_enable_gps, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					showGpsOptions();
 				}
 			});
-		builder.setNegativeButton("Do nothing", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.alert_do_nothing, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
 				dialog.cancel();
@@ -312,7 +311,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		@Override
 		protected void onPreExecute() {
-			showProgressDialog("Getting Location. Please wait...");
+			showProgressDialog(getString(R.string.service_update_getting_your_location));
 		}
 
 		@Override
@@ -340,7 +339,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		@Override
 		protected void onPreExecute() {
-			showProgressDialog("Location found, looking up area. Please wait...");
+			showProgressDialog(getString(R.string.service_update_location_found_looking_up_area));
 		}
 
 		@Override

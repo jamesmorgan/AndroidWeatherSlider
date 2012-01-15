@@ -38,7 +38,7 @@ import com.morgan.design.android.util.Utils;
 
 public class WeatherNotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection {
 
-	private static final int MAX_NUMBER_OF_NOTIFICATIONS = 3;
+	public static final int MAX_NUMBER_OF_NOTIFICATIONS = 3;
 
 	private static final String LOG_TAG = "WeatherNotificationControllerService";
 

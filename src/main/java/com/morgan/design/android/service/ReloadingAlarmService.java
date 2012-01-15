@@ -15,6 +15,7 @@ import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.weatherslider.morgan.design.R;
 
 public class ReloadingAlarmService extends IntentService {
 
@@ -36,7 +37,7 @@ public class ReloadingAlarmService extends IntentService {
 	protected void onHandleIntent(final Intent intent) {
 		Logger.d(LOG_TAG, "Reloading Alarm Service Initiated -> may set new one");
 
-		this.serviceUpdate.onGoing("Refreshing weather notifications...");
+		this.serviceUpdate.onGoing(getString(R.string.service_update_refreshing_weather_notifications));
 
 		final AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		final PendingIntent pi = PendingIntent.getBroadcast(this, 0, new Intent(LOOPING_ALARM), 0);
@@ -52,19 +53,19 @@ public class ReloadingAlarmService extends IntentService {
 				hasNotifications = true;
 
 				// Initiate reload existing broadcast
-				this.serviceUpdate.onGoing("Attempting to refresh weather...");
+				this.serviceUpdate.onGoing(getString(R.string.service_update_attempting_to_refresh_weather));
 				sendBroadcast(new Intent(Constants.RELOAD_WEATHER_BROADCAST));
 			}
 		}
 		catch (final Exception exception) {
-			this.serviceUpdate.onGoing("Failed to refresh weather");
+			this.serviceUpdate.onGoing(getString(R.string.service_update_failed_to_refresh_weather));
 			Logger.logSlientExcpetion(exception);
 		}
 		finally {
 			// Start new alarm to launch this if active notifications present
 			if (hasNotifications) {
 				Logger.d(LOG_TAG, "Setting next reloading alarm");
-				this.serviceUpdate.onGoing("Scheduling next refresh...");
+				this.serviceUpdate.onGoing(getString(R.string.service_update_scheduling_next_refresh));
 
 				final long schedule = PreferenceUtils.getPollingSchedule(this) * 60 * 1000;
 				final long futureAlarm = SystemClock.elapsedRealtime() + schedule;

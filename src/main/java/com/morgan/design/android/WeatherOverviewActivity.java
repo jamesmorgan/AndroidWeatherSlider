@@ -86,7 +86,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.weather_image = (ImageView) findViewById(R.id.weather_image);
 		this.main_temperature = (TextView) findViewById(R.id.main_temperature);
 
-		this.weather_description.setText(valueOrDefault(this.currentWeather.getCurrentText(), "N/A"));
+		this.weather_description.setText(valueOrDefault(this.currentWeather.getCurrentText(), getString(R.string.not_available)));
 		this.main_temperature.setText(this.currentWeather.getCurrentTemp()
 			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.weather_image.setImageResource(IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode()));
@@ -111,8 +111,8 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 					: this.currentWeather.getRegion();
 		}
 
-		this.location_1.setText(valueOrDefault(this.currentWeather.getCity(), "N/A"));
-		this.location_2.setText(valueOrDefault(location2, "N/A"));
+		this.location_1.setText(valueOrDefault(this.currentWeather.getCity(), getString(R.string.not_available)));
+		this.location_2.setText(valueOrDefault(location2, getString(R.string.not_available)));
 		this.location_lat_long.setText(String.format("Lat: %s | Long: %s", this.currentWeather.getLatitude(),
 				this.currentWeather.getLongitude()));
 	}
@@ -139,8 +139,8 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.sun_rise = (TextView) findViewById(R.id.sun_rise);
 		this.sun_set = (TextView) findViewById(R.id.sun_set);
 
-		this.sun_rise.setText(valueOrDefault(this.currentWeather.getSunRise(), "N/A"));
-		this.sun_set.setText(valueOrDefault(this.currentWeather.getSunSet(), "N/A"));
+		this.sun_rise.setText(valueOrDefault(this.currentWeather.getSunRise(), getString(R.string.not_available)));
+		this.sun_set.setText(valueOrDefault(this.currentWeather.getSunSet(), getString(R.string.not_available)));
 	}
 
 	private TextView temperature;
@@ -155,7 +155,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.temperature.setText(this.currentWeather.getCurrentTemp()
 			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.humidity.setText(this.currentWeather.getHumidityPercentage() + "%");
-		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), "N/A"));
+		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), getString(R.string.not_available)));
 		this.pressure.setCompoundDrawablesWithIntrinsicBounds(PressureUtils.getPressureStateImage(this.currentWeather.getRising()), 0, 0, 0);
 	}
 

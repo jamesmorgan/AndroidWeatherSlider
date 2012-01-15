@@ -65,12 +65,13 @@ public class TODO {
 	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
-	// FIXME -> Weather annimations?
+	// FIXME -> Weather animations?
 	// FIXME -> Add in 3-5 day summary of weather
 	// FIXME -> Create weather tips section, e.g. wear a coat it raining, it may take you longer to get to work, etc. -> opt-in & opt-out
 	// FIXME -> Add ability to pay for application in-line
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
+	// FIXME -> Give user option to create shortcuts to either open application, or open overview for one of there locations
 	
 	// ///////////////////
 	// Next Version ?.? //
@@ -89,8 +90,9 @@ public class TODO {
 	// FIXME -> Improve current notification layout
 	// FIXME -> Capture all shared preference values on application crash (ARCA)
 	// FIXME -> Long click open management pop-up menu & short click open overview mode
-	// FIXME -> Auto presets option, e.g. GPS, London, Tokoyo, New York, GPS?
+	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
 	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
+	// FIXME -> Clean up LaunchControllerReceiver, remove if required
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -106,6 +108,8 @@ public class TODO {
 	// FIXME -> Create Application Icon
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> On application load/start, if no weathers set, show enter location screen first
+	
+	// FIXME -> DONE - (15/01/2012) - Put all strings in strings.xml for localisation, fixed typos
 
 	// FIXME -> DONE - (14/01/2012) - Fix bug when no weather found for successful location woeid lookup. -> http://weather.yahooapis.com/forecastrss?w=2175446&u=c
 	// FIXME -> DONE - (14/01/2012) - Re styled Service update area

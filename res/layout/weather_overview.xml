@@ -230,7 +230,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="Further Details..."
+        android:text="@string/further_details"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#3399FF" />
 
@@ -243,7 +243,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="Open Google Maps..."
+        android:text="@string/open_google_maps"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#3399FF" />
 

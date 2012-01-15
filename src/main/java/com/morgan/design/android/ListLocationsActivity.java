@@ -87,13 +87,13 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		final WOEIDEntry entry = this.WOIEDlocations.get(position);
 		new AlertDialog.Builder(this).setMessage(createConfirmationText(entry))
 			.setCancelable(false)
-			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			.setPositiveButton(R.string.alert_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					loadWeatherDataForEntry(entry);
 				}
 			})
-			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			.setNegativeButton(R.string.alert_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					dialog.cancel();
@@ -112,7 +112,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 	private String createConfirmationText(final WOEIDEntry entry) {
 
 		final StringBuilder stringBuilder =
-				new StringBuilder().append("Is this correct: ")
+				new StringBuilder().append(getString(R.string.alert_on_location_click_is_this_correct))
 					.append(" \n")
 					.append(entry.getPlaceTypeName())
 					.append(": ")
@@ -148,7 +148,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		choice.setWoeid(entry.getWoeid());
 		choice.setCreatedDateTime(new Date());
 		choice.setCurrentLocationText(getSimpleLocation(entry));
-		choice.setCurrentWeatherText("N/A");
+		choice.setCurrentWeatherText(getString(R.string.not_available));
 
 		this.weatherDao.create(choice);
 

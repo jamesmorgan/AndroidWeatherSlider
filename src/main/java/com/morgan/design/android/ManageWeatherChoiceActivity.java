@@ -85,7 +85,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 					onLoadWeatherChoice(choice);
 				}
 			}
-			this.serviceUpdate.onGoing("Loading existing notifications");
+			this.serviceUpdate.onGoing(getString(R.string.service_update_loading_existing_notifications));
 		}
 	}
 
@@ -189,7 +189,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			case Constants.UPDATED_PREFERENCES:
 				if (resultCode == RESULT_OK) {
 					sendBroadcast(new Intent(Constants.PREFERENCES_UPDATED));
-					this.serviceUpdate.onGoing("Preferences changed, updating...");
+					this.serviceUpdate.onGoing(getString(R.string.service_update_preferences_changed_updating));
 				}
 				break;
 			default:
@@ -203,20 +203,20 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		final WeatherChoice woeidChoice = this.weatherChoices.get(position);
 
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		alertDialog.setTitle("Manage Location");
+		alertDialog.setTitle(getString(R.string.alert_title_manage_location));
 		final String dialogText =
 				"Location:\n" + woeidChoice.getCurrentLocationText() + "\nLast updated:\n"
 					+ DateUtils.dateToSimpleDateFormat(woeidChoice.getLastUpdatedDateTime());
 		alertDialog.setMessage(dialogText);
 
 		if (woeidChoice.isActive()) {
-			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Refresh", new DialogInterface.OnClickListener() {
+			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					onLoadWeatherChoice(woeidChoice);
 				}
 			});
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Disable", new DialogInterface.OnClickListener() {
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					attemptToKillNotifcation(woeidChoice);
@@ -224,7 +224,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			});
 		}
 		else {
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Enable", new DialogInterface.OnClickListener() {
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					onLoadWeatherChoice(woeidChoice);
@@ -232,7 +232,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			});
 		}
 
-		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Delete", new DialogInterface.OnClickListener() {
+		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
 				attemptToDeleteNotifcation(woeidChoice);

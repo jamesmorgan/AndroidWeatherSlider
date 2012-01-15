@@ -46,6 +46,8 @@ public class WeatherSliderApplication extends Application {
 		startService(new Intent(this, NotificationControllerService.class));
 		startService(new Intent(this, StaticLookupService.class));
 		startService(new Intent(this, RoamingLookupService.class));
+
+		// Start looping alarm
 		sendBroadcast(new Intent(LOOPING_ALARM));
 	}
 

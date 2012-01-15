@@ -27,6 +27,7 @@ import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
+import com.weatherslider.morgan.design.R;
 
 public class NotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnCancelAll {
 
@@ -99,10 +100,10 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 
 	protected void onNotificationsFull(final Context context) {
 		Logger.d(LOG_TAG, "Recieved: %s ", NOTIFICATIONS_FULL);
-		// TODO Replace with hidden preference
-		Toast.makeText(context,
-				String.format("Unable to add more weather notifications, please remove one first, maximum of %s notifications allowed", 3),
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(
+				context,
+				String.format(context.getString(R.string.toast_max_notifications_reached),
+						WeatherNotificationControllerService.MAX_NUMBER_OF_NOTIFICATIONS), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

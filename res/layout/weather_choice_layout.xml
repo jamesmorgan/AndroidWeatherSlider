@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="onAddNewLocation"
-            android:text="Add New Location..." >
+            android:text="@string/button_add_new_location" >
         </Button>
 
         <TextView

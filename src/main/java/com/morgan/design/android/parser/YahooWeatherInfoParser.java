@@ -164,14 +164,16 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 
 				if (element.getName().equals("item")) {
 					for (final Object object : element.getContent()) {
-						final Element innerContent = (Element) object;
-						if (innerContent.getName().equals("title")) {
+						if (object instanceof Element) {
+							final Element innerContent = (Element) object;
+							if (innerContent.getName().equals("title")) {
+								// Logger.d("TEST", innerContent.getValue());
+								description = innerContent.getValue();
+							}
+							// if (innerContent.getName().equals("description")) {
 							// Logger.d("TEST", innerContent.getValue());
-							description = innerContent.getValue();
+							// }
 						}
-						// if (innerContent.getName().equals("description")) {
-						// Logger.d("TEST", innerContent.getValue());
-						// }
 					}
 				}
 			}

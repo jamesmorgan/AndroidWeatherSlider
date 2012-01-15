@@ -17,6 +17,7 @@ import android.os.IBinder;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.util.Logger;
+import com.weatherslider.morgan.design.R;
 
 public class LocationLookupService extends Service {
 
@@ -75,7 +76,7 @@ public class LocationLookupService extends Service {
 	@Override
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
 		Logger.d(LOG_TAG, "Starting lookup location service");
-		this.serviceUpdate.loading("Initiating GPS lookup");
+		this.serviceUpdate.loading(getString(R.string.service_update_initiating_gps_lookup));
 
 		this.oneOffLocationUpdate = intent.getAction().equals(GET_ONE_OFF_CURRENT_LOCATION);
 
@@ -93,7 +94,7 @@ public class LocationLookupService extends Service {
 
 		// don't start listeners if no provider is enabled
 		if (!this.gpsEnabled && !this.networkEnabled) {
-			this.serviceUpdate.complete("Failed GPS lookup");
+			this.serviceUpdate.complete(getString(R.string.service_update_failed_gps_lookup));
 			onNoProvidersFound();
 			stopSelf();
 		}
@@ -142,11 +143,11 @@ public class LocationLookupService extends Service {
 		extras.putBoolean(PROVIDERS_FOUND, true);
 
 		if (null != location) {
-			this.serviceUpdate.complete("GPS Location found");
+			this.serviceUpdate.complete(getString(R.string.service_update_gps_location_found));
 			extras.putParcelable(CURRENT_LOCAION, location);
 		}
 		else {
-			this.serviceUpdate.complete("GPS Location not found");
+			this.serviceUpdate.complete(getString(R.string.service_update_gps_location_not_found));
 		}
 
 		sendBroadcast(this.oneOffLocationUpdate

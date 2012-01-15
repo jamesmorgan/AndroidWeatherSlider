@@ -33,6 +33,7 @@ import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
+import com.weatherslider.morgan.design.R;
 
 public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection,
 		OnAsyncCallback<YahooWeatherLookup>, OnReloadWeather {
@@ -119,12 +120,12 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 
 	@Override
 	public void onPreLookup() {
-		this.serviceUpdate.loading("Initalizing Weather Lookup");
+		this.serviceUpdate.loading(getString(R.string.service_update_initalizing_weather_lookup));
 	}
 
 	@Override
 	public void onPostLookup(final YahooWeatherLookup weatherLookup) {
-		this.serviceUpdate.complete("Completed Weather Lookup");
+		this.serviceUpdate.complete(getString(R.string.service_update_completed_weather_lookup));
 
 		if (null != weatherLookup) {
 
@@ -148,7 +149,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		else {
 			Toast.makeText(
 					this,
-					String.format("Unable to get weather details at present, will try again in %s",
+					String.format(getString(R.string.toast_unable_to_get_weather_details),
 							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
 				.show();
 		}
@@ -158,7 +159,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 
 	@Override
 	public void onInitiateExecution() {
-		this.serviceUpdate.onGoing("Running Weather Lookup");
+		this.serviceUpdate.onGoing(getString(R.string.service_update_running_weather_lookup));
 	}
 
 	protected Temperature getTempMode() {
