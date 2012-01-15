@@ -44,6 +44,7 @@ import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
+import com.weatherslider.morgan.design.R;
 
 public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
 		ServiceConnection, OnReloadWeather, OnCancelAll {
@@ -85,22 +86,22 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			public void onPostLookup(final GeocodeResult geocodeResult) {
 				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", geocodeResult);
 				if (null == geocodeResult) {
-					RoamingLookupService.this.serviceUpdate.complete("Geocode Location Found");
+					RoamingLookupService.this.serviceUpdate.complete(getString(R.string.service_update_geocode_location_found));
 				}
 				else {
-					RoamingLookupService.this.serviceUpdate.complete("Unable to fina Geocode Location");
+					RoamingLookupService.this.serviceUpdate.complete(getString(R.string.service_update_unable_to_fina_geocode_location));
 					onLocationFound(geocodeResult);
 				}
 			}
 
 			@Override
 			public void onPreLookup() {
-				RoamingLookupService.this.serviceUpdate.loading("Finding Geocode Location");
+				RoamingLookupService.this.serviceUpdate.loading(getString(R.string.service_update_finding_geocode_location));
 			}
 
 			@Override
 			public void onInitiateExecution() {
-				RoamingLookupService.this.serviceUpdate.onGoing("Lookup Geocode Location");
+				RoamingLookupService.this.serviceUpdate.onGoing(getString(R.string.service_update_lookup_geocode_location));
 			}
 		};
 	}
@@ -201,7 +202,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	@Override
 	public void onPostLookup(final YahooWeatherInfo weather) {
-		this.serviceUpdate.complete("Completed Weather Lookup");
+		this.serviceUpdate.complete(getString(R.string.service_update_completed_weather_lookup));
 
 		if (null == weather || weather.isError()) {
 			onFailedLookup();
@@ -250,13 +251,13 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	@Override
 	public void onPreLookup() {
-		this.serviceUpdate.loading("Initalizing Weather Lookup");
+		this.serviceUpdate.loading(getString(R.string.service_update_initalizing_weather_lookup));
 
 	}
 
 	@Override
 	public void onInitiateExecution() {
-		this.serviceUpdate.onGoing("Running Weather Lookup");
+		this.serviceUpdate.onGoing(getString(R.string.service_update_running_weather_lookup));
 	}
 
 	protected Temperature getTempMode() {

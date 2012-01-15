@@ -165,6 +165,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.morgan.design.android.broadcast.ConnectivityChangedReciever"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
         </receiver>
 
         <!-- ////////////////// -->
@@ -173,12 +184,12 @@
 
 
         <!-- Register periodic launcher for connectivity changes and get weather download -->
+        <!--
         <receiver
             android:name="com.morgan.design.android.broadcast.LaunchControllerReceiver"
             android:enabled="true"
             android:exported="false"
-            android:label="@string/periodic_reciever"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            android:label="@string/periodic_reciever" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -189,6 +200,7 @@
                 <action android:name="android.intent.action.ACTION_USER_PRESENT" />
             </intent-filter>
         </receiver>
+        -->
     </application>
 
 </manifest>

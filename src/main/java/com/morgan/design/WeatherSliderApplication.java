@@ -55,6 +55,8 @@ public class WeatherSliderApplication extends Application {
 	public void onTerminate() {
 		super.onTerminate();
 		stopService(new Intent(this, NotificationControllerService.class));
+		stopService(new Intent(this, StaticLookupService.class));
+		stopService(new Intent(this, RoamingLookupService.class));
 	}
 
 	public GoogleAnalyticsService getGoogleAnalyticsService() {

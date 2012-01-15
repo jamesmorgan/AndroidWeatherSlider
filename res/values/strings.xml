@@ -121,6 +121,10 @@
     <string name="service_update_failed_gps_lookup">Failed GPS lookup</string>
     <string name="service_update_gps_location_found">GPS Location found</string>
     <string name="service_update_gps_location_not_found">GPS Location not found</string>
+    <string name="service_update_lookup_geocode_location">Lookup Geocode Location</string>
+    <string name="service_update_finding_geocode_location">Finding Geocode Location</string>
+    <string name="service_update_unable_to_fina_geocode_location">Unable to find Geocode Location</string>
+    <string name="service_update_geocode_location_found">Geocode Location Found</string>
 
     <!-- StaticLookupService -->
     <string name="toast_unable_to_get_weather_details">Unable to get weather details at present, will try again in %s</string>
