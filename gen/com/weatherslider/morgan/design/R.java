@@ -25,8 +25,8 @@ public final class R {
         public static final int active_circle_green=0x7f020000;
         public static final int default_cold=0x7f020001;
         public static final int default_weather_icon=0x7f020002;
-        public static final int icon=0x7f020003;
-        public static final int inactive_circle_red=0x7f020004;
+        public static final int inactive_circle_red=0x7f020003;
+        public static final int launch_icon=0x7f020004;
         public static final int main_service_register_shape=0x7f020005;
         public static final int morgan_design_icon=0x7f020006;
         public static final int pressure_falling=0x7f020007;

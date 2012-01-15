@@ -16,7 +16,7 @@
     <!-- android:debuggable="true" -->
     <application
         android:name="com.morgan.design.WeatherSliderApplication"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/launch_icon"
         android:label="@string/app_name" >
 
         <!-- Main activity , can dispatch view on load -->
