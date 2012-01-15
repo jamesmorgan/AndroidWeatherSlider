@@ -108,8 +108,8 @@ public class TODO {
 	// ///////////////////////////////////
 	
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
-	// FIXME -> Create Application Icon
-	
+
+	// FIXME -> DONE - (15/01/2012) - Create Application Icon
 	// FIXME -> DONE - (15/01/2012) - Clean up home screen
 	// FIXME -> DONE - (15/01/2012) - Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 	// FIXME -> DONE - (15/01/2012) - Add menu to overview screen
