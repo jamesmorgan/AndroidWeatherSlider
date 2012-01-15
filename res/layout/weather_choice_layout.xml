@@ -8,26 +8,29 @@
         android:id="@+id/top_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="15dip" >
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_new_location_text" />
+            android:paddingBottom="5dp"
+            android:text="@string/modify_loaded_locaitons" />
 
         <Button
             android:id="@+id/add_new_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:onClick="onAddNewLocation"
+            android:paddingBottom="5dp"
             android:text="@string/button_add_new_location" >
         </Button>
 
-        <TextView
+        <View
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/modify_loaded_locaitons" />
+            android:layout_height="2dip"
+            android:background="#3399FF" />
     </LinearLayout>
 
     <LinearLayout

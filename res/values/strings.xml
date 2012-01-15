@@ -75,8 +75,7 @@
     <string name="alert_enable">Enable</string>
     <string name="alert_delete">Delete</string>
     <string name="button_add_new_location">Add New Location…</string>
-    <string name="modify_loaded_locaitons">Click location to modify</string>
-    <string name="add_new_location_text">Add more locations</string>
+    <string name="modify_loaded_locaitons">Add or modify your locations</string>
 
     <!-- List locations activity -->
     <string name="alert_on_location_click_is_this_correct">"Is this correct? "</string>
