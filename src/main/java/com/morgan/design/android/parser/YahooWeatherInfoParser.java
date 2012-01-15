@@ -5,6 +5,7 @@ import static com.morgan.design.android.util.ObjectUtils.isNotBlank;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -179,12 +180,11 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 			}
 		}
 
-		if (null == reason && null == description) {
-			return false;
+		if (StringUtils.containsIgnoreCase(reason, "error") || StringUtils.containsIgnoreCase(description, "error")) {
+			weatherBean.setWeatherError(new WeatherError(description, reason));
+			return true;
 		}
-
-		weatherBean.setWeatherError(new WeatherError(description, reason));
-		return true;
+		return false;
 	}
 
 	// yweather:forecast The weather forecast for a specific day. The item element contains multiple forecast elements for today and
