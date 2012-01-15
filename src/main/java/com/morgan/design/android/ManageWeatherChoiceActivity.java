@@ -85,7 +85,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 					onLoadWeatherChoice(choice);
 				}
 			}
-			this.serviceUpdate.onGoing(getString(R.string.service_update_loading_existing_notifications));
+			if (null != this.weatherChoices && !this.weatherChoices.isEmpty()) {
+				this.serviceUpdate.onGoing(getString(R.string.service_update_loading_existing_notifications));
+			}
+		}
+
+		// Launch enter screen if no active/existing locations found
+		if (null == this.weatherChoices || this.weatherChoices.isEmpty()) {
+			onAddNewLocation(null);
 		}
 	}
 

@@ -107,8 +107,8 @@ public class TODO {
 	// FIXME -> Confirm Google Analytics integration complete, make sure present on all areas possible, about, feedback form, all menu items
 	// FIXME -> Create Application Icon
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
-	// FIXME -> On application load/start, if no weathers set, show enter location screen first
 
+	// FIXME -> DONE - (15/01/2012) - On application load/start, if no weathers set, show enter location screen first
 	// FIXME -> DONE - (15/01/2012) - Change home screen ordering, roaming at top, errors at bottom 
 	// FIXME -> DONE - (15/01/2012) - Put all strings in strings.xml for localisation, fixed typos
 
