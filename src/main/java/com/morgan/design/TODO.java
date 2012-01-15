@@ -103,9 +103,9 @@ public class TODO {
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
 	
-	// ///////////////////////////////////
-	// User Feedback Version 1.0-BETA-2 //
-	// ///////////////////////////////////
+	// //////////////////////////////////////////
+	// Release Version 1.0-BETA-2 - (15/01/2012) //
+	// //////////////////////////////////////////
 	
 	// FIXME -> DONE - (15/01/2012) - On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> DONE - (15/01/2012) - Bug connectivity change broadcast not handled
