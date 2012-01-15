@@ -103,6 +103,10 @@ public class TODO {
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
 	
+	// ///////////////////////////////////
+	// User Feedback Version 1.0-BETA-2 //
+	// ///////////////////////////////////
+	
 	// FIXME -> On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> Create Application Icon
 	

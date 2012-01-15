@@ -10,13 +10,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="15dip" >
+        android:paddingTop="5dip" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
-            android:text="@string/modify_loaded_locaitons" />
+            android:text="@string/modify_loaded_locaitons"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
             android:id="@+id/add_new_location"
