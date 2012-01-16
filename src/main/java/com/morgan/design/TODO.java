@@ -95,6 +95,7 @@ public class TODO {
 	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
 	// FIXME -> Clean up LaunchControllerReceiver, remove if required
 	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
+	// FIXME -> Add 3 or 5 day forecast.
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -102,10 +103,15 @@ public class TODO {
 
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
+	// FIXME -> Don't open keyboard on enter location screen
+	// FIXME -> Make location list better at dealing with missing place names
+	// FIXME -> Sort of dialog on front screen, tidy and clean, add icon if possible. 
+	// FIXME -> Make icon on overview bigger
+	// FIXME -> Forecast screens, clean up
 	
-	// //////////////////////////////////////////
+	// ////////////////////////////////////////////
 	// Release Version 1.0-BETA-2 - (15/01/2012) //
-	// //////////////////////////////////////////
+	// ////////////////////////////////////////////
 	
 	// FIXME -> DONE - (15/01/2012) - On first successful weather loaded, present user with rate me link to market.
 	// FIXME -> DONE - (15/01/2012) - Bug connectivity change broadcast not handled

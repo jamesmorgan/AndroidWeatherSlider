@@ -25,6 +25,7 @@ public class PreferenceUtils {
 	public static final String PREF_APP_VERSION = "app.version";
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
 	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
+	public static final String PREF_SHOWN_RATE_ME_POPUP = "shown.rateme.popup";
 
 	public static void openUserPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, UserPreferencesActivity.class);
@@ -117,5 +118,13 @@ public class PreferenceUtils {
 
 	public static boolean setHasHadFirstSuccessfulLookup(final Context context, final boolean value) {
 		return getPrefs(context).edit().putBoolean(PREF_FIRST_LOOKUP, value).commit();
+	}
+
+	public static boolean shownRateMePopup(final Context context) {
+		return getPrefs(context).getBoolean(PREF_SHOWN_RATE_ME_POPUP, false);
+	}
+
+	public static boolean setShownMeRateMePopup(final Context context) {
+		return getPrefs(context).edit().putBoolean(PREF_SHOWN_RATE_ME_POPUP, true).commit();
 	}
 }
