@@ -78,24 +78,26 @@ public class TODO {
 	// Next Version ?.? //
 	// ///////////////////
 	
+	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
+	// FIXME -> Improve current notification layout
+	// FIXME -> Capture all shared preference values on application crash (ARCA)
+	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
+	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
+	
 	// FIXME -> Complete localisation
-	// FIXME -> Add flags for each country
 	// FIXME -> Change tabs for view pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Hook into search button to enter a location, search-able activity
-	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
 	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
-	// FIXME -> Improve current notification layout
-	// FIXME -> Capture all shared preference values on application crash (ARCA)
 	// FIXME -> Long click open management pop-up menu & short click open overview mode
-	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
-	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
 	// FIXME -> Clean up LaunchControllerReceiver, remove if required
-	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
+	// FIXME -> Add flags for each country
 	// FIXME -> Add 3 or 5 day forecast.
+	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
+	// FIXME -> Use application bar not button at top of page 
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -103,11 +105,13 @@ public class TODO {
 
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
-	// FIXME -> Don't open keyboard on enter location screen
 	// FIXME -> Make location list better at dealing with missing place names
-	// FIXME -> Sort of dialog on front screen, tidy and clean, add icon if possible. 
+	// FIXME -> Sort out dialog on front screen, tidy and clean, add icon if possible. 
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> Forecast screens, clean up
+	// FIXME -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
+	// FIXME -> DONE - (17/01/2012) - Don't open keyboard on enter location screen
+	// FIXME -> DONE - (17/01/2012) - Enter location should not allow multiple line entry, swap new line button for enter button
 	
 	// ////////////////////////////////////////////
 	// Release Version 1.0-BETA-2 - (15/01/2012) //

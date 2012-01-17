@@ -58,9 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="@string/text_field_enter_location"
-                        android:maxLines="1" >
-
-                        <requestFocus />
+                        android:singleLine="true" >
                     </EditText>
 
                     <Button
