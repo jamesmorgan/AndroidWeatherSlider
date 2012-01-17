@@ -37,6 +37,7 @@ import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.broadcast.ServiceUpdateReceiver;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
+import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
@@ -217,34 +218,42 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	@Override
 	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		super.onListItemClick(l, v, position, id);
-		final WeatherChoice woeidChoice = this.weatherChoices.get(position);
+		final WeatherChoice weatherChoice = this.weatherChoices.get(position);
 
-		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		alertDialog.setTitle(getString(R.string.alert_title_manage_location));
 		final String dialogText =
-				"Location:\n" + woeidChoice.getCurrentLocationText() + "\nLast updated:\n"
-					+ DateUtils.dateToSimpleDateFormat(woeidChoice.getLastUpdatedDateTime());
-		alertDialog.setMessage(dialogText);
+				weatherChoice.getCurrentLocationText() + "\n" + DateUtils.dateToSimpleDateFormat(weatherChoice.getLastUpdatedDateTime());
 
-		if (woeidChoice.isActive()) {
+		final AlertDialog alertDialog =
+				new AlertDialog.Builder(this).setIcon(IconFactory.getImageResourceFromCode(weatherChoice.getCurrentWeatherCode()))
+					.setTitle(getString(R.string.alert_title_manage_location))
+					.setMessage(dialogText)
+					.create();
+
+		if (weatherChoice.isActive()) {
+			// //////////////////////////////
+			// Refresh | Disabled | Delete //
+			// //////////////////////////////
 			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
-					onLoadWeatherChoice(woeidChoice);
+					onLoadWeatherChoice(weatherChoice);
 				}
 			});
 			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
-					attemptToKillNotifcation(woeidChoice);
+					attemptToKillNotifcation(weatherChoice);
 				}
 			});
 		}
 		else {
+			// //////////////////
+			// Enable | Delete //
+			// //////////////////
 			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
-					onLoadWeatherChoice(woeidChoice);
+					onLoadWeatherChoice(weatherChoice);
 				}
 			});
 		}
@@ -252,7 +261,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
-				attemptToDeleteNotifcation(woeidChoice);
+				attemptToDeleteNotifcation(weatherChoice);
 			}
 		});
 

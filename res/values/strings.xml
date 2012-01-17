@@ -69,7 +69,7 @@
     <string name="pref_changelog_title">Change Log</string>
 
     <!-- Home Screen - ManageWeatherChoiceActivity.java -->
-    <string name="alert_title_manage_location">Manage Location</string>
+    <string name="alert_title_manage_location">Manage Notification</string>
     <string name="alert_refresh">Refresh</string>
     <string name="alert_disable">Disable</string>
     <string name="alert_enable">Enable</string>
