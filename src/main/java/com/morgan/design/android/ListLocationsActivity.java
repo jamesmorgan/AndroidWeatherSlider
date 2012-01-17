@@ -85,7 +85,9 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		super.onListItemClick(l, v, position, id);
 		final WOEIDEntry entry = this.WOIEDlocations.get(position);
-		new AlertDialog.Builder(this).setMessage(createConfirmationText(entry))
+
+		new AlertDialog.Builder(this).setTitle(getString(R.string.alert_on_location_click_is_this_correct))
+			.setMessage(createConfirmationText(entry))
 			.setCancelable(false)
 			.setPositiveButton(R.string.alert_yes, new DialogInterface.OnClickListener() {
 				@Override
@@ -110,36 +112,27 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 	}
 
 	private String createConfirmationText(final WOEIDEntry entry) {
-
-		final StringBuilder stringBuilder =
-				new StringBuilder().append(getString(R.string.alert_on_location_click_is_this_correct))
-					.append(" \n")
-					.append(entry.getPlaceTypeName())
-					.append(": ")
-					.append(entry.getName());
-
-		// Either admin 1 or 2
+		String admin = null;
 		if ("" != entry.getAdmin1()) {
-			stringBuilder.append(" \n").append(entry.getAdmin1());
+			admin += entry.getAdmin1();
 		}
 		else if ("" != entry.getAdmin2()) {
-			stringBuilder.append(" \n").append(entry.getAdmin2());
+			admin += entry.getAdmin2();
 		}
 
-		// Either locality 1 or 2
+		String locality = null;
 		if ("" != entry.getLocality1()) {
-			stringBuilder.append(" \n").append(entry.getLocality1());
+			locality += entry.getLocality1();
+
 		}
 		else if ("" != entry.getLocality2()) {
-			stringBuilder.append(" \n").append(entry.getLocality2());
+			locality += entry.getLocality2();
 		}
-
-		// Always try country
-		if ("" != entry.getCountry()) {
-			stringBuilder.append(" \n").append(entry.getCountry());
-		}
-
-		return stringBuilder.toString();
+		return entry.getName() + " (" + entry.getPlaceTypeName() + ") \n" + entry.getCountry() + (null != admin
+				? "\n" + admin
+				: null != locality
+						? "\n" + locality
+						: "");
 	}
 
 	protected void loadWeatherDataForEntry(final WOEIDEntry entry) {
@@ -155,7 +148,8 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, choice.getId());
 
-		startService(new Intent(this, StaticLookupService.class).putExtra(FROM_INACTIVE_LOCATION, true).putExtras(bundle));
+		startService(new Intent(this, StaticLookupService.class).putExtra(FROM_INACTIVE_LOCATION, true)
+			.putExtras(bundle));
 
 		setResult(RESULT_OK);
 		finish();

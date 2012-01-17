@@ -108,6 +108,7 @@ public class TODO {
 	// FIXME -> Make location list better at dealing with missing place names
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> Forecast screens, clean up
+	// FIXME -> Add country flag icon to dialog of list of WOEID entries
 	// FIXME -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
 	// FIXME -> DONE - (17/01/2012) - Sort out dialog on front screen, tidy and clean, add icon if possible. 
 	// FIXME -> DONE - (17/01/2012) - Don't open keyboard on enter location screen
