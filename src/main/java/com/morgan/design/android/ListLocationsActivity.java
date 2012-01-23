@@ -88,7 +88,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 
 		new AlertDialog.Builder(this).setTitle(getString(R.string.alert_on_location_click_is_this_correct))
 			.setMessage(createConfirmationText(entry))
-			.setCancelable(false)
+			.setCancelable(true)
 			.setPositiveButton(R.string.alert_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
@@ -114,25 +114,32 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 	private String createConfirmationText(final WOEIDEntry entry) {
 		String admin = null;
 		if ("" != entry.getAdmin1()) {
-			admin += entry.getAdmin1();
+			admin = entry.getAdmin1();
 		}
 		else if ("" != entry.getAdmin2()) {
-			admin += entry.getAdmin2();
+			admin = entry.getAdmin2();
 		}
 
 		String locality = null;
 		if ("" != entry.getLocality1()) {
-			locality += entry.getLocality1();
+			locality = entry.getLocality1();
 
 		}
 		else if ("" != entry.getLocality2()) {
-			locality += entry.getLocality2();
+			locality = entry.getLocality2();
 		}
-		return entry.getName() + " (" + entry.getPlaceTypeName() + ") \n" + entry.getCountry() + (null != admin
-				? "\n" + admin
-				: null != locality
-						? "\n" + locality
-						: "");
+		
+		//@formatter:off
+		// Name and place type
+		// Country
+		// Admin OR Locality
+		return entry.getName() + " (" + entry.getPlaceTypeName() + ") \n"
+				+ (entry.getCountry() + "\n") +
+				(null != admin 
+						? admin
+						: null != locality 
+								? locality : "");
+		//@formatter:on
 	}
 
 	protected void loadWeatherDataForEntry(final WOEIDEntry entry) {

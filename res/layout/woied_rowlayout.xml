@@ -9,15 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"
-        android:textSize="20dp" >
+        android:textSize="20dp"
+        android:textStyle="bold" >
     </TextView>
 
     <TextView
-        android:id="@+id/admin"
+        android:id="@+id/secondary_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="admin"
-        android:textSize="20dp" >
+        android:text="secondary_text"
+        android:textSize="15dp" >
     </TextView>
 
     <TextView
@@ -25,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="country"
-        android:textSize="20dp" >
+        android:textSize="15dp" >
     </TextView>
 
 </LinearLayout>

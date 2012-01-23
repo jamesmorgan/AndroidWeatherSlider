@@ -52,12 +52,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
-                    <EditText
+                    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="0px"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true" />
+
+                    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component to prevent the dummy from receiving focus again -->
+                    <EditText
                         android:id="@+id/locationText"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="@string/text_field_enter_location"
+                        android:nextFocusLeft="@id/locationText"
+                        android:nextFocusUp="@id/locationText"
                         android:singleLine="true" >
                     </EditText>
 

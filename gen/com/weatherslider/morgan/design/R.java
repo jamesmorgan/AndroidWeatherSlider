@@ -99,7 +99,6 @@ public final class R {
         public static final int TextViewTitle=0x7f09000d;
         public static final int add_new_location=0x7f090024;
         public static final int additionaal_details_container=0x7f09002e;
-        public static final int admin=0x7f090040;
         public static final int alwaysUseGpsButton=0x7f09000b;
         public static final int country=0x7f090041;
         public static final int date=0x7f090015;
@@ -142,6 +141,7 @@ public final class R {
         public static final int overview_menu_home=0x7f09004a;
         public static final int overview_menu_settings=0x7f090048;
         public static final int pressure=0x7f090031;
+        public static final int secondary_text=0x7f090040;
         public static final int service_update_area=0x7f090026;
         public static final int service_update_area_container=0x7f090025;
         public static final int sun_rise=0x7f090035;

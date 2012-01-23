@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.opengl.Visibility;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 			holder = new ViewHolder();
 			holder.name = (TextView) view.findViewById(R.id.name);
 			holder.country = (TextView) view.findViewById(R.id.country);
-			holder.admin = (TextView) view.findViewById(R.id.admin);
+			holder.secondary_text = (TextView) view.findViewById(R.id.secondary_text);
 			view.setTag(holder);
 		}
 		else {
@@ -46,22 +47,34 @@ public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 		final WOEIDEntry entry = this.woiedEntries.get(position);
 		// Logger.d(this.LOG_TAG, entry.getName() + ", " + entry.getCountry());
 
+		// Name and place type
+		// Country
+		// Admin OR Locality (secondary_text)
 		if (entry != null) {
+
 			final TextView name = (TextView) view.findViewById(R.id.name);
 			name.setText(entry.getName());
 
 			final TextView country = (TextView) view.findViewById(R.id.country);
 			country.setText(entry.getCountry());
 
-			final TextView admin = (TextView) view.findViewById(R.id.admin);
+			String secondary_text = null;
 			if ("" != entry.getAdmin1()) {
-				admin.setText(entry.getAdmin1());
+				secondary_text = entry.getAdmin1();
 			}
 			else if ("" != entry.getAdmin2()) {
-				admin.setText(entry.getAdmin2());
+				secondary_text = entry.getAdmin2();
 			}
-			else {
-				admin.setText("");
+			else if ("" != entry.getLocality1()) {
+				secondary_text = entry.getLocality1();
+			}
+			else if ("" != entry.getLocality2()) {
+				secondary_text = entry.getLocality2();
+			}
+
+			final TextView secondary = (TextView) view.findViewById(R.id.secondary_text);
+			if (null != secondary_text) {
+				secondary.setText(secondary_text);
 			}
 		}
 		return view;
@@ -79,7 +92,7 @@ public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 
 	class ViewHolder {
 		TextView name;
-		TextView admin;
+		TextView secondary_text;
 		TextView country;
 	}
 }
