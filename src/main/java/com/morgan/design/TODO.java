@@ -99,19 +99,32 @@ public class TODO {
 	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
 	// FIXME -> Use application bar not button at top of page 
 	
+	// FIXME -> Add option for turn off all / disable network usages and turn off re-occurring alarm. 
+			// * Disable all with dialog, broadcast cancel all service.
+			// * Similar to feature toggle service, application preference?
+			// * Global flag service
+			// * Possible use global flag service to store cancel request?
+	
+	// FIXME -> Add country flag icon to dialog of list of WOEID entries
+	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
+	
+	// FIXME -> Check yahoo API t&C's for application usage -> possibly add web link to about section and change log
+	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	// FIXME -> Make location list better at dealing with missing place names
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> Forecast screens, clean up
-	// FIXME -> Add country flag icon to dialog of list of WOEID entries
 	// FIXME -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
+	// FIXME -> Don't open keyboard on enter location screen
+	// FIXME -> Handle null on list locations
+	// FIXME -> Make list location dialog cancelable
+	// FIXME -> Don't open keyboard as standard 
 	// FIXME -> DONE - (17/01/2012) - Sort out dialog on front screen, tidy and clean, add icon if possible. 
-	// FIXME -> DONE - (17/01/2012) - Don't open keyboard on enter location screen
 	// FIXME -> DONE - (17/01/2012) - Enter location should not allow multiple line entry, swap new line button for enter button
 	
 	// ////////////////////////////////////////////
