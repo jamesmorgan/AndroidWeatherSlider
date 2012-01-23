@@ -21,6 +21,8 @@ import android.os.IBinder;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
@@ -49,6 +51,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	private NotificationManager notificationManager;
 
 	private WeatherSliderApplication applicaiton;
+
 
 	@Override
 	public IBinder onBind(final Intent intent) {
@@ -80,6 +83,11 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		this.applicaiton = ((WeatherSliderApplication) getApplication());
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+	}
+
 	// /////////////////////////////////////////////
 	// ////////// Public methods ///////////////////
 	// /////////////////////////////////////////////
@@ -102,7 +110,8 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 				notification.setFkWeatherChoiceId(weatherChoice.getId());
 
 				// Find available service
-				for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers().entrySet()) {
+				for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers()
+					.entrySet()) {
 					if (null == entry.getValue()) {
 						notification.setServiceId(entry.getKey());
 						this.notificationDao.addNotification(notification);
@@ -144,7 +153,8 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	}
 
 	public void updatePreferences() {
-		for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers().entrySet()) {
+		for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers()
+			.entrySet()) {
 			if (null != entry.getValue()) {
 				showNotification(entry.getKey(), entry.getValue());
 			}
@@ -209,7 +219,8 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		final String temp = weatherInfo.getCurrentTemp() + Temperature.withDegree(Utils.abrev(weatherInfo.getTemperatureUnit()));
 		final String wind =
 				WindSpeed.fromSpeedAndUnit(this, weatherInfo.getWindSpeed(), weatherInfo.getWindSpeedUnit()) + " ("
-					+ Wind.fromDegreeToAbbreviation(weatherInfo.getWindDirection()).toLowerCase() + ")";
+					+ Wind.fromDegreeToAbbreviation(weatherInfo.getWindDirection())
+						.toLowerCase() + ")";
 
 		final String humidity = weatherInfo.getHumidityPercentage() + "% (Humdity)";
 
@@ -228,7 +239,9 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			location.append(weatherInfo.getCity());
 		}
 		return stringHasValue(weatherInfo.getCountry())
-				? location.append(", ").append(weatherInfo.getCountry()).toString()
+				? location.append(", ")
+					.append(weatherInfo.getCountry())
+					.toString()
 				: location.toString();
 	}
 }

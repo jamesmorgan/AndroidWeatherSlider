@@ -99,14 +99,14 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 
 				final PreparedQuery<WeatherChoice> orderBy =
 						WeatherChoiceDao.this.dao.queryBuilder()
+							.orderBy(WeatherChoice.VALID, false)
 							.orderBy(WeatherChoice.ACTIVE, false)
 							.orderBy(WeatherChoice.ROAMING, false)
 							.orderBy(WeatherChoice.WEATHER_LOCATION, true)
-							.orderBy(WeatherChoice.VALID, false)
 							.prepare();
 
 				Logger.d(LOG_TAG, orderBy.getStatement());
-
+				
 				final List<WeatherChoice> woeidChoices = WeatherChoiceDao.this.dao.query(orderBy);
 
 				return null != woeidChoices

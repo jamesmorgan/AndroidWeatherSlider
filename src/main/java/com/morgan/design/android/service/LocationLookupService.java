@@ -16,10 +16,11 @@ import android.os.IBinder;
 
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.util.Logger;
 import com.weatherslider.morgan.design.R;
 
-public class LocationLookupService extends Service {
+public class LocationLookupService extends Service implements OnCancelAll {
 
 	private static final String LOG_TAG = "LocationLookupService";
 
@@ -78,7 +79,8 @@ public class LocationLookupService extends Service {
 		Logger.d(LOG_TAG, "Starting lookup location service");
 		this.serviceUpdate.loading(getString(R.string.service_update_initiating_gps_lookup));
 
-		this.oneOffLocationUpdate = intent.getAction().equals(GET_ONE_OFF_CURRENT_LOCATION);
+		this.oneOffLocationUpdate = intent.getAction()
+			.equals(GET_ONE_OFF_CURRENT_LOCATION);
 
 		int locationTimeOut = DEFAULT_LOCATION_TIMEOUT;
 
@@ -107,6 +109,11 @@ public class LocationLookupService extends Service {
 
 		return START_NOT_STICKY;
 	};
+
+	@Override
+	public void onCancelAll() {
+		stopSelf();
+	}
 
 	private void determineProvidersEnabled() {
 		try {
@@ -227,4 +234,5 @@ public class LocationLookupService extends Service {
 		// No binder is required
 		return null;
 	}
+
 }

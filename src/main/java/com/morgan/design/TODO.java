@@ -105,21 +105,23 @@ public class TODO {
 			// * Global flag service
 			// * Possible use global flag service to store cancel request?
 	
-	// FIXME -> Add country flag icon to dialog of list of WOEID entries
-	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
+
+	// FIXME -> Add country flag icon to dialog of list of WOEID entries
+	// FIXME -> Option to add shortcut to hoe screen
 	
 	// FIXME -> Check yahoo API t&C's for application usage -> possibly add web link to about section and change log
-	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> Forecast screens, clean up
 
-	// FIXME -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
+	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
+
+	// FIXME -> BUG -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
 
 	// FIXME -> DONE - (23/01/2012) - Make location list better at dealing with missing place names
 	// FIXME -> DONE - (23/01/2012) - Handle null on list locations

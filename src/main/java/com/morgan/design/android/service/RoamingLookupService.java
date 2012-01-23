@@ -64,6 +64,9 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	private ReloadWeatherReciever reloadWeatherReciever;
 	protected CancelAllLookupsReciever cancelAllLookupsReciever;
 
+	private GeocodeWOIEDDataTaskFromLocation geocodeWOIEDDataTaskFromLocation;
+	private GetYahooWeatherInformationTask getYahooWeatherInformationTask;
+
 	// ///////////////////////////////////
 	// Service creation and destruction //
 	// ///////////////////////////////////
@@ -121,6 +124,12 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	@Override
 	public void onCancelAll() {
 		stopService(new Intent(LocationLookupService.GET_ROAMING_LOCATION_LOOKUP));
+		if (null != getYahooWeatherInformationTask) {
+			getYahooWeatherInformationTask.cancel(true);
+		}
+		if (null != geocodeWOIEDDataTaskFromLocation) {
+			geocodeWOIEDDataTaskFromLocation.cancel(true);
+		}
 	}
 
 	@Override
@@ -198,7 +207,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	protected void onLocationFound(final GeocodeResult geocodeResult) {
 		this.geocodeResult = geocodeResult;
-		new GetYahooWeatherInformationTask(this.cnnxManager, geocodeResult, getTempMode(), this).execute();
+		getYahooWeatherInformationTask = new GetYahooWeatherInformationTask(this.cnnxManager, geocodeResult, getTempMode(), this);
+		getYahooWeatherInformationTask.execute();
 	}
 
 	@Override
@@ -217,7 +227,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		// Remove immediately if cannot find find location
 		if (this.weatherChoice.isFirstAttempt()) {
-			Toast.makeText(this, "Unable to find the weather for your location, please try agin.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Unable to find the weather for your location, please try agin.", Toast.LENGTH_SHORT)
+				.show();
 			this.weatherDao.delete(this.weatherChoice);
 		}
 		// If active and failed, report failure and inform user of re-try
@@ -300,7 +311,9 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 						else if (null != location && providersFound) {
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
 									location.getLatitude());
-							new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback).execute();
+							geocodeWOIEDDataTaskFromLocation =
+									new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback);
+							geocodeWOIEDDataTaskFromLocation.execute();
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
