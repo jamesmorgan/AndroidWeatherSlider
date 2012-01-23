@@ -52,6 +52,9 @@ public class TODO {
 	// FIXME -> Always have GPS at the top, then last update time OR A_z
 	// FIXME -> Potentially local time not last updated time in each notification, would require user option?
 	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
+	// FIXME -> Change tabs for view pager 
+	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
+	// -> http://blog.stylingandroid.com/archives/537
 	
 	// ///////////////
 	// Nice To Have //
@@ -85,9 +88,6 @@ public class TODO {
 	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
 	
 	// FIXME -> Complete localisation
-	// FIXME -> Change tabs for view pager 
-	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
-	// -> http://blog.stylingandroid.com/archives/537
 	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Hook into search button to enter a location, search-able activity
@@ -106,6 +106,7 @@ public class TODO {
 			// * Possible use global flag service to store cancel request?
 
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
+	// FIXME -> Option to add shortcut to home screen
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -115,7 +116,6 @@ public class TODO {
 	// FIXME -> Style up Market page once deployed
 
 	// FIXME -> Add country flag icon to dialog of list of WOEID entries
-	// FIXME -> Option to add shortcut to hoe screen
 	
 	// FIXME -> Make icon on overview bigger
 

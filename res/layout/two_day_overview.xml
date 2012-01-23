@@ -48,12 +48,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingTop="10dip" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="@string/forecast_overview_lows_of"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -61,7 +61,6 @@
                 android:id="@+id/today_low_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="10"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
@@ -69,12 +68,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingBottom="10dip" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="@string/forecast_overview_highs_of"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -82,7 +81,6 @@
                 android:id="@+id/today_high_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="10"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
@@ -144,12 +142,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingTop="10dip" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="@string/forecast_overview_lows_of"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -157,7 +155,6 @@
                 android:id="@+id/tomo_low_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="10"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
@@ -165,12 +162,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingBottom="10dip" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="@string/forecast_overview_highs_of"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -178,7 +175,6 @@
                 android:id="@+id/tomo_high_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dip"
                 android:text="10"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
