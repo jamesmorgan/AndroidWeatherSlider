@@ -60,10 +60,10 @@ public class TwoDayOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> 
 		weather_image.setImageResource(IconFactory.getImageResourceFromCode(forcastEntry.getCode()));
 
 		final TextView high_temp = (TextView) findViewById(R.id.today_high_temp);
-		high_temp.setText(getString(R.string.forecast_overview_highs_of) + forcastEntry.getHigh() + tempUnit);
+		high_temp.setText(forcastEntry.getHigh() + tempUnit);
 
 		final TextView low_temp = (TextView) findViewById(R.id.today_low_temp);
-		low_temp.setText(getString(R.string.forecast_overview_lows_of) + forcastEntry.getLow() + tempUnit);
+		low_temp.setText(forcastEntry.getLow() + tempUnit);
 
 		final TextView date = (TextView) findViewById(R.id.today_date);
 		date.setText(DateUtils.toSimpleDate(forcastEntry.getDate()));
@@ -83,10 +83,10 @@ public class TwoDayOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> 
 		weather_image.setImageResource(IconFactory.getImageResourceFromCode(forcastEntry.getCode()));
 
 		final TextView high_temp = (TextView) findViewById(R.id.tomo_high_temp);
-		high_temp.setText(getString(R.string.forecast_overview_highs_of) + forcastEntry.getHigh() + tempUnit);
+		high_temp.setText(forcastEntry.getHigh() + tempUnit);
 
 		final TextView low_temp = (TextView) findViewById(R.id.tomo_low_temp);
-		low_temp.setText(getString(R.string.forecast_overview_lows_of) + forcastEntry.getLow() + tempUnit);
+		low_temp.setText(forcastEntry.getLow() + tempUnit);
 
 		final TextView date = (TextView) findViewById(R.id.tomo_date);
 		date.setText(DateUtils.toSimpleDate(forcastEntry.getDate()));
