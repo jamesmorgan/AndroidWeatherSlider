@@ -117,9 +117,9 @@ public class TODO {
 	// FIXME -> Add country flag icon to dialog of list of WOEID entries
 	// FIXME -> Option to add shortcut to hoe screen
 	
-	// FIXME -> Check yahoo API t&C's for application usage -> possibly add web link to about section and change log
 	// FIXME -> Make icon on overview bigger
-	
+
+	// FIXME -> DONE - (23/01/2012) - Check yahoo API t&C's for application usage -> added web link to about section and change log
 	// FIXME -> DONE - (23/01/2012) - Forecast screens, clean up, moved to single view, re-designed
 	// FIXME -> DONE - (23/01/2012) - BUG -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
 	// FIXME -> DONE - (23/01/2012) - Make location list better at dealing with missing place names

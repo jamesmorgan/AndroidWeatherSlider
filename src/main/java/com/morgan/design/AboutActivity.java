@@ -51,6 +51,18 @@ public class AboutActivity extends Activity {
 		this.adapter.addSection("Credits", new SimpleAdapter(this, credits, R.layout.list_complex_sub_with_image, 
 				new String[] {ITEM_TITLE, ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, 
 				new int[] { R.id.list_complex_title, R.id.list_complex_caption, R.id.list_complex_sub_caption, R.id.list_complex_url, R.id.list_complex_image }));
+		
+		// //////////
+		// Weather //
+		// //////////
+		
+		final List<Map<String, ?>> weather = new LinkedList<Map<String, ?>>();
+		weather.add(createImageItem("Yahoo! Weather", "Weather provided by Yahoo! Weather", Constants.YAHOO_WEATHER_URL, Constants.YAHOO_WEATHER_URL, R.drawable.yahoo_weather_logo));
+		
+		this.adapter.addSection("Weather", new SimpleAdapter(this, weather, R.layout.list_complex_sub_with_image, 
+				new String[] {ITEM_TITLE, ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, 
+				new int[] { R.id.list_complex_title, R.id.list_complex_caption, R.id.list_complex_sub_caption, R.id.list_complex_url, R.id.list_complex_image }));
+		
 
 		// ////////////
 		// Versions //

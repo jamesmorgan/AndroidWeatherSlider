@@ -87,6 +87,7 @@ public final class R {
         public static final int weather_channel_45=0x7f02003e;
         public static final int weather_channel_46=0x7f02003f;
         public static final int weather_channel_47=0x7f020040;
+        public static final int yahoo_weather_logo=0x7f020041;
     }
     public static final class id {
         public static final int ButtonSendFeedback=0x7f090013;
