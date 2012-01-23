@@ -251,7 +251,8 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 					final List<ForcastEntry> entries = this.currentWeather.getForcastEntries();
 					if (isNotEmpty(entries)) {
 						// HACK to put forecast details in intent as current weather is not Parcelable
-						final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
+						// TODO => remove if not needed => final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
+						final Intent intent = new Intent(this, TwoDayOverviewActivity.class);
 						final Bundle extras = new Bundle();
 						int i = 0;
 						for (final ForcastEntry forcastEntry : entries) {

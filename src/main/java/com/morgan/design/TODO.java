@@ -104,6 +104,8 @@ public class TODO {
 			// * Similar to feature toggle service, application preference?
 			// * Global flag service
 			// * Possible use global flag service to store cancel request?
+
+	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -117,12 +119,9 @@ public class TODO {
 	
 	// FIXME -> Check yahoo API t&C's for application usage -> possibly add web link to about section and change log
 	// FIXME -> Make icon on overview bigger
-	// FIXME -> Forecast screens, clean up
-
-	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
-
-	// FIXME -> BUG -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
-
+	
+	// FIXME -> DONE - (23/01/2012) - Forecast screens, clean up, moved to single view, re-designed
+	// FIXME -> DONE - (23/01/2012) - BUG -> When multiple locations exist, city not found/error locations should appear below locations which are simply disable due to no notifications space remaining.
 	// FIXME -> DONE - (23/01/2012) - Make location list better at dealing with missing place names
 	// FIXME -> DONE - (23/01/2012) - Handle null on list locations
 	// FIXME -> DONE - (23/01/2012) - Make list location dialog cancelable

@@ -74,6 +74,7 @@
         </activity>
 
         <!-- Weather Forecast Overview Screens -->
+        <!--
         <activity
             android:name="com.morgan.design.android.ForecastOverviewActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -86,6 +87,12 @@
         <activity
             android:name="com.morgan.design.android.ForecastOverviewTabActivity"
             android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        -->
+        <activity
+            android:name="com.morgan.design.android.TwoDayOverviewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
 
         <!-- Service which simply determines your current GPS location -->
