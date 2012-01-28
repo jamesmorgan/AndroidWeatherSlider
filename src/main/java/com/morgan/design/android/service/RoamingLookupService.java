@@ -26,6 +26,7 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.RateMe;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
@@ -45,7 +46,6 @@ import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
-import com.weatherslider.morgan.design.R;
 
 public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
 		ServiceConnection, OnReloadWeather, OnCancelAll {

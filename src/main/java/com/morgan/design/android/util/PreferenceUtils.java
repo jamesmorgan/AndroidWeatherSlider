@@ -53,7 +53,7 @@ public class PreferenceUtils {
 	}
 
 	public static int getPollingSchedule(final Context context) {
-		return Integer.valueOf(getPrefs(context).getString(PREF_POLLING_SCHEDULE, "15"));
+		return Integer.valueOf(getPrefs(context).getString(PREF_POLLING_SCHEDULE, "30"));
 	}
 
 	public static boolean setPollingSchedule(final Context context, final String minutes) {

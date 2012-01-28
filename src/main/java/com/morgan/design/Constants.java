@@ -22,7 +22,7 @@ public class Constants {
 	public static final String ANDROID_MARKET = "http://market.android.com/";
 	public static final String MORGAN_DESIGN = "http://www.morgan-design.com";
 	public static final String TWITTER_URL = "http://www.twitter.com/jimbob_87";
-	public static final String MARKET_LINK_URL = "market://search?q=pname:com.morgan.design";
+	public static final String MARKET_LINK_URL = "market://details?q=pname:com.morgan.design";
 	public static final String YAHOO_WEATHER_URL = "http://weather.yahoo.com/";
 
 	// Rest Template timeout

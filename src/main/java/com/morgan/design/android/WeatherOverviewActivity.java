@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.morgan.design.Constants;
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
@@ -34,7 +35,6 @@ import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.PressureUtils;
 import com.morgan.design.android.util.Utils;
-import com.weatherslider.morgan.design.R;
 
 public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> implements SimpleGestureListener {
 

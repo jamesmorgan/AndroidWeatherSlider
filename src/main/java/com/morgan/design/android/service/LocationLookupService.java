@@ -14,11 +14,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import com.morgan.design.weatherslider.R;
+import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
-import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.util.Logger;
-import com.weatherslider.morgan.design.R;
 
 public class LocationLookupService extends Service implements OnCancelAll {
 

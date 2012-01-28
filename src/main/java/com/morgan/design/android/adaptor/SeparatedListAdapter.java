@@ -11,7 +11,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 /* Copyright 2008 Jeff Sharkey
  * 

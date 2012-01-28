@@ -21,8 +21,6 @@ import android.os.IBinder;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
-import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
-import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
@@ -51,7 +49,6 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	private NotificationManager notificationManager;
 
 	private WeatherSliderApplication applicaiton;
-
 
 	@Override
 	public IBinder onBind(final Intent intent) {

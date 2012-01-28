@@ -17,7 +17,7 @@ import com.morgan.design.android.adaptor.SeparatedListAdapter;
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.util.BuildUtils;
 import com.morgan.design.android.util.Utils;
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 public class AboutActivity extends Activity {
 

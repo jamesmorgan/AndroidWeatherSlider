@@ -14,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.util.DateUtils;
-import com.weatherslider.morgan.design.R;
 
 public class CurrentChoiceAdaptor extends ArrayAdapter<WeatherChoice> {
 

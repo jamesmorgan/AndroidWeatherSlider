@@ -10,7 +10,7 @@ import com.morgan.design.android.util.BuildUtils;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 public class Changelog {
 
@@ -37,7 +37,8 @@ public class Changelog {
 		final boolean showChangeLog = PreferenceUtils.getChangelogPref(activity);
 
 		try {
-			final PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+			final PackageInfo pi = activity.getPackageManager()
+				.getPackageInfo(activity.getPackageName(), 0);
 			currentVersion = pi.versionCode;
 		}
 		catch (final NameNotFoundException e) {

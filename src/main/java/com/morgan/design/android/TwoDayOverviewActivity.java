@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.types.IconFactory;
@@ -16,7 +17,6 @@ import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
-import com.weatherslider.morgan.design.R;
 
 public class TwoDayOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> implements SimpleGestureListener {
 

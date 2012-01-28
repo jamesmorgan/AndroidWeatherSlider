@@ -108,6 +108,10 @@ public class TODO {
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	// FIXME -> Add option to put shortcut to overview screen on home page for each location
 	
+	// FIXME -> Style 'Add location button...'
+	// FIXME -> Make icon on overview bigger
+	// FIXME -> Add country flag icon to dialog of list of WOEID entries
+	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
@@ -115,11 +119,7 @@ public class TODO {
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
 
-	// FIXME -> Style 'Add location button...'
-	// FIXME -> Make icon on overview bigger
-
-	// FIXME -> Add country flag icon to dialog of list of WOEID entries
-
+	// FIXME -> DONE - (28/01/2012) - Removed update preference of 1 minutes, set default to 30 minutes
 	// FIXME -> DONE - (28/01/2012) - Option to add shortcut to home screen
 	// FIXME -> DONE - (28/01/2012) - Add progress spinner to service update area
 	

@@ -19,7 +19,7 @@ import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.BuildUtils;
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 @ReportsCrashes(formKey = Constants.ANDROID_DOCS_CRASH_REPORT_KEY, mode = ReportingInteractionMode.TOAST, forceCloseDialogAfterToast = false, resToastText = R.string.crash_toast_text)
 public class WeatherSliderApplication extends Application {

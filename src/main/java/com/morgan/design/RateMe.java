@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.morgan.design.android.util.PreferenceUtils;
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 public class RateMe {
 

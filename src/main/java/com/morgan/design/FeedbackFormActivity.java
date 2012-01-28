@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.util.BuildUtils;
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 public class FeedbackFormActivity extends Activity {
 

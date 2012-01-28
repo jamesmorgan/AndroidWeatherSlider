@@ -4,15 +4,14 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.opengl.Visibility;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.domain.WOEIDEntry;
-import com.weatherslider.morgan.design.R;
 
 public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 

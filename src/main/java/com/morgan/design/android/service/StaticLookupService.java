@@ -18,6 +18,7 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.RateMe;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever;
@@ -34,7 +35,6 @@ import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
-import com.weatherslider.morgan.design.R;
 
 public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection,
 		OnAsyncCallback<YahooWeatherLookup>, OnReloadWeather {

@@ -40,7 +40,7 @@ import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.RestTemplateFactory;
 import com.morgan.design.android.util.Utils;
 import com.morgan.design.android.util.YahooRequestUtils;
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 public class EnterLocationActivity extends Activity implements SimpleGestureListener {
 
@@ -258,7 +258,9 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	// //////////////////////////////////////////
 
 	public void refreshAvailableLocations(final List<WOEIDEntry> locations) {
-		this.WOIEDlocations = new ArrayList<WOEIDEntry>(locations);
+		this.WOIEDlocations = new ArrayList<WOEIDEntry>(null == locations
+				? new ArrayList<WOEIDEntry>()
+				: locations);
 		Logger.d(LOG_TAG, String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
 
 		if (null == locations || locations.isEmpty()) {

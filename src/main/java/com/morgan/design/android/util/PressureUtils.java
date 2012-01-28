@@ -1,6 +1,6 @@
 package com.morgan.design.android.util;
 
-import com.weatherslider.morgan.design.R;
+import com.morgan.design.weatherslider.R;
 
 public class PressureUtils {
 

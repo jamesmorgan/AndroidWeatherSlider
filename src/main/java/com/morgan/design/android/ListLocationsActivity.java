@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Constants;
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.WOIEDAdaptor;
 import com.morgan.design.android.dao.WeatherChoiceDao;
@@ -27,7 +28,6 @@ import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.StaticLookupService;
-import com.weatherslider.morgan.design.R;
 
 public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
 

@@ -15,7 +15,7 @@
             android:title="@string/pref_reload_on_connectivity_change_title" />
 
         <ListPreference
-            android:defaultValue="15"
+            android:defaultValue="30"
             android:entries="@array/polling_time"
             android:entryValues="@array/polling_time_values"
             android:key="pollingSchedule"

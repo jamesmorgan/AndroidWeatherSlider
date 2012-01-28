@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.morgan.design.AboutActivity;
 import com.morgan.design.FeedbackFormActivity;
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.domain.types.Abrev;
-import com.weatherslider.morgan.design.R;
 
 /**
  * @author James Edward Morgan

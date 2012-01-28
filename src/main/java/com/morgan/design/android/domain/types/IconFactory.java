@@ -3,8 +3,8 @@ package com.morgan.design.android.domain.types;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.dao.orm.WeatherChoice;
-import com.weatherslider.morgan.design.R;
 
 public class IconFactory {
 

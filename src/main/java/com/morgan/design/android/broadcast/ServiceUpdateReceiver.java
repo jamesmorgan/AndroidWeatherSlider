@@ -11,8 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.util.Logger;
-import com.weatherslider.morgan.design.R;
 
 public class ServiceUpdateReceiver extends BroadcastReceiver {
 

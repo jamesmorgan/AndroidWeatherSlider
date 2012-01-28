@@ -2,7 +2,7 @@
 <resources>
     
     <string-array name="polling_time">
-        <item>1 minute</item>
+        <!--  <item>1 minute</item>-->
         <item>15 minutes</item>
         <item>30 minutes</item>
         <item>1 hour</item>
@@ -13,7 +13,7 @@
 
     
     <string-array  name="polling_time_values">
-        <item>1</item>
+        <!-- <item>1</item> -->
         <item>15</item>
         <item>30</item>
         <item>60</item>
