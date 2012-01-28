@@ -115,9 +115,14 @@ public class TODO {
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
 
-	// FIXME -> Add country flag icon to dialog of list of WOEID entries
-	
+	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
+
+	// FIXME -> Add country flag icon to dialog of list of WOEID entries
+
+	// FIXME -> DONE - (28/01/2012) - Add progress spinner to service update area
+	
+	// FIXME -> DONE - (26/01/2012) - Add google analytics to about section 
 
 	// FIXME -> DONE - (23/01/2012) - Check yahoo API t&C's for application usage -> added web link to about section and change log
 	// FIXME -> DONE - (23/01/2012) - Forecast screens, clean up, moved to single view, re-designed

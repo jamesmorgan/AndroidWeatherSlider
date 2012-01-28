@@ -19,10 +19,8 @@ import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.morgan.design.RateMe;
-import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever;
-import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever.OnReloadWeather;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.dao.WeatherChoiceDao;

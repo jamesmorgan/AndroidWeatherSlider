@@ -35,13 +35,17 @@ public class TwoDayOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> 
 			// Today
 			if (intent.hasExtra(FORCAST_ENTRY + 0)) {
 				final ForcastEntry forcastEntry = (ForcastEntry) intent.getSerializableExtra(FORCAST_ENTRY + 0);
-				setToday(forcastEntry);
+				if (null != forcastEntry) {
+					setToday(forcastEntry);
+				}
 			}
 
 			// Tomo
 			if (intent.hasExtra(FORCAST_ENTRY + 1)) {
 				final ForcastEntry forcastEntry = (ForcastEntry) intent.getSerializableExtra(FORCAST_ENTRY + 1);
-				setTomo(forcastEntry);
+				if (null != forcastEntry) {
+					setTomo(forcastEntry);
+				}
 			}
 		}
 	}

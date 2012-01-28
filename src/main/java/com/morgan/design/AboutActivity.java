@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.morgan.design.android.adaptor.SeparatedListAdapter;
+import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.util.BuildUtils;
 import com.morgan.design.android.util.Utils;
 import com.weatherslider.morgan.design.R;
@@ -30,9 +31,13 @@ public class AboutActivity extends Activity {
 	private SeparatedListAdapter adapter;
 	private ListView list;
 
+	private GoogleAnalyticsService googleAnalyticsService;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
 
 		// create our list and custom adapter
 		this.adapter = new SeparatedListAdapter(this, R.layout.list_header);
@@ -88,7 +93,10 @@ public class AboutActivity extends Activity {
 				@SuppressWarnings("unchecked")
 				final HashMap<String, ?> item = (HashMap<String, ?>) AboutActivity.this.adapter.getItem(position);
 				if (item.containsKey(URL) && null != item.get(URL)) {
-					Utils.openUrl(AboutActivity.this, item.get(URL).toString());
+					googleAnalyticsService.trackClickEvent(AboutActivity.this, item.get(URL)
+						.toString());
+					Utils.openUrl(AboutActivity.this, item.get(URL)
+						.toString());
 				}
 			}
 		});
@@ -113,5 +121,9 @@ public class AboutActivity extends Activity {
 		item.put(ITEM_TITLE, title);
 		item.put(ITEM_VERSION, version);
 		return item;
+	}
+
+	protected WeatherSliderApplication getToLevelApplication() {
+		return ((WeatherSliderApplication) getApplication());
 	}
 }

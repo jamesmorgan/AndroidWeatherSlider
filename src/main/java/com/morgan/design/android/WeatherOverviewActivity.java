@@ -70,14 +70,16 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 		Logger.d(LOG_TAG, this.currentWeather);
 
-		setDescriptionAndImage();
-		setLocationDetails();
-		setWindDetails();
-		setSunDetails();
-		setTemperatureDetails();
+		if (null != this.currentWeather) {
+			setDescriptionAndImage();
+			setLocationDetails();
+			setWindDetails();
+			setSunDetails();
+			setTemperatureDetails();
 
-		setUpMoreInformationLink();
-		setUpOpenMapLink();
+			setUpMoreInformationLink();
+			setUpOpenMapLink();
+		}
 	}
 
 	@Override

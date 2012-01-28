@@ -47,6 +47,7 @@
             android:layout_height="0px"
             android:textAppearance="?android:attr/textAppearanceSmall" >
         </TextView>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -23,7 +23,8 @@ public enum Temperature implements Abrev {
 
 	public static Temperature to(final String temp) {
 		for (final Temperature type : values()) {
-			if (type.abrev().equalsIgnoreCase(temp)) {
+			if (type.abrev()
+				.equalsIgnoreCase(temp)) {
 				return type;
 			}
 		}
@@ -41,6 +42,9 @@ public enum Temperature implements Abrev {
 	}
 
 	public static String withDegree(final String abrev2) {
+		if (null == abrev2) {
+			return "";
+		}
 		return DEGREE + abrev2;
 	}
 

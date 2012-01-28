@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.morgan.design</groupId>
@@ -86,10 +84,18 @@
 			<version>4.2.3</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>android.support</groupId>
 			<artifactId>compatibility-v4</artifactId>
 			<version>r6</version>
+		</dependency>-->
+
+		<!-- ActionBar sherlock http://actionbarsherlock.com/download.html -->
+		<dependency>
+			<groupId>com.actionbarsherlock</groupId>
+			<artifactId>library</artifactId>
+			<version>3.5.1</version>
+			<type>apklib</type>
 		</dependency>
 
 		<!-- <dependency> <groupId>org.simpleframework</groupId> <artifactId>simple-xml</artifactId> 
@@ -281,6 +287,18 @@
 		<repository>
 			<id>acra-releases</id>
 			<url>http://acra.googlecode.com/svn/repository/releases</url>
+		</repository>
+
+		<!-- Android aciotn bar library -->
+		<repository>
+			<id>jakewharton</id>
+			<url>http://r.jakewharton.com/maven/release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 
 		<repository>
