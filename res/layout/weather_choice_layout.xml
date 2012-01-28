@@ -64,7 +64,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:indeterminateOnly="true"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </RelativeLayout>
 
     <ListView

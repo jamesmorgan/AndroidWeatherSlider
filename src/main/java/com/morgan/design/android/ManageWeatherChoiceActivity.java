@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -158,6 +160,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.CANCEL_ALL);
 				sendBroadcast(new Intent(CANCEL_ALL_WEATHER_NOTIFICATIONS));
 				return true;
+			case R.id.home_menu_create_shortcut:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.CREATE_HOME_SHORTCUT);
+				createShortcut();
+				return true;
 			case R.id.home_menu_reload_all:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.RELOAD_ALL_ACTIVE);
 				if (null != this.weatherChoices) {
@@ -171,6 +177,23 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void createShortcut() {
+		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
+		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		shortcutIntent.setClassName(this, this.getClass()
+			.getName());
+
+		Intent intent = new Intent();
+		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "WeatherSlider");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+				Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
+		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+
+		sendBroadcast(intent);
 	}
 
 	@Override

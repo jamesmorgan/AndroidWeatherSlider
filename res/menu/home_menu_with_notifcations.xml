@@ -23,5 +23,9 @@
     <item
         android:id="@+id/home_menu_about"
         android:title="@string/about"/>
+    
+    <item
+        android:id="@+id/home_menu_create_shortcut"
+        android:title="@string/create_shortcut"/>
 
 </menu>

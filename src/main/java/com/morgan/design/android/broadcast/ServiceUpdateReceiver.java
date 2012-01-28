@@ -47,7 +47,6 @@ public class ServiceUpdateReceiver extends BroadcastReceiver {
 			@Override
 			public void run() {
 				service_update_area.setText("");
-				service_update_progress_bar.setVisibility(View.INVISIBLE);
 				service_update_area_container.setVisibility(View.GONE);
 			}
 		};
@@ -63,22 +62,24 @@ public class ServiceUpdateReceiver extends BroadcastReceiver {
 		final String action = intent.getAction();
 		if (View.GONE == this.service_update_area_container.getVisibility()) {
 			this.service_update_area_container.setVisibility(View.VISIBLE);
-			this.service_update_progress_bar.setVisibility(View.VISIBLE);
 		}
 		if (ACTION.equals(action)) {
 			if (intent.hasExtra(LOADING)) {
 				final String loading = intent.getStringExtra(LOADING);
 				Logger.d(LOG_TAG, "Loading : " + loading);
+				service_update_progress_bar.setVisibility(View.VISIBLE);
 				setNewText(loading);
 			}
 			else if (intent.hasExtra(ONGOING)) {
 				final String ongoing = intent.getStringExtra(ONGOING);
 				Logger.d(LOG_TAG, "onGoing : " + ongoing);
+				service_update_progress_bar.setVisibility(View.VISIBLE);
 				setNewText(ongoing);
 			}
 			else if (intent.hasExtra(COMPLETE)) {
 				final String complete = intent.getStringExtra(COMPLETE);
 				Logger.d(LOG_TAG, "Complete : " + complete);
+				service_update_progress_bar.setVisibility(View.INVISIBLE);
 				setNewText(complete);
 			}
 		}

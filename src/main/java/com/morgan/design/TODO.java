@@ -106,7 +106,7 @@ public class TODO {
 			// * Possible use global flag service to store cancel request?
 
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
-	// FIXME -> Option to add shortcut to home screen
+	// FIXME -> Add option to put shortcut to overview screen on home page for each location
 	
 	// //////////////////////
 	// Release Version 1.0 //
@@ -120,6 +120,7 @@ public class TODO {
 
 	// FIXME -> Add country flag icon to dialog of list of WOEID entries
 
+	// FIXME -> DONE - (28/01/2012) - Option to add shortcut to home screen
 	// FIXME -> DONE - (28/01/2012) - Add progress spinner to service update area
 	
 	// FIXME -> DONE - (26/01/2012) - Add google analytics to about section 
