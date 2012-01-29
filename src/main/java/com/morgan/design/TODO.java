@@ -24,7 +24,6 @@ public class TODO {
 	// FIXME -> Open location on map from notification click handler
 	// FIXME -> Turn sun set and rise in time objects
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo -> http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
-	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
 	// FIXME -> New providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> Add temperature highs/lows for day on overview screen
 	// FIXME -> DB Version's & Tests
@@ -33,26 +32,18 @@ public class TODO {
 	// FIXME -> Add fine grained user control to location services -> http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
 	// FIXME -> Improve location based service
 	// FIXME -> Add option to stop lookup if battery % to low -> http://code.google.com/p/android-notifier/source/browse/AndroidNotifier/src/org/damazio/notifier/event/receivers/battery/BatteryEventReceiver.java
-	// FIXME -> Monitor service to prevent services stopping
-	// FIXME -> Lazy load service, are they needed -> is this possible?
-	// FIXME -> Deal with service restarts, monitor services-to-service
-	// FIXME -> Add option to extend location search, but may incur errors with weather lookup, must add in weather error checking e.g. http://weather.yahooapis.com/forecastrss?w=2347563&u=c
-	// FIXME -> Set maximum number of allowed notifications in preference
-	// FIXME -> Think about using a remote service and client for all operations -> http://saigeethamn.blogspot.com/2009/09/android-developer-tutorial-part-9.html
-	// FIXME -> Add provider -> add switcher -> http://mvn.egoclean.com/
 	// FIXME -> Add option for date format
 	// FIXME -> Allow users to narrow down location accuracy
 	// FIXME -> Consider alternative GeoPlannet features -> http://developer.yahoo.com/geo/geoplanet/
 	// FIXME -> Android bug with int-array preferences -> http://code.google.com/p/android/issues/detail?id=2096
-	// FIXME -> Possible calandar intergration for weather messages, warnings
+	// FIXME -> Possible calendar integration for weather messages, warnings
 	// FIXME -> Possible notification triggered on daily alarm with tip of the day about weather
-	// FIXME -> How is the weather goign to affect me e.g. travel plans, car, plane, bus etc?
+	// FIXME -> How is the weather going to affect me e.g. travel plans, car, plane, bus etc?
 	// FIXME -> Look into hooking into alarm providers?
 	// FIXME -> Try 'Add Location' at bottom of the screen
-	// FIXME -> Always have GPS at the top, then last update time OR A_z
 	// FIXME -> Potentially local time not last updated time in each notification, would require user option?
 	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
-	// FIXME -> Change tabs for view pager 
+	// FIXME ->View pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
 	
@@ -61,11 +52,9 @@ public class TODO {
 	// ///////////////
 	
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
-	// FIXME -> Option to disable collecting of logs via ACRA
 	// FIXME -> Check try/catch blocks report to ACRA if required
 	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc, Always have GPS at the top, then last update time OR A_z?
 	// FIXME -> Overlay weather on google maps -> http://www.androidhive.info/2012/01/android-working-with-google-maps/
-	// FIXME -> Proper error handling when no weather details found, parse response.
 	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
@@ -75,7 +64,6 @@ public class TODO {
 	// FIXME -> Add ability to pay for application in-line
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
-	// FIXME -> Give user option to create shortcuts to either open application, or open overview for one of there locations
 	
 	// ///////////////////
 	// Next Version ?.? //
@@ -91,13 +79,11 @@ public class TODO {
 	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Hook into search button to enter a location, search-able activity
-	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Long click open management pop-up menu & short click open overview mode
 	// FIXME -> Clean up LaunchControllerReceiver, remove if required
-	// FIXME -> Add flags for each country
 	// FIXME -> Add 3 or 5 day forecast.
 	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
-	// FIXME -> Use application bar not button at top of page 
+	// FIXME -> Give user option to create shortcuts to either open application, or open overview for one of there locations
 	
 	// FIXME -> Add option for turn off all / disable network usages and turn off re-occurring alarm. 
 			// * Disable all with dialog, broadcast cancel all service.
@@ -107,15 +93,20 @@ public class TODO {
 
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	// FIXME -> Add option to put shortcut to overview screen on home page for each location
-	
 	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
-	// FIXME -> Add country flag icon to dialog of list of WOEID entries
-	// FIXME -> Style up Market page once deployed
 	
 	// //////////////////////
 	// Release Version 1.1 //
 	// //////////////////////
+	
+	// FIXME -> Use application bar not button at top of page 
+	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
+	// FIXME -> Style up Market page once deployed
+	// FIXME -> Add flags for each country
+	// FIXME -> Add country flag icon to dialog and list of WOEID entries
+	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
+	// FIXME -> Option to disable collecting of logs via ACRA
 	
 	// //////////////////////
 	// Release Version 1.0 //
