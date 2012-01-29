@@ -111,14 +111,17 @@ public class TODO {
 	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> Add country flag icon to dialog of list of WOEID entries
+	// FIXME -> Style up Market page once deployed
+	
+	// //////////////////////
+	// Release Version 1.1 //
+	// //////////////////////
 	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
 
-	// FIXME -> Add Application on Android Market
-	// FIXME -> Style up Market page once deployed
-	
+	// FIXME -> DONE - (29/01/2012) - Add Application on Android Market
 	// FIXME -> DONE - (29/01/2012) - Added static factory methods allow for cleaner loading
 	// FIXME -> DONE - (29/01/2012) - Bug when disabled roaming locations.
 	// FIXME -> DONE - (29/01/2012) - Change market link to query on publisher name not package name
