@@ -97,20 +97,19 @@ public class TODO {
 	// FIXME -> Make icon on overview bigger
 	
 	// //////////////////////
-	// Release Version 1.1 //
+	// Release Version 1.? //
 	// //////////////////////
 	
 	// FIXME -> Use application bar not button at top of page 
 	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Style up Market page once deployed
-	// FIXME -> Add flags for each country
-	// FIXME -> Add country flag icon to dialog and list of WOEID entries
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
 		
 	// //////////////////////
 	// Release Version 1.1 //
 	// //////////////////////
 	
+	// FIXME -> DONE - (29/01/2012) - Add country flags for each country on location list
 	// FIXME -> DONE - (29/01/2012) - Add ACRA to about section
 	// FIXME -> DONE - (29/01/2012) - Option to disable collecting of logs via ACRA
 	// FIXME -> DONE - (29/01/2012) - Add current user preferences on application crash 
