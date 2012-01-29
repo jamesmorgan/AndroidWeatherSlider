@@ -65,9 +65,12 @@
     <string name="pref_reload_on_connectivity_change_title">Reload On Connectivity Changed</string>
     <string name="pref_google_analytics_summary">Thanks for helping improve this application</string>
     <string name="pref_google_analytics_title">Enable Google Analytics</string>
-    <string name="pref_changelog_summary">Show Change Log On Version Upgrade</string>
     <string name="pref_changelog_title">Change Log</string>
-
+    <string name="pref_changelog_summary">Show Change Log On Version Upgrade</string>
+    <string name="pref_acra_syslog_disabled">Don\'t collect systems logs on application crash</string>
+    <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>
+    <string name="pref_acra_syslog">Error Reporting</string>
+    
     <!-- Home Screen - ManageWeatherChoiceActivity.java -->
     <string name="alert_title_manage_location">Manage Notification</string>
     <string name="alert_refresh">Refresh</string>

@@ -64,6 +64,7 @@ public class AboutActivity extends Activity {
 		
 		final List<Map<String, ?>> weather = new LinkedList<Map<String, ?>>();
 		weather.add(createImageItem("Yahoo! Weather", "Weather provided by Yahoo! Weather", Constants.YAHOO_WEATHER_URL, Constants.YAHOO_WEATHER_URL, R.drawable.yahoo_weather_logo));
+		weather.add(createImageItem("ARCA", "Application Crash Report for Android", Constants.ARCA_URL, Constants.ARCA_URL, R.drawable.arca_logo));
 		
 		this.adapter.addSection("Weather", new SimpleAdapter(this, weather, R.layout.list_complex_sub_with_image, 
 				new String[] {ITEM_TITLE, ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, 
