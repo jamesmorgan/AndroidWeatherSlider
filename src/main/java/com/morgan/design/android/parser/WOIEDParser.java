@@ -78,6 +78,7 @@ public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 						entry.setName(element.getValue());
 					}
 					if (element.getName().equals(COUNTRY)) {
+						entry.setCountryCode(element.getAttributeValue("code"));
 						entry.setCountry(element.getValue());
 					}
 

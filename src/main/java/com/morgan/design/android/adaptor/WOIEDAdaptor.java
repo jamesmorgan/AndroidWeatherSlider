@@ -4,14 +4,16 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.morgan.design.android.domain.types.Flags;
+import com.morgan.design.weatherslider.R;
 
 public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 
@@ -56,6 +58,21 @@ public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 
 			final TextView country = (TextView) view.findViewById(R.id.country);
 			country.setText(entry.getCountry());
+
+			if (null != entry.getCountryCode()) {
+				Integer flagCode = Flags.getFlag(entry.getCountryCode());
+				if (null != flagCode) {
+					Drawable flag = this.context.getResources()
+						.getDrawable(flagCode);
+					country.setCompoundDrawablesWithIntrinsicBounds(flag, null, null, null);
+				}
+				else {
+					country.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+				}
+			}
+			else {
+				country.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+			}
 
 			String secondary_text = null;
 			if ("" != entry.getAdmin1()) {
