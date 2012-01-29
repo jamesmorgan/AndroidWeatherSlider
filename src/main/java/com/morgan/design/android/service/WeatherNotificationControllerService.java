@@ -77,7 +77,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		this.notificationDao = new NotificationDao(getHelper());
 		this.weatherDao = new WeatherChoiceDao(getHelper());
 		this.notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		this.applicaiton = ((WeatherSliderApplication) getApplication());
+		this.applicaiton = WeatherSliderApplication.locate(this);
 	}
 
 	@Override

@@ -77,7 +77,8 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		this.getMyLocationButton = (Button) findViewById(R.id.getMyLocationButton);
 		this.alwaysUseGpsButton = (Button) findViewById(R.id.alwaysUseGpsButton);
 
-		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
+			.getGoogleAnalyticsService();
 
 		this.location.setOnKeyListener(new View.OnKeyListener() {
 			@Override
@@ -316,10 +317,6 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	private void showGpsOptions() {
 		final Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 		startActivity(gpsOptionsIntent);
-	}
-
-	protected WeatherSliderApplication getToLevelApplication() {
-		return ((WeatherSliderApplication) getApplication());
 	}
 
 	// /////////////////////////////////////////

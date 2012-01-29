@@ -10,7 +10,9 @@ import org.acra.ErrorReporter;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Service;
 import android.content.Intent;
 
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
@@ -28,13 +30,22 @@ public class WeatherSliderApplication extends Application {
 
 	private static Map<Integer, YahooWeatherInfo> WEATHERS = new HashMap<Integer, YahooWeatherInfo>();
 
+	public static final WeatherSliderApplication locate(Activity activity) {
+		return ((WeatherSliderApplication) activity.getApplication());
+	}
+
+	public static final WeatherSliderApplication locate(Service service) {
+		return ((WeatherSliderApplication) service.getApplication());
+	}
+
 	@Override
 	public void onCreate() {
 		ACRA.init(this);
 		super.onCreate();
 
 		if (BuildUtils.isRunningEmmulator()) {
-			ErrorReporter.getInstance().disable();
+			ErrorReporter.getInstance()
+				.disable();
 		}
 
 		// SETUP three available notifications

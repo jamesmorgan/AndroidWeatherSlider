@@ -20,7 +20,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
 	private static final String DATABASE_NAME = "weather_slider.db";
 
-	// TODO reset to 1 for release
 	public static final int DATABASE_VERSION = 1;
 
 	private final Context context;

@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.morgan.design.Constants;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
@@ -35,6 +34,7 @@ import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.PressureUtils;
 import com.morgan.design.android.util.Utils;
+import com.morgan.design.weatherslider.R;
 
 public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper> implements SimpleGestureListener {
 
@@ -48,7 +48,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_overview);
-		final WeatherSliderApplication appState = getTopLevelApplication();
+		final WeatherSliderApplication appState = WeatherSliderApplication.locate(this);
 
 		final Intent intent = getIntent();
 		if (null == intent) {
@@ -224,10 +224,6 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 			}
 		});
 		this.open_map_link.setMovementMethod(LinkMovementMethod.getInstance());
-	}
-
-	protected WeatherSliderApplication getTopLevelApplication() {
-		return ((WeatherSliderApplication) getApplication());
 	}
 
 	public void trackPageView(final String page) {

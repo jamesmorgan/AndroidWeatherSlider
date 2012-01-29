@@ -118,7 +118,11 @@ public class TODO {
 
 	// FIXME -> Add Application on Android Market
 	// FIXME -> Style up Market page once deployed
-
+	
+	// FIXME -> DONE - (29/01/2012) - Added static factory methods allow for cleaner loading
+	// FIXME -> DONE - (29/01/2012) - bug when disabled roaming locations.
+	// FIXME -> DONE - (29/01/2012) - Change market link to query on publisher name not package name
+	
 	// FIXME -> DONE - (28/01/2012) - Removed update preference of 1 minutes, set default to 30 minutes
 	// FIXME -> DONE - (28/01/2012) - Option to add shortcut to home screen
 	// FIXME -> DONE - (28/01/2012) - Add progress spinner to service update area

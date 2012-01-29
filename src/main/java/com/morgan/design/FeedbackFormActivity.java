@@ -23,7 +23,8 @@ public class FeedbackFormActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.feedback_form);
 
-		this.googleAnalyticsService = ((WeatherSliderApplication) getApplication()).getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
+				.getGoogleAnalyticsService();
 	}
 
 	public void onSendFeedback(final View button) {

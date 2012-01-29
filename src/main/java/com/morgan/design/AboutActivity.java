@@ -37,7 +37,8 @@ public class AboutActivity extends Activity {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		this.googleAnalyticsService = getToLevelApplication().getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
+			.getGoogleAnalyticsService();
 
 		// create our list and custom adapter
 		this.adapter = new SeparatedListAdapter(this, R.layout.list_header);
@@ -51,7 +52,7 @@ public class AboutActivity extends Activity {
 		final List<Map<String, ?>> credits = new LinkedList<Map<String, ?>>();
 		credits.add(createImageItem("Twitter", "Follow me", Constants.TWITTER_URL, Constants.TWITTER_URL, R.drawable.twitter_logo));
 		credits.add(createImageItem("Created By", "James Morgan", Constants.MORGAN_DESIGN, Constants.MORGAN_DESIGN, R.drawable.morgan_design_icon));
-		credits.add(createImageItem("Rate Me", getResources().getString(R.string.app_name), Constants.ANDROID_MARKET, Constants.MARKET_LINK_URL, R.drawable.rate_me_icon));
+		credits.add(createImageItem("Rate WeatherSlider", getResources().getString(R.string.app_name), Constants.ANDROID_MARKET, Constants.MARKET_LINK_URL, R.drawable.rate_me_icon));
 
 		this.adapter.addSection("Credits", new SimpleAdapter(this, credits, R.layout.list_complex_sub_with_image, 
 				new String[] {ITEM_TITLE, ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, 
@@ -123,7 +124,4 @@ public class AboutActivity extends Activity {
 		return item;
 	}
 
-	protected WeatherSliderApplication getToLevelApplication() {
-		return ((WeatherSliderApplication) getApplication());
-	}
 }

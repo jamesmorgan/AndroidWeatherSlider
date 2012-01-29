@@ -26,7 +26,6 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.RateMe;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
@@ -46,6 +45,7 @@ import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
+import com.morgan.design.weatherslider.R;
 
 public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
 		ServiceConnection, OnReloadWeather, OnCancelAll {
@@ -180,7 +180,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	private GeocodeResult geocodeResult;
 
 	public void initiateRoamingWeatherProcess() {
-		this.weatherChoice = this.weatherDao.getActiveRoamingLocation();
+		this.weatherChoice = this.weatherDao.getRoamingLocation();
 
 		if (isNull(this.weatherChoice)) {
 			this.weatherChoice = new WeatherChoice();
@@ -194,11 +194,6 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	}
 
 	public void initiateRoamingWeatherProcess(final int weatherId) {
-		if (null != this.weatherChoice) {
-			this.weatherChoice.setRoaming(false);
-			this.weatherDao.update(this.weatherChoice);
-		}
-
 		this.weatherChoice = this.weatherDao.getById(weatherId);
 		this.weatherChoice.setRoaming(true);
 		this.weatherDao.update(this.weatherChoice);

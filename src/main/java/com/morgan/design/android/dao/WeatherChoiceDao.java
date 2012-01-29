@@ -97,16 +97,15 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 			@Override
 			public List<WeatherChoice> call() throws Exception {
 
-				final PreparedQuery<WeatherChoice> orderBy =
-						WeatherChoiceDao.this.dao.queryBuilder()
-							.orderBy(WeatherChoice.VALID, false)
-							.orderBy(WeatherChoice.ACTIVE, false)
-							.orderBy(WeatherChoice.ROAMING, false)
-							.orderBy(WeatherChoice.WEATHER_LOCATION, true)
-							.prepare();
+				final PreparedQuery<WeatherChoice> orderBy = WeatherChoiceDao.this.dao.queryBuilder()
+					.orderBy(WeatherChoice.VALID, false)
+					.orderBy(WeatherChoice.ACTIVE, false)
+					.orderBy(WeatherChoice.ROAMING, false)
+					.orderBy(WeatherChoice.WEATHER_LOCATION, true)
+					.prepare();
 
 				Logger.d(LOG_TAG, orderBy.getStatement());
-				
+
 				final List<WeatherChoice> woeidChoices = WeatherChoiceDao.this.dao.query(orderBy);
 
 				return null != woeidChoices
@@ -132,7 +131,9 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 			final QueryBuilder<WeatherChoice, Integer> queryBuilder = this.dao.queryBuilder();
 			final Where<WeatherChoice, Integer> where = queryBuilder.where();
 
-			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE)).and().eq(WeatherChoice.ROAMING, new SelectArg(Boolean.FALSE));
+			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE))
+				.and()
+				.eq(WeatherChoice.ROAMING, new SelectArg(Boolean.FALSE));
 
 			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
 
@@ -147,12 +148,31 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 		return new ArrayList<WeatherChoice>();
 	}
 
+	public WeatherChoice getRoamingLocation() {
+		try {
+			final QueryBuilder<WeatherChoice, Integer> queryBuilder = this.dao.queryBuilder();
+			final Where<WeatherChoice, Integer> where = queryBuilder.where();
+
+			where.eq(WeatherChoice.ROAMING, new SelectArg(Boolean.TRUE));
+
+			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
+
+			return this.dao.queryForFirst(queryBuilder.prepare());
+		}
+		catch (final SQLException exception) {
+			logError(exception);
+		}
+		return null;
+	}
+
 	public WeatherChoice getActiveRoamingLocation() {
 		try {
 			final QueryBuilder<WeatherChoice, Integer> queryBuilder = this.dao.queryBuilder();
 			final Where<WeatherChoice, Integer> where = queryBuilder.where();
 
-			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE)).and().eq(WeatherChoice.ROAMING, new SelectArg(Boolean.TRUE));
+			where.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE))
+				.and()
+				.eq(WeatherChoice.ROAMING, new SelectArg(Boolean.TRUE));
 
 			Logger.d(LOG_TAG, queryBuilder.prepareStatementString());
 
@@ -176,8 +196,11 @@ public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 
 	public boolean hasActiveNotifications() {
 		try {
-			final PreparedQuery<WeatherChoice> preparedQuery =
-					this.dao.queryBuilder().setCountOf(true).where().eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE)).prepare();
+			final PreparedQuery<WeatherChoice> preparedQuery = this.dao.queryBuilder()
+				.setCountOf(true)
+				.where()
+				.eq(WeatherChoice.ACTIVE, new SelectArg(Boolean.TRUE))
+				.prepare();
 
 			Logger.d(LOG_TAG, preparedQuery.getStatement());
 

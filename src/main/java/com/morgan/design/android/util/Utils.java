@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.morgan.design.AboutActivity;
 import com.morgan.design.FeedbackFormActivity;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.domain.types.Abrev;
+import com.morgan.design.weatherslider.R;
 
 /**
  * @author James Edward Morgan
@@ -64,6 +64,18 @@ public class Utils {
 		}
 	}
 
+	public static void openMarketLink(final Activity activity) {
+		try {
+
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse("market://search?q=pub:MorganDesign"));
+			activity.startActivity(intent);
+		}
+		catch (final Exception e) {
+			Utils.shortToast(activity, "Unable to open market place");
+		}
+	}
+
 	public static void openUrl(final Activity activity, final String url) {
 		try {
 			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
@@ -75,15 +87,16 @@ public class Utils {
 	}
 
 	public static void shortToast(final Activity activity, final CharSequence message) {
-		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(activity, message, Toast.LENGTH_SHORT)
+			.show();
 	}
 
 	/**
 	 * @return double the percentage of battery remaining
 	 */
 	public static double getBatteryLevel(final Context context) {
-		final Intent batteryIntent =
-				context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+		final Intent batteryIntent = context.getApplicationContext()
+			.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		final int rawlevel = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 		final double scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 		double level = -1;
