@@ -23,7 +23,6 @@
             android:title="@string/pref_polling_time_title" />
     </PreferenceCategory>
 
-    
     <!-- All options involved with how the application looks -->
     <PreferenceCategory android:title="Interface Options" >
         <ListPreference
@@ -48,7 +47,7 @@
             android:summary="@string/pref_wind_mode_summary"
             android:title="@string/pref_wind_mode_title" />
     </PreferenceCategory>
-    
+
     <!-- All options which effect how the application runs -->
     <PreferenceCategory android:title="General Options" >
         <CheckBoxPreference
@@ -61,6 +60,12 @@
             android:key="changelog"
             android:summary="@string/pref_changelog_summary"
             android:title="@string/pref_changelog_title" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="acra.syslog.enable"
+            android:summaryOff="@string/pref_acra_syslog_disabled"
+            android:summaryOn="@string/pref_acra_syslog_enabled"
+            android:title="@string/pref_acra_syslog" />
     </PreferenceCategory>
 
 </PreferenceScreen>

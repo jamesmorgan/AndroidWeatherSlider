@@ -1,5 +1,7 @@
 package com.morgan.design.android.util;
 
+import org.acra.ErrorReporter;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -129,4 +131,21 @@ public class Utils {
 				: "";
 	}
 
+	public static void addPreferencesToArcaReport(Context context) {
+		try {
+			//@formatter:off
+			ErrorReporter.getInstance().putCustomData("AppVersionPref", Integer.toString( PreferenceUtils.getAppVersionPref(context)));
+			ErrorReporter.getInstance().putCustomData("ShowChangelog", Boolean.toString(PreferenceUtils.getChangelogPref(context)));
+			ErrorReporter.getInstance().putCustomData("OverviewMode", PreferenceUtils.getOverviewMode(context).toString());
+			ErrorReporter.getInstance().putCustomData("PollingSchedule", Integer.toString( PreferenceUtils.getPollingSchedule(context)));
+			ErrorReporter.getInstance().putCustomData("TemperatureMode", PreferenceUtils.getTemperatureMode(context).getFull());
+			ErrorReporter.getInstance().putCustomData("WindSpeedMode", PreferenceUtils.getWindSpeedMode(context).toString());
+			ErrorReporter.getInstance().putCustomData("ReloadOnConnectivityChanged", Boolean.toString(PreferenceUtils.shouldReloadOnConnectivityChanged(context)));
+			ErrorReporter.getInstance().putCustomData("StartOnBoot", Boolean.toString(PreferenceUtils.shouldStartOnBoot(context)));
+			//@formatter:on
+		}
+		catch (Exception e) {
+			Logger.logSlientExcpetion(e);
+		}
+	}
 }

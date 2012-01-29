@@ -24,6 +24,7 @@ public class Constants {
 	public static final String TWITTER_URL = "http://www.twitter.com/jimbob_87";
 	public static final String MARKET_LINK_URL = "market://search?q=pub:MorganDesign";
 	public static final String YAHOO_WEATHER_URL = "http://weather.yahoo.com/";
+	public static final String ARCA_URL = "http://code.google.com/p/acra/";
 
 	// Rest Template timeout
 	public static final int READ_TIMEOUT = 30000;

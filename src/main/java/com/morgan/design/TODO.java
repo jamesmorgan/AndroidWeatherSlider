@@ -106,12 +106,20 @@ public class TODO {
 	// FIXME -> Add flags for each country
 	// FIXME -> Add country flag icon to dialog and list of WOEID entries
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
-	// FIXME -> Option to disable collecting of logs via ACRA
+		
+	// //////////////////////
+	// Release Version 1.1 //
+	// //////////////////////
+	
+	// FIXME -> DONE - (29/01/2012) - Add ACRA to about section
+	// FIXME -> DONE - (29/01/2012) - Option to disable collecting of logs via ACRA
+	// FIXME -> DONE - (29/01/2012) - Add current user preferences on application crash 
+	// FIXME -> DONE - (29/01/2012) - BUG -> Service update area populated with holder text
 	
 	// //////////////////////
 	// Release Version 1.0 //
 	// //////////////////////
-
+	
 	// FIXME -> DONE - (29/01/2012) - Add Application on Android Market
 	// FIXME -> DONE - (29/01/2012) - Added static factory methods allow for cleaner loading
 	// FIXME -> DONE - (29/01/2012) - Bug when disabled roaming locations.
