@@ -12,6 +12,7 @@ public class WOEIDEntry implements Serializable, Woeid {
 	private String name;
 
 	private String country;
+	private String countryCode;
 	private String admin1;
 	private String admin2;
 	private String admin3;
@@ -52,6 +53,13 @@ public class WOEIDEntry implements Serializable, Woeid {
 		this.country = country;
 	}
 
+	public String getCountryCode() {
+		return this.countryCode;
+	}
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+	
 	public final String getAdmin1() {
 		return this.admin1;
 	}
@@ -103,6 +111,8 @@ public class WOEIDEntry implements Serializable, Woeid {
 			.append(this.name)
 			.append(", country=")
 			.append(this.country)
+			.append(", countryCode=")
+			.append(this.countryCode)
 			.append(", admin1=")
 			.append(this.admin1)
 			.append(", admin2=")
