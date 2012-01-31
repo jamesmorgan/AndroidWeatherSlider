@@ -24,6 +24,8 @@ public class PreferenceUtils {
 	public static final String PREF_WIND_MODE = "windSpeedMode";
 	public static final String PREF_APP_VERSION = "app.version";
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
+	public static final String PREF_REFRESH_ON_USER_PRESENT = "refreshOnUserPresent";
+
 	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
 	public static final String PREF_SHOWN_RATE_ME_POPUP = "shown.rateme.popup";
 	public static final String PREF_ACRA_SYSTME_LOGS = "acra.syslog.enable";
@@ -155,6 +157,18 @@ public class PreferenceUtils {
 	public static boolean setShownMeRateMePopup(final Context context) {
 		return getPrefs(context).edit()
 			.putBoolean(PREF_SHOWN_RATE_ME_POPUP, true)
+			.commit();
+	}
+
+	public static boolean setRefreshOnUserPresent(final Context context, final boolean value) {
+		return getPrefs(context).edit()
+			.putBoolean(PREF_REFRESH_ON_USER_PRESENT, value)
+			.commit();
+	}
+
+	public static boolean shouldRefreshOnUserPresent(Context context) {
+		return getPrefs(context).edit()
+			.putBoolean(PREF_REFRESH_ON_USER_PRESENT, true)
 			.commit();
 	}
 }

@@ -140,6 +140,17 @@ public class UserPreferencesActivity extends PreferenceActivity {
 					});
 		}
 
+		if (pref.getKey()
+			.equals(PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT)) {
+			findPreference(PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT).setOnPreferenceChangeListener(
+					new Preference.OnPreferenceChangeListener() {
+						@Override
+						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+							return PreferenceUtils.setRefreshOnUserPresent(getApplicationContext(), (Boolean) clicked);
+						}
+					});
+		}
+
 		return super.onPreferenceTreeClick(preferenceScreen, pref);
 	}
 }

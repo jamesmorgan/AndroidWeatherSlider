@@ -63,6 +63,10 @@
     <string name="pref_start_on_boot_title">Start On Phone Boot</string>
     <string name="pref_reload_on_connectivity_change_summary">Enable this to reload weather everytime your connectivity changes</string>
     <string name="pref_reload_on_connectivity_change_title">Reload On Connectivity Changed</string>
+    
+    <string name="pref_refresh_on_user_present_title">Refresh weather everytime your phones wakes e.g. unlocks</string>
+    <string name="pref_refresh_on_user_present_summary">Enabling this will use more battery but can be useful</string>
+    
     <string name="pref_google_analytics_summary">Thanks for helping improve this application</string>
     <string name="pref_google_analytics_title">Enable Google Analytics</string>
     <string name="pref_changelog_title">Change Log</string>

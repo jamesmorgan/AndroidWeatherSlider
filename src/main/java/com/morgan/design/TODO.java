@@ -104,6 +104,7 @@ public class TODO {
 	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Style up Market page once deployed
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
+	// FIXME -> Add ability to launch service from wake up i.e. unlock
 		
 	// //////////////////////
 	// Release Version 1.1 //
