@@ -71,19 +71,14 @@ public class TODO {
 	
 	// FIXME -> Listen for 3rd party GPS position updated so can update notifications if required.
 	// FIXME -> Improve current notification layout
-	// FIXME -> Capture all shared preference values on application crash (ARCA)
 	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
 	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
 	
 	// FIXME -> Complete localisation
-	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-	// FIXME -> Hook into search button to enter a location, search-able activity
-	// FIXME -> Long click open management pop-up menu & short click open overview mode
-	// FIXME -> Clean up LaunchControllerReceiver, remove if required
 	// FIXME -> Add 3 or 5 day forecast.
 	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
 	// FIXME -> Give user option to create shortcuts to either open application, or open overview for one of there locations
+	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
 	
 	// FIXME -> Add option for turn off all / disable network usages and turn off re-occurring alarm. 
 			// * Disable all with dialog, broadcast cancel all service.
@@ -97,14 +92,37 @@ public class TODO {
 	// FIXME -> Make icon on overview bigger
 	
 	// //////////////////////
-	// Release Version 1.? //
+	// Release Version 1.3 //
 	// //////////////////////
 	
 	// FIXME -> Use application bar not button at top of page 
 	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
 	// FIXME -> Style up Market page once deployed
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
-	// FIXME -> Add ability to launch service from wake up i.e. unlock
+	
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	// FIXME -> Hook into search button to enter a location, search-able activity
+	
+	// FIXME -> Create google docs ACRA tracker, catch oddities in application.
+	// FIXME -> ** Unknown country flags codes
+	// FIXME -> ** Weather lookup failures
+	// FIXME -> ** HTTP request failures
+	// FIXME -> ** DB failures, including update
+	
+	// //////////////////////
+	// Release Version 1.2 //
+	// //////////////////////
+	
+	// FIXME -> DONE - (04/02/2012) - User Preferences re-work
+	// FIXME -> ** DONE - (04/02/2012) - Check preference reloads
+	// FIXME -> ** DONE - (04/02/2012) - Check preference defaults
+	// FIXME -> ** DONE - (04/02/2012) - Re-order and re-word preferences
+
+	// FIXME -> DONE - (04/02/2012) - Long click open management pop-up menu & short click open overview mode, option to long lick on overview, option to change?
+	// FIXME -> DONE - (04/02/2012) - Capture all shared preference values on application crash (ARCA)
+	
+	// FIXME -> DONE - (31/01/2012) - Add ability to launch service from wake up i.e. unlock, phone wake
+	// FIXME -> DONE - (31/01/2012) - Clean up LaunchControllerReceiver, remove if required
 		
 	// //////////////////////
 	// Release Version 1.1 //

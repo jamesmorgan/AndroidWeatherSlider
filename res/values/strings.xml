@@ -23,6 +23,8 @@
     <string name="not_available">N/A</string>
     <string name="alert_yes">Yes</string>
     <string name="alert_no">No</string>
+    <string name="alert_open">Open</string>
+    <string name="alert_cancel">Cancel</string>
 
     <!-- Feedback form -->
     <string name="feedbacktitle">Enter feedback details:</string>
@@ -51,31 +53,42 @@
     <string name="open_google_maps">Open Google Maps…</string>
 
     <!-- User Preferences activity -->
+    <string name="pref_overview_mode_title">Overview mode</string>
     <string name="pref_overview_mode_summary">Change what happens when you click on each notification</string>
-    <string name="pref_overview_mode_title">Web or Overview mode</string>
-    <string name="pref_temp_mode_summary">Show temperature in Celsius or Fahrenheit</string>
+    
     <string name="pref_temp_mode_title">Temperature</string>
-    <string name="pref_wind_mode_summary">Show speed in mph or kph</string>
+    <string name="pref_temp_mode_summary">Show temperature in Celsius or Fahrenheit</string>
+    
     <string name="pref_wind_mode_title">Wind Speed</string>
-    <string name="pref_polling_time_summary">Configure when to check for weather updates</string>
+    <string name="pref_wind_mode_summary">Show speed in mph or kph</string>
+    
     <string name="pref_polling_time_title">Update Interval</string>
-    <string name="pref_start_on_boot_summary">Enable this to start on phone boot</string>
+    <string name="pref_polling_time_summary">Configure when to check for weather updates</string>
+    
     <string name="pref_start_on_boot_title">Start On Phone Boot</string>
-    <string name="pref_reload_on_connectivity_change_summary">Enable this to reload weather everytime your connectivity changes</string>
-    <string name="pref_reload_on_connectivity_change_title">Reload On Connectivity Changed</string>
+    <string name="pref_start_on_boot_enabled">Refresh weather on phone start</string>
+    <string name="pref_start_on_boot_disabled">Don\'t refresh weather on phone start</string>
+
+    <string name="pref_reload_on_connectivity_change_title">Refresh On Connectivity Changed</string>
+    <string name="pref_reload_on_connectivity_change_enabled">Weather will refresh when your connectivity changes</string>
+    <string name="pref_reload_on_connectivity_change_disabled">Don\'t refresh you weather on connectivity changes</string>
     
-    <string name="pref_refresh_on_user_present_title">Refresh weather everytime your phones wakes e.g. unlocks</string>
-    <string name="pref_refresh_on_user_present_summary">Enabling this will use more battery but can be useful</string>
+    <string name="pref_refresh_on_user_present_title">Refresh On Wake</string>
+    <string name="pref_refresh_on_user_present_summary">e.g. phone unlock, wake. Enabling this will use more battery but can be useful</string>
     
-    <string name="pref_google_analytics_summary">Thanks for helping improve this application</string>
     <string name="pref_google_analytics_title">Enable Google Analytics</string>
+    <string name="pref_google_analytics_summary">Thanks for helping improve this application</string>
+    
     <string name="pref_changelog_title">Change Log</string>
-    <string name="pref_changelog_summary">Show Change Log On Version Upgrade</string>
+    <string name="pref_changelog_disabled">Don\'t show Change Log On Version Upgrade</string>
+    <string name="pref_changelog_enabled">Show Change Log On Version Upgrade</string>
+    
     <string name="pref_acra_syslog_disabled">Don\'t collect systems logs on application crash</string>
     <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>
     <string name="pref_acra_syslog">Error Reporting</string>
     
     <!-- Home Screen - ManageWeatherChoiceActivity.java -->
+    <string name="alert_title_open_overview">Open Overview Screen</string>
     <string name="alert_title_manage_location">Manage Notification</string>
     <string name="alert_refresh">Refresh</string>
     <string name="alert_disable">Disable</string>

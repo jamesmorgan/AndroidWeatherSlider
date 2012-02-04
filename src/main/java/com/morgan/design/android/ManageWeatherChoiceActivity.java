@@ -3,6 +3,8 @@ package com.morgan.design.android;
 import static com.morgan.design.Constants.CANCEL_ALL_WEATHER_NOTIFICATIONS;
 import static com.morgan.design.Constants.DELETE_CURRENT_NOTIFCATION;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
+import static com.morgan.design.Constants.NOTIFICATION_ID;
+import static com.morgan.design.Constants.OPEN_WEATHER_OVERVIEW;
 import static com.morgan.design.Constants.REMOVE_CURRENT_NOTIFCATION;
 import static com.morgan.design.Constants.WEATHER_ID;
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
@@ -24,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
@@ -37,8 +40,10 @@ import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.broadcast.ServiceUpdateReceiver;
+import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
+import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.RoamingLookupService;
@@ -49,7 +54,8 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
 import com.morgan.design.weatherslider.R;
 
-public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
+public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements
+		SimpleGestureListener {
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
 
@@ -68,16 +74,18 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	protected ServiceUpdateReceiver serviceUpdateRegister;
 	private IServiceUpdateBroadcaster serviceUpdate;
 
+	private NotificationDao notificationDao;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weather_choice_layout);
 
 		this.weatherDao = new WeatherChoiceDao(getHelper());
+		this.notificationDao = new NotificationDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
-		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
-			.getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this).getGoogleAnalyticsService();
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.serviceUpdateRegister = new ServiceUpdateReceiver(this);
 
@@ -103,6 +111,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		else {
 			Changelog.show(this, false);
 		}
+
+		getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+				return handleOnItemLongClick(pos);
+			}
+		});
 	}
 
 	@Override
@@ -184,14 +199,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
 		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		shortcutIntent.setClassName(this, this.getClass()
-			.getName());
+		shortcutIntent.setClassName(this, this.getClass().getName());
 
 		Intent intent = new Intent();
 		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
 		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "WeatherSlider");
-		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
-				Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap.createScaledBitmap(
+				BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
 		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 
 		sendBroadcast(intent);
@@ -239,58 +253,92 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		}
 	}
 
+	protected boolean handleOnItemLongClick(int pos) {
+		final WeatherChoice weatherChoice = this.weatherChoices.get(pos);
+
+		if (isNotNull(weatherChoice)) {
+
+			final WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice
+					.getId());
+
+			if (isNotNull(notification) && weatherChoice.isActive()) {
+
+				final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice,
+						R.string.alert_title_open_overview);
+				alertDialog.setCancelable(true);
+				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_open),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(final DialogInterface dialog, final int id) {
+								final Intent overviewIntent = new Intent(OPEN_WEATHER_OVERVIEW);
+								overviewIntent.putExtra(NOTIFICATION_ID, notification.getServiceId());
+								overviewIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
+								startActivity(overviewIntent);
+							}
+						});
+				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_cancel),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(final DialogInterface dialog, final int id) {
+								alertDialog.cancel();
+							}
+						});
+				alertDialog.show();
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
 		super.onListItemClick(l, v, position, id);
 		final WeatherChoice weatherChoice = this.weatherChoices.get(position);
 
-		final String dialogText =
-				weatherChoice.getCurrentLocationText() + "\n" + DateUtils.dateToSimpleDateFormat(weatherChoice.getLastUpdatedDateTime());
-
-		final AlertDialog alertDialog =
-				new AlertDialog.Builder(this).setIcon(IconFactory.getImageResourceFromCode(weatherChoice.getCurrentWeatherCode()))
-					.setTitle(getString(R.string.alert_title_manage_location))
-					.setMessage(dialogText)
-					.create();
+		final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice, R.string.alert_title_manage_location);
+		alertDialog.setCancelable(true);
 
 		if (weatherChoice.isActive()) {
 			// //////////////////////////////
 			// Refresh | Disabled | Delete //
 			// //////////////////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int id) {
-					onLoadWeatherChoice(weatherChoice);
-				}
-			});
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int id) {
-					attemptToKillNotifcation(weatherChoice);
-				}
-			});
+			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh),
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog, final int id) {
+							onLoadWeatherChoice(weatherChoice);
+						}
+					});
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable),
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog, final int id) {
+							attemptToKillNotifcation(weatherChoice);
+						}
+					});
 		}
 		else {
 			// //////////////////
 			// Enable | Delete //
 			// //////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int id) {
-					onLoadWeatherChoice(weatherChoice);
-				}
-			});
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable),
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog, final int id) {
+							onLoadWeatherChoice(weatherChoice);
+						}
+					});
 		}
 
-		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int id) {
-				attemptToDeleteNotifcation(weatherChoice);
-			}
-		});
+		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						attemptToDeleteNotifcation(weatherChoice);
+					}
+				});
 
 		alertDialog.show();
-
 	}
 
 	// ///////////////////////////////////////
@@ -306,9 +354,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, woeidChoice.getId());
 
-		final Intent service = woeidChoice.isRoaming()
-				? new Intent(this, RoamingLookupService.class)
-				: new Intent(this, StaticLookupService.class);
+		final Intent service = woeidChoice.isRoaming() ? new Intent(this, RoamingLookupService.class) : new Intent(
+				this, StaticLookupService.class);
 
 		service.putExtra(FROM_INACTIVE_LOCATION, true);
 		service.putExtras(bundle);
@@ -336,6 +383,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		bundle.putInt(WEATHER_ID, woeidChoice.getId());
 		sendBroadcast(new Intent(DELETE_CURRENT_NOTIFCATION).putExtras(bundle));
 		this.adaptor.remove(woeidChoice);
+	}
+
+	private AlertDialog createCurrentAlertDialog(final WeatherChoice weatherChoice, int titleResource) {
+		final String dialogText = weatherChoice.getCurrentLocationText() + "\n"
+				+ DateUtils.dateToSimpleDateFormat(weatherChoice.getLastUpdatedDateTime());
+		return new AlertDialog.Builder(this)
+				.setIcon(IconFactory.getImageResourceFromCode(weatherChoice.getCurrentWeatherCode()))
+				.setTitle(getString(titleResource)).setMessage(dialogText).create();
 	}
 
 	// /////////////////////////////////////////////

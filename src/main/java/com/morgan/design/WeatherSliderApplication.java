@@ -1,6 +1,16 @@
 package com.morgan.design;
 
 import static com.morgan.design.Constants.LOOPING_ALARM;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_ACRA_SYSTME_LOGS;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_CHANGELOG;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_FIRST_LOOKUP;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_RELOAD_ON_CONNECTIVITY_CHANGED;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_SHOWN_RATE_ME_POPUP;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_TEMPERATURE_MODE;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_WIND_MODE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,10 +31,18 @@ import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.BuildUtils;
-import com.morgan.design.android.util.Utils;
 import com.morgan.design.weatherslider.R;
 
-@ReportsCrashes(formKey = Constants.ANDROID_DOCS_CRASH_REPORT_KEY, mode = ReportingInteractionMode.TOAST, forceCloseDialogAfterToast = false, resToastText = R.string.crash_toast_text)
+//@formatter:off
+@ReportsCrashes(
+		formKey = Constants.ANDROID_DOCS_CRASH_REPORT_KEY, 
+		mode = ReportingInteractionMode.TOAST, 
+		forceCloseDialogAfterToast = false, 
+		resToastText = R.string.crash_toast_text,
+		additionalSharedPreferences={PREF_CHANGELOG, PREF_POLLING_SCHEDULE, PREF_POLLING_SCHEDULE, PREF_OVERVIEW_MODE,
+									PREF_TEMPERATURE_MODE,PREF_WIND_MODE, PREF_RELOAD_ON_CONNECTIVITY_CHANGED,
+									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS})
+//@formatter:on
 public class WeatherSliderApplication extends Application {
 
 	private GoogleAnalyticsService googleAnalyticsService;
@@ -45,8 +63,7 @@ public class WeatherSliderApplication extends Application {
 		super.onCreate();
 
 		if (BuildUtils.isRunningEmmulator()) {
-			ErrorReporter.getInstance()
-				.disable();
+			ErrorReporter.getInstance().disable();
 		}
 
 		// SETUP three available notifications
@@ -58,8 +75,6 @@ public class WeatherSliderApplication extends Application {
 		startService(new Intent(this, NotificationControllerService.class));
 		startService(new Intent(this, StaticLookupService.class));
 		startService(new Intent(this, RoamingLookupService.class));
-
-		Utils.addPreferencesToArcaReport(this);
 
 		// Start looping alarm
 		sendBroadcast(new Intent(LOOPING_ALARM));

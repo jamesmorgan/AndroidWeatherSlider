@@ -12,6 +12,8 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.dao.orm.WeatherNotification;
+import com.morgan.design.android.util.ACRAErrorLogger;
+import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.android.util.DBUtils;
 import com.morgan.design.android.util.Logger;
 
@@ -41,6 +43,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTableIfNotExists(connectionSource, WeatherNotification.class);
 		}
 		catch (final SQLException e) {
+			ACRAErrorLogger.logUnknownExcpeiton(Type.SQL_EXCEPTION, e);
 			Logger.e(LOG_TAG, "Can't create database", e);
 		}
 	}
@@ -84,6 +87,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			}
 		}
 		catch (final android.database.SQLException e) {
+			ACRAErrorLogger.logUnknownExcpeiton(Type.SQL_UPDATE_EXCEPTION, e);
 			Logger.e(LOG_TAG, "Can't migrate databases, bootstrap database, data will be lost", e);
 			onCreate(db, connectionSource);
 		}

@@ -5,6 +5,8 @@ import static com.morgan.design.Constants.READ_TIMEOUT;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.morgan.design.android.util.ACRAErrorLogger.Type;
+
 public class RestTemplateFactory {
 
 	public static String createAndQuery(final String url) {
@@ -18,6 +20,7 @@ public class RestTemplateFactory {
 			return restTemplate.getForObject(url, String.class);
 		}
 		catch (final Exception exception) {
+			ACRAErrorLogger.logUnknownExcpeiton(Type.HTTP_REQUEST_FAILURE, exception, url);
 			return null;
 		}
 	}
