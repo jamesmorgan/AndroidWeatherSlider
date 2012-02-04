@@ -110,10 +110,20 @@ public class Utils {
 	 * @return true if an active network connection if found, either connected
 	 *         or connecting
 	 */
-	public static boolean isConnectedOrConnecting(final Context context) {
-		final NetworkInfo activeNetwork = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE))
+	public static boolean isConnectedOrConnecting(final Context ctx) {
+		//@formatter:off
+		final NetworkInfo activeNetwork = 
+				((ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE))
 				.getActiveNetworkInfo();
-		return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
+		if (activeNetwork != null 
+				&& activeNetwork.isAvailable() 
+				&& activeNetwork.isConnected()
+				&& activeNetwork.isConnectedOrConnecting()) {
+			return true;
+		}
+		Logger.d(LOG_TAG, "Internet Connection Unavailable");
+		return false;
+		//@formatter:on
 	}
 
 	/**
