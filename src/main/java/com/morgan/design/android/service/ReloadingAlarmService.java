@@ -9,13 +9,14 @@ import android.os.SystemClock;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.morgan.design.Constants;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.repository.DatabaseHelper;
+import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.weatherslider.R;
 
 public class ReloadingAlarmService extends IntentService {
 
@@ -48,7 +49,8 @@ public class ReloadingAlarmService extends IntentService {
 			// Cancel any existing alarms
 			mAlarmManager.cancel(pi);
 
-			final WeatherChoiceDao dao = new WeatherChoiceDao(OpenHelperManager.getHelper(getApplicationContext(), DatabaseHelper.class));
+			final WeatherChoiceDao dao = new WeatherChoiceDao(OpenHelperManager.getHelper(getApplicationContext(),
+					DatabaseHelper.class));
 			if (dao.hasActiveNotifications()) {
 				hasNotifications = true;
 
@@ -59,7 +61,7 @@ public class ReloadingAlarmService extends IntentService {
 		}
 		catch (final Exception exception) {
 			this.serviceUpdate.onGoing(getString(R.string.service_update_failed_to_refresh_weather));
-			Logger.logSlientExcpetion(exception);
+			ACRAErrorLogger.logSlientExcpetion(exception);
 		}
 		finally {
 			// Start new alarm to launch this if active notifications present

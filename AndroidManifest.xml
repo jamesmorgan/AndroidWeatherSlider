@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="auto"
     package="com.morgan.design.weatherslider"
-    android:versionCode="2"
-    android:versionName="1.1" >
+    android:versionCode="3"
+    android:versionName="1.2" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -185,30 +185,16 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-
-        <!-- ////////////////// -->
-        <!-- ////////////////// -->
-        <!-- ////////////////// -->
-
-
-        <!-- Register periodic launcher for connectivity changes and get weather download -->
-        <!--
+        <!-- Sent when the user is present after device wakes up (e.g when the keyguard is gone) -->
         <receiver
-            android:name="com.morgan.design.android.broadcast.LaunchControllerReceiver"
+            android:name="com.morgan.design.android.broadcast.UserPresentReceiver" 
             android:enabled="true"
-            android:exported="false"
-            android:label="@string/periodic_reciever" >
+            android:exported="false" >
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_BOOT_COMPLETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_USER_PRESENT" />
+                <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        -->
+
     </application>
 
 </manifest>

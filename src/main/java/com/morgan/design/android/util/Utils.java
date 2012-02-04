@@ -1,7 +1,5 @@
 package com.morgan.design.android.util;
 
-import org.acra.ErrorReporter;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -57,7 +55,8 @@ public class Utils {
 
 	public static void openGoogleMaps(final Activity activity, final String latitude, final String longitude) {
 		try {
-			final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:%s,%s?z=15", latitude, longitude)));
+			final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:%s,%s?z=15", latitude,
+					longitude)));
 			activity.startActivity(intent);
 		}
 		catch (final Exception e) {
@@ -89,16 +88,15 @@ public class Utils {
 	}
 
 	public static void shortToast(final Activity activity, final CharSequence message) {
-		Toast.makeText(activity, message, Toast.LENGTH_SHORT)
-			.show();
+		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 	}
 
 	/**
 	 * @return double the percentage of battery remaining
 	 */
 	public static double getBatteryLevel(final Context context) {
-		final Intent batteryIntent = context.getApplicationContext()
-			.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+		final Intent batteryIntent = context.getApplicationContext().registerReceiver(null,
+				new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		final int rawlevel = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 		final double scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 		double level = -1;
@@ -109,11 +107,12 @@ public class Utils {
 	}
 
 	/**
-	 * @return true if an active network connection if found, either connected or connecting
+	 * @return true if an active network connection if found, either connected
+	 *         or connecting
 	 */
 	public static boolean isConnectedOrConnecting(final Context context) {
-		final NetworkInfo activeNetwork =
-				((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+		final NetworkInfo activeNetwork = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE))
+				.getActiveNetworkInfo();
 		return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 	}
 
@@ -121,31 +120,12 @@ public class Utils {
 	 * @return true if the GPS setting is enabled for the phone
 	 */
 	public static boolean isGpsEnabled(final ContentResolver contentResolver) {
-		final String gpsProviders = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+		final String gpsProviders = Settings.Secure.getString(contentResolver,
+				Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 		return (null != gpsProviders && !"".equals(gpsProviders));
 	}
 
 	public static final String abrev(final Abrev abrev) {
-		return null != abrev
-				? abrev.abrev()
-				: "";
-	}
-
-	public static void addPreferencesToArcaReport(Context context) {
-		try {
-			//@formatter:off
-			ErrorReporter.getInstance().putCustomData("AppVersionPref", Integer.toString( PreferenceUtils.getAppVersionPref(context)));
-			ErrorReporter.getInstance().putCustomData("ShowChangelog", Boolean.toString(PreferenceUtils.getChangelogPref(context)));
-			ErrorReporter.getInstance().putCustomData("OverviewMode", PreferenceUtils.getOverviewMode(context).toString());
-			ErrorReporter.getInstance().putCustomData("PollingSchedule", Integer.toString( PreferenceUtils.getPollingSchedule(context)));
-			ErrorReporter.getInstance().putCustomData("TemperatureMode", PreferenceUtils.getTemperatureMode(context).getFull());
-			ErrorReporter.getInstance().putCustomData("WindSpeedMode", PreferenceUtils.getWindSpeedMode(context).toString());
-			ErrorReporter.getInstance().putCustomData("ReloadOnConnectivityChanged", Boolean.toString(PreferenceUtils.shouldReloadOnConnectivityChanged(context)));
-			ErrorReporter.getInstance().putCustomData("StartOnBoot", Boolean.toString(PreferenceUtils.shouldStartOnBoot(context)));
-			//@formatter:on
-		}
-		catch (Exception e) {
-			Logger.logSlientExcpetion(e);
-		}
+		return null != abrev ? abrev.abrev() : "";
 	}
 }

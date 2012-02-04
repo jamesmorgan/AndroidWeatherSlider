@@ -11,6 +11,8 @@ import org.xml.sax.InputSource;
 import android.util.Log;
 
 import com.morgan.design.android.domain.GeocodeResult;
+import com.morgan.design.android.util.ACRAErrorLogger;
+import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.android.util.Logger;
 
 public class YahooGeocodeParser implements Parser<GeocodeResult> {
@@ -71,6 +73,7 @@ public class YahooGeocodeParser implements Parser<GeocodeResult> {
 			return geocodeResult;
 		}
 		catch (final Exception e) {
+			ACRAErrorLogger.logUnknownExcpeiton(Type.YAHOO_GEOCODE, e);
 			e.printStackTrace();
 			Logger.e(LOG_TAG, e.getMessage());
 		}

@@ -23,13 +23,13 @@
     </string-array>
 
     <string-array name="overview_mode">
-        <item>Open Web Browser</item>
         <item>Open Overview Screen</item>
+        <item>Open Web Browser</item>
     </string-array>
 
     <string-array name="overview_mode_values">
-        <item>WEB</item>
         <item>OVERVIEW</item>
+        <item>WEB</item>
     </string-array>
 
     <string-array name="temperature_mode_values">
