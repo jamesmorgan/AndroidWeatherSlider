@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!-- All options involved with how often we check for weather updates -->
-    <PreferenceCategory android:title="Refresh Options" >
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="startOnBoot"
-            android:summary="@string/pref_start_on_boot_summary"
-            android:title="@string/pref_start_on_boot_title" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="reloadOnConnectivityChanged"
-            android:summary="@string/pref_reload_on_connectivity_change_summary"
-            android:title="@string/pref_reload_on_connectivity_change_title" />
-
-        <ListPreference
-            android:defaultValue="30"
-            android:entries="@array/polling_time"
-            android:entryValues="@array/polling_time_values"
-            android:key="pollingSchedule"
-            android:summary="@string/pref_polling_time_summary"
-            android:title="@string/pref_polling_time_title" />
-    </PreferenceCategory>
-
     <!-- All options involved with how the application looks -->
     <PreferenceCategory android:title="Interface Options" >
         <ListPreference
@@ -48,6 +26,37 @@
             android:title="@string/pref_wind_mode_title" />
     </PreferenceCategory>
 
+    <!-- All options involved with how often we check for weather updates -->
+    <PreferenceCategory android:title="Refresh Options" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="startOnBoot"
+            android:summaryOn="@string/pref_start_on_boot_enabled"
+            android:summaryOff="@string/pref_start_on_boot_disabled"
+            android:title="@string/pref_start_on_boot_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="reloadOnConnectivityChanged"
+            android:summaryOn="@string/pref_reload_on_connectivity_change_enabled"
+            android:summaryOff="@string/pref_reload_on_connectivity_change_disabled"
+            android:title="@string/pref_reload_on_connectivity_change_title" />
+
+        <ListPreference
+            android:defaultValue="30"
+            android:entries="@array/polling_time"
+            android:entryValues="@array/polling_time_values"
+            android:key="pollingSchedule"
+            android:summary="@string/pref_polling_time_summary"
+            android:title="@string/pref_polling_time_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="refreshOnUserPresent"
+            android:summary="@string/pref_refresh_on_user_present_summary"
+            android:title="@string/pref_refresh_on_user_present_title" />
+    </PreferenceCategory>
+
     <!-- All options which effect how the application runs -->
     <PreferenceCategory android:title="General Options" >
         <CheckBoxPreference
@@ -58,7 +67,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="changelog"
-            android:summary="@string/pref_changelog_summary"
+            android:summaryOn="@string/pref_changelog_enabled"
+            android:summaryOff="@string/pref_changelog_disabled"
             android:title="@string/pref_changelog_title" />
         <CheckBoxPreference
             android:defaultValue="true"

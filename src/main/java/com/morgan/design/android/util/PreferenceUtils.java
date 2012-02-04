@@ -12,7 +12,7 @@ import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.WindSpeed;
 
-public class PreferenceUtils {
+public final class PreferenceUtils {
 
 	public static final String PREF_ENABLE_GOOGLE_ANALYTICS = "enableGoogleAnalytics";
 
@@ -24,6 +24,8 @@ public class PreferenceUtils {
 	public static final String PREF_WIND_MODE = "windSpeedMode";
 	public static final String PREF_APP_VERSION = "app.version";
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
+	public static final String PREF_REFRESH_ON_USER_PRESENT = "refreshOnUserPresent";
+
 	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
 	public static final String PREF_SHOWN_RATE_ME_POPUP = "shown.rateme.popup";
 	public static final String PREF_ACRA_SYSTME_LOGS = "acra.syslog.enable";
@@ -42,9 +44,7 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setChangelogPref(final Context context, final boolean value) {
-		return getPrefs(context).edit()
-			.putBoolean(PREF_CHANGELOG, value)
-			.commit();
+		return getPrefs(context).edit().putBoolean(PREF_CHANGELOG, value).commit();
 	}
 
 	public static boolean isGoogleAnalyticsEnabled(final Context context) {
@@ -52,9 +52,7 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setEnableGoogleAalytics(final Context context, final boolean value) {
-		return getPrefs(context).edit()
-			.putBoolean(PREF_ENABLE_GOOGLE_ANALYTICS, value)
-			.commit();
+		return getPrefs(context).edit().putBoolean(PREF_ENABLE_GOOGLE_ANALYTICS, value).commit();
 	}
 
 	public static int getPollingSchedule(final Context context) {
@@ -62,9 +60,7 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setPollingSchedule(final Context context, final String minutes) {
-		return getPrefs(context).edit()
-			.putString(PREF_POLLING_SCHEDULE, minutes)
-			.commit();
+		return getPrefs(context).edit().putString(PREF_POLLING_SCHEDULE, minutes).commit();
 	}
 
 	public static OverviewMode getOverviewMode(final Context context) {
@@ -72,9 +68,7 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setOverviewMode(final Context context, final String overviewMode) {
-		return getPrefs(context).edit()
-			.putString(PREF_OVERVIEW_MODE, overviewMode)
-			.commit();
+		return getPrefs(context).edit().putString(PREF_OVERVIEW_MODE, overviewMode).commit();
 	}
 
 	public static Temperature getTemperatureMode(final Context context) {
@@ -82,20 +76,15 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setTemperatureMode(final Context context, final String temperature) {
-		return getPrefs(context).edit()
-			.putString(PREF_TEMPERATURE_MODE, temperature)
-			.commit();
+		return getPrefs(context).edit().putString(PREF_TEMPERATURE_MODE, temperature).commit();
 	}
 
 	public static WindSpeed getWindSpeedMode(final Context context) {
-		return WindSpeed.fromPref(getPrefs(context).getString(PREF_WIND_MODE, WindSpeed.MPH.toString()
-			.toLowerCase()));
+		return WindSpeed.fromPref(getPrefs(context).getString(PREF_WIND_MODE, WindSpeed.MPH.toString().toLowerCase()));
 	}
 
 	public static boolean setWindSpeedMode(final Context context, final String wind) {
-		return getPrefs(context).edit()
-			.putString(PREF_WIND_MODE, wind)
-			.commit();
+		return getPrefs(context).edit().putString(PREF_WIND_MODE, wind).commit();
 	}
 
 	public static boolean shouldStartOnBoot(final Context context) {
@@ -105,27 +94,24 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setShouldStartOnBoot(final Context context, final boolean shouldStartOnBoot) {
-		return getPrefs(context).edit()
-			.putBoolean(PREF_START_ON_BOOT, shouldStartOnBoot)
-			.commit();
+		return getPrefs(context).edit().putBoolean(PREF_START_ON_BOOT, shouldStartOnBoot).commit();
 	}
 
 	public static boolean shouldReloadOnConnectivityChanged(final Context context) {
-		final boolean shouldReloadOnConnectivityChanged = getPrefs(context).getBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, true);
+		final boolean shouldReloadOnConnectivityChanged = getPrefs(context).getBoolean(
+				PREF_RELOAD_ON_CONNECTIVITY_CHANGED, true);
 		Logger.d("PreferenceUtils", "shouldReloadOnConnectivityChanged [%s]", shouldReloadOnConnectivityChanged);
 		return shouldReloadOnConnectivityChanged;
 	}
 
-	public static boolean setShouldReloadOnConnectivityChanged(final Context context, final boolean shouldReloadOnConnectivityChanged) {
+	public static boolean setShouldReloadOnConnectivityChanged(final Context context,
+			final boolean shouldReloadOnConnectivityChanged) {
 		return getPrefs(context).edit()
-			.putBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, shouldReloadOnConnectivityChanged)
-			.commit();
+				.putBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, shouldReloadOnConnectivityChanged).commit();
 	}
 
 	public static boolean setCollectSystemLogsWithArcaReporting(final Context context, final boolean collectLogs) {
-		return getPrefs(context).edit()
-			.putBoolean(PREF_ACRA_SYSTME_LOGS, collectLogs)
-			.commit();
+		return getPrefs(context).edit().putBoolean(PREF_ACRA_SYSTME_LOGS, collectLogs).commit();
 	}
 
 	public static int getAppVersionPref(final Context context) {
@@ -133,9 +119,7 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setAppVersionPref(final Context context, final int value) {
-		return getPrefs(context).edit()
-			.putInt(PREF_APP_VERSION, value)
-			.commit();
+		return getPrefs(context).edit().putInt(PREF_APP_VERSION, value).commit();
 	}
 
 	public static boolean hasSuccessfulWeatherLookup(final Context context) {
@@ -143,9 +127,7 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setHasHadFirstSuccessfulLookup(final Context context, final boolean value) {
-		return getPrefs(context).edit()
-			.putBoolean(PREF_FIRST_LOOKUP, value)
-			.commit();
+		return getPrefs(context).edit().putBoolean(PREF_FIRST_LOOKUP, value).commit();
 	}
 
 	public static boolean shownRateMePopup(final Context context) {
@@ -153,8 +135,14 @@ public class PreferenceUtils {
 	}
 
 	public static boolean setShownMeRateMePopup(final Context context) {
-		return getPrefs(context).edit()
-			.putBoolean(PREF_SHOWN_RATE_ME_POPUP, true)
-			.commit();
+		return getPrefs(context).edit().putBoolean(PREF_SHOWN_RATE_ME_POPUP, true).commit();
+	}
+
+	public static boolean setRefreshOnUserPresent(final Context context, final boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_REFRESH_ON_USER_PRESENT, value).commit();
+	}
+
+	public static boolean shouldRefreshOnUserPresent(Context context) {
+		return getPrefs(context).getBoolean(PREF_REFRESH_ON_USER_PRESENT, false);
 	}
 }

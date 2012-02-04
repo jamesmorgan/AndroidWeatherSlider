@@ -9,9 +9,10 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
-import android.util.Log;
-
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.morgan.design.android.util.ACRAErrorLogger;
+import com.morgan.design.android.util.ACRAErrorLogger.Type;
+import com.morgan.design.android.util.Logger;
 
 public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 
@@ -46,7 +47,7 @@ public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 	@SuppressWarnings("unchecked")
 	public List<WOEIDEntry> parse(final String results) {
 		if (results == null) {
-			Log.e(TAG, "Invalid results");
+			Logger.e(TAG, "Invalid results");
 			return null;
 		}
 		try {
@@ -90,8 +91,9 @@ public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 			return woiedEntries;
 		}
 		catch (final Exception e) {
+			ACRAErrorLogger.logUnknownExcpeiton(Type.WOEID_PARDER, e);
 			e.printStackTrace();
-			Log.e(TAG, e.getMessage());
+			Logger.e(TAG, e.getMessage());
 		}
 		return null;
 	}

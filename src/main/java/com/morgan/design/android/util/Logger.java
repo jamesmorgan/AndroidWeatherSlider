@@ -1,6 +1,5 @@
 package com.morgan.design.android.util;
 
-import org.acra.ErrorReporter;
 
 /**
  * @author James Edward Morgan
@@ -56,13 +55,4 @@ public class Logger {
 	public static void d(final String LOG_TAG, final String logMe, final Object... values) {
 		android.util.Log.d(LOGTAG + ": " + LOG_TAG, String.format(logMe, values));
 	}
-
-	public static void logSlientExcpetion(final Exception caughtException) {
-		ErrorReporter.getInstance().handleSilentException(caughtException);
-	}
-
-	public static void logExcpetion(final Exception caughtException) {
-		ErrorReporter.getInstance().handleException(caughtException);
-	}
-
 }

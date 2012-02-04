@@ -1,8 +1,13 @@
 package com.morgan.design.android.domain.types;
 
+import static com.morgan.design.android.util.ObjectUtils.isNotNull;
+import static com.morgan.design.android.util.ObjectUtils.isNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import com.morgan.design.android.util.ACRAErrorLogger;
+import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.weatherslider.R;
 
 public class Flags {
@@ -260,8 +265,10 @@ public class Flags {
 	}
 
 	public static Integer getFlag(String code) {
-		return (null == code)
-				? null
-				: FLAG_MAP.get(code.toLowerCase());
+		Integer flagResource = FLAG_MAP.get(code.toLowerCase());
+		if (isNotNull(code) && isNull(flagResource)) {
+			ACRAErrorLogger.logUnknownIssue(Type.UNKNOWN_FLAG_CODE, code);
+		}
+		return flagResource;
 	}
 }
