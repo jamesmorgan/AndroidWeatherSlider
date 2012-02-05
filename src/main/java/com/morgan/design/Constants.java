@@ -25,6 +25,7 @@ public class Constants {
 	public static final String MARKET_LINK_URL = "market://search?q=pub:MorganDesign";
 	public static final String YAHOO_WEATHER_URL = "http://weather.yahoo.com/";
 	public static final String ARCA_URL = "http://code.google.com/p/acra/";
+	public static final String ORMLITE_URL = "http://ormlite.com/";
 
 	// Rest Template timeout
 	public static final int READ_TIMEOUT = 30000;
@@ -41,10 +42,16 @@ public class Constants {
 	/** Triggered when a request to get the weather is made */
 	public static final String RELOAD_WEATHER_BROADCAST = "com.morgan.design.android.broadcast.RELOAD_WEATHER_BROADCAST";
 
-	/** Broadcast used to periodically check active notifications and if so, perform an update */
+	/**
+	 * Broadcast used to periodically check active notifications and if so,
+	 * perform an update
+	 */
 	public static final String LOOPING_ALARM = "com.morgan.design.android.broadcast.LOOPING_ALARM";
 
-	/** Triggered when the user wants to attempt to force close/cancel all active notifications */
+	/**
+	 * Triggered when the user wants to attempt to force close/cancel all active
+	 * notifications
+	 */
 	public static final String CANCEL_ALL_WEATHER_NOTIFICATIONS = "com.morgan.design.android.broadcast.CANCEL_ALL_WEATHER_NOTIFICATIONS";
 
 	// Activity Result codes

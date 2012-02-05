@@ -37,8 +37,7 @@ public class AboutActivity extends Activity {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
-			.getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this).getGoogleAnalyticsService();
 
 		// create our list and custom adapter
 		this.adapter = new SeparatedListAdapter(this, R.layout.list_header);
@@ -65,8 +64,9 @@ public class AboutActivity extends Activity {
 		final List<Map<String, ?>> weather = new LinkedList<Map<String, ?>>();
 		weather.add(createImageItem("Yahoo! Weather", "Weather provided by Yahoo! Weather", Constants.YAHOO_WEATHER_URL, Constants.YAHOO_WEATHER_URL, R.drawable.yahoo_weather_logo));
 		weather.add(createImageItem("ARCA", "Application Crash Report for Android", Constants.ARCA_URL, Constants.ARCA_URL, R.drawable.arca_logo));
+		weather.add(createImageItem("ORMLite", "ORMLite persistance", Constants.ORMLITE_URL, Constants.ORMLITE_URL, R.drawable.ormlite_256_logo));
 		
-		this.adapter.addSection("Weather", new SimpleAdapter(this, weather, R.layout.list_complex_sub_with_image, 
+		this.adapter.addSection("API's", new SimpleAdapter(this, weather, R.layout.list_complex_sub_with_image, 
 				new String[] {ITEM_TITLE, ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, 
 				new int[] { R.id.list_complex_title, R.id.list_complex_caption, R.id.list_complex_sub_caption, R.id.list_complex_url, R.id.list_complex_image }));
 		
@@ -91,14 +91,13 @@ public class AboutActivity extends Activity {
 
 		this.list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long duration) {
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position,
+					final long duration) {
 				@SuppressWarnings("unchecked")
 				final HashMap<String, ?> item = (HashMap<String, ?>) AboutActivity.this.adapter.getItem(position);
 				if (item.containsKey(URL) && null != item.get(URL)) {
-					googleAnalyticsService.trackClickEvent(AboutActivity.this, item.get(URL)
-						.toString());
-					Utils.openUrl(AboutActivity.this, item.get(URL)
-						.toString());
+					googleAnalyticsService.trackClickEvent(AboutActivity.this, item.get(URL).toString());
+					Utils.openUrl(AboutActivity.this, item.get(URL).toString());
 				}
 			}
 		});
@@ -107,8 +106,8 @@ public class AboutActivity extends Activity {
 		setContentView(this.list);
 	}
 
-	private Map<String, ?> createImageItem(final String title, final String caption, final String subCaption, final String url,
-			final int imageId) {
+	private Map<String, ?> createImageItem(final String title, final String caption, final String subCaption,
+			final String url, final int imageId) {
 		final Map<String, Object> item = new HashMap<String, Object>();
 		item.put(ITEM_TITLE, title);
 		item.put(ITEM_CAPTION, caption);

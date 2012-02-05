@@ -77,8 +77,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		this.getMyLocationButton = (Button) findViewById(R.id.getMyLocationButton);
 		this.alwaysUseGpsButton = (Button) findViewById(R.id.alwaysUseGpsButton);
 
-		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
-			.getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this).getGoogleAnalyticsService();
 
 		this.location.setOnKeyListener(new View.OnKeyListener() {
 			@Override
@@ -136,20 +135,20 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 							createGpsDisabledAlert();
 						}
 						else if (null != location && providersFound) {
-							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
-									location.getLatitude());
+							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]",
+									location.getLatitude(), location.getLatitude());
 							new DownloadWOIEDDataTaskFromLocation(location).execute();
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
-							Toast.makeText(EnterLocationActivity.this, R.string.toast_unable_to_locate_you, Toast.LENGTH_SHORT)
-								.show();
+							Toast.makeText(EnterLocationActivity.this, R.string.toast_unable_to_locate_you,
+									Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
 			};
-			registerReceiver(this.locationChangedBroadcastReciever,
-					new IntentFilter(LocationLookupService.ONE_OFF_LOCATION_FOUND_BROADCAST));
+			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(
+					LocationLookupService.ONE_OFF_LOCATION_FOUND_BROADCAST));
 		}
 	}
 
@@ -183,11 +182,9 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	// ///////////////////////////////////////
 
 	public void onGetLocation(final View v) {
-		final String location = this.location.getText()
-			.toString();
+		final String location = this.location.getText().toString();
 		if (null == location || "".equals(location)) {
-			Toast.makeText(this, R.string.toast_please_enter_a_location, Toast.LENGTH_SHORT)
-				.show();
+			Toast.makeText(this, R.string.toast_please_enter_a_location, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.GET_LOCATION);
@@ -206,8 +203,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		final boolean gpsEnabled = Utils.isGpsEnabled(getContentResolver());
 		if (isNot(networkConnected) && isNot(gpsEnabled)) {
 			dismissLoadingProgress();
-			Toast.makeText(this, R.string.toast_unable_to_request_network_location, Toast.LENGTH_SHORT)
-				.show();
+			Toast.makeText(this, R.string.toast_unable_to_request_network_location, Toast.LENGTH_SHORT).show();
 			createGpsDisabledAlert();
 			return;
 		}
@@ -215,39 +211,42 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		// Ensure have at-least 15% battery power left
 		if (15.00 > Utils.getBatteryLevel(getApplicationContext())) {
 			dismissLoadingProgress();
-			Toast.makeText(this, R.string.toast_low_battery_warning, Toast.LENGTH_SHORT)
-				.show();
+			Toast.makeText(this, R.string.toast_low_battery_warning, Toast.LENGTH_SHORT).show();
 			return;
 		}
 
 		// Allow for overriding default timeout
 		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_ONE_OFF_CURRENT_LOCATION);
-		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
+		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT,
+				LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
 		startService(findLocationBroadcast);
 	}
 
 	public void onEnabledGpsLocation(final View view) {
 		final boolean isChecked = this.useGps.isChecked();
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				location.setEnabled(!isChecked);
+				location.setClickable(!isChecked);
+				location.setFocusable(!isChecked);
+				location.setFocusableInTouchMode(!isChecked);
+				getMyLocationButton.setEnabled(!isChecked);
+				getMyLocationButton.setClickable(!isChecked);
+				lookUpLocationButton.setEnabled(!isChecked);
+				lookUpLocationButton.setClickable(!isChecked);
 
-		this.location.setEnabled(!isChecked);
-		this.location.setClickable(!isChecked);
-		this.location.setFocusable(!isChecked);
-		this.location.setFocusableInTouchMode(!isChecked);
-		this.getMyLocationButton.setEnabled(!isChecked);
-		this.getMyLocationButton.setClickable(!isChecked);
-		this.lookUpLocationButton.setEnabled(!isChecked);
-		this.lookUpLocationButton.setClickable(!isChecked);
-
-		this.alwaysUseGpsButton.setEnabled(isChecked);
-		this.alwaysUseGpsButton.setClickable(isChecked);
+				alwaysUseGpsButton.setEnabled(isChecked);
+				alwaysUseGpsButton.setClickable(isChecked);
+			}
+		});
 	}
 
 	public void onAlwaysUseGpsForLocation(final View view) {
 		Logger.d(LOG_TAG, "Ticked always use GPS, launching GpsWeatherLookupService");
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.ALWAYS_USE_GPS_LOCATION);
 
-		Toast.makeText(this, R.string.toast_attempting_to_lookup_your_gps_location, Toast.LENGTH_SHORT)
-			.show();
+		Toast.makeText(this, R.string.toast_attempting_to_lookup_your_gps_location, Toast.LENGTH_SHORT).show();
 
 		startService(new Intent(this, RoamingLookupService.class).putExtra(FROM_FRESH_LOOKUP, true));
 		setResult(RESULT_OK);
@@ -259,15 +258,13 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	// //////////////////////////////////////////
 
 	public void refreshAvailableLocations(final List<WOEIDEntry> locations) {
-		this.WOIEDlocations = new ArrayList<WOEIDEntry>(null == locations
-				? new ArrayList<WOEIDEntry>()
-				: locations);
+		this.WOIEDlocations = new ArrayList<WOEIDEntry>(null == locations ? new ArrayList<WOEIDEntry>() : locations);
 		Logger.d(LOG_TAG, String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
 
 		if (null == locations || locations.isEmpty()) {
-			Toast.makeText(this, String.format(getString(R.string.toast_error_unable_to_find_you), this.location.getText()),
-					Toast.LENGTH_SHORT)
-				.show();
+			Toast.makeText(this,
+					String.format(getString(R.string.toast_error_unable_to_find_you), this.location.getText()),
+					Toast.LENGTH_SHORT).show();
 		}
 		else {
 			final Bundle extras = new Bundle();
@@ -295,28 +292,20 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	}
 
 	private void createGpsDisabledAlert() {
-		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(R.string.alaert_enabled_gps_provider)
-			.setCancelable(false)
-			.setPositiveButton(R.string.alert_enable_gps, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int id) {
-					showGpsOptions();
-				}
-			});
-		builder.setNegativeButton(R.string.alert_do_nothing, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int id) {
-				dialog.cancel();
-			}
-		});
-		final AlertDialog alert = builder.create();
+		final AlertDialog alert = new AlertDialog.Builder(this).setMessage(R.string.alaert_enabled_gps_provider)
+				.setCancelable(false)
+				.setPositiveButton(R.string.alert_enable_gps, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+					}
+				}).setNegativeButton(R.string.alert_do_nothing, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						dialog.cancel();
+					}
+				}).create();
 		alert.show();
-	}
-
-	private void showGpsOptions() {
-		final Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		startActivity(gpsOptionsIntent);
 	}
 
 	// /////////////////////////////////////////
@@ -338,11 +327,9 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		@Override
 		protected List<WOEIDEntry> doInBackground(final Void... params) {
-			final String url = YahooRequestUtils.getInstance()
-				.createQuerryGetWoeid(this.location);
+			final String url = YahooRequestUtils.getInstance().createQuerryGetWoeid(this.location);
 
-			return YahooRequestUtils.getInstance()
-				.parseWOIEDResults(RestTemplateFactory.createAndQuery(url));
+			return YahooRequestUtils.getInstance().parseWOIEDResults(RestTemplateFactory.createAndQuery(url));
 		}
 
 		@Override
@@ -368,11 +355,9 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		@Override
 		protected List<WOEIDEntry> doInBackground(final Void... params) {
-			final String url = YahooRequestUtils.getInstance()
-				.createQuerryGetWoeid(this.location);
+			final String url = YahooRequestUtils.getInstance().createQuerryGetWoeid(this.location);
 
-			return YahooRequestUtils.getInstance()
-				.parseWOIEDResults(RestTemplateFactory.createAndQuery(url));
+			return YahooRequestUtils.getInstance().parseWOIEDResults(RestTemplateFactory.createAndQuery(url));
 		}
 
 		@Override

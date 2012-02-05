@@ -11,6 +11,7 @@ public class TODO {
 	// ////////////////////////
 	
 	// FIXME -> Debug mode on/off for deployment
+	// FIXME -> Style up Market page once deployed
 	// FIXME -> Configure build process, updating versions/ debug enabled/ keys/ changelog etc
 	// FIXME -> Consider signing apk with maven -> http://code.google.com/p/maven-android-plugin/wiki/SigningAPKWithMavenJarsigner
 	// FIXME -> When generating sources, set debug to false.
@@ -22,15 +23,12 @@ public class TODO {
 
 	// FIXME -> Show location on a small map in overview mode?
 	// FIXME -> Open location on map from notification click handler
-	// FIXME -> Turn sun set and rise in time objects
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo -> http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 	// FIXME -> New providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
-	// FIXME -> Add temperature highs/lows for day on overview screen
 	// FIXME -> DB Version's & Tests
 	// FIXME -> Change to native XML parser -> http://android-developers.blogspot.com/2011/12/watch-out-for-xmlpullparsernexttext.html
 	// FIXME -> Complete statuses, active, inactive, issues?
 	// FIXME -> Add fine grained user control to location services -> http://android10.org/index.php/articleslocationmaps/226-android-location-providers-gps-network-passive
-	// FIXME -> Improve location based service
 	// FIXME -> Add option to stop lookup if battery % to low -> http://code.google.com/p/android-notifier/source/browse/AndroidNotifier/src/org/damazio/notifier/event/receivers/battery/BatteryEventReceiver.java
 	// FIXME -> Add option for date format
 	// FIXME -> Allow users to narrow down location accuracy
@@ -52,18 +50,13 @@ public class TODO {
 	// ///////////////
 	
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
-	// FIXME -> Check try/catch blocks report to ACRA if required
 	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc, Always have GPS at the top, then last update time OR A_z?
 	// FIXME -> Overlay weather on google maps -> http://www.androidhive.info/2012/01/android-working-with-google-maps/
 	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
-	// FIXME -> Progress bar with service broadcast register updates, show failures, loading, success etc
 	// FIXME -> Weather animations?
 	// FIXME -> Add in 3-5 day summary of weather
 	// FIXME -> Create weather tips section, e.g. wear a coat it raining, it may take you longer to get to work, etc. -> opt-in & opt-out
-	// FIXME -> Add ability to pay for application in-line
-	// FIXME -> The home screen and notification order should always match the same ordering
-	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
 	
 	// ///////////////////
 	// Next Version ?.? //
@@ -78,7 +71,6 @@ public class TODO {
 	// FIXME -> Add 3 or 5 day forecast.
 	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
 	// FIXME -> Give user option to create shortcuts to either open application, or open overview for one of there locations
-	// FIXME -> Add 3rd party library's to credits -> ORMLite, ACRA, Yahoo Weather API
 	
 	// FIXME -> Add option for turn off all / disable network usages and turn off re-occurring alarm. 
 			// * Disable all with dialog, broadcast cancel all service.
@@ -90,25 +82,45 @@ public class TODO {
 	// FIXME -> Add option to put shortcut to overview screen on home page for each location
 	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
-	
-	// //////////////////////
-	// Release Version 1.3 //
-	// //////////////////////
-	
-	// FIXME -> Use application bar not button at top of page 
-	// FIXME -> Add ability to launch service from wake up i.e. unlock -> manifest changed - implementation missing
-	// FIXME -> Style up Market page once deployed
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
+	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
+	// FIXME -> The home screen and notification order should always match the same ordering
+	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
 	
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-	// FIXME -> Hook into search button to enter a location, search-able activity
+	// FIXME -> Allow exporting of locations as xml file / back, hook in to 3rd party backup application
+	// FIXME -> Backup DB option
 	
+	// FIXME -> Check try/catch blocks report to ACRA if required
 	// FIXME -> Create google docs ACRA tracker, catch oddities in application.
 	// FIXME -> ** Unknown country flags codes
 	// FIXME -> ** Weather lookup failures
 	// FIXME -> ** HTTP request failures
 	// FIXME -> ** DB failures, including update
 	
+	// //////////////////////
+	// Release Version 1.? //
+	// //////////////////////
+
+	// FIXME -> Use application bar not button at top of page 
+	// FIXME -> Hook into search button to enter a location, search-able activity
+	// FIXME -> Add swipe icons on screens where possible, overview screen first
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	
+	// //////////////////////
+	// Release Version 1.4 //
+	// //////////////////////
+	
+	// FIXME -> DONE - (05/02/2012) - Restarting service once moved application to SD Card
+	// FIXME -> DONE - (05/02/2012) - Forecast description overflow padding bug  
+	// FIXME -> DONE - (05/02/2012) - Fix bug on 2nd load rate me market link pop up not working
+	
+	// //////////////////////
+	// Release Version 1.3 //
+	// //////////////////////
+	
+	// FIXME -> DONE - (04/02/2012) - Add 3rd party library to credits -> ORMLite
+	// FIXME -> DONE - (04/02/2012) - Fix hang when selecting check box on enter screen, run on ui thread?
+
 	// //////////////////////
 	// Release Version 1.2 //
 	// //////////////////////
