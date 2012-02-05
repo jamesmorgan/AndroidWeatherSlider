@@ -26,10 +26,6 @@ public class ACRAErrorLogger {
 		ErrorReporter.getInstance().handleSilentException(caughtException);
 	}
 
-	public static void logExcpetion(final Exception caughtException) {
-		ErrorReporter.getInstance().handleException(caughtException);
-	}
-
 	// FIXME -> Create google documents ACRA tracker, catch oddities in
 	// application.
 	// FIXME -> ** Unknown country flags codes - done

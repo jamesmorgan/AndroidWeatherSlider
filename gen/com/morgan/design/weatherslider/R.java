@@ -277,65 +277,66 @@ public final class R {
         public static final int launch_icon=0x7f0200fc;
         public static final int main_service_register_shape=0x7f0200fd;
         public static final int morgan_design_icon=0x7f0200fe;
-        public static final int pressure_falling=0x7f0200ff;
-        public static final int pressure_rising=0x7f020100;
-        public static final int pressure_steady=0x7f020101;
-        public static final int problem_circle_blue=0x7f020102;
-        public static final int rate_me_icon=0x7f020103;
-        public static final int roaming=0x7f020104;
-        public static final int rounded_corners=0x7f020105;
-        public static final int sun_rise=0x7f020106;
-        public static final int sun_set=0x7f020107;
-        public static final int twitter_logo=0x7f020108;
-        public static final int weather_channel_00=0x7f020109;
-        public static final int weather_channel_01=0x7f02010a;
-        public static final int weather_channel_02=0x7f02010b;
-        public static final int weather_channel_03=0x7f02010c;
-        public static final int weather_channel_04=0x7f02010d;
-        public static final int weather_channel_05=0x7f02010e;
-        public static final int weather_channel_06=0x7f02010f;
-        public static final int weather_channel_07=0x7f020110;
-        public static final int weather_channel_08=0x7f020111;
-        public static final int weather_channel_09=0x7f020112;
-        public static final int weather_channel_10=0x7f020113;
-        public static final int weather_channel_11=0x7f020114;
-        public static final int weather_channel_12=0x7f020115;
-        public static final int weather_channel_13=0x7f020116;
-        public static final int weather_channel_14=0x7f020117;
-        public static final int weather_channel_15=0x7f020118;
-        public static final int weather_channel_16=0x7f020119;
-        public static final int weather_channel_17=0x7f02011a;
-        public static final int weather_channel_18=0x7f02011b;
-        public static final int weather_channel_19=0x7f02011c;
-        public static final int weather_channel_20=0x7f02011d;
-        public static final int weather_channel_21=0x7f02011e;
-        public static final int weather_channel_22=0x7f02011f;
-        public static final int weather_channel_23=0x7f020120;
-        public static final int weather_channel_24=0x7f020121;
-        public static final int weather_channel_25=0x7f020122;
-        public static final int weather_channel_26=0x7f020123;
-        public static final int weather_channel_27=0x7f020124;
-        public static final int weather_channel_28=0x7f020125;
-        public static final int weather_channel_29=0x7f020126;
-        public static final int weather_channel_30=0x7f020127;
-        public static final int weather_channel_31=0x7f020128;
-        public static final int weather_channel_32=0x7f020129;
-        public static final int weather_channel_33=0x7f02012a;
-        public static final int weather_channel_34=0x7f02012b;
-        public static final int weather_channel_35=0x7f02012c;
-        public static final int weather_channel_36=0x7f02012d;
-        public static final int weather_channel_37=0x7f02012e;
-        public static final int weather_channel_38=0x7f02012f;
-        public static final int weather_channel_39=0x7f020130;
-        public static final int weather_channel_40=0x7f020131;
-        public static final int weather_channel_41=0x7f020132;
-        public static final int weather_channel_42=0x7f020133;
-        public static final int weather_channel_43=0x7f020134;
-        public static final int weather_channel_44=0x7f020135;
-        public static final int weather_channel_45=0x7f020136;
-        public static final int weather_channel_46=0x7f020137;
-        public static final int weather_channel_47=0x7f020138;
-        public static final int yahoo_weather_logo=0x7f020139;
+        public static final int ormlite_256_logo=0x7f0200ff;
+        public static final int pressure_falling=0x7f020100;
+        public static final int pressure_rising=0x7f020101;
+        public static final int pressure_steady=0x7f020102;
+        public static final int problem_circle_blue=0x7f020103;
+        public static final int rate_me_icon=0x7f020104;
+        public static final int roaming=0x7f020105;
+        public static final int rounded_corners=0x7f020106;
+        public static final int sun_rise=0x7f020107;
+        public static final int sun_set=0x7f020108;
+        public static final int twitter_logo=0x7f020109;
+        public static final int weather_channel_00=0x7f02010a;
+        public static final int weather_channel_01=0x7f02010b;
+        public static final int weather_channel_02=0x7f02010c;
+        public static final int weather_channel_03=0x7f02010d;
+        public static final int weather_channel_04=0x7f02010e;
+        public static final int weather_channel_05=0x7f02010f;
+        public static final int weather_channel_06=0x7f020110;
+        public static final int weather_channel_07=0x7f020111;
+        public static final int weather_channel_08=0x7f020112;
+        public static final int weather_channel_09=0x7f020113;
+        public static final int weather_channel_10=0x7f020114;
+        public static final int weather_channel_11=0x7f020115;
+        public static final int weather_channel_12=0x7f020116;
+        public static final int weather_channel_13=0x7f020117;
+        public static final int weather_channel_14=0x7f020118;
+        public static final int weather_channel_15=0x7f020119;
+        public static final int weather_channel_16=0x7f02011a;
+        public static final int weather_channel_17=0x7f02011b;
+        public static final int weather_channel_18=0x7f02011c;
+        public static final int weather_channel_19=0x7f02011d;
+        public static final int weather_channel_20=0x7f02011e;
+        public static final int weather_channel_21=0x7f02011f;
+        public static final int weather_channel_22=0x7f020120;
+        public static final int weather_channel_23=0x7f020121;
+        public static final int weather_channel_24=0x7f020122;
+        public static final int weather_channel_25=0x7f020123;
+        public static final int weather_channel_26=0x7f020124;
+        public static final int weather_channel_27=0x7f020125;
+        public static final int weather_channel_28=0x7f020126;
+        public static final int weather_channel_29=0x7f020127;
+        public static final int weather_channel_30=0x7f020128;
+        public static final int weather_channel_31=0x7f020129;
+        public static final int weather_channel_32=0x7f02012a;
+        public static final int weather_channel_33=0x7f02012b;
+        public static final int weather_channel_34=0x7f02012c;
+        public static final int weather_channel_35=0x7f02012d;
+        public static final int weather_channel_36=0x7f02012e;
+        public static final int weather_channel_37=0x7f02012f;
+        public static final int weather_channel_38=0x7f020130;
+        public static final int weather_channel_39=0x7f020131;
+        public static final int weather_channel_40=0x7f020132;
+        public static final int weather_channel_41=0x7f020133;
+        public static final int weather_channel_42=0x7f020134;
+        public static final int weather_channel_43=0x7f020135;
+        public static final int weather_channel_44=0x7f020136;
+        public static final int weather_channel_45=0x7f020137;
+        public static final int weather_channel_46=0x7f020138;
+        public static final int weather_channel_47=0x7f020139;
+        public static final int yahoo_weather_logo=0x7f02013a;
     }
     public static final class id {
         public static final int ButtonSendFeedback=0x7f090013;
@@ -452,13 +453,13 @@ public final class R {
     }
     public static final class string {
         public static final int about=0x7f060002;
-        public static final int alaert_enabled_gps_provider=0x7f06005e;
+        public static final int alaert_enabled_gps_provider=0x7f06005f;
         public static final int alert_cancel=0x7f060017;
         public static final int alert_delete=0x7f060049;
         public static final int alert_disable=0x7f060047;
-        public static final int alert_do_nothing=0x7f060060;
+        public static final int alert_do_nothing=0x7f060061;
         public static final int alert_enable=0x7f060048;
-        public static final int alert_enable_gps=0x7f06005f;
+        public static final int alert_enable_gps=0x7f060060;
         public static final int alert_no=0x7f060015;
         /**  List locations activity 
          */
@@ -516,6 +517,7 @@ public final class R {
         public static final int gps_weather_service=0x7f06000a;
         public static final int home=0x7f060012;
         public static final int modify_loaded_locaitons=0x7f06004b;
+        public static final int network_issue_onload=0x7f06005a;
         public static final int no_email_clients_installed=0x7f060026;
         /**  Button / General 
          */
@@ -555,46 +557,46 @@ public final class R {
         public static final int rate_me_title=0x7f06000e;
         public static final int reload=0x7f060006;
         public static final int reload_all=0x7f060005;
-        public static final int service_update_attempting_to_refresh_weather=0x7f06006a;
-        public static final int service_update_completed_weather_lookup=0x7f060067;
-        public static final int service_update_failed_gps_lookup=0x7f06006e;
-        public static final int service_update_failed_to_refresh_weather=0x7f06006b;
-        public static final int service_update_finding_geocode_location=0x7f060072;
-        public static final int service_update_geocode_location_found=0x7f060074;
-        public static final int service_update_getting_current_location=0x7f060063;
+        public static final int service_update_attempting_to_refresh_weather=0x7f06006b;
+        public static final int service_update_completed_weather_lookup=0x7f060068;
+        public static final int service_update_failed_gps_lookup=0x7f06006f;
+        public static final int service_update_failed_to_refresh_weather=0x7f06006c;
+        public static final int service_update_finding_geocode_location=0x7f060073;
+        public static final int service_update_geocode_location_found=0x7f060075;
+        public static final int service_update_getting_current_location=0x7f060064;
         /**  Service Updates 
          */
-        public static final int service_update_getting_your_location=0x7f060061;
-        public static final int service_update_gps_location_found=0x7f06006f;
-        public static final int service_update_gps_location_not_found=0x7f060070;
-        public static final int service_update_initalizing_weather_lookup=0x7f060066;
-        public static final int service_update_initiating_gps_lookup=0x7f06006d;
-        public static final int service_update_loading_existing_notifications=0x7f060064;
-        public static final int service_update_location_found_looking_up_area=0x7f060062;
-        public static final int service_update_lookup_geocode_location=0x7f060071;
-        public static final int service_update_preferences_changed_updating=0x7f060065;
-        public static final int service_update_refreshing_weather_notifications=0x7f060069;
-        public static final int service_update_running_weather_lookup=0x7f060068;
-        public static final int service_update_scheduling_next_refresh=0x7f06006c;
-        public static final int service_update_unable_to_fina_geocode_location=0x7f060073;
+        public static final int service_update_getting_your_location=0x7f060062;
+        public static final int service_update_gps_location_found=0x7f060070;
+        public static final int service_update_gps_location_not_found=0x7f060071;
+        public static final int service_update_initalizing_weather_lookup=0x7f060067;
+        public static final int service_update_initiating_gps_lookup=0x7f06006e;
+        public static final int service_update_loading_existing_notifications=0x7f060065;
+        public static final int service_update_location_found_looking_up_area=0x7f060063;
+        public static final int service_update_lookup_geocode_location=0x7f060072;
+        public static final int service_update_preferences_changed_updating=0x7f060066;
+        public static final int service_update_refreshing_weather_notifications=0x7f06006a;
+        public static final int service_update_running_weather_lookup=0x7f060069;
+        public static final int service_update_scheduling_next_refresh=0x7f06006d;
+        public static final int service_update_unable_to_fina_geocode_location=0x7f060074;
         public static final int settings=0x7f060000;
         public static final int summary_enter_a_location_or_use_your_gps=0x7f060050;
         public static final int text_field_enter_location=0x7f060051;
         /**  Enter location activity 
          */
         public static final int title_add_a_new_location=0x7f06004f;
-        public static final int toast_attempting_to_lookup_your_gps_location=0x7f06005c;
-        public static final int toast_error_unable_to_find_you=0x7f06005d;
-        public static final int toast_low_battery_warning=0x7f06005b;
+        public static final int toast_attempting_to_lookup_your_gps_location=0x7f06005d;
+        public static final int toast_error_unable_to_find_you=0x7f06005e;
+        public static final int toast_low_battery_warning=0x7f06005c;
         /**  NotificationControllerService 
          */
-        public static final int toast_max_notifications_reached=0x7f060076;
+        public static final int toast_max_notifications_reached=0x7f060077;
         public static final int toast_please_enter_a_location=0x7f060059;
         /**  StaticLookupService 
          */
-        public static final int toast_unable_to_get_weather_details=0x7f060075;
+        public static final int toast_unable_to_get_weather_details=0x7f060076;
         public static final int toast_unable_to_locate_you=0x7f060058;
-        public static final int toast_unable_to_request_network_location=0x7f06005a;
+        public static final int toast_unable_to_request_network_location=0x7f06005b;
         /**  Notification IDS 
          */
         public static final int weather_notification_service_1=0x7f060027;

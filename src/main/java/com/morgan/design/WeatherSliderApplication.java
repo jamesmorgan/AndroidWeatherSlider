@@ -78,6 +78,17 @@ public class WeatherSliderApplication extends Application {
 
 		// Start looping alarm
 		sendBroadcast(new Intent(LOOPING_ALARM));
+
+		//@formatter:off
+		// Ensure network is active/connected in order to use
+//		final boolean networkConnected = Utils.isConnectedOrConnecting(getApplicationContext());
+//		final boolean gpsEnabled = Utils.isGpsEnabled(getContentResolver());
+//		if (isNot(networkConnected) && isNot(gpsEnabled)) {
+//			Toast.makeText(this, R.string.network_issue_onload, Toast.LENGTH_SHORT).show();
+//			createGpsDisabledAlert();
+//			return;
+//		}
+		//@formatter:on
 	}
 
 	@Override
@@ -87,6 +98,25 @@ public class WeatherSliderApplication extends Application {
 		stopService(new Intent(this, StaticLookupService.class));
 		stopService(new Intent(this, RoamingLookupService.class));
 	}
+
+	//@formatter:off
+//	private void createGpsDisabledAlert() {
+//		final AlertDialog alert = new AlertDialog.Builder(this).setMessage(R.string.alaert_enabled_gps_provider)
+//				.setCancelable(false)
+//				.setPositiveButton(R.string.alert_enable_gps, new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(final DialogInterface dialog, final int id) {
+//						startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+//					}
+//				}).setNegativeButton(R.string.alert_do_nothing, new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(final DialogInterface dialog, final int id) {
+//						dialog.cancel();
+//					}
+//				}).create();
+//		alert.show();
+//	}
+	//@formatter:on
 
 	public GoogleAnalyticsService getGoogleAnalyticsService() {
 		return this.googleAnalyticsService;

@@ -42,8 +42,9 @@ public class HttpWeatherLookupFactory {
 			}
 		}
 		catch (final Throwable e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.WEATHER_LOOKUP, e);
 			Logger.i(LOG_TAG, "Unknonw error when getting weather data task", e);
+			ACRAErrorLogger.logUnknownExcpeiton(Type.WEATHER_LOOKUP, e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -76,6 +77,7 @@ public class HttpWeatherLookupFactory {
 		catch (final Throwable e) {
 			ACRAErrorLogger.logUnknownExcpeiton(Type.WEATHER_LOOKUP, e);
 			Logger.i(LOG_TAG, "Unknonw error when getting weather data task", e);
+			e.printStackTrace();
 		}
 		return null;
 	}
