@@ -5,7 +5,7 @@ package com.morgan.design.android.util;
  */
 public class Logger {
 
-	private final static String LOGTAG = "WeatherSlider";
+	private final static String LOGTAG = "";
 
 	public static void v(final String LOG_TAG, final String logMe) {
 		android.util.Log.v(LOGTAG + ": " + LOG_TAG, logMe);

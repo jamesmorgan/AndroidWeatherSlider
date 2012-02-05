@@ -110,7 +110,7 @@ public class TODO {
 	// Release Version 1.4 //
 	// //////////////////////
 	
-	// FIXME -> Allow proper move to SD feature
+	// FIXME -> DONE - (05/02/2012) - Restarting service once moved application to SD Card
 	// FIXME -> DONE - (05/02/2012) - Forecast description overflow padding bug  
 	// FIXME -> DONE - (05/02/2012) - Fix bug on 2nd load rate me market link pop up not working
 	

@@ -88,7 +88,7 @@
         <activity
             android:name="com.morgan.design.android.ForecastOverviewTabActivity"
             android:configChanges="keyboardHidden|orientation" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.morgan.design.android.TwoDayOverviewActivity"
@@ -185,16 +185,27 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <!-- Sent when the user is present after device wakes up (e.g when the keyguard is gone) -->
+        <!-- Sent when the user is present after device wakes up (e.g when the key guard is gone) -->
         <receiver
-            android:name="com.morgan.design.android.broadcast.UserPresentReceiver" 
+            android:name="com.morgan.design.android.broadcast.UserPresentReceiver"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
+        <!-- Sent application has completed the move to SD Card -->
+        <receiver
+            android:name="com.morgan.design.android.broadcast.ApplicationMovedToSDCardReciever"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
