@@ -100,22 +100,26 @@ public class TODO {
 	// //////////////////////
 	// Release Version 1.? //
 	// //////////////////////
-	
-	// //////////////////////
-	// Release Version 1.4 //
-	// //////////////////////
-	
+
 	// FIXME -> Use application bar not button at top of page 
 	// FIXME -> Hook into search button to enter a location, search-able activity
 	// FIXME -> Add swipe icons on screens where possible, overview screen first
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	
 	// //////////////////////
+	// Release Version 1.4 //
+	// //////////////////////
+	
+	// FIXME -> Forecast padding bug overflow 
+	// FIXME -> Allow proper move to SD feature
+	// FIXME -> DONE - (05/02/2012) - Fix bug on 2nd load rate me market link pop up not working
+	
+	// //////////////////////
 	// Release Version 1.3 //
 	// //////////////////////
 	
-	// FIXME -> DONE - (05/02/2012) - Add 3rd party library to credits -> ORMLite
-	// FIXME -> DONE - (05/02/2012) - Fix hang when selecting check box on enter screen, run on ui thread?
+	// FIXME -> DONE - (04/02/2012) - Add 3rd party library to credits -> ORMLite
+	// FIXME -> DONE - (04/02/2012) - Fix hang when selecting check box on enter screen, run on ui thread?
 
 	// //////////////////////
 	// Release Version 1.2 //
