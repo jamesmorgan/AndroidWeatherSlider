@@ -13,6 +13,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,14 +21,15 @@ import android.widget.ListView;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Constants;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.adaptor.WOIEDAdaptor;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.morgan.design.android.domain.types.Flags;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.StaticLookupService;
+import com.morgan.design.weatherslider.R;
 
 public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
 
@@ -86,23 +88,32 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		super.onListItemClick(l, v, position, id);
 		final WOEIDEntry entry = this.WOIEDlocations.get(position);
 
-		new AlertDialog.Builder(this).setTitle(getString(R.string.alert_on_location_click_is_this_correct))
-			.setMessage(createConfirmationText(entry))
-			.setCancelable(true)
-			.setPositiveButton(R.string.alert_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int id) {
-					loadWeatherDataForEntry(entry);
-				}
-			})
-			.setNegativeButton(R.string.alert_no, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int id) {
-					dialog.cancel();
-				}
-			})
-			.create()
-			.show();
+		Drawable flag = null;
+		if (null != entry.getCountryCode()) {
+			Integer flagCode = Flags.getFlag(entry.getCountryCode());
+			if (null != flagCode) {
+				flag = getResources().getDrawable(flagCode);
+			}
+		}
+
+		//@formatter:off
+		new AlertDialog.Builder(this)
+				.setIcon(flag)
+				.setTitle(getString(R.string.alert_on_location_click_is_this_correct))
+				.setMessage(createConfirmationText(entry))
+				.setCancelable(true)
+				.setPositiveButton(R.string.alert_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						loadWeatherDataForEntry(entry);
+					}
+				}).setNegativeButton(R.string.alert_no, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						dialog.cancel();
+					}
+				}).create().show();
+		//@formatter:on
 	}
 
 	@Override
@@ -128,7 +139,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		else if ("" != entry.getLocality2()) {
 			locality = entry.getLocality2();
 		}
-		
+
 		//@formatter:off
 		// Name and place type
 		// Country
@@ -155,8 +166,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, choice.getId());
 
-		startService(new Intent(this, StaticLookupService.class).putExtra(FROM_INACTIVE_LOCATION, true)
-			.putExtras(bundle));
+		startService(new Intent(this, StaticLookupService.class).putExtra(FROM_INACTIVE_LOCATION, true).putExtras(bundle));
 
 		setResult(RESULT_OK);
 		finish();
@@ -164,8 +174,6 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 
 	private String getSimpleLocation(final WOEIDEntry entry) {
 		final String location = valueOrDefault(entry.getName(), "");
-		return stringHasValue(location)
-				? location + ", " + valueOrDefault(entry.getCountry(), "")
-				: valueOrDefault(entry.getCountry(), "");
+		return stringHasValue(location) ? location + ", " + valueOrDefault(entry.getCountry(), "") : valueOrDefault(entry.getCountry(), "");
 	}
 }

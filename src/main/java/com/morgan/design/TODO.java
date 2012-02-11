@@ -111,6 +111,7 @@ public class TODO {
 	// //////////////////////
 	
 	
+	// FIXME -> DONE - (11/02/2012) - Add country flag to list locations confirmation alert box
 	
 	// FIXME -> DONE - (11/02/2012) - Ability to disable ticker text updates from weather notifications including user preference
 	// FIXME -> DONE - (11/02/2012) - #. Use case: New email comes through so unlock phone to view alert and then updates come through 
