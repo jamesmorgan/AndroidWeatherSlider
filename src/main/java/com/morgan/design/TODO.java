@@ -107,6 +107,16 @@ public class TODO {
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	
 	// //////////////////////
+	// Release Version 1.5 //
+	// //////////////////////
+	
+	
+	
+	// FIXME -> DONE - (11/02/2012) - Ability to disable ticker text updates from weather notifications including user preference
+	// FIXME -> DONE - (11/02/2012) - #. Use case: New email comes through so unlock phone to view alert and then updates come through 
+	// FIXME ->	DONE - (11/02/2012) - 			and hide everything in notification bar. 
+	
+	// //////////////////////
 	// Release Version 1.4 //
 	// //////////////////////
 	

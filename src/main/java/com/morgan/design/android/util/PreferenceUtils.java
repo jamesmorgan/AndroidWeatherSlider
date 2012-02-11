@@ -25,6 +25,7 @@ public final class PreferenceUtils {
 	public static final String PREF_APP_VERSION = "app.version";
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
 	public static final String PREF_REFRESH_ON_USER_PRESENT = "refreshOnUserPresent";
+	public static final String PREF_ENABLED_NOTIFCATION_TICKER_TEXT = "enableNotificationTickerText";
 
 	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
 	public static final String PREF_SHOWN_RATE_ME_POPUP = "shown.rateme.popup";
@@ -98,16 +99,13 @@ public final class PreferenceUtils {
 	}
 
 	public static boolean shouldReloadOnConnectivityChanged(final Context context) {
-		final boolean shouldReloadOnConnectivityChanged = getPrefs(context).getBoolean(
-				PREF_RELOAD_ON_CONNECTIVITY_CHANGED, true);
+		final boolean shouldReloadOnConnectivityChanged = getPrefs(context).getBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, true);
 		Logger.d("PreferenceUtils", "shouldReloadOnConnectivityChanged [%s]", shouldReloadOnConnectivityChanged);
 		return shouldReloadOnConnectivityChanged;
 	}
 
-	public static boolean setShouldReloadOnConnectivityChanged(final Context context,
-			final boolean shouldReloadOnConnectivityChanged) {
-		return getPrefs(context).edit()
-				.putBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, shouldReloadOnConnectivityChanged).commit();
+	public static boolean setShouldReloadOnConnectivityChanged(final Context context, final boolean shouldReloadOnConnectivityChanged) {
+		return getPrefs(context).edit().putBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, shouldReloadOnConnectivityChanged).commit();
 	}
 
 	public static boolean setCollectSystemLogsWithArcaReporting(final Context context, final boolean collectLogs) {
@@ -144,5 +142,13 @@ public final class PreferenceUtils {
 
 	public static boolean shouldRefreshOnUserPresent(Context context) {
 		return getPrefs(context).getBoolean(PREF_REFRESH_ON_USER_PRESENT, false);
+	}
+
+	public static boolean setEnableNotificationTickerText(final Context context, final boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_ENABLED_NOTIFCATION_TICKER_TEXT, value).commit();
+	}
+
+	public static boolean enabledNotifcationTickerText(Context context) {
+		return getPrefs(context).getBoolean(PREF_ENABLED_NOTIFCATION_TICKER_TEXT, true);
 	}
 }

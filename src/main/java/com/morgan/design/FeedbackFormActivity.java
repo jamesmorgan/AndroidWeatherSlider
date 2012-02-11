@@ -23,8 +23,7 @@ public class FeedbackFormActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.feedback_form);
 
-		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
-				.getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this).getGoogleAnalyticsService();
 	}
 
 	public void onSendFeedback(final View button) {
@@ -61,9 +60,9 @@ public class FeedbackFormActivity extends Activity {
 
 	protected String formatFeedbackMessage(final String feedbackType, final String name, final String email, final String feedback,
 			final boolean bRequiresResponse, final String version) {
-		return String.format("Application: %s \n\n Type: %s \n\n %s \n\n %s (%s) - %s \n\n Version: %s \n\n Android Version: %s",
-				getResources().getString(R.string.app_name), feedbackType, feedback, name, email, getResponseString(bRequiresResponse),
-				version, Build.VERSION.RELEASE);
+		return String.format("Application: %s \n\n Type: %s \n\n %s \n\n %s (%s) - %s \n\n Version: %s \n\n Android Version: %s", getResources()
+				.getString(R.string.app_name), feedbackType, feedback, name, email, getResponseString(bRequiresResponse), version,
+				Build.VERSION.RELEASE);
 
 	}
 
