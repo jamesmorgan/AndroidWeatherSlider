@@ -267,7 +267,7 @@ public class Flags {
 	public static Integer getFlag(String code) {
 		Integer flagResource = FLAG_MAP.get(code.toLowerCase());
 		if (isNotNull(code) && isNull(flagResource)) {
-			ACRAErrorLogger.logUnknownIssue(Type.UNKNOWN_FLAG_CODE, code);
+			ACRAErrorLogger.logErrorType(Type.UNKNOWN_FLAG_CODE, code);
 		}
 		return flagResource;
 	}

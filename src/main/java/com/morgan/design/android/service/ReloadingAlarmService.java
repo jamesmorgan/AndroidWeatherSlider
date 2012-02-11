@@ -61,7 +61,7 @@ public class ReloadingAlarmService extends IntentService {
 		}
 		catch (final Exception exception) {
 			this.serviceUpdate.onGoing(getString(R.string.service_update_failed_to_refresh_weather));
-			ACRAErrorLogger.logSlientExcpetion(exception);
+			ACRAErrorLogger.handleSilentException(exception);
 		}
 		finally {
 			// Start new alarm to launch this if active notifications present

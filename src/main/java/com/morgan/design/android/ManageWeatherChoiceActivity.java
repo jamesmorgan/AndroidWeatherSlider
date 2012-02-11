@@ -118,6 +118,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				return handleOnItemLongClick(pos);
 			}
 		});
+
 	}
 
 	@Override
@@ -295,50 +296,58 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		super.onListItemClick(l, v, position, id);
 		final WeatherChoice weatherChoice = this.weatherChoices.get(position);
 
-		final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice, R.string.alert_title_manage_location);
-		alertDialog.setCancelable(true);
+		throw new UnknownError("Some Exception");
 
-		if (weatherChoice.isActive()) {
-			// //////////////////////////////
-			// Refresh | Disabled | Delete //
-			// //////////////////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							onLoadWeatherChoice(weatherChoice);
-						}
-					});
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							attemptToKillNotifcation(weatherChoice);
-						}
-					});
-		}
-		else {
-			// //////////////////
-			// Enable | Delete //
-			// //////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							onLoadWeatherChoice(weatherChoice);
-						}
-					});
-		}
-
-		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete),
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int id) {
-						attemptToDeleteNotifcation(weatherChoice);
-					}
-				});
-
-		alertDialog.show();
+		// final AlertDialog alertDialog =
+		// createCurrentAlertDialog(weatherChoice,
+		// R.string.alert_title_manage_location);
+		// alertDialog.setCancelable(true);
+		//
+		// if (weatherChoice.isActive()) {
+		// // //////////////////////////////
+		// // Refresh | Disabled | Delete //
+		// // //////////////////////////////
+		// alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+		// getString(R.string.alert_refresh),
+		// new DialogInterface.OnClickListener() {
+		// @Override
+		// public void onClick(final DialogInterface dialog, final int id) {
+		// onLoadWeatherChoice(weatherChoice);
+		// }
+		// });
+		// alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+		// getString(R.string.alert_disable),
+		// new DialogInterface.OnClickListener() {
+		// @Override
+		// public void onClick(final DialogInterface dialog, final int id) {
+		// attemptToKillNotifcation(weatherChoice);
+		// }
+		// });
+		// }
+		// else {
+		// // //////////////////
+		// // Enable | Delete //
+		// // //////////////////
+		// alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+		// getString(R.string.alert_enable),
+		// new DialogInterface.OnClickListener() {
+		// @Override
+		// public void onClick(final DialogInterface dialog, final int id) {
+		// onLoadWeatherChoice(weatherChoice);
+		// }
+		// });
+		// }
+		//
+		// alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+		// getString(R.string.alert_delete),
+		// new DialogInterface.OnClickListener() {
+		// @Override
+		// public void onClick(final DialogInterface dialog, final int id) {
+		// attemptToDeleteNotifcation(weatherChoice);
+		// }
+		// });
+		//
+		// alertDialog.show();
 	}
 
 	// ///////////////////////////////////////

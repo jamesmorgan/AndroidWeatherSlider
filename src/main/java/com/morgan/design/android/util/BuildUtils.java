@@ -32,8 +32,8 @@ public class BuildUtils {
 		String versionCode = "- | -";
 		try {
 			final PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-			versionCode =
-					new StringBuilder().append("").append(Integer.toString(pi.versionCode)).append(" | ").append(pi.versionName).toString();
+			versionCode = new StringBuilder().append("").append(Integer.toString(pi.versionCode)).append(" | ")
+					.append(pi.versionName).toString();
 		}
 		catch (final Exception e) {
 			Logger.e(LOG_TAG, "Error gettting version code", e);

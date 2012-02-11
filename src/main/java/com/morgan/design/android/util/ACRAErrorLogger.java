@@ -4,46 +4,50 @@ import org.acra.ErrorReporter;
 
 public class ACRAErrorLogger {
 
+	private static final String LOG_TAG = "ACRAErrorLogger";
+
 	public enum Type {
-		HTTP_REQUEST_FAILURE,
+		//@formatter:off
+		HTTP_REQUEST_FAILURE(""),
+		SQL_EXCEPTION(""),
+		SQL_UPDATE_EXCEPTION(""),
+		WEATHER_LOOKUP(""),
+		WOEID_PARDER(""),
+		YAHOO_GEOCODE(""),
+		YAHOO_WEATHER_INFO(""),
+		UNKNOWN_FLAG_CODE("");
+		//@formatter:on
 
-		SQL_EXCEPTION,
+		private final String message;
 
-		SQL_UPDATE_EXCEPTION,
+		private Type(String value) {
+			this.message = value;
+		}
 
-		WEATHER_LOOKUP,
-
-		WOEID_PARDER,
-
-		YAHOO_GEOCODE,
-
-		YAHOO_WEATHER_INFO,
-
-		UNKNOWN_FLAG_CODE;
+		public String format(String value) {
+			return null != value ? String.format(this.message, value) : this.message;
+		}
 	}
 
-	public static void logSlientExcpetion(final Exception caughtException) {
+	public static void handleSilentException(final Exception caughtException) {
+		// Always warn to console
+		Logger.w(LOG_TAG, caughtException.getMessage());
+		// Silently send exception to default Google handler
 		ErrorReporter.getInstance().handleSilentException(caughtException);
 	}
 
-	// FIXME -> Create google documents ACRA tracker, catch oddities in
-	// application.
-	// FIXME -> ** Unknown country flags codes - done
-	// FIXME -> ** XML conversion errors - done
-	// FIXME -> ** Weather lookup failures - done
-	// FIXME -> ** HTTP request failures - done
-	// FIXME -> ** DB failures, including update - done
-
-	public static void logUnknownExcpeiton(Type type, Throwable throwable, String message) {
-
+	public static void handleException(final Exception caughtException) {
+		// Always warn to console
+		Logger.w(LOG_TAG, caughtException.getMessage());
+		// Loudly send exception to default Google handler, force user knowledge
+		ErrorReporter.getInstance().handleException(caughtException);
 	}
 
-	public static void logUnknownExcpeiton(Type type, Throwable throwable) {
+	public static void logErrorType(Type type, String message) {
+		Logger.w(LOG_TAG, type.name() + " : " + type.format(message));
 
-	}
-
-	public static void logUnknownIssue(Type type, String issue) {
-
+		ErrorReporter.getInstance().putCustomData(CustomReportSender.CUSTOME_ERROR_KEY,
+				type.name() + " : " + type.format(message));
 	}
 
 }

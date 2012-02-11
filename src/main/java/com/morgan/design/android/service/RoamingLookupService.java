@@ -47,8 +47,8 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 import com.morgan.design.weatherslider.R;
 
-public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
-		ServiceConnection, OnReloadWeather, OnCancelAll {
+public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements
+		OnAsyncCallback<YahooWeatherInfo>, ServiceConnection, OnReloadWeather, OnCancelAll {
 
 	private static final String LOG_TAG = "RoamingLookupService";
 
@@ -90,22 +90,26 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			public void onPostLookup(final GeocodeResult geocodeResult) {
 				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", geocodeResult);
 				if (null == geocodeResult) {
-					RoamingLookupService.this.serviceUpdate.complete(getString(R.string.service_update_geocode_location_found));
+					RoamingLookupService.this.serviceUpdate
+							.complete(getString(R.string.service_update_geocode_location_found));
 				}
 				else {
-					RoamingLookupService.this.serviceUpdate.complete(getString(R.string.service_update_unable_to_fina_geocode_location));
+					RoamingLookupService.this.serviceUpdate
+							.complete(getString(R.string.service_update_unable_to_fina_geocode_location));
 					onLocationFound(geocodeResult);
 				}
 			}
 
 			@Override
 			public void onPreLookup() {
-				RoamingLookupService.this.serviceUpdate.loading(getString(R.string.service_update_finding_geocode_location));
+				RoamingLookupService.this.serviceUpdate
+						.loading(getString(R.string.service_update_finding_geocode_location));
 			}
 
 			@Override
 			public void onInitiateExecution() {
-				RoamingLookupService.this.serviceUpdate.onGoing(getString(R.string.service_update_lookup_geocode_location));
+				RoamingLookupService.this.serviceUpdate
+						.onGoing(getString(R.string.service_update_lookup_geocode_location));
 			}
 		};
 	}
@@ -143,7 +147,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	@Override
 	public void onServiceConnected(final ComponentName className, final IBinder service) {
-		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService.LocalBinder) service).getService();
+		this.mBoundNotificationControllerService = ((WeatherNotificationControllerService.LocalBinder) service)
+				.getService();
 	}
 
 	@Override
@@ -202,7 +207,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 	protected void onLocationFound(final GeocodeResult geocodeResult) {
 		this.geocodeResult = geocodeResult;
-		getYahooWeatherInformationTask = new GetYahooWeatherInformationTask(this.cnnxManager, geocodeResult, getTempMode(), this);
+		getYahooWeatherInformationTask = new GetYahooWeatherInformationTask(this.cnnxManager, geocodeResult,
+				getTempMode(), this);
 		getYahooWeatherInformationTask.execute();
 	}
 
@@ -223,7 +229,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		// Remove immediately if cannot find find location
 		if (this.weatherChoice.isFirstAttempt()) {
 			Toast.makeText(this, "Unable to find the weather for your location, please try agin.", Toast.LENGTH_SHORT)
-				.show();
+					.show();
 			this.weatherDao.delete(this.weatherChoice);
 		}
 		// If active and failed, report failure and inform user of re-try
@@ -231,8 +237,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			Toast.makeText(
 					this,
 					String.format("Unable to get weather details at present, will try again in %s",
-							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
-				.show();
+							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))),
+					Toast.LENGTH_SHORT).show();
 			this.weatherChoice.setActive(false);
 			this.weatherChoice.failedQuery();
 			this.weatherDao.update(this.weatherChoice);
@@ -249,7 +255,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		// Successful execution
 		this.weatherChoice.successfullyQuery(weather);
-		this.weatherChoice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(this.weatherChoice, weather));
+		this.weatherChoice.setActive(this.mBoundNotificationControllerService.addWeatherNotification(
+				this.weatherChoice, weather));
 
 		this.weatherDao.update(this.weatherChoice);
 
@@ -304,10 +311,10 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 							Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
 						}
 						else if (null != location && providersFound) {
-							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
-									location.getLatitude());
-							geocodeWOIEDDataTaskFromLocation =
-									new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback);
+							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]",
+									location.getLatitude(), location.getLatitude());
+							geocodeWOIEDDataTaskFromLocation = new GeocodeWOIEDDataTaskFromLocation(location,
+									RoamingLookupService.this.onGeocodeDataCallback);
 							geocodeWOIEDDataTaskFromLocation.execute();
 						}
 						else {
@@ -317,15 +324,16 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 					}
 				}
 			};
-			registerReceiver(this.locationChangedBroadcastReciever,
-					new IntentFilter(LocationLookupService.ROAMING_LOCATION_FOUND_BROADCAST));
+			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(
+					LocationLookupService.ROAMING_LOCATION_FOUND_BROADCAST));
 		}
 	}
 
 	private void triggerGetGpsLocation() {
 		Logger.d(LOG_TAG, "Triggering get GPS location");
 		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_ROAMING_LOCATION_LOOKUP);
-		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
+		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT,
+				LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
 		startService(findLocationBroadcast);
 	}
 

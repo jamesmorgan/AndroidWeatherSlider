@@ -31,6 +31,7 @@ import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.BuildUtils;
+import com.morgan.design.android.util.CustomReportSender;
 import com.morgan.design.weatherslider.R;
 
 //@formatter:off
@@ -63,8 +64,10 @@ public class WeatherSliderApplication extends Application {
 		super.onCreate();
 
 		if (BuildUtils.isRunningEmmulator()) {
-			ErrorReporter.getInstance().disable();
+			// ErrorReporter.getInstance().disable();
 		}
+
+		ErrorReporter.getInstance().setReportSender(new CustomReportSender());
 
 		// SETUP three available notifications
 		WEATHERS.put(R.string.weather_notification_service_1, null);

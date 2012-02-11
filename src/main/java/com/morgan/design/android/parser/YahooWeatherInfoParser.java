@@ -17,9 +17,7 @@ import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.WindSpeed;
 import com.morgan.design.android.util.ACRAErrorLogger;
-import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.android.util.DateUtils;
-import com.morgan.design.android.util.Logger;
 
 public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 
@@ -141,9 +139,8 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 			}
 			return weatherBean;
 		}
-		catch (final Exception e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.YAHOO_WEATHER_INFO, e);
-			Logger.e(TAG, e.getMessage());
+		catch (final Exception exception) {
+			ACRAErrorLogger.handleSilentException(exception);
 		}
 		return null;
 	}

@@ -11,7 +11,6 @@ import org.xml.sax.InputSource;
 
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.util.ACRAErrorLogger;
-import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.android.util.Logger;
 
 public class WOIEDParser implements Parser<List<WOEIDEntry>> {
@@ -91,9 +90,7 @@ public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 			return woiedEntries;
 		}
 		catch (final Exception e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.WOEID_PARDER, e);
-			e.printStackTrace();
-			Logger.e(TAG, e.getMessage());
+			ACRAErrorLogger.handleSilentException(e);
 		}
 		return null;
 	}
