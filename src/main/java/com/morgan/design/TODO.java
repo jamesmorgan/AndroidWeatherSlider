@@ -22,7 +22,6 @@ public class TODO {
 	// ////////////////
 
 	// FIXME -> Show location on a small map in overview mode?
-	// FIXME -> Open location on map from notification click handler
 	// FIXME -> Fix bug when parsing RFC822 dates from yahoo -> http://www.anyang-window.com.cn/sax-read-yahoo-service-weather-data/ - Date publish = new SimpleDateFormat ("EEE, dd MMM yyyy hh: mm az" Locale.US). Parse (s_date);
 	// FIXME -> New providers, Google / The Weather Channel - http://www.weather.com/services/xmloap.html
 	// FIXME -> DB Version's & Tests
@@ -40,7 +39,6 @@ public class TODO {
 	// FIXME -> Look into hooking into alarm providers?
 	// FIXME -> Try 'Add Location' at bottom of the screen
 	// FIXME -> Potentially local time not last updated time in each notification, would require user option?
-	// FIXME -> Changelog to techie? -> Possible change to have feedback more visible (menu) and place changelog in more hidden place
 	// FIXME ->View pager 
 	// -> http://www.zylinc.com/blog-reader/items/viewpager-page-indicator.html 
 	// -> http://blog.stylingandroid.com/archives/537
@@ -79,11 +77,9 @@ public class TODO {
 			// * Possible use global flag service to store cancel request?
 
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
-	// FIXME -> Add option to put shortcut to overview screen on home page for each location
 	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
-	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
 	
@@ -101,6 +97,8 @@ public class TODO {
 	// Release Version 1.? //
 	// //////////////////////
 
+	// FIXME -> Add option to put shortcut to overview screen on home page for each location
+	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Use application bar not button at top of page 
 	// FIXME -> Hook into search button to enter a location, search-able activity
 	// FIXME -> Add swipe icons on screens where possible, overview screen first
@@ -109,7 +107,6 @@ public class TODO {
 	// //////////////////////
 	// Release Version 1.5 //
 	// //////////////////////
-	
 	
 	// FIXME -> DONE - (11/02/2012) - Add country flag to list locations confirmation alert box
 	

@@ -57,7 +57,12 @@ public final class PreferenceUtils {
 	}
 
 	public static int getPollingSchedule(final Context context) {
-		return Integer.valueOf(getPrefs(context).getString(PREF_POLLING_SCHEDULE, "30"));
+		try {
+			return Integer.valueOf(getPrefs(context).getString(PREF_POLLING_SCHEDULE, "30"));
+		}
+		catch (Exception e) {
+			return 30;
+		}
 	}
 
 	public static boolean setPollingSchedule(final Context context, final String minutes) {
