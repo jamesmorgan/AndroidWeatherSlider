@@ -2,6 +2,7 @@ package com.morgan.design.android;
 
 import static com.morgan.design.android.util.PreferenceUtils.PREF_ACRA_SYSTME_LOGS;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_CHANGELOG;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLED_NOTIFCATION_TICKER_TEXT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLE_GOOGLE_ANALYTICS;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
@@ -59,57 +60,51 @@ public class UserPreferencesActivity extends PreferenceActivity {
 		}
 
 		if (pref.getKey().equals(PREF_POLLING_SCHEDULE)) {
-			findPreference(PREF_POLLING_SCHEDULE).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object value) {
-							hasChanged = true;
-							return PreferenceUtils.setPollingSchedule(getApplicationContext(), (String) value);
-						}
-					});
+			findPreference(PREF_POLLING_SCHEDULE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object value) {
+					hasChanged = true;
+					return PreferenceUtils.setPollingSchedule(getApplicationContext(), (String) value);
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_START_ON_BOOT)) {
-			findPreference(PREF_START_ON_BOOT).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
-							return PreferenceUtils.setShouldStartOnBoot(getApplicationContext(), (Boolean) clicked);
-						}
-					});
+			findPreference(PREF_START_ON_BOOT).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setShouldStartOnBoot(getApplicationContext(), (Boolean) clicked);
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_ENABLE_GOOGLE_ANALYTICS)) {
-			findPreference(PREF_ENABLE_GOOGLE_ANALYTICS).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
-							return PreferenceUtils.setEnableGoogleAalytics(getApplicationContext(), (Boolean) clicked);
-						}
-					});
+			findPreference(PREF_ENABLE_GOOGLE_ANALYTICS).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setEnableGoogleAalytics(getApplicationContext(), (Boolean) clicked);
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_OVERVIEW_MODE)) {
-			findPreference(PREF_OVERVIEW_MODE).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object overview) {
-							hasChanged = true;
-							return PreferenceUtils.setOverviewMode(getApplicationContext(),
-									OverviewMode.fromPref((String) overview));
-						}
-					});
+			findPreference(PREF_OVERVIEW_MODE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object overview) {
+					hasChanged = true;
+					return PreferenceUtils.setOverviewMode(getApplicationContext(), OverviewMode.fromPref((String) overview));
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_TEMPERATURE_MODE)) {
-			findPreference(PREF_TEMPERATURE_MODE).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object temperature) {
-							hasChanged = true;
-							return PreferenceUtils.setTemperatureMode(getApplicationContext(), (String) temperature);
-						}
-					});
+			findPreference(PREF_TEMPERATURE_MODE).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object temperature) {
+					hasChanged = true;
+					return PreferenceUtils.setTemperatureMode(getApplicationContext(), (String) temperature);
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_WIND_MODE)) {
@@ -123,35 +118,39 @@ public class UserPreferencesActivity extends PreferenceActivity {
 		}
 
 		if (pref.getKey().equals(PREF_RELOAD_ON_CONNECTIVITY_CHANGED)) {
-			findPreference(PREF_RELOAD_ON_CONNECTIVITY_CHANGED).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
-							return PreferenceUtils.setShouldReloadOnConnectivityChanged(getApplicationContext(),
-									(Boolean) clicked);
-						}
-					});
+			findPreference(PREF_RELOAD_ON_CONNECTIVITY_CHANGED).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setShouldReloadOnConnectivityChanged(getApplicationContext(), (Boolean) clicked);
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_ACRA_SYSTME_LOGS)) {
-			findPreference(PREF_ACRA_SYSTME_LOGS).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
-							return PreferenceUtils.setCollectSystemLogsWithArcaReporting(getApplicationContext(),
-									(Boolean) clicked);
-						}
-					});
+			findPreference(PREF_ACRA_SYSTME_LOGS).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setCollectSystemLogsWithArcaReporting(getApplicationContext(), (Boolean) clicked);
+				}
+			});
 		}
 
 		if (pref.getKey().equals(PREF_REFRESH_ON_USER_PRESENT)) {
-			findPreference(PREF_REFRESH_ON_USER_PRESENT).setOnPreferenceChangeListener(
-					new Preference.OnPreferenceChangeListener() {
-						@Override
-						public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
-							return PreferenceUtils.setRefreshOnUserPresent(getApplicationContext(), (Boolean) clicked);
-						}
-					});
+			findPreference(PREF_REFRESH_ON_USER_PRESENT).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setRefreshOnUserPresent(getApplicationContext(), (Boolean) clicked);
+				}
+			});
+		}
+
+		if (pref.getKey().equals(PREF_ENABLED_NOTIFCATION_TICKER_TEXT)) {
+			findPreference(PREF_ENABLED_NOTIFCATION_TICKER_TEXT).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setEnableNotificationTickerText(getApplicationContext(), (Boolean) clicked);
+				}
+			});
 		}
 
 		return super.onPreferenceTreeClick(preferenceScreen, pref);

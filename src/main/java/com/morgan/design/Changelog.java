@@ -37,8 +37,7 @@ public class Changelog {
 		final boolean showChangeLog = PreferenceUtils.getChangelogPref(activity);
 
 		try {
-			final PackageInfo pi = activity.getPackageManager()
-				.getPackageInfo(activity.getPackageName(), 0);
+			final PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
 			currentVersion = pi.versionCode;
 		}
 		catch (final NameNotFoundException e) {
@@ -59,16 +58,13 @@ public class Changelog {
 	}
 
 	protected static void showChangelogDialog(final Activity activity) {
-		new AlertDialog.Builder(activity).setIcon(android.R.drawable.ic_dialog_info)
-			.setTitle(R.string.changelog_title)
-			.setView(Utils.dialogWebView(activity, activity.getString(R.string.changelog_filename)))
-			.setPositiveButton(R.string.okay, null)
-			.setNegativeButton(R.string.feedback, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(final DialogInterface dialog, final int which) {
-					Utils.openFeedback(activity);
-				}
-			})
-			.show();
+		new AlertDialog.Builder(activity).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.changelog_title)
+				.setView(Utils.dialogWebView(activity, activity.getString(R.string.changelog_filename))).setPositiveButton(R.string.okay, null)
+				.setNegativeButton(R.string.feedback, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int which) {
+						Utils.openFeedback(activity);
+					}
+				}).show();
 	}
 }

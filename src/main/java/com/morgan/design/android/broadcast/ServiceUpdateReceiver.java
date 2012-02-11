@@ -11,14 +11,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.weatherslider.R;
 
 public class ServiceUpdateReceiver extends BroadcastReceiver {
 
 	private static final int SEVEN_SECONDS = 7000;
 
-	private static final String LOG_TAG = "ServiceUpdateRegister";
+	private static final String LOG_TAG = "ServiceUpdateReceiver";
 
 	public static final String ACTION = "com.morgan.design.android.SERVICE_UPDATE";
 
@@ -59,8 +59,14 @@ public class ServiceUpdateReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(final Context context, final Intent intent) {
+		if (null == intent) {
+			if (null != this.service_update_area_container) {
+				this.service_update_area_container.setVisibility(View.GONE);
+			}
+			return;
+		}
 		final String action = intent.getAction();
-		if (View.GONE == this.service_update_area_container.getVisibility()) {
+		if (View.VISIBLE != this.service_update_area_container.getVisibility()) {
 			this.service_update_area_container.setVisibility(View.VISIBLE);
 		}
 		if (ACTION.equals(action)) {
