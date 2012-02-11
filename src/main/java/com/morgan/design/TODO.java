@@ -103,6 +103,13 @@ public class TODO {
 	// FIXME -> Hook into search button to enter a location, search-able activity
 	// FIXME -> Add swipe icons on screens where possible, overview screen first
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	// FIXME -> Confirm application handles force close well
+	
+	// //////////////////////
+	// Release Version 1.6 //
+	// //////////////////////
+	
+	
 	
 	// //////////////////////
 	// Release Version 1.5 //
