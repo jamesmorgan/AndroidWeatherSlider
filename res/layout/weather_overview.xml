@@ -221,30 +221,60 @@
         android:text="Last Update Datetime"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/more_information_link"
+    <LinearLayout
+        android:id="@+id/further_details_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:linksClickable="true"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:text="@string/further_details"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#3399FF" />
+        android:paddingBottom="5dip" >
 
-    <TextView
-        android:id="@+id/open_map_link"
+        <TextView
+            android:id="@+id/more_information_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/further_details"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#3399FF" />
+
+        <TextView
+            android:id="@+id/open_map_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:gravity="right"
+            android:linksClickable="true"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/open_google_maps"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#3399FF" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:linksClickable="true"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:text="@string/open_google_maps"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#3399FF" />
+        android:baselineAligned="true"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#3399FF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip" 
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:text="@string/swipe_left_for_forecast_details" />
+    </LinearLayout>
 
 </LinearLayout>

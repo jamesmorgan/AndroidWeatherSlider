@@ -98,18 +98,18 @@ public class TODO {
 	// //////////////////////
 
 	// FIXME -> Add option to put shortcut to overview screen on home page for each location
-	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Use application bar not button at top of page 
 	// FIXME -> Hook into search button to enter a location, search-able activity
-	// FIXME -> Add swipe icons on screens where possible, overview screen first
-	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-	// FIXME -> Confirm application handles force close well
 	
 	// //////////////////////
 	// Release Version 1.6 //
 	// //////////////////////
 	
+	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
+	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	
+	// FIXME -> DONE - (11/02/2012) - Added swipe icons & labels on overview and forecast screen
+	// FIXME -> DONE - (11/02/2012) - Confirm application handles force close well
 	
 	// //////////////////////
 	// Release Version 1.5 //
