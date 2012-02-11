@@ -588,6 +588,8 @@ public final class R {
         public static final int service_update_unable_to_fina_geocode_location=0x7f060077;
         public static final int settings=0x7f060000;
         public static final int summary_enter_a_location_or_use_your_gps=0x7f060053;
+        /**  Swipe Areas 
+         */
         public static final int swipe_left_for_forecast_details=0x7f06007b;
         public static final int swipe_right_for_current_conditions=0x7f06007c;
         public static final int text_field_enter_location=0x7f060054;

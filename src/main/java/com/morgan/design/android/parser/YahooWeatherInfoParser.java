@@ -117,8 +117,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 				}
 			}
 
-			final List<?> itemContentElements = document.getRootElement().getChild("channel").getChild("item")
-					.getContent();
+			final List<?> itemContentElements = document.getRootElement().getChild("channel").getChild("item").getContent();
 
 			for (final Object itemElement : itemContentElements) {
 
@@ -142,8 +141,9 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 			return weatherBean;
 		}
 		catch (final Exception e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.YAHOO_WEATHER_INFO, e);
-			Logger.e(TAG, e.getMessage());
+			ACRAErrorLogger.recordUnknownIssue(Type.YAHOO_WEATHER_INFO, result);
+			ACRAErrorLogger.logSlientExcpetion(e);
+			Logger.w(TAG, e.getMessage());
 		}
 		return null;
 	}

@@ -7,13 +7,11 @@ public class ACRAErrorLogger {
 	public enum Type {
 		HTTP_REQUEST_FAILURE,
 
-		SQL_EXCEPTION,
-
 		SQL_UPDATE_EXCEPTION,
 
 		WEATHER_LOOKUP,
 
-		WOEID_PARDER,
+		WOEID_PARSER,
 
 		YAHOO_GEOCODE,
 
@@ -22,28 +20,12 @@ public class ACRAErrorLogger {
 		UNKNOWN_FLAG_CODE;
 	}
 
-	public static void logSlientExcpetion(final Exception caughtException) {
+	public static void logSlientExcpetion(final Throwable caughtException) {
 		ErrorReporter.getInstance().handleSilentException(caughtException);
 	}
 
-	// FIXME -> Create google documents ACRA tracker, catch oddities in
-	// application.
-	// FIXME -> ** Unknown country flags codes - done
-	// FIXME -> ** XML conversion errors - done
-	// FIXME -> ** Weather lookup failures - done
-	// FIXME -> ** HTTP request failures - done
-	// FIXME -> ** DB failures, including update - done
-
-	public static void logUnknownExcpeiton(Type type, Throwable throwable, String message) {
-
-	}
-
-	public static void logUnknownExcpeiton(Type type, Throwable throwable) {
-
-	}
-
-	public static void logUnknownIssue(Type type, String issue) {
-
+	public static void recordUnknownIssue(Type type, String message) {
+		ErrorReporter.getInstance().putCustomData(type.name(), message);
 	}
 
 }

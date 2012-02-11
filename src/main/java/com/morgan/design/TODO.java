@@ -85,13 +85,8 @@ public class TODO {
 	
 	// FIXME -> Allow exporting of locations as xml file / back, hook in to 3rd party backup application
 	// FIXME -> Backup DB option
-	
+
 	// FIXME -> Check try/catch blocks report to ACRA if required
-	// FIXME -> Create google docs ACRA tracker, catch oddities in application.
-	// FIXME -> ** Unknown country flags codes
-	// FIXME -> ** Weather lookup failures
-	// FIXME -> ** HTTP request failures
-	// FIXME -> ** DB failures, including update
 	
 	// //////////////////////
 	// Release Version 1.? //
@@ -107,6 +102,12 @@ public class TODO {
 	
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	
+	// FIXME -> DONE - (11/02/2012) - Track application crashes in ARCA, including oddities in application.
+	// FIXME -> DONE - (11/02/2012) - ** Unknown country flags codes
+	// FIXME -> DONE - (11/02/2012) - ** Weather lookup failures
+	// FIXME -> DONE - (11/02/2012) - ** HTTP request failures
+	// FIXME -> DONE - (11/02/2012) - * DB failures, including update
 	
 	// FIXME -> DONE - (11/02/2012) - Added swipe icons & labels on overview and forecast screen
 	// FIXME -> DONE - (11/02/2012) - Confirm application handles force close well
