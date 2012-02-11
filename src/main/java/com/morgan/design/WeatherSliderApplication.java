@@ -3,6 +3,7 @@ package com.morgan.design;
 import static com.morgan.design.Constants.LOOPING_ALARM;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_ACRA_SYSTME_LOGS;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_CHANGELOG;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLED_NOTIFCATION_TICKER_TEXT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_FIRST_LOOKUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
@@ -40,7 +41,7 @@ import com.morgan.design.weatherslider.R;
 		forceCloseDialogAfterToast = false, 
 		resToastText = R.string.crash_toast_text,
 		additionalSharedPreferences={PREF_CHANGELOG, PREF_POLLING_SCHEDULE, PREF_POLLING_SCHEDULE, PREF_OVERVIEW_MODE,
-									PREF_TEMPERATURE_MODE,PREF_WIND_MODE, PREF_RELOAD_ON_CONNECTIVITY_CHANGED,
+									PREF_TEMPERATURE_MODE,PREF_WIND_MODE, PREF_RELOAD_ON_CONNECTIVITY_CHANGED, PREF_ENABLED_NOTIFCATION_TICKER_TEXT,
 									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS})
 //@formatter:on
 public class WeatherSliderApplication extends Application {

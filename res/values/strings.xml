@@ -83,6 +83,10 @@
     <string name="pref_changelog_disabled">Don\'t show Change Log On Version Upgrade</string>
     <string name="pref_changelog_enabled">Show Change Log On Version Upgrade</string>
     
+    <string name="pref_disable_notification_ticker_text_title">Notification Text Updates</string>
+    <string name="pref_disable_notification_ticker_text_disabled">Text notification updates are disabled</string>
+    <string name="pref_disable_notification_ticker_text_enabled">Text notification updates are enabled</string>
+    
     <string name="pref_acra_syslog_disabled">Don\'t collect systems logs on application crash</string>
     <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>
     <string name="pref_acra_syslog">Error Reporting</string>
