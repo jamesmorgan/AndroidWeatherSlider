@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.GeocodeResult;
+import com.morgan.design.android.domain.Woeid;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.YahooWeatherLookup;
 import com.morgan.design.android.domain.types.Temperature;
@@ -16,8 +17,8 @@ public class HttpWeatherLookupFactory {
 
 	private static final String LOG_TAG = "HttpWeatherLookupFactory";
 
-	public static YahooWeatherLookup getForWeatherChoice(final WeatherChoice weatherChoice,
-			final Temperature temperature, final ConnectivityManager cnnxManager) {
+	public static YahooWeatherLookup getForWeatherChoice(final WeatherChoice weatherChoice, final Temperature temperature,
+			final ConnectivityManager cnnxManager) {
 		if (null == weatherChoice) {
 			Logger.i(LOG_TAG, "WeatherChoice is null, no WOIED found. Unable to get yahoo weather info.");
 			return null;
@@ -36,21 +37,21 @@ public class HttpWeatherLookupFactory {
 
 				final String url = YahooRequestUtils.getInstance().createWeatherQuery(weatherChoice, temperature);
 
-				final YahooWeatherInfo weatherInfo = YahooRequestUtils.getInstance().getWeatherInfo(
-						RestTemplateFactory.createAndQuery(url));
+				final YahooWeatherInfo weatherInfo = YahooRequestUtils.getInstance().getWeatherInfo(RestTemplateFactory.createAndQuery(url));
 				return new YahooWeatherLookup(weatherChoice, weatherInfo);
 			}
 		}
 		catch (final Throwable e) {
-			Logger.i(LOG_TAG, "Unknonw error when getting weather data task", e);
-			ACRAErrorLogger.logUnknownExcpeiton(Type.WEATHER_LOOKUP, e);
-			e.printStackTrace();
+			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE,
+					String.format("Woeid=[%s], Temperature=[%s]", woeid(weatherChoice), temp(temperature)));
+			ACRAErrorLogger.logSlientExcpetion(e);
+			Logger.w(LOG_TAG, "Unknonw error when getting weather data task", e);
 		}
 		return null;
 	}
 
-	public static YahooWeatherInfo getForGeocodeResult(final GeocodeResult geocodeResult,
-			final Temperature temperature, final ConnectivityManager cnnxManager) {
+	public static YahooWeatherInfo getForGeocodeResult(final GeocodeResult geocodeResult, final Temperature temperature,
+			final ConnectivityManager cnnxManager) {
 		if (null == geocodeResult) {
 			Logger.i(LOG_TAG, "GeocodeResult is null, no WOIED found. Unable to get yahoo weather info.");
 			return null;
@@ -75,9 +76,10 @@ public class HttpWeatherLookupFactory {
 			}
 		}
 		catch (final Throwable e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.WEATHER_LOOKUP, e);
-			Logger.i(LOG_TAG, "Unknonw error when getting weather data task", e);
-			e.printStackTrace();
+			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE,
+					String.format("Woeid=[%s], Temperature=[%s]", woeid(geocodeResult), temp(temperature)));
+			ACRAErrorLogger.logSlientExcpetion(e);
+			Logger.e(LOG_TAG, "Unknonw error when getting weather data task", e);
 		}
 		return null;
 	}
@@ -88,5 +90,13 @@ public class HttpWeatherLookupFactory {
 		}
 		final NetworkInfo ni = cnnxManager.getActiveNetworkInfo();
 		return ni == null || !ni.isAvailable() || !ni.isConnected();
+	}
+
+	private static String temp(Temperature temperature) {
+		return null != temperature ? temperature.abrev() : "N/A";
+	}
+
+	private static String woeid(Woeid woeid) {
+		return null != woeid ? woeid.getWoeid() : "N/A";
 	}
 }

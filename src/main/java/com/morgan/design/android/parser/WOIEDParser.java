@@ -91,9 +91,9 @@ public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 			return woiedEntries;
 		}
 		catch (final Exception e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.WOEID_PARDER, e);
-			e.printStackTrace();
-			Logger.e(TAG, e.getMessage());
+			ACRAErrorLogger.recordUnknownIssue(Type.WOEID_PARSER, results);
+			ACRAErrorLogger.logSlientExcpetion(e);
+			Logger.w(TAG, e.getMessage());
 		}
 		return null;
 	}

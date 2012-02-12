@@ -1,199 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:weightSum="100" >
+    android:layout_height="match_parent" >
 
     <LinearLayout
+        android:id="@+id/forecast_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dip"
-        android:layout_weight="50"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical"
-        android:padding="5dp" >
-
-        <TextView
-            android:id="@+id/today_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Today"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/today_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dip"
-            android:text="Date"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <ImageView
-            android:id="@+id/today_weather_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dip"
-            android:src="@drawable/default_weather_icon" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
+        android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dip" >
+            android:layout_marginTop="80dip"
+            android:layout_weight="50"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:padding="5dp" >
 
             <TextView
+                android:id="@+id/today_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forecast_overview_lows_of"
+                android:text="Today"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/today_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dip"
+                android:text="Date"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/today_low_temp"
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <ImageView
+                android:id="@+id/today_weather_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:padding="15dip"
+                android:src="@drawable/default_weather_icon" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forecast_overview_lows_of"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/today_low_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forecast_overview_highs_of"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/today_high_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <TextView
+                android:id="@+id/today_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dip"
+                android:text="Description"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dip" >
+            android:layout_marginTop="80dip"
+            android:layout_weight="50"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:padding="5dp" >
 
             <TextView
+                android:id="@+id/tomo_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forecast_overview_highs_of"
+                android:text="Tomo"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/tomo_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dip"
+                android:text="Date"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/today_high_temp"
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <ImageView
+                android:id="@+id/tomo_weather_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:padding="15dip"
+                android:src="@drawable/default_weather_icon" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forecast_overview_lows_of"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/tomo_low_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forecast_overview_highs_of"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/tomo_high_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <TextView
+                android:id="@+id/tomo_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dip"
+                android:text="Description"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <TextView
-            android:id="@+id/today_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="15dip"
-            android:text="Description"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dip"
-        android:layout_weight="50"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical"
-        android:padding="5dp" >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:drawableLeft="@drawable/arrow_left"
+        android:gravity="center_vertical|right"
+        android:paddingBottom="2dip"
+        android:paddingLeft="10dip"
+        android:paddingTop="2dip"
+        android:text="@string/swipe_right_for_current_conditions" />
 
-        <TextView
-            android:id="@+id/tomo_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tomo"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_above="@+id/textView1"
+        android:layout_alignParentLeft="true"
+        android:background="#3399FF" />
 
-        <TextView
-            android:id="@+id/tomo_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dip"
-            android:text="Date"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <ImageView
-            android:id="@+id/tomo_weather_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dip"
-            android:src="@drawable/default_weather_icon" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forecast_overview_lows_of"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/tomo_low_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dip" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forecast_overview_highs_of"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/tomo_high_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <TextView
-            android:id="@+id/tomo_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="15dip"
-            android:text="Description"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
