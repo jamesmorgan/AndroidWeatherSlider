@@ -19,8 +19,9 @@ public class RestTemplateFactory {
 
 			return restTemplate.getForObject(url, String.class);
 		}
-		catch (final Exception exception) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.HTTP_REQUEST_FAILURE, exception, url);
+		catch (final Exception e) {
+			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE, url);
+			ACRAErrorLogger.logSlientExcpetion(e);
 			return null;
 		}
 	}

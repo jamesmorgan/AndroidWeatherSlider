@@ -49,8 +49,8 @@
     <string name="weather_notification_service_3">weather_notification_service_3</string>
 
     <!-- Weather Overview activity -->
-    <string name="further_details">Further Details…</string>
-    <string name="open_google_maps">Open Google Maps…</string>
+    <string name="further_details">Further Details</string>
+    <string name="open_google_maps">Google Maps</string>
 
     <!-- User Preferences activity -->
     <string name="pref_overview_mode_title">Overview mode</string>
@@ -156,5 +156,9 @@
 
     <!-- NotificationControllerService -->
     <string name="toast_max_notifications_reached">Unable to add more weather notifications, please remove one first, maximum of %s notifications allowed</string>
+
+    <!-- Swipe Areas -->
+    <string name="swipe_left_for_forecast_details">Swipe left for forecast details…</string>
+    <string name="swipe_right_for_current_conditions">…Swipe right for current conditions</string>
 
 </resources>

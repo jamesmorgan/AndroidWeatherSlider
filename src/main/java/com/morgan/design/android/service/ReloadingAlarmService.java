@@ -49,8 +49,7 @@ public class ReloadingAlarmService extends IntentService {
 			// Cancel any existing alarms
 			mAlarmManager.cancel(pi);
 
-			final WeatherChoiceDao dao = new WeatherChoiceDao(OpenHelperManager.getHelper(getApplicationContext(),
-					DatabaseHelper.class));
+			final WeatherChoiceDao dao = new WeatherChoiceDao(OpenHelperManager.getHelper(getApplicationContext(), DatabaseHelper.class));
 			if (dao.hasActiveNotifications()) {
 				hasNotifications = true;
 

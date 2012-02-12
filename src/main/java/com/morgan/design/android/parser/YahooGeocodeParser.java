@@ -73,9 +73,9 @@ public class YahooGeocodeParser implements Parser<GeocodeResult> {
 			return geocodeResult;
 		}
 		catch (final Exception e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.YAHOO_GEOCODE, e);
-			e.printStackTrace();
-			Logger.e(LOG_TAG, e.getMessage());
+			ACRAErrorLogger.recordUnknownIssue(Type.YAHOO_GEOCODE, result);
+			ACRAErrorLogger.logSlientExcpetion(e);
+			Logger.w(LOG_TAG, e.getMessage());
 		}
 		return null;
 	}

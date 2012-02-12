@@ -43,14 +43,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTableIfNotExists(connectionSource, WeatherNotification.class);
 		}
 		catch (final SQLException e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.SQL_EXCEPTION, e);
+			ACRAErrorLogger.logSlientExcpetion(e);
 			Logger.e(LOG_TAG, "Can't create database", e);
 		}
 	}
 
 	/**
-	 * This is called when your application is upgraded and it has a higher version number. This allows you to adjust the various data to
-	 * match the new version number.
+	 * This is called when your application is upgraded and it has a higher
+	 * version number. This allows you to adjust the various data to match the
+	 * new version number.
 	 */
 	@Override
 	public void onUpgrade(final SQLiteDatabase db, final ConnectionSource connectionSource, int oldVersion, final int newVersion) {
@@ -87,7 +88,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			}
 		}
 		catch (final android.database.SQLException e) {
-			ACRAErrorLogger.logUnknownExcpeiton(Type.SQL_UPDATE_EXCEPTION, e);
+			ACRAErrorLogger.recordUnknownIssue(Type.SQL_UPDATE_EXCEPTION, String.format("Old Version=[%s], New Version=[%s]", oldVersion, newVersion));
+			ACRAErrorLogger.logSlientExcpetion(e);
 			Logger.e(LOG_TAG, "Can't migrate databases, bootstrap database, data will be lost", e);
 			onCreate(db, connectionSource);
 		}
