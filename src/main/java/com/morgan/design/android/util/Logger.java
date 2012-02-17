@@ -1,5 +1,7 @@
 package com.morgan.design.android.util;
 
+import android.util.Log;
+
 /**
  * @author James Edward Morgan
  */
@@ -7,56 +9,43 @@ public class Logger {
 
 	private final static String LOGTAG = "";
 
-	public static void v(final String LOG_TAG, final String logMe) {
-		android.util.Log.v(LOGTAG + ": " + LOG_TAG, logMe);
-	}
-
-	public static void v(final String LOG_TAG, final String logMe, final Object... values) {
-		android.util.Log.v(LOGTAG + ": " + LOG_TAG, String.format(logMe, values));
-	}
-
 	public static void w(final String LOG_TAG, final String logMe) {
-		android.util.Log.w(LOGTAG + ": " + LOG_TAG, logMe);
+		Log.w(tag(LOG_TAG), logMe);
 	}
 
-	public static void w(final String LOG_TAG, final String logMe, final Object... values) {
-		android.util.Log.w(LOGTAG + ": " + LOG_TAG, String.format(logMe, values));
+	public static void w(final String LOG_TAG, final String logMe, Throwable throwable) {
+		Log.w(tag(LOG_TAG), logMe, throwable);
+	}
+
+	public static void w(final String LOG_TAG, Throwable throwable) {
+		Log.w(tag(LOG_TAG), throwable);
 	}
 
 	public static void e(final String LOG_TAG, final String logMe) {
-		android.util.Log.e(LOGTAG + ": " + LOG_TAG, logMe);
+		Log.e(tag(LOG_TAG), logMe);
 	}
 
 	public static void e(final String LOG_TAG, final String logMe, final Object... values) {
-		android.util.Log.e(LOGTAG + ": " + LOG_TAG, String.format(logMe, values));
+		Log.e(tag(LOG_TAG), String.format(logMe, values));
 	}
 
 	public static void e(final String LOG_TAG, final String logMe, final Throwable ex) {
-		android.util.Log.e(LOGTAG + ": " + LOG_TAG, logMe, ex);
-	}
-
-	public static void i(final String LOG_TAG, final String logMe) {
-		android.util.Log.i(LOGTAG + ": " + LOG_TAG, logMe);
-	}
-
-	public static void i(final String LOG_TAG, final String logMe, final Throwable ex) {
-		android.util.Log.i(LOGTAG + ": " + LOG_TAG, logMe, ex);
-	}
-
-	public static void i(final String LOG_TAG, final String logMe, final Object... values) {
-		android.util.Log.i(LOGTAG + ": " + LOG_TAG, String.format(logMe, values));
+		Log.e(tag(LOG_TAG), logMe, ex);
 	}
 
 	public static void d(final String LOG_TAG, final long logMe) {
-		android.util.Log.d(LOGTAG + ": " + LOG_TAG, "" + logMe);
+		Log.d(tag(LOG_TAG), "" + logMe);
 	}
 
 	public static void d(final String LOG_TAG, final Object logMe) {
-		android.util.Log.d(LOGTAG + ": " + LOG_TAG, "" + logMe);
+		Log.d(tag(LOG_TAG), "" + logMe);
 	}
 
 	public static void d(final String LOG_TAG, final String logMe, final Object... values) {
-		android.util.Log.d(LOGTAG + ": " + LOG_TAG, String.format(logMe, values));
+		Log.d(tag(LOG_TAG), String.format(logMe, values));
 	}
 
+	private static String tag(final String LOG_TAG) {
+		return LOGTAG + ": " + LOG_TAG;
+	}
 }

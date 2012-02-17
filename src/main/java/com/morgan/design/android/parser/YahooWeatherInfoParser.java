@@ -23,7 +23,7 @@ import com.morgan.design.android.util.Logger;
 
 public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 
-	private static final String TAG = "YahooWeatherInfoParser";
+	private static final String LOG_TAG = "YahooWeatherInfoParser";
 
 	// yweather:location
 	private static final String LOCATION = "location";
@@ -142,7 +142,7 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 		}
 		catch (final Exception e) {
 			ACRAErrorLogger.recordUnknownIssue(Type.YAHOO_WEATHER_INFO, result);
-			Logger.w(TAG, e.getMessage());
+			Logger.w(LOG_TAG, "Error parsing Yahoo weather details", e);
 		}
 		return null;
 	}

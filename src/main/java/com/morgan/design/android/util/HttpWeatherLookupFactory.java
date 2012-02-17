@@ -20,16 +20,16 @@ public class HttpWeatherLookupFactory {
 	public static YahooWeatherLookup getForWeatherChoice(final WeatherChoice weatherChoice, final Temperature temperature,
 			final ConnectivityManager cnnxManager) {
 		if (null == weatherChoice) {
-			Logger.i(LOG_TAG, "WeatherChoice is null, no WOIED found. Unable to get yahoo weather info.");
+			Logger.d(LOG_TAG, "WeatherChoice is null, no WOIED found. Unable to get yahoo weather info.");
 			return null;
 		}
 		try {
 			if (isBlank(weatherChoice.getWoeid())) {
-				Logger.i(LOG_TAG, "No locaiton WOIED found.");
+				Logger.d(LOG_TAG, "No locaiton WOIED found.");
 				return null;
 			}
 			if (isNotConnectedToNetwork(cnnxManager)) {
-				Logger.i(LOG_TAG, "No usable network.");
+				Logger.d(LOG_TAG, "No usable network.");
 				return null;
 			}
 			else {
@@ -44,7 +44,7 @@ public class HttpWeatherLookupFactory {
 		catch (final Throwable e) {
 			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE,
 					String.format("Woeid=[%s], Temperature=[%s]", woeid(weatherChoice), temp(temperature)));
-			Logger.w(LOG_TAG, "Unknonw error when getting weather data task", e);
+			Logger.w(LOG_TAG, "Error when getting weather data task", e);
 		}
 		return null;
 	}
@@ -52,18 +52,18 @@ public class HttpWeatherLookupFactory {
 	public static YahooWeatherInfo getForGeocodeResult(final GeocodeResult geocodeResult, final Temperature temperature,
 			final ConnectivityManager cnnxManager) {
 		if (null == geocodeResult) {
-			Logger.i(LOG_TAG, "GeocodeResult is null, no WOIED found. Unable to get yahoo weather info.");
+			Logger.d(LOG_TAG, "GeocodeResult is null, no WOIED found. Unable to get yahoo weather info.");
 			return null;
 		}
 		try {
 			final String woeidId = geocodeResult.getWoeid();
 
 			if (isBlank(woeidId)) {
-				Logger.i(LOG_TAG, "No locaiton WOIED found.");
+				Logger.d(LOG_TAG, "No locaiton WOIED found.");
 				return null;
 			}
 			if (isNotConnectedToNetwork(cnnxManager)) {
-				Logger.i(LOG_TAG, "No usable network.");
+				Logger.d(LOG_TAG, "No usable network.");
 				return null;
 			}
 			else {
