@@ -105,7 +105,8 @@ public class TODO {
 	
 	// FIXME -> Set ScrollView on forecast overview to handle screen rotation & check all screens  
 	// FIXME -> Option to disable failed update toasts, default true. Maybe have different status for them?
-	// FIXME-> Fix bug in Logger.w. Check logging class implementation for bugs
+	// FIXME -> DONE - (17/02/2012) - Return null from YahooWeatherInfoParser, preventing NPE
+	// FIXME -> DONE - (17/02/2012) - Fix bug in Logger.w. Check logging class implementation for bugs
 	// FIXME -> DONE - (17/02/2012) - Remove reporting error every time for custom ARCA reports
 
 	// //////////////////////

@@ -1,6 +1,7 @@
 package com.morgan.design.android.parser;
 
 import static com.morgan.design.android.util.ObjectUtils.isNotBlank;
+import static com.morgan.design.android.util.ObjectUtils.isNull;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -92,6 +93,9 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 
 	@Override
 	public YahooWeatherInfo parse(final String result) {
+		if (isNull(result)) {
+			return null;
+		}
 		try {
 			final YahooWeatherInfo weatherBean = new YahooWeatherInfo();
 
