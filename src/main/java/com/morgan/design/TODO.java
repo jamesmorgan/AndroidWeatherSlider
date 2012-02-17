@@ -100,6 +100,14 @@ public class TODO {
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	
 	// //////////////////////
+	// Release Version 1.7 //
+	// //////////////////////
+	
+	// FIXME -> Remove reporting error every time for custom ARCA reports
+	// FIXME -> Set ScrollView on forecast overview to handle screen rotation & check all screens  
+	// FIXME -> Option to disable failed update toasts, default true. Maybe have different status for them?
+
+	// //////////////////////
 	// Release Version 1.6 //
 	// //////////////////////
 	

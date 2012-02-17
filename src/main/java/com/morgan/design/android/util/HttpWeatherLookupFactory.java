@@ -44,7 +44,6 @@ public class HttpWeatherLookupFactory {
 		catch (final Throwable e) {
 			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE,
 					String.format("Woeid=[%s], Temperature=[%s]", woeid(weatherChoice), temp(temperature)));
-			ACRAErrorLogger.logSlientExcpetion(e);
 			Logger.w(LOG_TAG, "Unknonw error when getting weather data task", e);
 		}
 		return null;
@@ -78,7 +77,6 @@ public class HttpWeatherLookupFactory {
 		catch (final Throwable e) {
 			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE,
 					String.format("Woeid=[%s], Temperature=[%s]", woeid(geocodeResult), temp(temperature)));
-			ACRAErrorLogger.logSlientExcpetion(e);
 			Logger.e(LOG_TAG, "Unknonw error when getting weather data task", e);
 		}
 		return null;

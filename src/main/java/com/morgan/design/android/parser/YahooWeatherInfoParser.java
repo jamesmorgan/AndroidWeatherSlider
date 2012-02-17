@@ -142,7 +142,6 @@ public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 		}
 		catch (final Exception e) {
 			ACRAErrorLogger.recordUnknownIssue(Type.YAHOO_WEATHER_INFO, result);
-			ACRAErrorLogger.logSlientExcpetion(e);
 			Logger.w(TAG, e.getMessage());
 		}
 		return null;
