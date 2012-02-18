@@ -1,5 +1,6 @@
 package com.morgan.design.android.service;
 
+import static com.morgan.design.Constants.FAILED_LOOKUP;
 import static com.morgan.design.Constants.FROM_FRESH_LOOKUP;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
 import static com.morgan.design.Constants.LOOPING_ALARM;
@@ -47,8 +48,8 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 import com.morgan.design.weatherslider.R;
 
-public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>, ServiceConnection,
-		OnReloadWeather, OnCancelAll {
+public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>, ServiceConnection, OnReloadWeather,
+		OnCancelAll {
 
 	private static final String LOG_TAG = "RoamingLookupService";
 
@@ -236,7 +237,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 			this.weatherChoice.failedQuery();
 			this.weatherDao.update(this.weatherChoice);
 		}
-		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, true));
 	}
 
 	private void onSuccessfulLookup(final YahooWeatherInfo weather) {
@@ -254,7 +255,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		RateMe.setSuccessIfRequired(this);
 
-		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, false));
 	}
 
 	@Override
@@ -304,8 +305,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 						}
 						else if (null != location && providersFound) {
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
-							geocodeWOIEDDataTaskFromLocation = new GeocodeWOIEDDataTaskFromLocation(location,
-									RoamingLookupService.this.onGeocodeDataCallback);
+							geocodeWOIEDDataTaskFromLocation = new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback);
 							geocodeWOIEDDataTaskFromLocation.execute();
 						}
 						else {

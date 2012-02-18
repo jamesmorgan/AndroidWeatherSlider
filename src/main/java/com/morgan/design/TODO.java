@@ -47,14 +47,22 @@ public class TODO {
 	// Nice To Have //
 	// ///////////////
 	
-	// FIXME -> Potentially show accuracy and time when looking up GPS location
-	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc, Always have GPS at the top, then last update time OR A_z?
 	// FIXME -> Overlay weather on google maps -> http://www.androidhive.info/2012/01/android-working-with-google-maps/
 	// FIXME -> Create Broadcast Service helper e.g. BroadcastRegister.register(this); @BroadcastReciever on file will deal with unbind/bind
 	// FIXME -> Consider Android Annotations (http://code.google.com/p/androidannotations/)
 	// FIXME -> Weather animations?
 	// FIXME -> Add in 3-5 day summary of weather
 	// FIXME -> Create weather tips section, e.g. wear a coat it raining, it may take you longer to get to work, etc. -> opt-in & opt-out
+
+	///////////////////////
+	// ADVANCED SETTINGS //
+	///////////////////////
+
+	// FIXME -> Potentially show accuracy and time when looking up GPS location
+	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc, Always have GPS at the top, then last update time OR A_z?
+	// FIXME -> Allow exporting of locations as xml file / back, hook in to 3rd party backup application
+	// FIXME -> Backup DB option
+	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
 	
 	// ///////////////////
 	// Next Version ?.? //
@@ -68,7 +76,6 @@ public class TODO {
 	// FIXME -> Complete localisation
 	// FIXME -> Add 3 or 5 day forecast.
 	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
-	// FIXME -> Give user option to create shortcuts to either open application, or open overview for one of there locations
 	
 	// FIXME -> Add option for turn off all / disable network usages and turn off re-occurring alarm. 
 			// * Disable all with dialog, broadcast cancel all service.
@@ -79,14 +86,8 @@ public class TODO {
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
-	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
-	
-	// FIXME -> Allow exporting of locations as xml file / back, hook in to 3rd party backup application
-	// FIXME -> Backup DB option
-
-	// FIXME -> Check try/catch blocks report to ACRA if required
 	
 	// //////////////////////
 	// Release Version 1.? //
@@ -98,6 +99,7 @@ public class TODO {
 	
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+	// FIXME -> Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
 	
 	// //////////////////////
 	// Release Version 1.7 //
@@ -105,10 +107,11 @@ public class TODO {
 	
 	// FIXME -> Changelog
 	// FIXME -> Set ScrollView on forecast overview to handle screen rotation & check all screens  
-
-	// FIXME -> Option to disable failed update toasts, default true. NEEDS TEST
 	
-	// FIXME -> show failed toast if on home screen and waiting for update to come through?
+	// FIXME -> Add ICS support - Android 4.0
+	
+	// FIXME -> DONE - (18/02/2012) - Option to disable failed update toasts, default true. 
+	// FIXME -> DONE - (18/02/2012) - Always show failed toast if on home screen even if disabled in service for user feedback
 	
 	// FIXME -> DONE - (17/02/2012) - BUG -> On occasion, roaming services are disabled once a failed request occurs
 	// FIXME -> DONE - (17/02/2012) - Return null from YahooWeatherInfoParser, preventing NPE

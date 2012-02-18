@@ -2,6 +2,7 @@ package com.morgan.design.android;
 
 import static com.morgan.design.Constants.CANCEL_ALL_WEATHER_NOTIFICATIONS;
 import static com.morgan.design.Constants.DELETE_CURRENT_NOTIFCATION;
+import static com.morgan.design.Constants.FAILED_LOOKUP;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
 import static com.morgan.design.Constants.NOTIFICATION_ID;
 import static com.morgan.design.Constants.OPEN_WEATHER_OVERVIEW;
@@ -28,6 +29,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Changelog;
@@ -51,11 +53,11 @@ import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
+import com.morgan.design.android.util.TimeUtils;
 import com.morgan.design.android.util.Utils;
 import com.morgan.design.weatherslider.R;
 
-public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements
-		SimpleGestureListener {
+public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
 
 	private static final String LOG_TAG = "ManageWeatherChoiceActivity";
 
@@ -130,7 +132,14 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved : %s", intent.getAction());
 					reLoadWeatherChoices();
+					if (null != intent && intent.hasExtra(FAILED_LOOKUP)) {
+						// Only show toasts if not active as will also be displayed in service
+						if (!PreferenceUtils.reportErrorOnFailedLookup(ManageWeatherChoiceActivity.this)) {
+							showFailedLookupToast();
+						}
+					}
 				}
+
 			};
 			registerReceiver(this.updateWeatherListBroadcastReceiver, new IntentFilter(Constants.UPDATE_WEATHER_LIST));
 		}
@@ -155,6 +164,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
+
 		switch (item.getItemId()) {
 			case R.id.home_menu_changelog:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_CHANGE_LOG);
@@ -196,6 +206,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	private void createShortcut() {
+
 		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
 		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -204,8 +215,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		Intent intent = new Intent();
 		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
 		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "WeatherSlider");
-		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Bitmap.createScaledBitmap(
-				BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+				Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
 		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 
 		sendBroadcast(intent);
@@ -213,6 +224,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	@Override
 	public boolean onPrepareOptionsMenu(final Menu menu) {
+
 		menu.clear();
 		final MenuInflater inflater = getMenuInflater();
 		if (null != this.weatherChoices) {
@@ -229,6 +241,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+
 		super.onActivityResult(requestCode, resultCode, data);
 		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.ADD_NEW_LOCATION);
 		switch (requestCode) {
@@ -254,35 +267,31 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	protected boolean handleOnItemLongClick(int pos) {
+
 		final WeatherChoice weatherChoice = this.weatherChoices.get(pos);
 
 		if (isNotNull(weatherChoice)) {
-
-			final WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice
-					.getId());
+			final WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
 
 			if (isNotNull(notification) && weatherChoice.isActive()) {
-
-				final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice,
-						R.string.alert_title_open_overview);
+				final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice, R.string.alert_title_open_overview);
 				alertDialog.setCancelable(true);
-				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_open),
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(final DialogInterface dialog, final int id) {
-								final Intent overviewIntent = new Intent(OPEN_WEATHER_OVERVIEW);
-								overviewIntent.putExtra(NOTIFICATION_ID, notification.getServiceId());
-								overviewIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
-								startActivity(overviewIntent);
-							}
-						});
-				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_cancel),
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(final DialogInterface dialog, final int id) {
-								alertDialog.cancel();
-							}
-						});
+				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_open), new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						final Intent overviewIntent = new Intent(OPEN_WEATHER_OVERVIEW);
+						overviewIntent.putExtra(NOTIFICATION_ID, notification.getServiceId());
+						overviewIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
+						startActivity(overviewIntent);
+					}
+				});
+				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						alertDialog.cancel();
+					}
+				});
 				alertDialog.show();
 				return true;
 			}
@@ -292,6 +301,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	@Override
 	protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
+
 		super.onListItemClick(l, v, position, id);
 		final WeatherChoice weatherChoice = this.weatherChoices.get(position);
 
@@ -302,41 +312,37 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			// //////////////////////////////
 			// Refresh | Disabled | Delete //
 			// //////////////////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							onLoadWeatherChoice(weatherChoice);
-						}
-					});
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							attemptToKillNotifcation(weatherChoice);
-						}
-					});
+			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					onLoadWeatherChoice(weatherChoice);
+				}
+			});
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					attemptToKillNotifcation(weatherChoice);
+				}
+			});
 		}
 		else {
 			// //////////////////
 			// Enable | Delete //
 			// //////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							onLoadWeatherChoice(weatherChoice);
-						}
-					});
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					onLoadWeatherChoice(weatherChoice);
+				}
+			});
 		}
 
-		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete),
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int id) {
-						attemptToDeleteNotifcation(weatherChoice);
-					}
-				});
+		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				attemptToDeleteNotifcation(weatherChoice);
+			}
+		});
 
 		alertDialog.show();
 	}
@@ -346,16 +352,17 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// ///////////////////////////////////////
 
 	public void onAddNewLocation(final View view) {
+
 		final Intent intent = new Intent(this, EnterLocationActivity.class);
 		startActivityForResult(intent, Constants.ENTER_LOCATION);
 	}
 
 	protected void onLoadWeatherChoice(final WeatherChoice woeidChoice) {
+
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, woeidChoice.getId());
 
-		final Intent service = woeidChoice.isRoaming() ? new Intent(this, RoamingLookupService.class) : new Intent(
-				this, StaticLookupService.class);
+		final Intent service = woeidChoice.isRoaming() ? new Intent(this, RoamingLookupService.class) : new Intent(this, StaticLookupService.class);
 
 		service.putExtra(FROM_INACTIVE_LOCATION, true);
 		service.putExtras(bundle);
@@ -386,11 +393,16 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	}
 
 	private AlertDialog createCurrentAlertDialog(final WeatherChoice weatherChoice, int titleResource) {
-		final String dialogText = weatherChoice.getCurrentLocationText() + "\n"
-				+ DateUtils.dateToSimpleDateFormat(weatherChoice.getLastUpdatedDateTime());
-		return new AlertDialog.Builder(this)
-				.setIcon(IconFactory.getImageResourceFromCode(weatherChoice.getCurrentWeatherCode()))
+		final String dialogText = weatherChoice.getCurrentLocationText() + "\n" + DateUtils.dateToSimpleDateFormat(weatherChoice.getLastUpdatedDateTime());
+		return new AlertDialog.Builder(this).setIcon(IconFactory.getImageResourceFromCode(weatherChoice.getCurrentWeatherCode()))
 				.setTitle(getString(titleResource)).setMessage(dialogText).create();
+	}
+
+	private void showFailedLookupToast() {
+		Toast.makeText(
+				this,
+				String.format(getString(R.string.toast_unable_to_get_weather_details),
+						TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
 	}
 
 	// /////////////////////////////////////////////

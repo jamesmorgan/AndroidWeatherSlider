@@ -1,5 +1,6 @@
 package com.morgan.design.android.service;
 
+import static com.morgan.design.Constants.FAILED_LOOKUP;
 import static com.morgan.design.Constants.FROM_INACTIVE_LOCATION;
 import static com.morgan.design.Constants.LOOPING_ALARM;
 import static com.morgan.design.Constants.UPDATE_WEATHER_LIST;
@@ -156,8 +157,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
 			}
 		}
-
-		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, null != weatherLookup));
 	}
 
 	@Override

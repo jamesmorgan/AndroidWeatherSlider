@@ -77,5 +77,6 @@ public class Constants {
 	public static final String CONNECTIVITY_CHANGED = "CONNECTIVITY_CHANGED";
 	public static final String FROM_INACTIVE_LOCATION = "FROM_INACTIVE_LOCATION";
 	public static final String FROM_FRESH_LOOKUP = "FROM_FRESH_LOOKUP";
+	public static final String FAILED_LOOKUP = "FAILED_LOOKUP";
 
 }
