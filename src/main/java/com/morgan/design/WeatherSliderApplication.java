@@ -9,6 +9,7 @@ import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_RELOAD_ON_CONNECTIVITY_CHANGED;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_REPORT_ERROR_ON_FAILED_LOOKUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_SHOWN_RATE_ME_POPUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_TEMPERATURE_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_WIND_MODE;
@@ -42,7 +43,7 @@ import com.morgan.design.weatherslider.R;
 		resToastText = R.string.crash_toast_text,
 		additionalSharedPreferences={PREF_CHANGELOG, PREF_POLLING_SCHEDULE, PREF_POLLING_SCHEDULE, PREF_OVERVIEW_MODE,
 									PREF_TEMPERATURE_MODE,PREF_WIND_MODE, PREF_RELOAD_ON_CONNECTIVITY_CHANGED, PREF_ENABLED_NOTIFCATION_TICKER_TEXT,
-									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS})
+									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS, PREF_REPORT_ERROR_ON_FAILED_LOOKUP})
 //@formatter:on
 public class WeatherSliderApplication extends Application {
 

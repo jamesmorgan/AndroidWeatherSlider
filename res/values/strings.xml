@@ -87,6 +87,10 @@
     <string name="pref_disable_notification_ticker_text_disabled">Text notification updates are disabled</string>
     <string name="pref_disable_notification_ticker_text_enabled">Text notification updates are enabled</string>
     
+    <string name="pref_report_error_on_failed_lookup_title">Failed Request Alerts</string>
+    <string name="pref_report_error_on_failed_lookup_disabled">Failed request alerts are disabled</string>
+    <string name="pref_report_error_on_failed_lookup_enabled">Failed request alerts are enabled</string>
+    
     <string name="pref_acra_syslog_disabled">Don\'t collect systems logs on application crash</string>
     <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>
     <string name="pref_acra_syslog">Error Reporting</string>
@@ -160,5 +164,6 @@
     <!-- Swipe Areas -->
     <string name="swipe_left_for_forecast_details">Swipe left for forecast details…</string>
     <string name="swipe_right_for_current_conditions">…Swipe right for current conditions</string>
+    <string name="toast_unable_to_find_the_weather_for_your_location">Unable to find the weather for your location, please try agin.</string>
 
 </resources>

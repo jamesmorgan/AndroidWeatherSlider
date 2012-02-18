@@ -18,7 +18,6 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.RateMe;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ReloadWeatherReciever;
@@ -35,9 +34,10 @@ import com.morgan.design.android.util.HttpWeatherLookupFactory;
 import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
+import com.morgan.design.weatherslider.R;
 
-public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection,
-		OnAsyncCallback<YahooWeatherLookup>, OnReloadWeather {
+public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnAsyncCallback<YahooWeatherLookup>,
+		OnReloadWeather {
 
 	private static final String LOG_TAG = "StaticLookupService";
 
@@ -149,11 +149,12 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 			this.weatherChoice = this.weatherDao.getActiveStaticLocations();
 		}
 		else {
-			Toast.makeText(
-					this,
-					String.format(getString(R.string.toast_unable_to_get_weather_details),
-							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
-				.show();
+			if (PreferenceUtils.reportErrorOnFailedLookup(this)) {
+				Toast.makeText(
+						this,
+						String.format(getString(R.string.toast_unable_to_get_weather_details),
+								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
+			}
 		}
 
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));

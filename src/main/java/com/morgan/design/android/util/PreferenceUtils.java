@@ -26,6 +26,7 @@ public final class PreferenceUtils {
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
 	public static final String PREF_REFRESH_ON_USER_PRESENT = "refreshOnUserPresent";
 	public static final String PREF_ENABLED_NOTIFCATION_TICKER_TEXT = "enableNotificationTickerText";
+	public static final String PREF_REPORT_ERROR_ON_FAILED_LOOKUP = "reportErrorOnFailedLookup";
 
 	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
 	public static final String PREF_SHOWN_RATE_ME_POPUP = "shown.rateme.popup";
@@ -155,5 +156,13 @@ public final class PreferenceUtils {
 
 	public static boolean enabledNotifcationTickerText(Context context) {
 		return getPrefs(context).getBoolean(PREF_ENABLED_NOTIFCATION_TICKER_TEXT, true);
+	}
+
+	public static boolean setReportErrorOnFailedLookup(final Context context, final boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_REPORT_ERROR_ON_FAILED_LOOKUP, value).commit();
+	}
+
+	public static boolean reportErrorOnFailedLookup(Context context) {
+		return getPrefs(context).getBoolean(PREF_REPORT_ERROR_ON_FAILED_LOOKUP, false);
 	}
 }

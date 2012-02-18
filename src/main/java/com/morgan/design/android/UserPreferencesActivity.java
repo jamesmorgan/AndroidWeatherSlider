@@ -8,6 +8,7 @@ import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_RELOAD_ON_CONNECTIVITY_CHANGED;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_REPORT_ERROR_ON_FAILED_LOOKUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_START_ON_BOOT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_TEMPERATURE_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_WIND_MODE;
@@ -149,6 +150,15 @@ public class UserPreferencesActivity extends PreferenceActivity {
 				@Override
 				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
 					return PreferenceUtils.setEnableNotificationTickerText(getApplicationContext(), (Boolean) clicked);
+				}
+			});
+		}
+
+		if (pref.getKey().equals(PREF_REPORT_ERROR_ON_FAILED_LOOKUP)) {
+			findPreference(PREF_REPORT_ERROR_ON_FAILED_LOOKUP).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setReportErrorOnFailedLookup(getApplicationContext(), (Boolean) clicked);
 				}
 			});
 		}

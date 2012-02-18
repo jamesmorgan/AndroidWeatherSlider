@@ -47,8 +47,8 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 import com.morgan.design.weatherslider.R;
 
-public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>,
-		ServiceConnection, OnReloadWeather, OnCancelAll {
+public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> implements OnAsyncCallback<YahooWeatherInfo>, ServiceConnection,
+		OnReloadWeather, OnCancelAll {
 
 	private static final String LOG_TAG = "RoamingLookupService";
 
@@ -222,18 +222,17 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		// Remove immediately if cannot find find location
 		if (this.weatherChoice.isFirstAttempt()) {
-			Toast.makeText(this, "Unable to find the weather for your location, please try agin.", Toast.LENGTH_SHORT)
-				.show();
+			Toast.makeText(this, R.string.toast_unable_to_find_the_weather_for_your_location, Toast.LENGTH_SHORT).show();
 			this.weatherDao.delete(this.weatherChoice);
 		}
 		// If active and failed, report failure and inform user of re-try
 		else {
-			Toast.makeText(
-					this,
-					String.format("Unable to get weather details at present, will try again in %s",
-							TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
-				.show();
-			this.weatherChoice.setActive(false);
+			if (PreferenceUtils.reportErrorOnFailedLookup(this)) {
+				Toast.makeText(
+						this,
+						String.format(getString(R.string.toast_unable_to_get_weather_details),
+								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
+			}
 			this.weatherChoice.failedQuery();
 			this.weatherDao.update(this.weatherChoice);
 		}
@@ -304,10 +303,9 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 							Logger.d(LOG_TAG, "No location providers found, GPS and MOBILE are disabled");
 						}
 						else if (null != location && providersFound) {
-							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(),
-									location.getLatitude());
-							geocodeWOIEDDataTaskFromLocation =
-									new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback);
+							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
+							geocodeWOIEDDataTaskFromLocation = new GeocodeWOIEDDataTaskFromLocation(location,
+									RoamingLookupService.this.onGeocodeDataCallback);
 							geocodeWOIEDDataTaskFromLocation.execute();
 						}
 						else {
@@ -317,8 +315,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 					}
 				}
 			};
-			registerReceiver(this.locationChangedBroadcastReciever,
-					new IntentFilter(LocationLookupService.ROAMING_LOCATION_FOUND_BROADCAST));
+			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(LocationLookupService.ROAMING_LOCATION_FOUND_BROADCAST));
 		}
 	}
 
@@ -357,8 +354,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		private final OnAsyncCallback<YahooWeatherInfo> asyncCallback;
 		private final GeocodeResult result;
 
-		public GetYahooWeatherInformationTask(final ConnectivityManager cnnxManager, final GeocodeResult result,
-				final Temperature temperature, final OnAsyncCallback<YahooWeatherInfo> asyncCallback) {
+		public GetYahooWeatherInformationTask(final ConnectivityManager cnnxManager, final GeocodeResult result, final Temperature temperature,
+				final OnAsyncCallback<YahooWeatherInfo> asyncCallback) {
 			this.cnnxManager = cnnxManager;
 			this.result = result;
 			this.asyncCallback = asyncCallback;
