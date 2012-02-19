@@ -28,6 +28,15 @@
 
     <!-- All options involved with how often we check for weather updates -->
     <PreferenceCategory android:title="Refresh Options" >
+
+        <ListPreference
+            android:defaultValue="30"
+            android:entries="@array/polling_time"
+            android:entryValues="@array/polling_time_values"
+            android:key="pollingSchedule"
+            android:summary="@string/pref_polling_time_summary"
+            android:title="@string/pref_polling_time_title" />
+        
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="startOnBoot"
@@ -51,24 +60,16 @@
 
         <CheckBoxPreference
             android:defaultValue="false"
+            android:key="refreshOnUserPresent"
+            android:summary="@string/pref_refresh_on_user_present_summary"
+            android:title="@string/pref_refresh_on_user_present_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="reportErrorOnFailedLookup"
             android:summaryOn="@string/pref_report_error_on_failed_lookup_enabled"
             android:summaryOff="@string/pref_report_error_on_failed_lookup_disabled"
             android:title="@string/pref_report_error_on_failed_lookup_title" />
-
-        <ListPreference
-            android:defaultValue="30"
-            android:entries="@array/polling_time"
-            android:entryValues="@array/polling_time_values"
-            android:key="pollingSchedule"
-            android:summary="@string/pref_polling_time_summary"
-            android:title="@string/pref_polling_time_title" />
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="refreshOnUserPresent"
-            android:summary="@string/pref_refresh_on_user_present_summary"
-            android:title="@string/pref_refresh_on_user_present_title" />
     </PreferenceCategory>
 
     <!-- All options which effect how the application runs -->

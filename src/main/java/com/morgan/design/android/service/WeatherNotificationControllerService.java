@@ -172,9 +172,8 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		if (null != weatherInfo) {
 			this.applicaiton.setWeather(serviceId, weatherInfo);
 
-			// Cancel existing notification, giving impression of textual
-			// updates on new one, if disabled, simple re-use existing
-			// notification
+			// Cancel existing notification, giving impression of textual updates on new one, if disabled, simple re-use
+			// existing notification
 			if (PreferenceUtils.enabledNotifcationTickerText(this)) {
 				this.notificationManager.cancel(serviceId);
 			}

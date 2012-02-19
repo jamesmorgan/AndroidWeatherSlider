@@ -83,13 +83,13 @@
     <string name="pref_changelog_disabled">Don\'t show Change Log On Version Upgrade</string>
     <string name="pref_changelog_enabled">Show Change Log On Version Upgrade</string>
     
-    <string name="pref_disable_notification_ticker_text_title">Notification Text Updates</string>
-    <string name="pref_disable_notification_ticker_text_disabled">Text notification updates are disabled</string>
-    <string name="pref_disable_notification_ticker_text_enabled">Text notification updates are enabled</string>
+    <string name="pref_disable_notification_ticker_text_title">Weather Summary</string>
+    <string name="pref_disable_notification_ticker_text_disabled">Don\'t show weather summary updates</string>
+    <string name="pref_disable_notification_ticker_text_enabled">Summary weather updates are enabled</string>
     
-    <string name="pref_report_error_on_failed_lookup_title">Failed Request Alerts</string>
-    <string name="pref_report_error_on_failed_lookup_disabled">Failed request alerts are disabled</string>
-    <string name="pref_report_error_on_failed_lookup_enabled">Failed request alerts are enabled</string>
+    <string name="pref_report_error_on_failed_lookup_title">Failure Notification</string>
+    <string name="pref_report_error_on_failed_lookup_disabled">Don\'t alert me if a weather lookup fails</string>
+    <string name="pref_report_error_on_failed_lookup_enabled">Alert me if a weather lookup fails</string>
     
     <string name="pref_acra_syslog_disabled">Don\'t collect systems logs on application crash</string>
     <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>

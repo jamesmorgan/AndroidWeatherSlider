@@ -127,19 +127,17 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		super.onResume();
 		if (isNull(this.updateWeatherListBroadcastReceiver)) {
 			this.updateWeatherListBroadcastReceiver = new BroadcastReceiver() {
-
 				@Override
 				public void onReceive(final Context context, final Intent intent) {
 					Logger.d(LOG_TAG, "Recieved : %s", intent.getAction());
 					reLoadWeatherChoices();
-					if (null != intent && intent.hasExtra(FAILED_LOOKUP)) {
+					if (null != intent && intent.hasExtra(FAILED_LOOKUP) && intent.getBooleanExtra(FAILED_LOOKUP, false)) {
 						// Only show toasts if not active as will also be displayed in service
 						if (!PreferenceUtils.reportErrorOnFailedLookup(ManageWeatherChoiceActivity.this)) {
 							showFailedLookupToast();
 						}
 					}
 				}
-
 			};
 			registerReceiver(this.updateWeatherListBroadcastReceiver, new IntentFilter(Constants.UPDATE_WEATHER_LIST));
 		}

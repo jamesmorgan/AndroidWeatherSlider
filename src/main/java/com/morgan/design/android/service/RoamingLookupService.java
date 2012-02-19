@@ -255,7 +255,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		RateMe.setSuccessIfRequired(this);
 
-		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, false));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST));
 	}
 
 	@Override

@@ -37,8 +37,7 @@ import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 import com.morgan.design.weatherslider.R;
 
-public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnAsyncCallback<YahooWeatherLookup>,
-		OnReloadWeather {
+public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnAsyncCallback<YahooWeatherLookup>, OnReloadWeather {
 
 	private static final String LOG_TAG = "StaticLookupService";
 
@@ -157,7 +156,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
 			}
 		}
-		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, null != weatherLookup));
+		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, null == weatherLookup));
 	}
 
 	@Override
@@ -193,8 +192,8 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		private final ConnectivityManager cnnxManager;
 		private final OnAsyncCallback<YahooWeatherLookup> asyncCallback;
 
-		public GetYahooWeatherInformationForWoeid(final ConnectivityManager cnnxManager, final WeatherChoice weatherChoice,
-				final Temperature temperature, final OnAsyncCallback<YahooWeatherLookup> asyncCallback) {
+		public GetYahooWeatherInformationForWoeid(final ConnectivityManager cnnxManager, final WeatherChoice weatherChoice, final Temperature temperature,
+				final OnAsyncCallback<YahooWeatherLookup> asyncCallback) {
 			this.cnnxManager = cnnxManager;
 			this.asyncCallback = asyncCallback;
 			this.weatherChoice = weatherChoice;

@@ -21,13 +21,13 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.Logger;
+import com.morgan.design.weatherslider.R;
 
 public class NotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnCancelAll {
 
@@ -100,10 +100,9 @@ public class NotificationControllerService extends OrmLiteBaseService<DatabaseHe
 
 	protected void onNotificationsFull(final Context context) {
 		Logger.d(LOG_TAG, "Recieved: %s ", NOTIFICATIONS_FULL);
-		Toast.makeText(
-				context,
-				String.format(context.getString(R.string.toast_max_notifications_reached),
-						WeatherNotificationControllerService.MAX_NUMBER_OF_NOTIFICATIONS), Toast.LENGTH_SHORT).show();
+		Toast.makeText(context,
+				String.format(context.getString(R.string.toast_max_notifications_reached), WeatherNotificationControllerService.MAX_NUMBER_OF_NOTIFICATIONS),
+				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

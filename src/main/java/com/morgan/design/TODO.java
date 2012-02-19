@@ -107,11 +107,12 @@ public class TODO {
 	
 	// FIXME -> Changelog
 	// FIXME -> Set ScrollView on forecast overview to handle screen rotation & check all screens  
-	
 	// FIXME -> Add ICS support - Android 4.0
 	
-	// FIXME -> DONE - (18/02/2012) - Option to disable failed update toasts, default true. 
-	// FIXME -> DONE - (18/02/2012) - Always show failed toast if on home screen even if disabled in service for user feedback
+	// FIXME -> DONE - (19/02/2012) - Re-word and reorder preferences
+	// FIXME -> DONE - (19/02/2012) - BUG Text notifications still come through from roaming lookup service
+	// FIXME -> DONE - (19/02/2012) - Option to disable failed update toasts, default true. 
+	// FIXME -> DONE - (19/02/2012) - Always show failed toast if on home screen even if disabled in service for user feedback
 	
 	// FIXME -> DONE - (17/02/2012) - BUG -> On occasion, roaming services are disabled once a failed request occurs
 	// FIXME -> DONE - (17/02/2012) - Return null from YahooWeatherInfoParser, preventing NPE
