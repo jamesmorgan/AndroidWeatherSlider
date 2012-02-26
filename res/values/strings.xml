@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Android Mainifest -->
+    <string name="crash_toast_text">Sorry! The application has died, a report has been sent to the developer in order to fix the issue!</string>
+    <string name="app_name">Weather Slider</string>
+    <string name="get_my_location_service">None-bindable Location Look Service</string>
+    <string name="gps_weather_service">gps_weather_service</string>
+    <string name="periodic_reciever">Register periodic launcher for connectivity changes and get weather download</string>
+
+    <!-- Change Log -->
+    <string name="changelog_title">Change Log</string>
+    <string name="changelog_filename">changelog.html</string>
+
+    <!-- Rate Me -->
+    <string name="rate_me_title">Would you like to rate the application?</string>
+
+    <!-- Button / General -->
+    <string name="no_thanks">No Thanks</string>
+    <string name="okay">Okay</string>
+    <string name="feedback">Feedback</string>
+    <string name="home">Home</string>
+    <string name="not_available">N/A</string>
+    <string name="alert_yes">Yes</string>
+    <string name="alert_no">No</string>
+    <string name="alert_open">Open</string>
+    <string name="alert_cancel">Cancel</string>
+
+    <!-- Feedback form -->
+    <string name="feedbacktitle">Enter feedback details:</string>
+    <string name="feedbackname">Name</string>
+    <string name="feedbackemail">Email (not required)</string>
+    <string name="feedbackbody">Details…</string>
+    <string name="feedbackresponse">Would you like an email response?</string>
+    <string name="feedbackbutton">Send Feedback…</string>
+    <string name="feedbacktype">Type…</string>
+    <string name="feedbacktype1">Improvement</string>
+    <string name="feedbacktype2">Suggestion</string>
+    <string name="feedbacktype3">Bug</string>
+    <string name="feedbacktype4">Other</string>
+    <string name="feedbackmessagebody_responseyes">Requires a response</string>
+    <string name="feedbackmessagebody_responseno">Does not require a response</string>
+    <string name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>
+    <string name="no_email_clients_installed">There are no email clients installed.</string>
+
+    <!-- Notification IDS -->
+    <string name="weather_notification_service_1">weather_notification_service_1</string>
+    <string name="weather_notification_service_2">weather_notification_service_2</string>
+    <string name="weather_notification_service_3">weather_notification_service_3</string>
+
+    <!-- Weather Overview activity -->
+    <string name="further_details">Further Details</string>
+    <string name="open_google_maps">Google Maps</string>
+
+    <!-- User Preferences activity -->
+    <string name="pref_overview_mode_title">Overview mode</string>
+    <string name="pref_overview_mode_summary">Change what happens when you click on each notification</string>
+    
+    <string name="pref_temp_mode_title">Temperature</string>
+    <string name="pref_temp_mode_summary">Show temperature in Celsius or Fahrenheit</string>
+    
+    <string name="pref_wind_mode_title">Wind Speed</string>
+    <string name="pref_wind_mode_summary">Show speed in mph or kph</string>
+    
+    <string name="pref_polling_time_title">Update Interval</string>
+    <string name="pref_polling_time_summary">Configure when to check for weather updates</string>
+    
+    <string name="pref_start_on_boot_title">Start On Phone Boot</string>
+    <string name="pref_start_on_boot_enabled">Refresh weather on phone start</string>
+    <string name="pref_start_on_boot_disabled">Don\'t refresh weather on phone start</string>
+
+    <string name="pref_reload_on_connectivity_change_title">Refresh On Connectivity Changed</string>
+    <string name="pref_reload_on_connectivity_change_enabled">Weather will refresh when your connectivity changes</string>
+    <string name="pref_reload_on_connectivity_change_disabled">Don\'t refresh you weather on connectivity changes</string>
+    
+    <string name="pref_refresh_on_user_present_title">Refresh On Wake</string>
+    <string name="pref_refresh_on_user_present_summary">e.g. phone unlock, wake. Enabling this will use more battery but can be useful</string>
+    
+    <string name="pref_google_analytics_title">Enable Google Analytics</string>
+    <string name="pref_google_analytics_summary">Thanks for helping improve this application</string>
+    
+    <string name="pref_changelog_title">Change Log</string>
+    <string name="pref_changelog_disabled">Don\'t show Change Log On Version Upgrade</string>
+    <string name="pref_changelog_enabled">Show Change Log On Version Upgrade</string>
+    
+    <string name="pref_disable_notification_ticker_text_title">Weather Summary</string>
+    <string name="pref_disable_notification_ticker_text_disabled">Don\'t show weather summary updates</string>
+    <string name="pref_disable_notification_ticker_text_enabled">Summary weather updates are enabled</string>
+    
+    <string name="pref_report_error_on_failed_lookup_title">Failure Notification</string>
+    <string name="pref_report_error_on_failed_lookup_disabled">Don\'t alert me if a weather lookup fails</string>
+    <string name="pref_report_error_on_failed_lookup_enabled">Alert me if a weather lookup fails</string>
+    
+    <string name="pref_acra_syslog_disabled">Don\'t collect systems logs on application crash</string>
+    <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>
+    <string name="pref_acra_syslog">Error Reporting</string>
+    
+    <!-- Home Screen - ManageWeatherChoiceActivity.java -->
+    <string name="alert_title_open_overview">Open Overview Screen</string>
+    <string name="alert_title_manage_location">Manage Notification</string>
+    <string name="alert_refresh">Refresh</string>
+    <string name="alert_disable">Disable</string>
+    <string name="alert_enable">Enable</string>
+    <string name="alert_delete">Delete</string>
+    <string name="button_add_new_location">Add New Location…</string>
+    <string name="modify_loaded_locaitons">Add or modify your locations</string>
+
+    <!-- List locations activity -->
+    <string name="alert_on_location_click_is_this_correct">"Is this correct? "</string>
+
+    <!-- Forecast overview tabs -->
+    <string name="forecast_overview_highs_of">"Highs of "</string>
+    <string name="forecast_overview_lows_of">"Lows of "</string>
+
+    <!-- Enter location activity -->
+    <string name="title_add_a_new_location">Add a new location</string>
+    <string name="summary_enter_a_location_or_use_your_gps">Enter a location or use your GPS…</string>
+    <string name="text_field_enter_location">Enter Location…</string>
+    <string name="button_lookup">Lookup…</string>
+    <string name="enter_location_example">e.g. Postal Code or Town</string>
+    <string name="find_your_location_title">Find your location</string>
+    <string name="find_your_current_location_summary">Find your current location via GPS</string>
+    <string name="chkbox_always_use_gps">Always Use GPS</string>
+    <string name="always_use_gps_summary">Always find your location via GPS</string>
+    <string name="toast_unable_to_locate_you">Unable to locate you, please ensure you are connected to the network.</string>
+    <string name="toast_please_enter_a_location">Please enter a location.</string>
+    <string name="network_issue_onload">You network is disabled, please re-enabled in order for this application to work correctly.</string>
+    <string name="toast_unable_to_request_network_location">Unable to request network location. You are currently not connected.</string>
+    <string name="toast_low_battery_warning">Low battery, unable to use location services.</string>
+    <string name="toast_attempting_to_lookup_your_gps_location">Attempting to lookup your GPS location and find the weather.</string>
+    <string name="toast_error_unable_to_find_you">Unable to find %s, please try again.</string>
+    <string name="alaert_enabled_gps_provider">No location providers found, Your GPS &amp; Mobile Network is disabled! Would you like to enable it?</string>
+    <string name="alert_enable_gps">Enable GPS</string>
+    <string name="alert_do_nothing">Do nothing</string>
+
+    <!-- Service Updates -->
+    <string name="service_update_getting_your_location">Getting Location. Please wait…</string>
+    <string name="service_update_location_found_looking_up_area">Location found, looking up area. Please wait…</string>
+    <string name="service_update_getting_current_location">Getting Current Location. Please wait…</string>
+    <string name="service_update_loading_existing_notifications">Loading existing notifications</string>
+    <string name="service_update_preferences_changed_updating">Preferences changed, updating…</string>
+    <string name="service_update_initalizing_weather_lookup">Initializing Weather Lookup</string>
+    <string name="service_update_completed_weather_lookup">Completed Weather Lookup</string>
+    <string name="service_update_running_weather_lookup">Running Weather Lookup</string>
+    <string name="service_update_refreshing_weather_notifications">Refreshing weather notifications…</string>
+    <string name="service_update_attempting_to_refresh_weather">Attempting to refresh weather…</string>
+    <string name="service_update_failed_to_refresh_weather">Failed to refresh weather</string>
+    <string name="service_update_scheduling_next_refresh">Scheduling next refresh…</string>
+    <string name="service_update_initiating_gps_lookup">Initiating GPS lookup</string>
+    <string name="service_update_failed_gps_lookup">Failed GPS lookup</string>
+    <string name="service_update_gps_location_found">GPS Location found</string>
+    <string name="service_update_gps_location_not_found">GPS Location not found</string>
+    <string name="service_update_lookup_geocode_location">Lookup Geocode Location</string>
+    <string name="service_update_finding_geocode_location">Finding Geocode Location</string>
+    <string name="service_update_unable_to_fina_geocode_location">Unable to find Geocode Location</string>
+    <string name="service_update_geocode_location_found">Geocode Location Found</string>
+
+    <!-- StaticLookupService -->
+    <string name="toast_unable_to_get_weather_details">Unable to get weather details at present, will try again in %s</string>
+
+    <!-- NotificationControllerService -->
+    <string name="toast_max_notifications_reached">Unable to add more weather notifications, please remove one first, maximum of %s notifications allowed</string>
+
+    <!-- Swipe Areas -->
+    <string name="swipe_left_for_forecast_details">Swipe left for forecast details…</string>
+    <string name="swipe_right_for_current_conditions">…Swipe right for current conditions</string>
+    <string name="toast_unable_to_find_the_weather_for_your_location">Unable to find the weather for your location, please try agin.</string>
+
+</resources>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.morgan.design</groupId>
+	<artifactId>WeatherSlider</artifactId>
+	<version>1.7-SNAPSHOT</version>
+	<packaging>apk</packaging>
+	<name>WeatherSlider</name>
+
+	<properties>
+		<spring-android-version>1.0.0.M4</spring-android-version>
+		<simple-version>2.4.1</simple-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.android</groupId>
+			<artifactId>spring-android-rest-template</artifactId>
+			<version>${spring-android-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.android</groupId>
+			<artifactId>spring-android-core</artifactId>
+			<version>${spring-android-version}</version>
+		</dependency>
+		<dependency>
+			<!-- Using Simple for XML marshaling -->
+			<groupId>org.simpleframework</groupId>
+			<artifactId>simple-xml</artifactId>
+			<version>${simple-version}</version>
+			<exclusions>
+				<!-- StAX is not available on Android -->
+				<exclusion>
+					<artifactId>stax</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<!-- Provided by Android -->
+				<exclusion>
+					<artifactId>xpp3</artifactId>
+					<groupId>xpp3</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1.1-android-fork</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.android.apps.analytics</groupId>
+			<artifactId>GoogleAnalyticsTracker</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-android</artifactId>
+			<version>4.33</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.acra</groupId>
+			<artifactId>acra</artifactId>
+			<version>4.2.3</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v4</artifactId>
+			<version>r6</version>
+		</dependency>-->
+
+		<!-- ActionBar sherlock http://actionbarsherlock.com/download.html -->
+		<dependency>
+			<groupId>com.actionbarsherlock</groupId>
+			<artifactId>library</artifactId>
+			<version>3.5.1</version>
+			<type>apklib</type>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.simpleframework</groupId> <artifactId>simple-xml</artifactId> 
+			<version>${simple-version}</version> </dependency> -->
+		<!-- <dependency> <groupId>com.viewpagerindicator</groupId> <artifactId>library</artifactId> 
+			<version>2.2.2</version> <type>apklib</type> </dependency> -->
+		<!--<dependency> -->
+		<!-- Using Jackson for JSON marshaling -->
+		<!--<groupId>org.codehaus.jackson</groupId> <artifactId>jackson-mapper-asl</artifactId> 
+			<version>1.7.3</version> <scope>compile</scope> -->
+		<!--</dependency> -->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Android Maven build plugin -->
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>3.0.2</version>
+
+				<!-- Zip Allign APK -->
+				<executions>
+					<execution>
+						<id>alignApk</id>
+						<phase>install</phase>
+						<goals>
+							<goal>zipalign</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<proguard>
+						<skip>true</skip>
+					</proguard>
+					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+					<assetsDirectory>${project.basedir}/assets</assetsDirectory>
+					<resourceDirectory>${project.basedir}/res</resourceDirectory>
+					<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
+					<sdk>
+						<platform>7</platform>
+					</sdk>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+
+					<!-- Zip Allign Configuration -->
+					<zipalign>
+						<verbose>true</verbose>
+						<skip>false</skip>
+						<inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
+						<outputApk>${project.build.directory}/${project.artifactId}-aligned.apk</outputApk>
+					</zipalign>
+
+				</configuration>
+				<extensions>true</extensions>
+			</plugin>
+
+			<!-- Maven Compile Me -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<!-- Sets the AndroidManifest.xml Version Name to the projects version 
+				number -->
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<source>
+								project.modules.each {
+								try {
+								def manifestFile = new
+								File("${it}/AndroidManifest.xml")
+								def ns = new
+								groovy.xml.Namespace("http://schemas.android.com/apk/res/android",
+								"ns")
+								def parser = new groovy.util.XmlParser(false, true)
+								def
+								rootNode = parser.parse(manifestFile)
+								def attributes =
+								rootNode.attributes()
+								attributes[ns.versionName] =
+								"${project.version}"
+								def writer = new
+								groovy.io.GroovyPrintWriter(manifestFile)
+								writer.println('&lt;?xml version="1.0" encoding="UTF-8"?&gt;')
+								def xmlWriter = new groovy.util.XmlNodePrinter(writer)
+								xmlWriter.setPreserveWhitespace(false)
+								xmlWriter.setNamespaceAware(true)
+								xmlWriter.print(rootNode)
+								}
+								catch (FileNotFoundException e)
+								{
+								println('No AndroidManifest.xml
+								file found. Skipping version update.')
+								println('Probably not an
+								Android project, but a library.')
+								println('Skipping version
+								update.')
+								}
+								}
+							</source>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.jayway.maven.plugins.android.generation2
+										</groupId>
+										<artifactId>
+											android-maven-plugin
+										</artifactId>
+										<versionRange>
+											[3.0.0,)
+										</versionRange>
+										<goals>
+											<goal>proguard</goal>
+											<goal>manifest-update</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+	<repositories>
+		<!-- For testing against latest Spring snapshots -->
+		<!-- For developing with Android ROME Feed Reader -->
+		<repository>
+			<id>android-rome-feed-reader-repository</id>
+			<name>Android ROME Feed Reader Repository</name>
+			<url>https://android-rome-feed-reader.googlecode.com/svn/maven2/releases</url>
+		</repository>
+
+		<!-- <repository> <id>org.springframework.maven.snapshot</id> <name>Spring 
+			Maven Snapshot Repository</name> <url>http://maven.springframework.org/snapshot</url> 
+			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
+			</snapshots> </repository> -->
+		<!-- For developing against latest Spring milestones -->
+
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring 
+			Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<!-- Google Android crash reporting tool -->
+		<repository>
+			<id>acra-releases</id>
+			<url>http://acra.googlecode.com/svn/repository/releases</url>
+		</repository>
+
+		<!-- Android aciotn bar library -->
+		<repository>
+			<id>jakewharton</id>
+			<url>http://r.jakewharton.com/maven/release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>maven-android-plugin</id>
+			<name>android mvn repo</name>
+			<url>http://rgladwell.github.com/m2e-android/updates/master</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
+</project>

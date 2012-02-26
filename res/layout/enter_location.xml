@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dip" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:text="@string/title_add_a_new_location"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="@string/summary_enter_a_location_or_use_your_gps"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#3399FF" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="clip_horizontal|clip_vertical"
+            android:orientation="vertical"
+            android:weightSum="1.0" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="15dip"
+                android:paddingTop="15dip" >
+
+                <LinearLayout
+                    android:id="@+id/text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="0px"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true" />
+
+                    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component to prevent the dummy from receiving focus again -->
+                    <EditText
+                        android:id="@+id/locationText"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/text_field_enter_location"
+                        android:nextFocusLeft="@id/locationText"
+                        android:nextFocusUp="@id/locationText"
+                        android:singleLine="true" >
+                    </EditText>
+
+                    <Button
+                        android:id="@+id/lookUpLocationButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onGetLocation"
+                        android:text="@string/button_lookup" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_location_example"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <LinearLayout
+                android:id="@+id/lookup_location_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|clip_vertical"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dip"
+                android:paddingTop="13dip" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.00"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/find_your_location_title"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/find_your_current_location_summary"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/getMyLocationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onGetCurrentMyLocation"
+                    android:text="@string/button_lookup" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <LinearLayout
+                android:id="@+id/use_gps_location_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|clip_vertical"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dip"
+                android:paddingTop="13dip" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.00"
+                    android:orientation="vertical" >
+
+                    <CheckBox
+                        android:id="@+id/use_gps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onEnabledGpsLocation"
+                        android:text="@string/chkbox_always_use_gps"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/always_use_gps_summary"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/alwaysUseGpsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:onClick="onAlwaysUseGpsForLocation"
+                    android:text="@string/button_lookup" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
