@@ -1,280 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/location_a"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dip"
-        android:text="Place Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/location_b"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingBottom="10dip"
-        android:text="City"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
+        <TextView
+            android:id="@+id/location_a"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="10dip" >
+            android:paddingTop="10dip"
+            android:text="Place Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <LinearLayout
+        <TextView
+            android:id="@+id/location_b"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dip"
+            android:text="City"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dip" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/weather_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current Weather Description"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <ImageView
+                        android:id="@+id/weather_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/default_weather_icon" />
+
+                    <TextView
+                        android:id="@+id/main_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Temp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip" >
+
+                <TextView
+                    android:id="@+id/location_lat_long"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="long &amp; Lat" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:id="@+id/additionaal_details_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:padding="10dip" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/weather_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Current Weather Description"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <ImageView
-                    android:id="@+id/weather_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/default_weather_icon" />
-
-                <TextView
-                    android:id="@+id/main_temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Temp"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-            </LinearLayout>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dip" >
-
-            <TextView
-                android:id="@+id/location_lat_long"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="long &amp; Lat" />
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:id="@+id/additionaal_details_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:gravity="center_horizontal"
-        android:padding="10dip" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Temp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Value" />
-
-            <TextView
-                android:id="@+id/humidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Humidity" />
-
-            <TextView
-                android:id="@+id/pressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/pressure_steady"
-                android:text="Pressure" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Wind "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/wind_chill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chill" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/wind_speed"
+                    android:id="@+id/temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Speed" />
+                    android:text="Value" />
 
                 <TextView
-                    android:id="@+id/wind_direction"
+                    android:id="@+id/humidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="->" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Sun "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:layout_width="16dip"
-                    android:layout_height="16dip"
-                    android:src="@drawable/sun_rise" />
+                    android:text="Humidity" />
 
                 <TextView
-                    android:id="@+id/sun_rise"
+                    android:id="@+id/pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rise" />
+                    android:drawableLeft="@drawable/pressure_steady"
+                    android:text="Pressure" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:layout_width="16dip"
-                    android:layout_height="16dip"
-                    android:src="@drawable/sun_set" />
+                android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/sun_set"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Set" />
+                    android:text=" Wind "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/wind_chill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chill" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/wind_speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Speed" />
+
+                    <TextView
+                        android:id="@+id/wind_direction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="->" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Sun "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="16dip"
+                        android:layout_height="16dip"
+                        android:src="@drawable/sun_rise" />
+
+                    <TextView
+                        android:id="@+id/sun_rise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rise" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="16dip"
+                        android:layout_height="16dip"
+                        android:src="@drawable/sun_set" />
+
+                    <TextView
+                        android:id="@+id/sun_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="5dip"
-        android:text="Updated"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/last_updated_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:text="Last Update Datetime"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <LinearLayout
-        android:id="@+id/further_details_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dip" >
 
         <TextView
-            android:id="@+id/more_information_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:linksClickable="true"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:paddingTop="10dip"
-            android:text="@string/further_details"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#3399FF" />
+            android:paddingTop="5dip"
+            android:text="Updated"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/open_map_link"
-            android:layout_width="match_parent"
+            android:id="@+id/last_updated_date_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:gravity="right"
-            android:linksClickable="true"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:paddingTop="10dip"
-            android:text="@string/open_google_maps"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#3399FF" />
-    </LinearLayout>
+            android:text="Last Update Datetime"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="true"
-        android:orientation="vertical" >
-
-        <View
+        <LinearLayout
+            android:id="@+id/further_details_container"
             android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#3399FF" />
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/arrow_right"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dip" 
-            android:paddingTop="2dip"
-            android:paddingBottom="2dip"
-            android:text="@string/swipe_left_for_forecast_details" />
+            android:paddingBottom="5dip" >
+
+            <TextView
+                android:id="@+id/more_information_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip"
+                android:text="@string/further_details"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#3399FF" />
+
+            <TextView
+                android:id="@+id/open_map_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:gravity="right"
+                android:linksClickable="true"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip"
+                android:text="@string/open_google_maps"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#3399FF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="true"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#3399FF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="center_vertical"
+                android:paddingBottom="2dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="2dip"
+                android:text="@string/swipe_left_for_forecast_details" />
+        </LinearLayout>
+        
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

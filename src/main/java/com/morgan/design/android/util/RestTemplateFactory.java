@@ -21,7 +21,6 @@ public class RestTemplateFactory {
 		}
 		catch (final Exception e) {
 			ACRAErrorLogger.recordUnknownIssue(Type.HTTP_REQUEST_FAILURE, url);
-			ACRAErrorLogger.logSlientExcpetion(e);
 			return null;
 		}
 	}
