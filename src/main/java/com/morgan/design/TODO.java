@@ -87,10 +87,6 @@ public class TODO {
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
-<<<<<<< HEAD
-	// FIXME -> Add ICS support - Android 4.0
-=======
->>>>>>> development
 	
 	// //////////////////////
 	// Release Version 1.? //
@@ -102,8 +98,8 @@ public class TODO {
 	
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-<<<<<<< HEAD
 	// FIXME -> Capture Phone type on application feedback
+// FIXME -> Add ICS support - Android 4.0
 	
 	// FIXME -> Investigate maven release plugin
 	
@@ -130,18 +126,6 @@ public class TODO {
 	// FIXME -> DONE - (19/02/2012) - Changelog
 	// FIXME -> DONE - (19/02/2012) - Updated screen shots & added customisation options to product overview on market place
 	// FIXME -> DONE - (19/02/2012) - Set ScrollView on forecast & overview to handle screen rotation 
-=======
-	// FIXME -> Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
-	
-	// //////////////////////
-	// Release Version 1.7 //
-	// //////////////////////
-	
-	// FIXME -> Changelog
-	// FIXME -> Set ScrollView on forecast overview to handle screen rotation & check all screens  
-	// FIXME -> Add ICS support - Android 4.0
-	
->>>>>>> development
 	// FIXME -> DONE - (19/02/2012) - Re-word and reorder preferences
 	// FIXME -> DONE - (19/02/2012) - BUG Text notifications still come through from roaming lookup service
 	// FIXME -> DONE - (19/02/2012) - Option to disable failed update toasts, default true. 
