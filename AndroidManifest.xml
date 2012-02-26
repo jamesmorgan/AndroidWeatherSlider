@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="auto"
     package="com.morgan.design.weatherslider"
+<<<<<<< HEAD
+    android:versionCode="9"
+    android:versionName="1.8" >
+=======
     android:versionCode="8"
     android:versionName="1.7" >
+>>>>>>> development
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

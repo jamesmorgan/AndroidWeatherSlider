@@ -73,7 +73,6 @@ public class TODO {
 	// FIXME -> Add Google Guava to project, plus possible refactoring, removal of Apache Commons
 	// FIXME -> Clean up front screen, possible move add location button to bottom, along with refresh/canel all icon
 	
-	// FIXME -> Complete localisation
 	// FIXME -> Add 3 or 5 day forecast.
 	// FIXME -> Auto presets option, e.g. GPS, London, Toyko, New York, GPS?
 	
@@ -81,13 +80,17 @@ public class TODO {
 			// * Disable all with dialog, broadcast cancel all service.
 			// * Similar to feature toggle service, application preference?
 			// * Global flag service
-			// * Possible use global flag service to store cancel request?
+			// * Possibly use global flag service to store cancel request?
 
 	// FIXME -> BUG -> when cancelling all during existing lookup, notifications can still be displayed
 	// FIXME -> Style 'Add location button...'
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
+<<<<<<< HEAD
+	// FIXME -> Add ICS support - Android 4.0
+=======
+>>>>>>> development
 	
 	// //////////////////////
 	// Release Version 1.? //
@@ -99,6 +102,35 @@ public class TODO {
 	
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
+<<<<<<< HEAD
+	// FIXME -> Capture Phone type on application feedback
+	
+	// FIXME -> Investigate maven release plugin
+	
+	// FIXME -> Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
+	// Ability for different modes once active
+	// e.g. 1) enable force update dialog if version is V1.8f
+	//      2) enable dialog on next restart (accessed) V1.8r
+	//      2) never display dialog V1.8n
+	
+	// FIXME -> Complete localisation
+	// FIXME -> Delete WeatherLookupEntry.java
+	// FIXME -> Update ORMLite 3.45
+	
+	// //////////////////////
+	// Release Version 1.8 //
+	// //////////////////////
+	
+	// FIXME -> Remove: ACRAErrorLogger.logSlientExcpetion(e) from RestTemplateFactory 
+
+	// //////////////////////
+	// Release Version 1.7 //
+	// //////////////////////
+	
+	// FIXME -> DONE - (19/02/2012) - Changelog
+	// FIXME -> DONE - (19/02/2012) - Updated screen shots & added customisation options to product overview on market place
+	// FIXME -> DONE - (19/02/2012) - Set ScrollView on forecast & overview to handle screen rotation 
+=======
 	// FIXME -> Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
 	
 	// //////////////////////
@@ -109,6 +141,7 @@ public class TODO {
 	// FIXME -> Set ScrollView on forecast overview to handle screen rotation & check all screens  
 	// FIXME -> Add ICS support - Android 4.0
 	
+>>>>>>> development
 	// FIXME -> DONE - (19/02/2012) - Re-word and reorder preferences
 	// FIXME -> DONE - (19/02/2012) - BUG Text notifications still come through from roaming lookup service
 	// FIXME -> DONE - (19/02/2012) - Option to disable failed update toasts, default true. 
