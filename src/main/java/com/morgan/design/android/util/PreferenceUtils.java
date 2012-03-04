@@ -175,7 +175,7 @@ public final class PreferenceUtils {
 	}
 
 	public static boolean enableDailyUpdateCheck(Context context) {
-		return getPrefs(context).getBoolean(PREF_ENABLE_UPDATE_CHECKER, false);
+		return getPrefs(context).getBoolean(PREF_ENABLE_UPDATE_CHECKER, true);
 	}
 
 	public static boolean setShowUpdateDialogOnNextOpen(Context context, boolean value) {
