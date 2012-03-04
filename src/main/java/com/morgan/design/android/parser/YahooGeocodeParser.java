@@ -10,10 +10,10 @@ import org.xml.sax.InputSource;
 
 import android.util.Log;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
-import com.morgan.design.android.util.Logger;
 
 public class YahooGeocodeParser implements Parser<GeocodeResult> {
 

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.morgan.design.Constants;
+import com.morgan.design.Logger;
 import com.morgan.design.android.UserPreferencesActivity;
 import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.domain.types.Temperature;
@@ -28,6 +29,9 @@ public final class PreferenceUtils {
 	public static final String PREF_ENABLED_NOTIFCATION_TICKER_TEXT = "enableNotificationTickerText";
 	public static final String PREF_REPORT_ERROR_ON_FAILED_LOOKUP = "reportErrorOnFailedLookup";
 
+	public static final String PREF_SHOW_UPDATE_DIALOG_ON_NEXT_OPEN = "show.update.dialog.on.next.open";
+	public static final String PREF_ENABLE_UPDATE_CHECKER = "enable.update.checker";
+	public static final String PREF_LAST_UPDATE_CHECK_TIME = "last.update.check.time";
 	public static final String PREF_FIRST_LOOKUP = "first.successful.lookup";
 	public static final String PREF_SHOWN_RATE_ME_POPUP = "shown.rateme.popup";
 	public static final String PREF_ACRA_SYSTME_LOGS = "acra.syslog.enable";
@@ -164,5 +168,29 @@ public final class PreferenceUtils {
 
 	public static boolean reportErrorOnFailedLookup(Context context) {
 		return getPrefs(context).getBoolean(PREF_REPORT_ERROR_ON_FAILED_LOOKUP, false);
+	}
+
+	public static boolean setEnableDailyUpdateCheck(final Context context, final boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_ENABLE_UPDATE_CHECKER, value).commit();
+	}
+
+	public static boolean enableDailyUpdateCheck(Context context) {
+		return getPrefs(context).getBoolean(PREF_ENABLE_UPDATE_CHECKER, true);
+	}
+
+	public static boolean setShowUpdateDialogOnNextOpen(Context context, boolean value) {
+		return getPrefs(context).edit().putBoolean(PREF_SHOW_UPDATE_DIALOG_ON_NEXT_OPEN, value).commit();
+	}
+
+	public static boolean shouldShowUpdateDialogOnNextOpen(Context context) {
+		return getPrefs(context).getBoolean(PREF_SHOW_UPDATE_DIALOG_ON_NEXT_OPEN, false);
+	}
+
+	public static boolean setLastTimCheckedForUpdate(final Context context, final long time) {
+		return getPrefs(context).edit().putLong(PREF_LAST_UPDATE_CHECK_TIME, time).commit();
+	}
+
+	public static long getLastTimCheckedForUpdate(Context context) {
+		return getPrefs(context).getLong(PREF_LAST_UPDATE_CHECK_TIME, 0L);
 	}
 }

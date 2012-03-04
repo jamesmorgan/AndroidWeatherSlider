@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>com.j256.ormlite</groupId>
 			<artifactId>ormlite-android</artifactId>
-			<version>4.33</version>
+			<version>4.35</version>
 		</dependency>
 
 		<dependency>

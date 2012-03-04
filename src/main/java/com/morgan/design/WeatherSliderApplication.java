@@ -5,6 +5,7 @@ import static com.morgan.design.android.util.PreferenceUtils.PREF_ACRA_SYSTME_LO
 import static com.morgan.design.android.util.PreferenceUtils.PREF_CHANGELOG;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLED_NOTIFCATION_TICKER_TEXT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_FIRST_LOOKUP;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_LAST_UPDATE_CHECK_TIME;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT;
@@ -32,6 +33,7 @@ import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.service.NotificationControllerService;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
+import com.morgan.design.android.service.UpdateService;
 import com.morgan.design.android.util.BuildUtils;
 import com.morgan.design.weatherslider.R;
 
@@ -43,7 +45,8 @@ import com.morgan.design.weatherslider.R;
 		resToastText = R.string.crash_toast_text,
 		additionalSharedPreferences={PREF_CHANGELOG, PREF_POLLING_SCHEDULE, PREF_POLLING_SCHEDULE, PREF_OVERVIEW_MODE,
 									PREF_TEMPERATURE_MODE,PREF_WIND_MODE, PREF_RELOAD_ON_CONNECTIVITY_CHANGED, PREF_ENABLED_NOTIFCATION_TICKER_TEXT,
-									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS, PREF_REPORT_ERROR_ON_FAILED_LOOKUP})
+									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS, 
+									PREF_REPORT_ERROR_ON_FAILED_LOOKUP, PREF_LAST_UPDATE_CHECK_TIME})
 //@formatter:on
 public class WeatherSliderApplication extends Application {
 
@@ -80,6 +83,9 @@ public class WeatherSliderApplication extends Application {
 
 		// Start looping alarm
 		sendBroadcast(new Intent(LOOPING_ALARM));
+
+		// Trigger Update Service
+		startService(new Intent(this, UpdateService.class));
 
 		//@formatter:off
 		// Ensure network is active/connected in order to use

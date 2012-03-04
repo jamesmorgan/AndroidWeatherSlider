@@ -8,10 +8,10 @@ import java.util.concurrent.Callable;
 
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.morgan.design.Logger;
 import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DBUtils;
-import com.morgan.design.android.util.Logger;
 
 public class NotificationDao extends AbstractDao<WeatherNotification, Integer> {
 

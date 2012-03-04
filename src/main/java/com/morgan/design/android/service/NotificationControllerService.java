@@ -21,12 +21,12 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.Logger;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.util.Logger;
 import com.morgan.design.weatherslider.R;
 
 public class NotificationControllerService extends OrmLiteBaseService<DatabaseHelper> implements ServiceConnection, OnCancelAll {

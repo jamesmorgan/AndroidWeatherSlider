@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.morgan.design.android.domain.WOEIDEntry;
-import com.morgan.design.android.domain.types.Flags;
+import com.morgan.design.android.factory.FlagIconFactory;
 import com.morgan.design.weatherslider.R;
 
 public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
@@ -60,7 +60,7 @@ public class WOIEDAdaptor extends ArrayAdapter<WOEIDEntry> {
 			country.setText(entry.getCountry());
 
 			if (null != entry.getCountryCode()) {
-				Integer flagCode = Flags.getFlag(entry.getCountryCode());
+				Integer flagCode = FlagIconFactory.getFlag(entry.getCountryCode());
 				if (null != flagCode) {
 					Drawable flag = this.context.getResources()
 						.getDrawable(flagCode);
