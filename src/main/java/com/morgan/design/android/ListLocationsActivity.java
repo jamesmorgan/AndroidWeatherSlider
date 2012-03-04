@@ -26,9 +26,10 @@ import com.morgan.design.android.adaptor.WOIEDAdaptor;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.WOEIDEntry;
-import com.morgan.design.android.domain.types.Flags;
+import com.morgan.design.android.factory.FlagIconFactory;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.StaticLookupService;
+import com.morgan.design.android.util.Utils;
 import com.morgan.design.weatherslider.R;
 
 public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements SimpleGestureListener {
@@ -90,7 +91,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 
 		Drawable flag = null;
 		if (null != entry.getCountryCode()) {
-			Integer flagCode = Flags.getFlag(entry.getCountryCode());
+			Integer flagCode = FlagIconFactory.getFlag(entry.getCountryCode());
 			if (null != flagCode) {
 				flag = getResources().getDrawable(flagCode);
 			}
@@ -107,12 +108,7 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 					public void onClick(final DialogInterface dialog, final int id) {
 						loadWeatherDataForEntry(entry);
 					}
-				}).setNegativeButton(R.string.alert_no, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int id) {
-						dialog.cancel();
-					}
-				}).create().show();
+				}).setNegativeButton(R.string.alert_no, Utils.cancel).create().show();
 		//@formatter:on
 	}
 

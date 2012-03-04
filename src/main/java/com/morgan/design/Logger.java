@@ -1,4 +1,4 @@
-package com.morgan.design.android.util;
+package com.morgan.design;
 
 import android.util.Log;
 

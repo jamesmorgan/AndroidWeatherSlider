@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.morgan.design.Constants;
 import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.domain.ForcastEntry;
-import com.morgan.design.android.domain.types.IconFactory;
+import com.morgan.design.android.factory.IconFactory;
 import com.morgan.design.android.util.DateUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;

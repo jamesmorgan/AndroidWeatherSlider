@@ -10,7 +10,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.morgan.design.android.domain.Woeid;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.domain.types.IconFactory;
+import com.morgan.design.android.factory.IconFactory;
 import com.morgan.design.android.parser.WeatherError;
 
 @DatabaseTable(tableName = "weather_choice")

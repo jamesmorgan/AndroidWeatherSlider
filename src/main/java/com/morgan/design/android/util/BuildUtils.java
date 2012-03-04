@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.repository.DatabaseHelper;
 
 public class BuildUtils {

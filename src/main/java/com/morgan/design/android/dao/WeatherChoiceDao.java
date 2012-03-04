@@ -14,10 +14,10 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
+import com.morgan.design.Logger;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.DBUtils;
-import com.morgan.design.android.util.Logger;
 
 public class WeatherChoiceDao extends AbstractDao<WeatherChoice, Integer> {
 

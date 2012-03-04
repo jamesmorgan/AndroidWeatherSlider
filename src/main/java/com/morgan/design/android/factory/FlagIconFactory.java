@@ -1,4 +1,4 @@
-package com.morgan.design.android.domain.types;
+package com.morgan.design.android.factory;
 
 import static com.morgan.design.android.util.ObjectUtils.isNotNull;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
@@ -10,7 +10,7 @@ import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.weatherslider.R;
 
-public class Flags {
+public class FlagIconFactory {
 
 	public static final Map<String, Integer> FLAG_MAP;
 	static {

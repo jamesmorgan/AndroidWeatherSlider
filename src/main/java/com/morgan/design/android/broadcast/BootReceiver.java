@@ -4,8 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.service.ReloadingAlarmService;
-import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 
 public class BootReceiver extends BroadcastReceiver {
