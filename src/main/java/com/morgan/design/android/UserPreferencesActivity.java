@@ -4,6 +4,7 @@ import static com.morgan.design.android.util.PreferenceUtils.PREF_ACRA_SYSTME_LO
 import static com.morgan.design.android.util.PreferenceUtils.PREF_CHANGELOG;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLED_NOTIFCATION_TICKER_TEXT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLE_GOOGLE_ANALYTICS;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_ENABLE_UPDATE_CHECKER;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_OVERVIEW_MODE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_POLLING_SCHEDULE;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_REFRESH_ON_USER_PRESENT;
@@ -159,6 +160,15 @@ public class UserPreferencesActivity extends PreferenceActivity {
 				@Override
 				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
 					return PreferenceUtils.setReportErrorOnFailedLookup(getApplicationContext(), (Boolean) clicked);
+				}
+			});
+		}
+
+		if (pref.getKey().equals(PREF_ENABLE_UPDATE_CHECKER)) {
+			findPreference(PREF_ENABLE_UPDATE_CHECKER).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					return PreferenceUtils.setEnableDailyUpdateCheck(getApplicationContext(), (Boolean) clicked);
 				}
 			});
 		}
