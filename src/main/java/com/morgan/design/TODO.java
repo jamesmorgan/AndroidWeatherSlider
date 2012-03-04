@@ -99,19 +99,23 @@ public class TODO {
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	// FIXME -> Capture Phone type on application feedback
-// FIXME -> Add ICS support - Android 4.0
+	// FIXME -> Add ICS support - Android 4.0
 	
 	// FIXME -> Investigate maven release plugin
-	
-	// FIXME -> Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
-	// Ability for different modes once active
-	// e.g. 1) enable force update dialog if version is V1.8f
-	//      2) enable dialog on next restart (accessed) V1.8r
-	//      2) never display dialog V1.8n
-	
 	// FIXME -> Complete localisation
-	// FIXME -> Delete WeatherLookupEntry.java
-	// FIXME -> Update ORMLite 3.45
+	
+	// //////////////////////
+	// Release Version 1.8 //
+	// //////////////////////
+	
+	// FIXME -> DONE - (19/02/2012) - Delete WeatherLookupEntry.java
+	// FIXME -> DONE - (19/02/2012) - Update ORMLite 3.45
+	
+	// FIXME -> DONE - (19/02/2012) - Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
+	// FIXME -> DONE - (19/02/2012) - Ability for different modes once active
+	// FIXME -> DONE - (19/02/2012) - e.g. 1) enable force update dialog if version is V1.8f
+	// FIXME -> DONE - (19/02/2012) - 2) enable dialog on next restart (accessed) V1.8r
+	// FIXME -> DONE - (19/02/2012) - 2) never display dialog V1.8n
 	
 	// //////////////////////
 	// Release Version 1.8 //

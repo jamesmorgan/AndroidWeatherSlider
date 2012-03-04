@@ -10,12 +10,12 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.morgan.design.Logger;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.android.util.DBUtils;
-import com.morgan.design.android.util.Logger;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 

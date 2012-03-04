@@ -3,6 +3,8 @@ package com.morgan.design.android.util;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
 
+import com.morgan.design.Logger;
+
 import android.database.sqlite.SQLiteDatabase;
 
 public class DBUtils {

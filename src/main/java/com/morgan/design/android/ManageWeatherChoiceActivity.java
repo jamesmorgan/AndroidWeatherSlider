@@ -1,5 +1,6 @@
 package com.morgan.design.android;
 
+import static com.morgan.design.Constants.APPLICATION_UPDATE_AVAILABLE;
 import static com.morgan.design.Constants.CANCEL_ALL_WEATHER_NOTIFICATIONS;
 import static com.morgan.design.Constants.DELETE_CURRENT_NOTIFCATION;
 import static com.morgan.design.Constants.FAILED_LOOKUP;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.Changelog;
 import com.morgan.design.Constants;
+import com.morgan.design.Logger;
 import com.morgan.design.RateMe;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
@@ -42,16 +44,16 @@ import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.broadcast.ServiceUpdateReceiver;
+import com.morgan.design.android.broadcast.UpdateApplicationReciever;
 import com.morgan.design.android.dao.NotificationDao;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.dao.orm.WeatherNotification;
-import com.morgan.design.android.domain.types.IconFactory;
+import com.morgan.design.android.factory.IconFactory;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.service.RoamingLookupService;
 import com.morgan.design.android.service.StaticLookupService;
 import com.morgan.design.android.util.DateUtils;
-import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.TimeUtils;
 import com.morgan.design.android.util.Utils;
@@ -73,7 +75,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private GoogleAnalyticsService googleAnalyticsService;
 
-	protected ServiceUpdateReceiver serviceUpdateRegister;
+	private ServiceUpdateReceiver serviceUpdateRegister;
+	private UpdateApplicationReciever updateApplicationReciever;
 	private IServiceUpdateBroadcaster serviceUpdate;
 
 	private NotificationDao notificationDao;
@@ -90,6 +93,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.googleAnalyticsService = WeatherSliderApplication.locate(this).getGoogleAnalyticsService();
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.serviceUpdateRegister = new ServiceUpdateReceiver(this);
+		this.updateApplicationReciever = new UpdateApplicationReciever(this, this.googleAnalyticsService);
 
 		reLoadWeatherChoices();
 
@@ -112,6 +116,16 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		}
 		else {
 			Changelog.show(this, false);
+		}
+
+		// If update available
+		if (PreferenceUtils.shouldShowUpdateDialogOnNextOpen(this)) {
+			// Clean down flag
+			PreferenceUtils.setShowUpdateDialogOnNextOpen(this, false);
+			if (!this.updateApplicationReciever.alertDisplayed()) {
+				// Send show dialog broadcast
+				sendBroadcast(new Intent(APPLICATION_UPDATE_AVAILABLE));
+			}
 		}
 
 		getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -158,6 +172,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		if (isNotNull(this.serviceUpdateRegister)) {
 			this.serviceUpdateRegister.unregisterReceiver();
 		}
+		if (isNotNull(this.updateApplicationReciever)) {
+			this.updateApplicationReciever.unregister();
+		}
 	}
 
 	@Override
@@ -203,23 +220,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		}
 	}
 
-	private void createShortcut() {
-
-		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		shortcutIntent.setClassName(this, this.getClass().getName());
-
-		Intent intent = new Intent();
-		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "WeatherSlider");
-		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
-				Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
-		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-
-		sendBroadcast(intent);
-	}
-
 	@Override
 	public boolean onPrepareOptionsMenu(final Menu menu) {
 
@@ -262,39 +262,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			default:
 				break;
 		}
-	}
-
-	protected boolean handleOnItemLongClick(int pos) {
-
-		final WeatherChoice weatherChoice = this.weatherChoices.get(pos);
-
-		if (isNotNull(weatherChoice)) {
-			final WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
-
-			if (isNotNull(notification) && weatherChoice.isActive()) {
-				final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice, R.string.alert_title_open_overview);
-				alertDialog.setCancelable(true);
-				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_open), new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(final DialogInterface dialog, final int id) {
-						final Intent overviewIntent = new Intent(OPEN_WEATHER_OVERVIEW);
-						overviewIntent.putExtra(NOTIFICATION_ID, notification.getServiceId());
-						overviewIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
-						startActivity(overviewIntent);
-					}
-				});
-				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int id) {
-						alertDialog.cancel();
-					}
-				});
-				alertDialog.show();
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
@@ -345,6 +312,39 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.show();
 	}
 
+	protected boolean handleOnItemLongClick(int pos) {
+
+		final WeatherChoice weatherChoice = this.weatherChoices.get(pos);
+
+		if (isNotNull(weatherChoice)) {
+			final WeatherNotification notification = this.notificationDao.findNotificationForWeatherId(weatherChoice.getId());
+
+			if (isNotNull(notification) && weatherChoice.isActive()) {
+				final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice, R.string.alert_title_open_overview);
+				alertDialog.setCancelable(true);
+				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_open), new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						final Intent overviewIntent = new Intent(OPEN_WEATHER_OVERVIEW);
+						overviewIntent.putExtra(NOTIFICATION_ID, notification.getServiceId());
+						overviewIntent.setClass(getApplicationContext(), WeatherOverviewActivity.class);
+						startActivity(overviewIntent);
+					}
+				});
+				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int id) {
+						alertDialog.cancel();
+					}
+				});
+				alertDialog.show();
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// ///////////////////////////////////////
 	// ///////////// Click Handlers //////////
 	// ///////////////////////////////////////
@@ -370,6 +370,23 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 	// //////////////////////////////////////////
 	// ///////////// General / Utility //////////
 	// //////////////////////////////////////////
+
+	private void createShortcut() {
+
+		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
+		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		shortcutIntent.setClassName(this, this.getClass().getName());
+
+		Intent intent = new Intent();
+		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "WeatherSlider");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+				Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.launch_icon), 72, 72, true));
+		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+
+		sendBroadcast(intent);
+	}
 
 	private void reLoadWeatherChoices() {
 		this.weatherChoices = this.weatherDao.findAllWeathers();

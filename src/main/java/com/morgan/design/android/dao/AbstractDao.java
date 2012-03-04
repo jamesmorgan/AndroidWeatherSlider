@@ -7,8 +7,8 @@ import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
 
 import com.j256.ormlite.dao.Dao;
+import com.morgan.design.Logger;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.util.Logger;
 
 public abstract class AbstractDao<T, ID extends Serializable> {
 

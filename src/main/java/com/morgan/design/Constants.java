@@ -1,5 +1,7 @@
 package com.morgan.design;
 
+import com.morgan.design.android.util.BuildUtils;
+
 public class Constants {
 
 	// Yahoo Key
@@ -16,6 +18,11 @@ public class Constants {
 
 	// Web URL's
 	public static final String YAHOO_WEATHER_FORECAST_LINK = "http://weather.yahoo.com/forecast/%s.html";
+
+	// Application Update checker URL
+	public static final String UPDATE_SITE = BuildUtils.isRunningEmmulator()
+			? "https://raw.github.com/jamesemorgan/ApplicationProperties/master/ApplicationUpdates/WeatherSlider/WeatherSlider_Test.update"
+			: "https://raw.github.com/jamesemorgan/ApplicationProperties/master/ApplicationUpdates/WeatherSlider/WeatherSlider.update";
 
 	// About -> website links
 	public static final String DONATE_URL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QMZWPL26PY5GW";
@@ -51,6 +58,11 @@ public class Constants {
 	 * Triggered when the user wants to attempt to force close/cancel all active notifications
 	 */
 	public static final String CANCEL_ALL_WEATHER_NOTIFICATIONS = "com.morgan.design.android.broadcast.CANCEL_ALL_WEATHER_NOTIFICATIONS";
+
+	/**
+	 * Triggered when and update is available for the application
+	 */
+	public static final String APPLICATION_UPDATE_AVAILABLE = "com.morgan.design.android.broadcast.APPLICATION_UPDATE_AVAILABLE";
 
 	// Activity Result codes
 	public static final int ENTER_LOCATION = 1;

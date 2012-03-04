@@ -19,6 +19,7 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.morgan.design.Logger;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.WeatherOverviewActivity;
 import com.morgan.design.android.dao.NotificationDao;
@@ -26,13 +27,12 @@ import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.dao.orm.WeatherNotification;
 import com.morgan.design.android.domain.YahooWeatherInfo;
-import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.OverviewMode;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.Wind;
 import com.morgan.design.android.domain.types.WindSpeed;
+import com.morgan.design.android.factory.IconFactory;
 import com.morgan.design.android.repository.DatabaseHelper;
-import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.android.util.Utils;
 
