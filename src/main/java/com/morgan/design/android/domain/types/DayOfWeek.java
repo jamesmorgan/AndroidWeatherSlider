@@ -1,6 +1,6 @@
 package com.morgan.design.android.domain.types;
 
-import com.morgan.design.android.util.Logger;
+import com.morgan.design.Logger;
 
 public enum DayOfWeek implements Abrev {
 

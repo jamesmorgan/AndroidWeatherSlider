@@ -1,16 +1,19 @@
-package com.morgan.design.android.util;
+package com.morgan.design.android.factory;
 
 import static com.morgan.design.android.util.ObjectUtils.isBlank;
 import static com.morgan.design.android.util.ObjectUtils.isNull;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.android.domain.GeocodeResult;
 import com.morgan.design.android.domain.Woeid;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.YahooWeatherLookup;
 import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.util.ACRAErrorLogger;
+import com.morgan.design.android.util.YahooRequestUtils;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
 
 public class HttpWeatherLookupFactory {

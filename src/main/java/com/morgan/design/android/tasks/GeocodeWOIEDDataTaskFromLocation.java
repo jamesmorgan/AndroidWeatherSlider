@@ -3,9 +3,9 @@ package com.morgan.design.android.tasks;
 import android.location.Location;
 import android.os.AsyncTask;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.domain.GeocodeResult;
-import com.morgan.design.android.util.Logger;
-import com.morgan.design.android.util.RestTemplateFactory;
+import com.morgan.design.android.factory.RestTemplateFactory;
 import com.morgan.design.android.util.YahooRequestUtils;
 
 public class GeocodeWOIEDDataTaskFromLocation extends AsyncTask<Void, Void, GeocodeResult> {

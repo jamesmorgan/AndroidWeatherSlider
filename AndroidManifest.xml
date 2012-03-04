@@ -29,6 +29,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.morgan.design.android.broadcast.APPLICATION_UPDATE_AVAILABLE" />
+            </intent-filter>
         </activity>
 
         <!-- Displays information about this application with various links -->
@@ -88,7 +91,7 @@
         <activity
             android:name="com.morgan.design.android.ForecastOverviewTabActivity"
             android:configChanges="keyboardHidden|orientation" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.morgan.design.android.TwoDayOverviewActivity"
@@ -156,6 +159,9 @@
 
         <!-- Service intent checks for active notifications and reloads them -->
         <service android:name="com.morgan.design.android.service.ReloadingAlarmService" />
+
+        <!-- Service intent checks for updates to Weather Slider -->
+        <service android:name="com.morgan.design.android.service.UpdateService" />
 
         <!-- Periodic alarm receiver -->
         <receiver

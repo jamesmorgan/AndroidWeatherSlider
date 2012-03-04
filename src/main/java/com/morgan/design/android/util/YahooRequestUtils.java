@@ -10,6 +10,7 @@ import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.domain.Woeid;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.Temperature;
+import com.morgan.design.android.domain.types.YahooPlaceTypes;
 import com.morgan.design.android.parser.WOIEDParser;
 import com.morgan.design.android.parser.YahooGeocodeParser;
 import com.morgan.design.android.parser.YahooWeatherInfoParser;

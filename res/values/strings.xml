@@ -95,6 +95,10 @@
     <string name="pref_acra_syslog_enabled">Collect systems logs on application crash</string>
     <string name="pref_acra_syslog">Error Reporting</string>
     
+    <string name="pref_update_checker_disabled">Don\'t checker for Weather Slider updates</string>
+    <string name="pref_update_checker_enabled">Check for updates are enabled</string>
+    <string name="pref_update_checker">Check for updates</string>
+    
     <!-- Home Screen - ManageWeatherChoiceActivity.java -->
     <string name="alert_title_open_overview">Open Overview Screen</string>
     <string name="alert_title_manage_location">Manage Notification</string>
@@ -165,5 +169,7 @@
     <string name="swipe_left_for_forecast_details">Swipe left for forecast details…</string>
     <string name="swipe_right_for_current_conditions">…Swipe right for current conditions</string>
     <string name="toast_unable_to_find_the_weather_for_your_location">Unable to find the weather for your location, please try agin.</string>
+    <string name="update_checker_alert">An update for is available!\n\nOpen Android Market and see the details?</string>
+    <string name="update_available">Update Available</string>
 
 </resources>

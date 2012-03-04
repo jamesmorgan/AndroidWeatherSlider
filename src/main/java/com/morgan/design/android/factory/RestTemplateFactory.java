@@ -1,10 +1,11 @@
-package com.morgan.design.android.util;
+package com.morgan.design.android.factory;
 
 import static com.morgan.design.Constants.READ_TIMEOUT;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
 
 public class RestTemplateFactory {
