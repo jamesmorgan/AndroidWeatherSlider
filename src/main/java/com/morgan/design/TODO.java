@@ -105,7 +105,7 @@ public class TODO {
 	// FIXME -> Complete localisation
 	
 	// //////////////////////
-	// Release Version 1.8 //
+	// Release Version 1.9 //
 	// //////////////////////
 	
 	// FIXME -> DONE - (19/02/2012) - Delete WeatherLookupEntry.java
