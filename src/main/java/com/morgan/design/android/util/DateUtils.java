@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import com.morgan.design.Logger;
+
 public class DateUtils {
 
 	private static final String LOG_TAG = "DateUtils";

@@ -11,16 +11,16 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.domain.ForcastEntry;
 import com.morgan.design.android.domain.YahooWeatherInfo;
 import com.morgan.design.android.domain.types.DayOfWeek;
-import com.morgan.design.android.domain.types.IconFactory;
 import com.morgan.design.android.domain.types.Temperature;
 import com.morgan.design.android.domain.types.WindSpeed;
+import com.morgan.design.android.factory.IconFactory;
 import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
 import com.morgan.design.android.util.DateUtils;
-import com.morgan.design.android.util.Logger;
 
 public class YahooWeatherInfoParser implements Parser<YahooWeatherInfo> {
 

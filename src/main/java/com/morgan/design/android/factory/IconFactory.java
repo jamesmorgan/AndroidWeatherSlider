@@ -1,4 +1,4 @@
-package com.morgan.design.android.domain.types;
+package com.morgan.design.android.factory;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -91,6 +91,12 @@
             android:summaryOff="@string/pref_acra_syslog_disabled"
             android:summaryOn="@string/pref_acra_syslog_enabled"
             android:title="@string/pref_acra_syslog" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="enable.update.checker"
+            android:summaryOff="@string/pref_update_checker_disabled"
+            android:summaryOn="@string/pref_update_checker_enabled"
+            android:title="@string/pref_update_checker" />
     </PreferenceCategory>
 
 </PreferenceScreen>

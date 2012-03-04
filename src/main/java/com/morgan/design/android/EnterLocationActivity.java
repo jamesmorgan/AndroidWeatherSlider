@@ -30,14 +30,14 @@ import android.widget.Toast;
 
 import com.morgan.design.Changelog;
 import com.morgan.design.Constants;
+import com.morgan.design.Logger;
 import com.morgan.design.WeatherSliderApplication;
 import com.morgan.design.android.SimpleGestureFilter.SimpleGestureListener;
 import com.morgan.design.android.analytics.GoogleAnalyticsService;
 import com.morgan.design.android.domain.WOEIDEntry;
+import com.morgan.design.android.factory.RestTemplateFactory;
 import com.morgan.design.android.service.LocationLookupService;
 import com.morgan.design.android.service.RoamingLookupService;
-import com.morgan.design.android.util.Logger;
-import com.morgan.design.android.util.RestTemplateFactory;
 import com.morgan.design.android.util.Utils;
 import com.morgan.design.android.util.YahooRequestUtils;
 import com.morgan.design.weatherslider.R;
@@ -135,20 +135,17 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 							createGpsDisabledAlert();
 						}
 						else if (null != location && providersFound) {
-							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]",
-									location.getLatitude(), location.getLatitude());
+							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
 							new DownloadWOIEDDataTaskFromLocation(location).execute();
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
-							Toast.makeText(EnterLocationActivity.this, R.string.toast_unable_to_locate_you,
-									Toast.LENGTH_SHORT).show();
+							Toast.makeText(EnterLocationActivity.this, R.string.toast_unable_to_locate_you, Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
 			};
-			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(
-					LocationLookupService.ONE_OFF_LOCATION_FOUND_BROADCAST));
+			registerReceiver(this.locationChangedBroadcastReciever, new IntentFilter(LocationLookupService.ONE_OFF_LOCATION_FOUND_BROADCAST));
 		}
 	}
 
@@ -217,8 +214,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 
 		// Allow for overriding default timeout
 		final Intent findLocationBroadcast = new Intent(LocationLookupService.GET_ONE_OFF_CURRENT_LOCATION);
-		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT,
-				LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
+		findLocationBroadcast.putExtra(LocationLookupService.LOCATION_LOOKUP_TIMEOUT, LocationLookupService.DEFAULT_LOCATION_TIMEOUT);
 		startService(findLocationBroadcast);
 	}
 
@@ -262,9 +258,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		Logger.d(LOG_TAG, String.format("Found [%s] WOIED locations", this.WOIEDlocations.size()));
 
 		if (null == locations || locations.isEmpty()) {
-			Toast.makeText(this,
-					String.format(getString(R.string.toast_error_unable_to_find_you), this.location.getText()),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, String.format(getString(R.string.toast_error_unable_to_find_you), this.location.getText()), Toast.LENGTH_SHORT).show();
 		}
 		else {
 			final Bundle extras = new Bundle();
@@ -292,19 +286,13 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 	}
 
 	private void createGpsDisabledAlert() {
-		final AlertDialog alert = new AlertDialog.Builder(this).setMessage(R.string.alaert_enabled_gps_provider)
-				.setCancelable(false)
+		final AlertDialog alert = new AlertDialog.Builder(this).setMessage(R.string.alaert_enabled_gps_provider).setCancelable(false)
 				.setPositiveButton(R.string.alert_enable_gps, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface dialog, final int id) {
 						startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 					}
-				}).setNegativeButton(R.string.alert_do_nothing, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int id) {
-						dialog.cancel();
-					}
-				}).create();
+				}).setNegativeButton(R.string.alert_do_nothing, Utils.cancel).create();
 		alert.show();
 	}
 

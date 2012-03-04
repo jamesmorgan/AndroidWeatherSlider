@@ -11,7 +11,7 @@ import java.util.Set;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.morgan.design.android.util.Logger;
+import com.morgan.design.Logger;
 
 /**
  * Used as a aid in the migration process for, loading required SQL files as specified by a given version

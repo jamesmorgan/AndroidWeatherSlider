@@ -23,6 +23,8 @@ public class GoogleAnalyticsService {
 	public static final String SEND_FEEDBACK = "SendFeedback";
 	public static final String OPEN_GOOGLE_MAPS = "OpenGoogleMaps";
 	public static final String MORE_INFO = "MoreInfo";
+	public static final String APP_UPDATE_FOUND_CLICKED = "AppUpdateFoundClicked";
+	public static final String APP_UPDATE_FOUND_CANCELLED = "AppUpdateFoundCancelled";
 
 	private static GoogleAnalyticsService INSTANCE;
 

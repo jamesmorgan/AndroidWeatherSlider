@@ -9,12 +9,12 @@ import android.os.SystemClock;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.morgan.design.Constants;
+import com.morgan.design.Logger;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
 import com.morgan.design.android.dao.WeatherChoiceDao;
 import com.morgan.design.android.repository.DatabaseHelper;
 import com.morgan.design.android.util.ACRAErrorLogger;
-import com.morgan.design.android.util.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 import com.morgan.design.weatherslider.R;
 

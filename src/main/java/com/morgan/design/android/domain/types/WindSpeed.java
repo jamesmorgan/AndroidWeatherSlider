@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 
 import android.content.Context;
 
-import com.morgan.design.android.util.Logger;
+import com.morgan.design.Logger;
 import com.morgan.design.android.util.PreferenceUtils;
 
 public enum WindSpeed {

@@ -9,10 +9,10 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
+import com.morgan.design.Logger;
 import com.morgan.design.android.domain.WOEIDEntry;
 import com.morgan.design.android.util.ACRAErrorLogger;
 import com.morgan.design.android.util.ACRAErrorLogger.Type;
-import com.morgan.design.android.util.Logger;
 
 public class WOIEDParser implements Parser<List<WOEIDEntry>> {
 
