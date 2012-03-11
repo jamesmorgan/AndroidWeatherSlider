@@ -164,7 +164,10 @@ public class ListLocationsActivity extends OrmLiteBaseListActivity<DatabaseHelpe
 
 		startService(new Intent(this, StaticLookupService.class).putExtra(FROM_INACTIVE_LOCATION, true).putExtras(bundle));
 
-		setResult(RESULT_OK);
+		Intent intent = new Intent();
+		intent.putExtra(WEATHER_ID, choice.getId());
+
+		setResult(RESULT_OK, intent);
 		finish();
 	}
 
