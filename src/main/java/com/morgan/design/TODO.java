@@ -108,6 +108,7 @@ public class TODO {
 	// ///////////////////////
 	
 	// FIXME -> DONE - (18/03/2012) - Changelog!
+	// FIXME -> DONE - (18/03/2012) - Removal of READ_LOGS Android permission!
 	// FIXME -> DONE - (18/03/2012) - Add ICS support - Android 4.0
 	// FIXME -> DONE - (18/03/2012) - Issue with swipe areas on ICS
 	// FIXME -> DONE - (18/03/2012) - Fixing Lint warnings, project clean up, old classes, images are deleted.
