@@ -13,8 +13,26 @@ public class BuildUtils {
 
 	private static final String LOG_TAG = "BUILD_UTILS";
 
+	public static String phoneModel() {
+		// Device model
+		return android.os.Build.MODEL;
+	}
+
+	public static String androidVersion() {
+		// Android version
+		return android.os.Build.VERSION.RELEASE;
+	}
+
+	public static boolean isRunningEmmulator() {
+		return "sdk".equals(Build.PRODUCT);
+	}
+
 	public static boolean isNotRunningEmmulator() {
 		return isRunningEmmulator();
+	}
+
+	public static int getDbVersion() {
+		return DatabaseHelper.DATABASE_VERSION;
 	}
 
 	public static String getDeviceId() {
@@ -33,17 +51,12 @@ public class BuildUtils {
 		String versionCode = "- | -";
 		try {
 			final PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-			versionCode =
-					new StringBuilder().append("").append(Integer.toString(pi.versionCode)).append(" | ").append(pi.versionName).toString();
+			versionCode = new StringBuilder().append("").append(Integer.toString(pi.versionCode)).append(" | ").append(pi.versionName).toString();
 		}
 		catch (final Exception e) {
 			Logger.e(LOG_TAG, "Error gettting version code", e);
 		}
 		return versionCode;
-	}
-
-	public static boolean isRunningEmmulator() {
-		return "sdk".equals(Build.PRODUCT);
 	}
 
 	public static String getSQLLiteVersion() {
@@ -64,7 +77,4 @@ public class BuildUtils {
 		return "N/A";
 	}
 
-	public static int getDbVersion() {
-		return DatabaseHelper.DATABASE_VERSION;
-	}
 }

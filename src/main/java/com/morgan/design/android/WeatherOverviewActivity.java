@@ -8,6 +8,8 @@ import static com.morgan.design.android.util.ObjectUtils.valueOrDefault;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -118,8 +120,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.main_temperature = (TextView) findViewById(R.id.main_temperature);
 
 		this.weather_description.setText(valueOrDefault(this.currentWeather.getCurrentText(), getString(R.string.not_available)));
-		this.main_temperature.setText(this.currentWeather.getCurrentTemp()
-			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
+		this.main_temperature.setText(this.currentWeather.getCurrentTemp() + Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.weather_image.setImageResource(IconFactory.getImageResourceFromCode(this.currentWeather.getCurrentCode()));
 	}
 
@@ -137,15 +138,12 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 			location2 += this.currentWeather.getCountry();
 		}
 		if (stringHasValue(this.currentWeather.getRegion())) {
-			location2 += stringHasValue(location2)
-					? ", " + this.currentWeather.getRegion()
-					: this.currentWeather.getRegion();
+			location2 += stringHasValue(location2) ? ", " + this.currentWeather.getRegion() : this.currentWeather.getRegion();
 		}
 
 		this.location_1.setText(valueOrDefault(this.currentWeather.getCity(), getString(R.string.not_available)));
 		this.location_2.setText(valueOrDefault(location2, getString(R.string.not_available)));
-		this.location_lat_long.setText(String.format("Lat: %s | Long: %s", this.currentWeather.getLatitude(),
-				this.currentWeather.getLongitude()));
+		this.location_lat_long.setText(String.format("Lat: %s | Long: %s", this.currentWeather.getLatitude(), this.currentWeather.getLongitude()));
 	}
 
 	private TextView wind_speed;
@@ -158,8 +156,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.wind_direction = (TextView) findViewById(R.id.wind_direction);
 
 		this.wind_speed.setText(WindSpeed.fromSpeedAndUnit(this, this.currentWeather.getWindSpeed(), this.currentWeather.getWindSpeedUnit()));
-		this.wind_chill.setText(this.currentWeather.getWindChill()
-			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
+		this.wind_chill.setText(this.currentWeather.getWindChill() + Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.wind_direction.setText(" (" + Wind.fromDegreeToAbbreviation(this.currentWeather.getWindDirection()) + ")");
 	}
 
@@ -168,10 +165,16 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
 	private void setSunDetails() {
 		this.sun_rise = (TextView) findViewById(R.id.sun_rise);
-		this.sun_set = (TextView) findViewById(R.id.sun_set);
-
 		this.sun_rise.setText(valueOrDefault(this.currentWeather.getSunRise(), getString(R.string.not_available)));
+
+		Drawable sun_riseIcon = new BitmapDrawable(((BitmapDrawable) getResources().getDrawable(R.drawable.sun_rise)).getBitmap());
+		this.sun_rise.setCompoundDrawablesWithIntrinsicBounds(sun_riseIcon, null, null, null);
+
+		this.sun_set = (TextView) findViewById(R.id.sun_set);
 		this.sun_set.setText(valueOrDefault(this.currentWeather.getSunSet(), getString(R.string.not_available)));
+
+		Drawable sun_setIcon = new BitmapDrawable(((BitmapDrawable) getResources().getDrawable(R.drawable.sun_set)).getBitmap());
+		this.sun_set.setCompoundDrawablesWithIntrinsicBounds(sun_setIcon, null, null, null);
 	}
 
 	private TextView temperature;
@@ -183,11 +186,9 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.humidity = (TextView) findViewById(R.id.humidity);
 		this.pressure = (TextView) findViewById(R.id.pressure);
 
-		this.temperature.setText(this.currentWeather.getCurrentTemp()
-			+ Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
+		this.temperature.setText(this.currentWeather.getCurrentTemp() + Temperature.withDegree(Utils.abrev(this.currentWeather.getTemperatureUnit())));
 		this.humidity.setText(this.currentWeather.getHumidityPercentage() + "%");
-		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(),
-				getString(R.string.not_available)));
+		this.pressure.setText(valueOrDefault(this.currentWeather.getPressure() + this.currentWeather.getPressureUnit(), getString(R.string.not_available)));
 		this.pressure.setCompoundDrawablesWithIntrinsicBounds(PressureUtils.getPressureStateImage(this.currentWeather.getRising()), 0, 0, 0);
 	}
 
@@ -199,8 +200,7 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 		this.more_information_link.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				final Intent browserIntent =
-						new Intent(Intent.ACTION_VIEW, Uri.parse(WeatherOverviewActivity.this.currentWeather.getLink()));
+				final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(WeatherOverviewActivity.this.currentWeather.getLink()));
 				startActivity(browserIntent);
 				trackPageView(GoogleAnalyticsService.MORE_INFO);
 			}
@@ -249,7 +249,8 @@ public class WeatherOverviewActivity extends OrmLiteBaseActivity<DatabaseHelper>
 					final List<ForcastEntry> entries = this.currentWeather.getForcastEntries();
 					if (isNotEmpty(entries)) {
 						// HACK to put forecast details in intent as current weather is not Parcelable
-						// TODO => remove if not needed => final Intent intent = new Intent(this, ForcastTabCreationActivity.class);
+						// TODO => remove if not needed => final Intent intent = new Intent(this,
+						// ForcastTabCreationActivity.class);
 						final Intent intent = new Intent(this, TwoDayOverviewActivity.class);
 						final Bundle extras = new Bundle();
 						int i = 0;

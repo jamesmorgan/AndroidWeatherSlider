@@ -222,7 +222,6 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	@Override
 	public boolean onPrepareOptionsMenu(final Menu menu) {
-
 		menu.clear();
 		final MenuInflater inflater = getMenuInflater();
 		if (null != this.weatherChoices) {

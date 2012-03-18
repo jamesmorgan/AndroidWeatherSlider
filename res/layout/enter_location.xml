@@ -55,6 +55,7 @@
                     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 
                     <LinearLayout
+                        android:id="@+id/dummy_focus_container"
                         android:layout_width="0px"
                         android:layout_height="0px"
                         android:focusable="true"

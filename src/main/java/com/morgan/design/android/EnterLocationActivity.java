@@ -155,7 +155,7 @@ public class EnterLocationActivity extends Activity implements SimpleGestureList
 		switch (requestCode) {
 			case Constants.SELECT_LOCATION:
 				if (resultCode == RESULT_OK) {
-					setResult(RESULT_OK);
+					setResult(RESULT_OK, data);
 					finish();
 				}
 				else if (resultCode == RESULT_CANCELED) {
