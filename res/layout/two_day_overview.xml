@@ -213,12 +213,8 @@
             android:baselineAligned="true"
             android:orientation="vertical" >
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dip"
-                android:background="#3399FF" />
-
             <TextView
+                android:id="@+id/swipe_right_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -229,6 +225,11 @@
                 android:paddingTop="2dip"
                 android:text="@string/swipe_right_for_current_conditions" />
 
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_alignTop="@+id/swipe_right_icon"
+                android:background="#3399FF" />
         </RelativeLayout>
     </LinearLayout>
 

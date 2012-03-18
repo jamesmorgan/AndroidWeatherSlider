@@ -7,6 +7,5 @@
     <string name="create_shortcut">Create Shortcut</string>
     <string name="cancel_all">Cancel All</string>
     <string name="reload_all">Reload All</string>
-    <string name="reload">Reload</string>
 
 </resources>

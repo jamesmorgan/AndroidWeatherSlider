@@ -93,29 +93,40 @@ public class TODO {
 	// //////////////////////
 
 	// FIXME -> Add option to put shortcut to overview screen on home page for each location
-	// FIXME -> Use application bar not button at top of page 
 	// FIXME -> Hook into search button to enter a location, search-able activity
 	
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
-	// FIXME -> Capture Phone type on application feedback
-	// FIXME -> Add ICS support - Android 4.0
 	
 	// FIXME -> Investigate maven release plugin
 	// FIXME -> Complete localisation
+	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
+	// FIXME -> Use application bar not button at top of page 
+	
+	// ///////////////////////
+	// Release Version 1.10 //
+	// ///////////////////////
+	
+	// FIXME -> DONE - (18/03/2012) - Changelog!
+	// FIXME -> DONE - (18/03/2012) - Removal of READ_LOGS Android permission!
+	// FIXME -> DONE - (18/03/2012) - Add ICS support - Android 4.0
+	// FIXME -> DONE - (18/03/2012) - Issue with swipe areas on ICS
+	// FIXME -> DONE - (18/03/2012) - Fixing Lint warnings, project clean up, old classes, images are deleted.
+	// FIXME -> DONE - (18/03/2012) - Added Phone Model & Android Version to about page.
 	
 	// //////////////////////
 	// Release Version 1.9 //
 	// //////////////////////
 	
-	// FIXME -> DONE - (19/02/2012) - Delete WeatherLookupEntry.java
-	// FIXME -> DONE - (19/02/2012) - Update ORMLite 3.45
+	// FIXME -> DONE - (24/02/2012) - Delete WeatherLookupEntry.java
+	// FIXME -> DONE - (24/02/2012) - Update ORMLite 3.45
 	
-	// FIXME -> DONE - (19/02/2012) - Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
-	// FIXME -> DONE - (19/02/2012) - Ability for different modes once active
-	// FIXME -> DONE - (19/02/2012) - e.g. 1) enable force update dialog if version is V1.8f
-	// FIXME -> DONE - (19/02/2012) - 2) enable dialog on next restart (accessed) V1.8r
-	// FIXME -> DONE - (19/02/2012) - 2) never display dialog V1.8n
+	// FIXME -> DONE - (24/02/2012) - Check for updates daily? - http://www.androidsnippets.com/check-for-updates-once-a-day
+	// FIXME -> DONE - (24/02/2012) - Ability for different modes once active
+	// FIXME -> DONE - (24/02/2012) -  Modes: 1) 		 NONE => ""  - No update available, do nothing
+	// FIXME -> DONE - (24/02/2012) - 		  2) 	   FORCED => "f" - Attempt to inform User immediately & schedule for next application open
+	// FIXME -> DONE - (24/02/2012) - 		  3) ON_NEXT_OPEN => "n" - Inform user on next launch
+	// FIXME -> DONE - (24/02/2012) - 		  3) 	   SILENT => "s" - Update available but not critical, do nothing
 	
 	// //////////////////////
 	// Release Version 1.8 //

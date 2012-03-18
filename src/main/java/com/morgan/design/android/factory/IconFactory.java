@@ -3,8 +3,8 @@ package com.morgan.design.android.factory;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.dao.orm.WeatherChoice;
+import com.morgan.design.weatherslider.R;
 
 public class IconFactory {
 
@@ -146,9 +146,9 @@ public class IconFactory {
 		// 37 isolated thunderstorms
 		WEATHER_MAP.put(37, R.drawable.weather_channel_37);
 		// 38 scattered thunderstorms
-		WEATHER_MAP.put(38, R.drawable.weather_channel_38);
+		WEATHER_MAP.put(38, R.drawable.weather_channel_39);
 		// 39 scattered thunderstorms
-		WEATHER_MAP.put(39, R.drawable.weather_channel_38);
+		WEATHER_MAP.put(39, R.drawable.weather_channel_39);
 		// 40 scattered showers
 		WEATHER_MAP.put(40, R.drawable.weather_channel_40);
 		// 41 heavy snow
@@ -172,9 +172,7 @@ public class IconFactory {
 
 	public static int getImageResourceFromCode(final int code) {
 		final Integer imageRes = WEATHER_MAP.get(code);
-		return null != imageRes
-				? imageRes
-				: R.drawable.weather_channel_44;
+		return null != imageRes ? imageRes : R.drawable.weather_channel_44;
 	}
 
 	public static int getStatus(final WeatherChoice woeidChoice) {

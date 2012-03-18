@@ -22,6 +22,10 @@ import com.morgan.design.Logger;
 import com.morgan.design.android.util.BuildUtils;
 import com.morgan.design.android.util.PreferenceUtils;
 
+/**
+ * @author James Edward Morgan <br />
+ *         Service capable of checking for updates and prompting the user under certain conditions.
+ */
 public class UpdateService extends IntentService {
 
 	public static final String LOG_TAG = "UpdateService";
