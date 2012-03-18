@@ -107,8 +107,7 @@ public class TODO {
 	// Release Version 1.10 //
 	// ///////////////////////
 	
-	// FIXME -> Changelog!
-	
+	// FIXME -> DONE - (18/03/2012) - Changelog!
 	// FIXME -> DONE - (18/03/2012) - Add ICS support - Android 4.0
 	// FIXME -> DONE - (18/03/2012) - Issue with swipe areas on ICS
 	// FIXME -> DONE - (18/03/2012) - Fixing Lint warnings, project clean up, old classes, images are deleted.
