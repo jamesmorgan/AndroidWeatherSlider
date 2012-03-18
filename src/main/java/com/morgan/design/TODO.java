@@ -101,16 +101,17 @@ public class TODO {
 	// FIXME -> Investigate maven release plugin
 	// FIXME -> Complete localisation
 	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
+	// FIXME -> Use application bar not button at top of page 
 	
 	// ///////////////////////
 	// Release Version 1.10 //
 	// ///////////////////////
 	
-	// FIXME -> Use application bar not button at top of page 
-	// FIXME -> Add ICS support - Android 4.0
 	// FIXME -> Changelog!
 	
-	// FIXME - Issue with swipe areas on ICS
+	// FIXME -> DONE - (18/03/2012) - Add ICS support - Android 4.0
+	// FIXME -> DONE - (18/03/2012) - Issue with swipe areas on ICS
+	// FIXME -> DONE - (18/03/2012) - Fixing Lint warnings, project clean up, old classes, images are deleted.
 	// FIXME -> DONE - (18/03/2012) - Added Phone Model & Android Version to about page.
 	
 	// //////////////////////

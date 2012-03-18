@@ -122,7 +122,7 @@
 					<resourceDirectory>${project.basedir}/res</resourceDirectory>
 					<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
 					<sdk>
-						<platform>8</platform>
+						<platform>15</platform>
 					</sdk>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 
