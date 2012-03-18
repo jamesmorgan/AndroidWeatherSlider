@@ -107,9 +107,11 @@ public class TODO {
 	// ///////////////////////
 	
 	// FIXME -> Use application bar not button at top of page 
-	// FIXME -> Capture Phone type on application feedback
 	// FIXME -> Add ICS support - Android 4.0
 	// FIXME -> Changelog!
+	
+	// FIXME - Issue with swipe areas on ICS
+	// FIXME -> DONE - (18/03/2012) - Added Phone Model & Android Version to about page.
 	
 	// //////////////////////
 	// Release Version 1.9 //

@@ -79,6 +79,8 @@ public class AboutActivity extends Activity {
 		version.add(createSimple("Application Version", BuildUtils.getVersion(this)));
 		version.add(createSimple("Database Version", BuildUtils.getDbVersion()));
 		version.add(createSimple("SQLLite Version", BuildUtils.getSQLLiteVersion()));
+		version.add(createSimple("Android Version", BuildUtils.androidVersion()));
+		version.add(createSimple("Phone Model", BuildUtils.phoneModel()));
 
 		this.adapter.addSection("Version", new SimpleAdapter(this, version, R.layout.list_simple,
 				new String[] { ITEM_TITLE, ITEM_VERSION }, 
@@ -91,8 +93,7 @@ public class AboutActivity extends Activity {
 
 		this.list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-					final long duration) {
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long duration) {
 				@SuppressWarnings("unchecked")
 				final HashMap<String, ?> item = (HashMap<String, ?>) AboutActivity.this.adapter.getItem(position);
 				if (item.containsKey(URL) && null != item.get(URL)) {
@@ -106,8 +107,7 @@ public class AboutActivity extends Activity {
 		setContentView(this.list);
 	}
 
-	private Map<String, ?> createImageItem(final String title, final String caption, final String subCaption,
-			final String url, final int imageId) {
+	private Map<String, ?> createImageItem(final String title, final String caption, final String subCaption, final String url, final int imageId) {
 		final Map<String, Object> item = new HashMap<String, Object>();
 		item.put(ITEM_TITLE, title);
 		item.put(ITEM_CAPTION, caption);
