@@ -89,7 +89,8 @@ public class TODO {
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
 	
 	// //////////////////////
-	// Release Version 1.? //
+	// Version: 1.?		   //
+	// Status: Development //
 	// //////////////////////
 
 	// FIXME -> Add option to put shortcut to overview screen on home page for each location
@@ -103,9 +104,18 @@ public class TODO {
 	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
 	// FIXME -> Use application bar not button at top of page 
 	
-	// ///////////////////////
-	// Release Version 1.10 //
-	// ///////////////////////
+	// //////////////////////
+	// Version: 1.12	   //
+	// Status: Development //
+	// //////////////////////
+
+	// FIXME -> Links, help, TODO, about, market link etc
+	// FIXME -> DONE - (20/03/2012) - Default Weather Summary notification text to false
+	
+	// ///////////////////
+	// Version: 1.10    //
+	// Status: Released //
+	// ///////////////////
 	
 	// FIXME -> DONE - (18/03/2012) - Changelog!
 	// FIXME -> DONE - (18/03/2012) - Removal of READ_LOGS Android permission!

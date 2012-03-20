@@ -159,7 +159,7 @@ public final class PreferenceUtils {
 	}
 
 	public static boolean enabledNotifcationTickerText(Context context) {
-		return getPrefs(context).getBoolean(PREF_ENABLED_NOTIFCATION_TICKER_TEXT, true);
+		return getPrefs(context).getBoolean(PREF_ENABLED_NOTIFCATION_TICKER_TEXT, false);
 	}
 
 	public static boolean setReportErrorOnFailedLookup(final Context context, final boolean value) {
