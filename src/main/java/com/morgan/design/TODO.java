@@ -109,7 +109,7 @@ public class TODO {
 	// Status: Development //
 	// //////////////////////
 
-	// FIXME -> Links, help, TODO, about, market link etc
+	// FIXME -> DONE - (20/03/2012) - Update README - Links, help, TODO, about, market link etc
 	// FIXME -> DONE - (20/03/2012) - Default Weather Summary notification text to false
 	
 	// ///////////////////
