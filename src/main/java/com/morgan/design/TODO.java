@@ -99,7 +99,6 @@ public class TODO {
 	// FIXME -> Listen to "android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" and check data enabled, prompt user if required
 	// FIXME -> Present user with error screen when application starts if background data transmission is disabled
 	
-	// FIXME -> Investigate maven release plugin
 	// FIXME -> Complete localisation
 	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
 	// FIXME -> Use application bar not button at top of page 
@@ -109,6 +108,55 @@ public class TODO {
 	// Status: Development //
 	// //////////////////////
 
+	// FIXME -> Investigate maven release plugin
+	/* 
+	 * ######################
+	 * ## Outcome Required ##
+	 * ######################
+	 * 
+	 * Plugin goals : http://maven-android-plugin-m2site.googlecode.com/svn/plugin-info.html
+	 *
+	 * Build Artifact
+	 * - ZipAlign (/)
+	 * - Pro-guard (/)
+	 * - Properties Substitution (/)
+	 * - Disable Debug (/)
+	 * - Lower logging level (/)
+	 * 
+	 * Tag version
+	 * - Upload to GitHub
+	 * 
+	 * Version Update
+	 * - Update POM.xml version (/)
+	 * - Update AndroidMainfest.xml version (/)
+	 *
+	 * -------------------------------------------------
+	 * Download MorseFlash MavenAdroid application for sample deployment
+	 * Tutorial: http://www.vogella.de/articles/AndroidBuildMaven/article.html
+	 * 			 http://www.jameselsey.co.uk/blogs/techblog/automating-android-application-signing-and-zipaligning-with-maven/
+	 * 
+	 * mvn android:apk - Creates the apk file. By default signs it with debug keystore. - http://maven-android-plugin-m2site.googlecode.com/svn/apk-mojo.html
+	 * 
+	 * mvn android:help - Show help - http://maven-android-plugin-m2site.googlecode.com/svn/help-mojo.html
+	 *
+	 * mvn android:manifest-update - Updates various version attributes present in the AndroidManifest.xml file. - http://maven-android-plugin-m2site.googlecode.com/svn/manifest-update-mojo.html
+	 *
+	 * mvn android:proguard - Processes both application and dependency classes using the ProGuard - http://maven-android-plugin-m2site.googlecode.com/svn/proguard-mojo.html
+	 * 
+	 * mvn android:run - Runs first activity with intent android.intent.action.MAIN - http://maven-android-plugin-m2site.googlecode.com/svn/run-mojo.html
+	 * 
+	 * mvn android:zipalign - ZipalignMojo can run the zipalign command against the apk. - http://maven-android-plugin-m2site.googlecode.com/svn/zipalign-mojo.html
+	 * 
+	 * Updating POM version - http://blog.tallan.com/2011/11/29/build-your-android-project-in-one-step-with-maven/
+	 * 
+	 * Running tests - http://wiebe-elsinga.com/blog/?p=365
+	 * 
+	 */
+	
+	// FIXME -> House Work - Update Maven to latest version 3.0.4
+	// FIXME -> House Work - Update Java to latest version
+	
+	// FIXME -> Update ORMLite to 4.36
 	// FIXME -> DONE - (20/03/2012) - Update README - Links, help, TODO, about, market link etc
 	// FIXME -> DONE - (20/03/2012) - Default Weather Summary notification text to false
 	
@@ -434,7 +482,8 @@ public class TODO {
 	// FIXME -> DONE - swipe navigation path - (add to manual)
 	// FIXME -> DONE - periodically query for weather
 	// FIXME -> DONE - check phone has Internet before launching
-
+	// FIXME -> DONE - First working prototype
+	
 	//@formatter:on
 
 }
