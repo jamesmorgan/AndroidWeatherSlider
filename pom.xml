@@ -14,6 +14,14 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>2.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.android</groupId>
 			<artifactId>spring-android-rest-template</artifactId>
@@ -78,70 +86,62 @@
 		</dependency>
 
 		<!-- ActionBar sherlock http://actionbarsherlock.com/download.html -->
-       <!-- <dependency>
-            <groupId>com.actionbarsherlock</groupId>
-            <artifactId>library</artifactId>
-            <version>4.0.0</version>
-            <type>apklib</type>
-        </dependency>
-        <dependency>
-            <groupId>com.actionbarsherlock</groupId>
-            <artifactId>library</artifactId>
-            <version>4.0.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency> -->
+		<!-- <dependency> <groupId>com.actionbarsherlock</groupId> <artifactId>library</artifactId> 
+			<version>4.0.0</version> <type>apklib</type> </dependency> <dependency> <groupId>com.actionbarsherlock</groupId> 
+			<artifactId>library</artifactId> <version>4.0.0</version> <type>jar</type> 
+			<scope>compile</scope> </dependency> -->
 
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<version>3.1.1</version>
+					<extensions>true</extensions>
+					<configuration>
+						<undeployBeforeDeploy>true</undeployBeforeDeploy>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
-			<!-- Android Maven build plugin -->
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
-				<version>3.1.1</version>
-
-				<!-- Zip Align APK -->
-				<executions>
-					<execution>
-						<id>alignApk</id>
-						<phase>install</phase>
-						<goals>
-							<goal>zipalign</goal>
-						</goals>
-					</execution>
-				</executions>
-
 				<configuration>
+					<sdk>
+						<!-- platform or api level (api level 4 = platform 1.6) -->
+						<platform>8</platform>
+						<path>${env.ANDROID_HOME}</path>
+					</sdk>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+					<!-- Zip Alignment Configuration -->
+					<zipalign>
+						<verbose>true</verbose>
+						<skip>false</skip><!-- defaults to true -->
+						<inputApk>${project.build.directory}/${project.artifactId}-${project.version}.apk</inputApk>
+						<outputApk>${project.build.directory}/${project.artifactId}-${project.version}-RELEASE.apk</outputApk>
+					</zipalign>
+					<!-- Manifest Update Configuration -->
+					<manifest>
+						<versionCodeAutoIncrement>true</versionCodeAutoIncrement>
+						<versionCodeUpdateFromVersion>true</versionCodeUpdateFromVersion>
+						<debuggable>false</debuggable>
+					</manifest>
+					<!-- Proguard Configuration -->
 					<proguard>
 						<skip>true</skip>
 					</proguard>
-					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
-					<assetsDirectory>${project.basedir}/assets</assetsDirectory>
-					<resourceDirectory>${project.basedir}/res</resourceDirectory>
-					<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
-					<sdk>
-						<platform>15</platform>
-					</sdk>
-					<undeployBeforeDeploy>true</undeployBeforeDeploy>
-
-					<!-- Zip Allign Configuration -->
-					<zipalign>
-						<verbose>true</verbose>
-						<skip>false</skip>
-						<inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
-						<outputApk>${project.build.directory}/${project.artifactId}-aligned.apk</outputApk>
-					</zipalign>
-					
-					<manifestDebuggable>false</manifestDebuggable>
-
 				</configuration>
-				<extensions>true</extensions>
 			</plugin>
-
-			<!-- Maven Compile Me -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
@@ -149,100 +149,47 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-
-			<!-- Sets the AndroidManifest.xml Version Name to the projects version 
-				number -->
-			<plugin>
-				<groupId>org.codehaus.groovy.maven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<inherited>false</inherited>
-						<configuration>
-							<source>
-								project.modules.each {
-								try {
-								def manifestFile = new
-								File("${it}/AndroidManifest.xml")
-								def ns = new
-								groovy.xml.Namespace("http://schemas.android.com/apk/res/android",
-								"ns")
-								def parser = new groovy.util.XmlParser(false, true)
-								def
-								rootNode = parser.parse(manifestFile)
-								def attributes =
-								rootNode.attributes()
-								attributes[ns.versionName] =
-								"${project.version}"
-								def writer = new
-								groovy.io.GroovyPrintWriter(manifestFile)
-								writer.println('&lt;?xml version="1.0" encoding="UTF-8"?&gt;')
-								def xmlWriter = new groovy.util.XmlNodePrinter(writer)
-								xmlWriter.setPreserveWhitespace(false)
-								xmlWriter.setNamespaceAware(true)
-								xmlWriter.print(rootNode)
-								}
-								catch (FileNotFoundException e)
-								{
-								println('No AndroidManifest.xml
-								file found. Skipping version update.')
-								println('Probably not an
-								Android project, but a library.')
-								println('Skipping version
-								update.')
-								}
-								}
-							</source>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											com.jayway.maven.plugins.android.generation2
-										</groupId>
-										<artifactId>
-											android-maven-plugin
-										</artifactId>
-										<versionRange>
-											[3.0.0,)
-										</versionRange>
-										<goals>
-											<goal>proguard</goal>
-											<goal>manifest-update</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
+	<profiles>
+		<!-- mvn install -Prelease -->
+		<profile>
+			<id>release</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>install</defaultGoal>
+				<finalName>${project.artifactId}</finalName>
+				<plugins>
+					<plugin>
+						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+						<artifactId>maven-android-plugin</artifactId>
+						<inherited>true</inherited>
+						<executions>
+							<!-- Zip Alignment -->
+							<execution>
+								<id>zipalign</id>
+								<phase>install</phase>
+								<goals>
+									<goal>zipalign</goal>
+								</goals>
+							</execution>
+							<!-- Manifest Update -->
+							<execution>
+								<id>update-manifest</id>
+								<phase>install</phase>
+								<goals>
+									<goal>manifest-update</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<repositories>
 		<!-- For testing against latest Spring snapshots -->
@@ -261,9 +208,11 @@
 
 		<repository>
 			<id>org.springframework.maven.milestone</id>
-			<name>Spring 
-			Maven Milestone Repository</name>
+			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -273,6 +222,12 @@
 		<repository>
 			<id>acra-releases</id>
 			<url>http://acra.googlecode.com/svn/repository/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 
 		<!-- Android aciotn bar library -->
@@ -283,7 +238,7 @@
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 
@@ -295,7 +250,7 @@
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 
