@@ -103,6 +103,7 @@ public class TODO {
 	// FIXME -> Complete localisation
 	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
 	// FIXME -> Use application bar not button at top of page - https://groups.google.com/forum/?fromgroups#!topic/actionbarsherlock/VeEsPvKKOdo
+	// FIXME -> Create new Intel images - http://developer.android.com/guide/developing/devices/emulator.html#accel-vm
 	
 	// //////////////////////
 	// Version: 1.12	   //
@@ -138,10 +139,9 @@ public class TODO {
 	 * Running tests - http://wiebe-elsinga.com/blog/?p=365
 	 */
 	
-	// FIXME -> Create new Intel images - http://developer.android.com/guide/developing/devices/emulator.html#accel-vm
-	// FIXME -> Update ORMLite to 4.38
-	
+	// FIXME -> DONE - (26/03/2012) - Update ORMLite to 4.38
 	// FIXME -> DONE - (26/03/2012) - Added license to GNU GPLv3
+	
 	// FIXME -> DONE - (25/03/2012) - House Work - Update Maven to latest version 3.0.4
 	// FIXME -> DONE - (25/03/2012) - House Work - Update Java to latest version 1.6_u31
 	
