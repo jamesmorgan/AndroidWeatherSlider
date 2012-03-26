@@ -63,3 +63,10 @@ To view all up and coming features, plus see what is already present visit the m
 * [My Blog](http://www.morgan-design.com "Morgan-Design.com")
 
 * [Other Applications](https://play.google.com/store/search?q=MorganDesign&c=apps "Google Play Store")
+
+## License
+
+Licensed as GNU GPLv3 - [http://www.gnu.org/licenses/gpl-3.0.txt](http://www.gnu.org/licenses/gpl-3.0.txt)
+
+If you steal the code please consider a reference to Weather Slider or morgan-design as a good will gesture.
+ 
