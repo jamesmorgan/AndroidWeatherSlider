@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:installLocation="auto"
     package="com.morgan.design.weatherslider"
-    android:versionCode="11"
-    android:versionName="1.10" >
+    android:installLocation="auto"
+    android:versionCode="12"
+    android:versionName="1.12" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- <uses-permission android:name="android.permission.READ_LOGS" />  -->
+    <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
-    <uses-sdk android:minSdkVersion="8" android:maxSdkVersion="14"/>
+    <uses-sdk
+        android:maxSdkVersion="14"
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
 
     <!-- android:debuggable="true" -->
     <application
@@ -76,7 +79,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.morgan.design.android.TwoDayOverviewActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -87,6 +89,7 @@
         <service
             android:name="com.morgan.design.android.service.LocationLookupService"
             android:enabled="true"
+            android:exported="false"
             android:label="@string/get_my_location_service" >
             <intent-filter>
                 <action android:name="com.morgan.design.android.service.GET_ROAMING_LOCATION_LOOKUP" />
@@ -121,7 +124,8 @@
         <!-- Service deals with all common tasks related to controlling notifications -->
         <service
             android:name="com.morgan.design.android.service.NotificationControllerService"
-            android:enabled="true" >
+            android:enabled="true"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.morgan.design.android.broadcast.PREFERENCES_UPDATED" />
             </intent-filter>
