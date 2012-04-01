@@ -90,7 +90,7 @@ public class TODO {
 	
 	
 	// //////////////////////
-	// Version: 1.?		   //
+	// Version: 1.13	   //
 	// Status: Development //
 	// //////////////////////
 
@@ -107,7 +107,8 @@ public class TODO {
 	
 	// //////////////////////
 	// Version: 1.12	   //
-	// Status: Development //
+	// Status: Released	   //
+	// Date: 01/04/2011    //
 	// //////////////////////
 
 	// FIXME -> DONE - (25/03/2012) - Investigate maven release plugin
