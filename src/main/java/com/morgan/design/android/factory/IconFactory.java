@@ -3,6 +3,8 @@ package com.morgan.design.android.factory;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
+
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.weatherslider.R;
 
@@ -10,6 +12,7 @@ public class IconFactory {
 
 	public static int NOTE_FOUND = 3200;
 
+	@SuppressLint("UseSparseArrays")
 	public static final Map<Integer, Integer> WEATHER_MAP;
 
 	public static final int NA = R.drawable.weather_channel_44;

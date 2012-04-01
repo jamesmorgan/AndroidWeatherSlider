@@ -139,8 +139,10 @@ public class TODO {
 	 * Running tests - http://wiebe-elsinga.com/blog/?p=365
 	 */
 	
+	// FIXME -> DONE - (01/04/2012) - Fixing Lint warnings
 	// FIXME -> DONE - (26/03/2012) - Update ORMLite to 4.38
 	// FIXME -> DONE - (26/03/2012) - Added license to GNU GPLv3
+	// FIXME -> DONE - (26/03/2012) - Sync Version Name and Version Code
 	
 	// FIXME -> DONE - (25/03/2012) - House Work - Update Maven to latest version 3.0.4
 	// FIXME -> DONE - (25/03/2012) - House Work - Update Java to latest version 1.6_u31

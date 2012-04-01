@@ -11,7 +11,7 @@ public enum Temperature implements Abrev {
 
 	CELSIUS("c", "Celsius");
 
-	static final Character DEGREE = new Character('\u00b0');
+	static final Character DEGREE = Character.valueOf('°');
 
 	private String abrev;
 	private String full;
@@ -23,8 +23,7 @@ public enum Temperature implements Abrev {
 
 	public static Temperature to(final String temp) {
 		for (final Temperature type : values()) {
-			if (type.abrev()
-				.equalsIgnoreCase(temp)) {
+			if (type.abrev().equalsIgnoreCase(temp)) {
 				return type;
 			}
 		}
