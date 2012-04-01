@@ -3,6 +3,8 @@ package com.morgan.design.android.domain.types;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
+
 /**
  * Based on http://developer.yahoo.com/weather/#codes
  * 
@@ -10,6 +12,7 @@ import java.util.Map;
  */
 public class WeatherConditions {
 
+	@SuppressLint("UseSparseArrays")
 	private static Map<Integer, Condition> CONDITIONS;
 	static {
 		CONDITIONS = new HashMap<Integer, Condition>();

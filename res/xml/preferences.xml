@@ -52,7 +52,7 @@
             android:title="@string/pref_reload_on_connectivity_change_title" />
 
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="enableNotificationTickerText"
             android:summaryOn="@string/pref_disable_notification_ticker_text_enabled"
             android:summaryOff="@string/pref_disable_notification_ticker_text_disabled"

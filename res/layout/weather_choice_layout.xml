@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
 
     <LinearLayout
         android:id="@+id/top_container"
@@ -50,7 +52,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/service_update_spinner"
+            android:layout_toLeftOf="@+id/service_update_progress_bar"
             android:background="@drawable/rounded_corners"
             android:gravity="center_vertical|center_horizontal"
             android:text="Some update..."

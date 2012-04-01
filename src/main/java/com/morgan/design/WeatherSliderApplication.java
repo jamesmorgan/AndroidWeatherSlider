@@ -23,6 +23,7 @@ import org.acra.ErrorReporter;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
@@ -52,6 +53,7 @@ public class WeatherSliderApplication extends Application {
 
 	private GoogleAnalyticsService googleAnalyticsService;
 
+	@SuppressLint("UseSparseArrays")
 	private static Map<Integer, YahooWeatherInfo> WEATHERS = new HashMap<Integer, YahooWeatherInfo>();
 
 	public static final WeatherSliderApplication locate(Activity activity) {
