@@ -90,7 +90,7 @@ public class TODO {
 	
 	
 	// //////////////////////
-	// Version: 1.?		   //
+	// Version: 1.1X	   //
 	// Status: Development //
 	// //////////////////////
 
@@ -106,8 +106,19 @@ public class TODO {
 	// FIXME -> Create new Intel images - http://developer.android.com/guide/developing/devices/emulator.html#accel-vm
 	
 	// //////////////////////
+	// Version: 1.13	   //
+	// Status: Released    //
+	// Date: 15/04/2011    //
+	// //////////////////////
+
+	// FIXME -> DONE - (15/04/2012) - Update ORMLite to 4.39
+	// FIXME -> DONE - (15/04/2012) - Updated screen shots on market
+	// FIXME -> DONE - (15/04/2012) - Removed maxSDkVersion from manifest as preventing some user upgrades
+	
+	// //////////////////////
 	// Version: 1.12	   //
-	// Status: Development //
+	// Status: Released	   //
+	// Date: 01/04/2011    //
 	// //////////////////////
 
 	// FIXME -> DONE - (25/03/2012) - Investigate maven release plugin
