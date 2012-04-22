@@ -14,6 +14,12 @@
     <!-- Rate Me -->
     <string name="rate_me_title">Would you like to rate the application?</string>
 
+    <!-- Share Options -->
+    <string name="share_subject">Weather Slider</string>
+    <!-- https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider -->
+    <string name="share_content">I\'m using Weather Slider, the light weight Android Weather Companion, http://bit.ly/JhNRyL</string>
+    <string name="share_title">Share via</string>
+    
     <!-- Button / General -->
     <string name="no_thanks">No Thanks</string>
     <string name="okay">Okay</string>
