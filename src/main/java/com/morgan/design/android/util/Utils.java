@@ -54,6 +54,22 @@ public class Utils {
 			Logger.e(LOG_TAG, "Unable to about activity: ", e);
 		}
 	}
+
+	public static void openShareIntent(final Activity activity) {
+		try {
+			Intent i = new Intent(android.content.Intent.ACTION_SEND);
+			i.setType("text/plain");
+			i.putExtra(android.content.Intent.EXTRA_SUBJECT, activity.getString(R.string.share_subject));
+			i.putExtra(android.content.Intent.EXTRA_TEXT, activity.getString(R.string.share_content));
+			Intent createChooser = Intent.createChooser(i, activity.getString(R.string.share_title));
+			activity.startActivity(createChooser);
+		}
+		catch (final Exception e) {
+			shortToast(activity, "Unable to open sharing options");
+			Logger.e(LOG_TAG, "Unable to open sharing options: ", e);
+		}
+	}
+
 	public static DialogInterface.OnClickListener cancel = new DialogInterface.OnClickListener() {
 		@Override
 		public void onClick(DialogInterface dialog, int whichButton) {

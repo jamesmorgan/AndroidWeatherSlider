@@ -20,6 +20,7 @@ public class GoogleAnalyticsService {
 	public static final String RELOAD_ALL_ACTIVE = "ReloadAllActiveNotifications";
 	public static final String CANCEL_ALL = "CancelAllNotifications";
 	public static final String CREATE_HOME_SHORTCUT = "CreateHomeScreenShortcut";
+	public static final String OPEN_SHARE_INTENT = "OpenShareIntent";
 	public static final String SEND_FEEDBACK = "SendFeedback";
 	public static final String OPEN_GOOGLE_MAPS = "OpenGoogleMaps";
 	public static final String MORE_INFO = "MoreInfo";

@@ -357,12 +357,13 @@ public final class R {
         public static final int further_details_container=0x7f090042;
         public static final int getMyLocationButton=0x7f090008;
         public static final int home_menu_about=0x7f090050;
-        public static final int home_menu_cancel_all=0x7f090051;
+        public static final int home_menu_cancel_all=0x7f090052;
         public static final int home_menu_changelog=0x7f09004f;
-        public static final int home_menu_create_shortcut=0x7f090053;
+        public static final int home_menu_create_shortcut=0x7f090054;
         public static final int home_menu_feedback=0x7f09004e;
-        public static final int home_menu_reload_all=0x7f090052;
+        public static final int home_menu_reload_all=0x7f090053;
         public static final int home_menu_settings=0x7f09004d;
+        public static final int home_menu_share=0x7f090051;
         public static final int humidity=0x7f09003a;
         public static final int image=0x7f090047;
         public static final int last_time_updated=0x7f090049;
@@ -387,9 +388,9 @@ public final class R {
         public static final int more_information_link=0x7f090043;
         public static final int name=0x7f09004a;
         public static final int open_map_link=0x7f090044;
-        public static final int overview_menu_feedback=0x7f090055;
-        public static final int overview_menu_home=0x7f090056;
-        public static final int overview_menu_settings=0x7f090054;
+        public static final int overview_menu_feedback=0x7f090056;
+        public static final int overview_menu_home=0x7f090057;
+        public static final int overview_menu_settings=0x7f090055;
         public static final int pressure=0x7f09003b;
         public static final int secondary_text=0x7f09004b;
         public static final int service_update_area=0x7f09002e;
@@ -449,169 +450,177 @@ public final class R {
     }
     public static final class string {
         public static final int about=0x7f060002;
-        public static final int alaert_enabled_gps_provider=0x7f060066;
-        public static final int alert_cancel=0x7f060015;
-        public static final int alert_delete=0x7f060050;
-        public static final int alert_disable=0x7f06004e;
-        public static final int alert_do_nothing=0x7f060068;
-        public static final int alert_enable=0x7f06004f;
-        public static final int alert_enable_gps=0x7f060067;
-        public static final int alert_no=0x7f060013;
+        public static final int alaert_enabled_gps_provider=0x7f06006a;
+        public static final int alert_cancel=0x7f060019;
+        public static final int alert_delete=0x7f060054;
+        public static final int alert_disable=0x7f060052;
+        public static final int alert_do_nothing=0x7f06006c;
+        public static final int alert_enable=0x7f060053;
+        public static final int alert_enable_gps=0x7f06006b;
+        public static final int alert_no=0x7f060017;
         /**  List locations activity 
          */
-        public static final int alert_on_location_click_is_this_correct=0x7f060053;
-        public static final int alert_open=0x7f060014;
-        public static final int alert_refresh=0x7f06004d;
-        public static final int alert_title_manage_location=0x7f06004c;
+        public static final int alert_on_location_click_is_this_correct=0x7f060057;
+        public static final int alert_open=0x7f060018;
+        public static final int alert_refresh=0x7f060051;
+        public static final int alert_title_manage_location=0x7f060050;
         /**  Home Screen - ManageWeatherChoiceActivity.java 
          */
-        public static final int alert_title_open_overview=0x7f06004b;
-        public static final int alert_yes=0x7f060012;
-        public static final int always_use_gps_summary=0x7f06005e;
-        public static final int app_name=0x7f060007;
-        public static final int button_add_new_location=0x7f060051;
-        public static final int button_lookup=0x7f060059;
-        public static final int cancel_all=0x7f060004;
+        public static final int alert_title_open_overview=0x7f06004f;
+        public static final int alert_yes=0x7f060016;
+        public static final int always_use_gps_summary=0x7f060062;
+        public static final int app_name=0x7f060008;
+        public static final int button_add_new_location=0x7f060055;
+        public static final int button_lookup=0x7f06005d;
+        public static final int cancel_all=0x7f060005;
         public static final int change_log=0x7f060001;
-        public static final int changelog_filename=0x7f06000b;
+        public static final int changelog_filename=0x7f06000c;
         /**  Change Log 
          */
-        public static final int changelog_title=0x7f06000a;
-        public static final int chkbox_always_use_gps=0x7f06005d;
+        public static final int changelog_title=0x7f06000b;
+        public static final int chkbox_always_use_gps=0x7f060061;
         /**  Android Mainifest 
          */
-        public static final int crash_toast_text=0x7f060006;
-        public static final int create_shortcut=0x7f060003;
-        public static final int enter_location_example=0x7f06005a;
-        public static final int feedback=0x7f06000f;
-        public static final int feedbackbody=0x7f060019;
-        public static final int feedbackbutton=0x7f06001b;
-        public static final int feedbackemail=0x7f060018;
-        public static final int feedbackmessagebody_responseno=0x7f060022;
-        public static final int feedbackmessagebody_responseyes=0x7f060021;
-        public static final int feedbackmessagesubject_format=0x7f060023;
-        public static final int feedbackname=0x7f060017;
-        public static final int feedbackresponse=0x7f06001a;
+        public static final int crash_toast_text=0x7f060007;
+        public static final int create_shortcut=0x7f060004;
+        public static final int enter_location_example=0x7f06005e;
+        public static final int feedback=0x7f060013;
+        public static final int feedbackbody=0x7f06001d;
+        public static final int feedbackbutton=0x7f06001f;
+        public static final int feedbackemail=0x7f06001c;
+        public static final int feedbackmessagebody_responseno=0x7f060026;
+        public static final int feedbackmessagebody_responseyes=0x7f060025;
+        public static final int feedbackmessagesubject_format=0x7f060027;
+        public static final int feedbackname=0x7f06001b;
+        public static final int feedbackresponse=0x7f06001e;
         /**  Feedback form 
          */
-        public static final int feedbacktitle=0x7f060016;
-        public static final int feedbacktype=0x7f06001c;
-        public static final int feedbacktype1=0x7f06001d;
-        public static final int feedbacktype2=0x7f06001e;
-        public static final int feedbacktype3=0x7f06001f;
-        public static final int feedbacktype4=0x7f060020;
-        public static final int find_your_current_location_summary=0x7f06005c;
-        public static final int find_your_location_title=0x7f06005b;
+        public static final int feedbacktitle=0x7f06001a;
+        public static final int feedbacktype=0x7f060020;
+        public static final int feedbacktype1=0x7f060021;
+        public static final int feedbacktype2=0x7f060022;
+        public static final int feedbacktype3=0x7f060023;
+        public static final int feedbacktype4=0x7f060024;
+        public static final int find_your_current_location_summary=0x7f060060;
+        public static final int find_your_location_title=0x7f06005f;
         /**  Forecast overview tabs 
          */
-        public static final int forecast_overview_highs_of=0x7f060054;
-        public static final int forecast_overview_lows_of=0x7f060055;
+        public static final int forecast_overview_highs_of=0x7f060058;
+        public static final int forecast_overview_lows_of=0x7f060059;
         /**  Weather Overview activity 
          */
-        public static final int further_details=0x7f060028;
-        public static final int get_my_location_service=0x7f060008;
-        public static final int gps_weather_service=0x7f060009;
-        public static final int home=0x7f060010;
-        public static final int modify_loaded_locaitons=0x7f060052;
-        public static final int network_issue_onload=0x7f060061;
-        public static final int no_email_clients_installed=0x7f060024;
+        public static final int further_details=0x7f06002c;
+        public static final int get_my_location_service=0x7f060009;
+        public static final int gps_weather_service=0x7f06000a;
+        public static final int home=0x7f060014;
+        public static final int modify_loaded_locaitons=0x7f060056;
+        public static final int network_issue_onload=0x7f060065;
+        public static final int no_email_clients_installed=0x7f060028;
         /**  Button / General 
          */
-        public static final int no_thanks=0x7f06000d;
-        public static final int not_available=0x7f060011;
-        public static final int okay=0x7f06000e;
-        public static final int open_google_maps=0x7f060029;
-        public static final int pref_acra_syslog=0x7f060047;
-        public static final int pref_acra_syslog_disabled=0x7f060045;
-        public static final int pref_acra_syslog_enabled=0x7f060046;
-        public static final int pref_changelog_disabled=0x7f06003d;
-        public static final int pref_changelog_enabled=0x7f06003e;
-        public static final int pref_changelog_title=0x7f06003c;
-        public static final int pref_disable_notification_ticker_text_disabled=0x7f060040;
-        public static final int pref_disable_notification_ticker_text_enabled=0x7f060041;
-        public static final int pref_disable_notification_ticker_text_title=0x7f06003f;
-        public static final int pref_google_analytics_summary=0x7f06003b;
-        public static final int pref_google_analytics_title=0x7f06003a;
-        public static final int pref_overview_mode_summary=0x7f06002b;
+        public static final int no_thanks=0x7f060011;
+        public static final int not_available=0x7f060015;
+        public static final int okay=0x7f060012;
+        public static final int open_google_maps=0x7f06002d;
+        public static final int pref_acra_syslog=0x7f06004b;
+        public static final int pref_acra_syslog_disabled=0x7f060049;
+        public static final int pref_acra_syslog_enabled=0x7f06004a;
+        public static final int pref_changelog_disabled=0x7f060041;
+        public static final int pref_changelog_enabled=0x7f060042;
+        public static final int pref_changelog_title=0x7f060040;
+        public static final int pref_disable_notification_ticker_text_disabled=0x7f060044;
+        public static final int pref_disable_notification_ticker_text_enabled=0x7f060045;
+        public static final int pref_disable_notification_ticker_text_title=0x7f060043;
+        public static final int pref_google_analytics_summary=0x7f06003f;
+        public static final int pref_google_analytics_title=0x7f06003e;
+        public static final int pref_overview_mode_summary=0x7f06002f;
         /**  User Preferences activity 
          */
-        public static final int pref_overview_mode_title=0x7f06002a;
-        public static final int pref_polling_time_summary=0x7f060031;
-        public static final int pref_polling_time_title=0x7f060030;
-        public static final int pref_refresh_on_user_present_summary=0x7f060039;
-        public static final int pref_refresh_on_user_present_title=0x7f060038;
-        public static final int pref_reload_on_connectivity_change_disabled=0x7f060037;
-        public static final int pref_reload_on_connectivity_change_enabled=0x7f060036;
-        public static final int pref_reload_on_connectivity_change_title=0x7f060035;
-        public static final int pref_report_error_on_failed_lookup_disabled=0x7f060043;
-        public static final int pref_report_error_on_failed_lookup_enabled=0x7f060044;
-        public static final int pref_report_error_on_failed_lookup_title=0x7f060042;
-        public static final int pref_start_on_boot_disabled=0x7f060034;
-        public static final int pref_start_on_boot_enabled=0x7f060033;
-        public static final int pref_start_on_boot_title=0x7f060032;
-        public static final int pref_temp_mode_summary=0x7f06002d;
-        public static final int pref_temp_mode_title=0x7f06002c;
-        public static final int pref_update_checker=0x7f06004a;
-        public static final int pref_update_checker_disabled=0x7f060048;
-        public static final int pref_update_checker_enabled=0x7f060049;
-        public static final int pref_wind_mode_summary=0x7f06002f;
-        public static final int pref_wind_mode_title=0x7f06002e;
+        public static final int pref_overview_mode_title=0x7f06002e;
+        public static final int pref_polling_time_summary=0x7f060035;
+        public static final int pref_polling_time_title=0x7f060034;
+        public static final int pref_refresh_on_user_present_summary=0x7f06003d;
+        public static final int pref_refresh_on_user_present_title=0x7f06003c;
+        public static final int pref_reload_on_connectivity_change_disabled=0x7f06003b;
+        public static final int pref_reload_on_connectivity_change_enabled=0x7f06003a;
+        public static final int pref_reload_on_connectivity_change_title=0x7f060039;
+        public static final int pref_report_error_on_failed_lookup_disabled=0x7f060047;
+        public static final int pref_report_error_on_failed_lookup_enabled=0x7f060048;
+        public static final int pref_report_error_on_failed_lookup_title=0x7f060046;
+        public static final int pref_start_on_boot_disabled=0x7f060038;
+        public static final int pref_start_on_boot_enabled=0x7f060037;
+        public static final int pref_start_on_boot_title=0x7f060036;
+        public static final int pref_temp_mode_summary=0x7f060031;
+        public static final int pref_temp_mode_title=0x7f060030;
+        public static final int pref_update_checker=0x7f06004e;
+        public static final int pref_update_checker_disabled=0x7f06004c;
+        public static final int pref_update_checker_enabled=0x7f06004d;
+        public static final int pref_wind_mode_summary=0x7f060033;
+        public static final int pref_wind_mode_title=0x7f060032;
         /**  Rate Me 
          */
-        public static final int rate_me_title=0x7f06000c;
-        public static final int reload_all=0x7f060005;
-        public static final int service_update_attempting_to_refresh_weather=0x7f060072;
-        public static final int service_update_completed_weather_lookup=0x7f06006f;
-        public static final int service_update_failed_gps_lookup=0x7f060076;
-        public static final int service_update_failed_to_refresh_weather=0x7f060073;
-        public static final int service_update_finding_geocode_location=0x7f06007a;
-        public static final int service_update_geocode_location_found=0x7f06007c;
-        public static final int service_update_getting_current_location=0x7f06006b;
+        public static final int rate_me_title=0x7f06000d;
+        public static final int reload_all=0x7f060006;
+        public static final int service_update_attempting_to_refresh_weather=0x7f060076;
+        public static final int service_update_completed_weather_lookup=0x7f060073;
+        public static final int service_update_failed_gps_lookup=0x7f06007a;
+        public static final int service_update_failed_to_refresh_weather=0x7f060077;
+        public static final int service_update_finding_geocode_location=0x7f06007e;
+        public static final int service_update_geocode_location_found=0x7f060080;
+        public static final int service_update_getting_current_location=0x7f06006f;
         /**  Service Updates 
          */
-        public static final int service_update_getting_your_location=0x7f060069;
-        public static final int service_update_gps_location_found=0x7f060077;
-        public static final int service_update_gps_location_not_found=0x7f060078;
-        public static final int service_update_initalizing_weather_lookup=0x7f06006e;
-        public static final int service_update_initiating_gps_lookup=0x7f060075;
-        public static final int service_update_loading_existing_notifications=0x7f06006c;
-        public static final int service_update_location_found_looking_up_area=0x7f06006a;
-        public static final int service_update_lookup_geocode_location=0x7f060079;
-        public static final int service_update_preferences_changed_updating=0x7f06006d;
-        public static final int service_update_refreshing_weather_notifications=0x7f060071;
-        public static final int service_update_running_weather_lookup=0x7f060070;
-        public static final int service_update_scheduling_next_refresh=0x7f060074;
-        public static final int service_update_unable_to_fina_geocode_location=0x7f06007b;
+        public static final int service_update_getting_your_location=0x7f06006d;
+        public static final int service_update_gps_location_found=0x7f06007b;
+        public static final int service_update_gps_location_not_found=0x7f06007c;
+        public static final int service_update_initalizing_weather_lookup=0x7f060072;
+        public static final int service_update_initiating_gps_lookup=0x7f060079;
+        public static final int service_update_loading_existing_notifications=0x7f060070;
+        public static final int service_update_location_found_looking_up_area=0x7f06006e;
+        public static final int service_update_lookup_geocode_location=0x7f06007d;
+        public static final int service_update_preferences_changed_updating=0x7f060071;
+        public static final int service_update_refreshing_weather_notifications=0x7f060075;
+        public static final int service_update_running_weather_lookup=0x7f060074;
+        public static final int service_update_scheduling_next_refresh=0x7f060078;
+        public static final int service_update_unable_to_fina_geocode_location=0x7f06007f;
         public static final int settings=0x7f060000;
-        public static final int summary_enter_a_location_or_use_your_gps=0x7f060057;
+        public static final int share=0x7f060003;
+        /**  https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider 
+         */
+        public static final int share_content=0x7f06000f;
+        /**  Share Options 
+         */
+        public static final int share_subject=0x7f06000e;
+        public static final int share_title=0x7f060010;
+        public static final int summary_enter_a_location_or_use_your_gps=0x7f06005b;
         /**  Swipe Areas 
          */
-        public static final int swipe_left_for_forecast_details=0x7f06007f;
-        public static final int swipe_right_for_current_conditions=0x7f060080;
-        public static final int text_field_enter_location=0x7f060058;
+        public static final int swipe_left_for_forecast_details=0x7f060083;
+        public static final int swipe_right_for_current_conditions=0x7f060084;
+        public static final int text_field_enter_location=0x7f06005c;
         /**  Enter location activity 
          */
-        public static final int title_add_a_new_location=0x7f060056;
-        public static final int toast_attempting_to_lookup_your_gps_location=0x7f060064;
-        public static final int toast_error_unable_to_find_you=0x7f060065;
-        public static final int toast_low_battery_warning=0x7f060063;
+        public static final int title_add_a_new_location=0x7f06005a;
+        public static final int toast_attempting_to_lookup_your_gps_location=0x7f060068;
+        public static final int toast_error_unable_to_find_you=0x7f060069;
+        public static final int toast_low_battery_warning=0x7f060067;
         /**  NotificationControllerService 
          */
-        public static final int toast_max_notifications_reached=0x7f06007e;
-        public static final int toast_please_enter_a_location=0x7f060060;
-        public static final int toast_unable_to_find_the_weather_for_your_location=0x7f060081;
+        public static final int toast_max_notifications_reached=0x7f060082;
+        public static final int toast_please_enter_a_location=0x7f060064;
+        public static final int toast_unable_to_find_the_weather_for_your_location=0x7f060085;
         /**  StaticLookupService 
          */
-        public static final int toast_unable_to_get_weather_details=0x7f06007d;
-        public static final int toast_unable_to_locate_you=0x7f06005f;
-        public static final int toast_unable_to_request_network_location=0x7f060062;
-        public static final int update_available=0x7f060083;
-        public static final int update_checker_alert=0x7f060082;
+        public static final int toast_unable_to_get_weather_details=0x7f060081;
+        public static final int toast_unable_to_locate_you=0x7f060063;
+        public static final int toast_unable_to_request_network_location=0x7f060066;
+        public static final int update_available=0x7f060087;
+        public static final int update_checker_alert=0x7f060086;
         /**  Notification IDS 
          */
-        public static final int weather_notification_service_1=0x7f060025;
-        public static final int weather_notification_service_2=0x7f060026;
-        public static final int weather_notification_service_3=0x7f060027;
+        public static final int weather_notification_service_1=0x7f060029;
+        public static final int weather_notification_service_2=0x7f06002a;
+        public static final int weather_notification_service_3=0x7f06002b;
     }
     public static final class style {
         public static final int NotificationText=0x7f070000;

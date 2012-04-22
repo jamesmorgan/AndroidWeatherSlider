@@ -1,29 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
+
     <item
         android:id="@+id/home_menu_cancel_all"
         android:title="@string/cancel_all"/>
-
     <item
         android:id="@+id/home_menu_reload_all"
         android:title="@string/reload_all"/>
-
     <item
         android:id="@+id/home_menu_settings"
         android:title="@string/settings"/>
-
     <item
         android:id="@+id/home_menu_feedback"
         android:title="@string/feedback"/>
-
     <item
         android:id="@+id/home_menu_changelog"
         android:title="@string/change_log"/>
-    
     <item
         android:id="@+id/home_menu_about"
         android:title="@string/about"/>
-    
+    <item
+        android:id="@+id/home_menu_share"
+        android:title="@string/share"/>
     <item
         android:id="@+id/home_menu_create_shortcut"
         android:title="@string/create_shortcut"/>
