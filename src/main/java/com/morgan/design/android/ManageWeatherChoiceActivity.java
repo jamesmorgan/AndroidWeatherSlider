@@ -205,6 +205,10 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.CREATE_HOME_SHORTCUT);
 				createShortcut();
 				return true;
+			case R.id.home_menu_share:
+				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.OPEN_SHARE_INTENT);
+				Utils.openShareIntent(this);
+				return true;
 			case R.id.home_menu_reload_all:
 				this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.RELOAD_ALL_ACTIVE);
 				if (null != this.weatherChoices) {

@@ -106,6 +106,14 @@ public class TODO {
 	// FIXME -> Create new Intel images - http://developer.android.com/guide/developing/devices/emulator.html#accel-vm
 	
 	// //////////////////////
+	// Version: 1.14	   //
+	// Status: Released    //
+	// Date: 22/04/2011    //
+	// //////////////////////
+	
+	// FIXME -> DONE - (22/04/2012) - Added share option to home screen menu"
+	
+	// //////////////////////
 	// Version: 1.13	   //
 	// Status: Released    //
 	// Date: 15/04/2011    //
