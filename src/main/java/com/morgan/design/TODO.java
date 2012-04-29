@@ -104,6 +104,7 @@ public class TODO {
 	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
 	// FIXME -> Use application bar not button at top of page - https://groups.google.com/forum/?fromgroups#!topic/actionbarsherlock/VeEsPvKKOdo
 	// FIXME -> Create new Intel images - http://developer.android.com/guide/developing/devices/emulator.html#accel-vm
+	// FIXME -> Update ORMLite to 4.40
 	
 	// //////////////////////
 	// Version: 1.14	   //
