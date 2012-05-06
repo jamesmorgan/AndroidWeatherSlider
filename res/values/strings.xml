@@ -78,6 +78,10 @@
     <string name="pref_reload_on_connectivity_change_enabled">Weather will refresh when your connectivity changes</string>
     <string name="pref_reload_on_connectivity_change_disabled">Don\'t refresh you weather on connectivity changes</string>
     
+    <string name="pref_new_notification_layout_title">Use New Notification Layout</string>
+    <string name="pref_new_notification_layout_enabled">New Notification Layout Enabled</string>
+    <string name="pref_new_notification_layout_disabled">New Notification Layout Disabled</string>
+    
     <string name="pref_refresh_on_user_present_title">Refresh On Wake</string>
     <string name="pref_refresh_on_user_present_summary">e.g. phone unlock, wake. Enabling this will use more battery but can be useful</string>
     
