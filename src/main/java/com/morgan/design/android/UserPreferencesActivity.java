@@ -12,6 +12,7 @@ import static com.morgan.design.android.util.PreferenceUtils.PREF_RELOAD_ON_CONN
 import static com.morgan.design.android.util.PreferenceUtils.PREF_REPORT_ERROR_ON_FAILED_LOOKUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_START_ON_BOOT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_TEMPERATURE_MODE;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_USE_NEW_NOTIFICAITON_LAYOUT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_WIND_MODE;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -28,7 +29,7 @@ public class UserPreferencesActivity extends PreferenceActivity {
 
 	private static final String LOG_TAG = "UserPreferencesActivity";
 
-	protected boolean hasChanged = false;
+	protected static boolean hasChanged = false;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class UserPreferencesActivity extends PreferenceActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (this.hasChanged) {
+		if (hasChanged) {
 			setResult(RESULT_OK);
 		}
 		else {
@@ -169,6 +170,16 @@ public class UserPreferencesActivity extends PreferenceActivity {
 				@Override
 				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
 					return PreferenceUtils.setEnableDailyUpdateCheck(getApplicationContext(), (Boolean) clicked);
+				}
+			});
+		}
+
+		if (pref.getKey().equals(PREF_USE_NEW_NOTIFICAITON_LAYOUT)) {
+			findPreference(PREF_USE_NEW_NOTIFICAITON_LAYOUT).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+				@Override
+				public boolean onPreferenceChange(final Preference arg0, final Object clicked) {
+					hasChanged = true;
+					return PreferenceUtils.setShouldUseNewNotificationLayout(getApplicationContext(), (Boolean) clicked);
 				}
 			});
 		}

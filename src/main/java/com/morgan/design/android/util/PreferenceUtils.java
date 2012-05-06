@@ -25,6 +25,7 @@ public final class PreferenceUtils {
 	public static final String PREF_WIND_MODE = "windSpeedMode";
 	public static final String PREF_APP_VERSION = "app.version";
 	public static final String PREF_RELOAD_ON_CONNECTIVITY_CHANGED = "reloadOnConnectivityChanged";
+	public static final String PREF_USE_NEW_NOTIFICAITON_LAYOUT = "useNewNotificationLayout";
 	public static final String PREF_REFRESH_ON_USER_PRESENT = "refreshOnUserPresent";
 	public static final String PREF_ENABLED_NOTIFCATION_TICKER_TEXT = "enableNotificationTickerText";
 	public static final String PREF_REPORT_ERROR_ON_FAILED_LOOKUP = "reportErrorOnFailedLookup";
@@ -116,6 +117,14 @@ public final class PreferenceUtils {
 
 	public static boolean setShouldReloadOnConnectivityChanged(final Context context, final boolean shouldReloadOnConnectivityChanged) {
 		return getPrefs(context).edit().putBoolean(PREF_RELOAD_ON_CONNECTIVITY_CHANGED, shouldReloadOnConnectivityChanged).commit();
+	}
+
+	public static boolean shouldUseNewNotificationLayout(final Context context) {
+		return getPrefs(context).getBoolean(PREF_USE_NEW_NOTIFICAITON_LAYOUT, true);
+	}
+
+	public static boolean setShouldUseNewNotificationLayout(final Context context, final boolean useNewLayout) {
+		return getPrefs(context).edit().putBoolean(PREF_USE_NEW_NOTIFICAITON_LAYOUT, useNewLayout).commit();
 	}
 
 	public static boolean setCollectSystemLogsWithArcaReporting(final Context context, final boolean collectLogs) {
