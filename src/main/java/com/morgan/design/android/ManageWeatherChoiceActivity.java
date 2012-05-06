@@ -242,9 +242,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-
 		super.onActivityResult(requestCode, resultCode, data);
-		this.googleAnalyticsService.trackPageView(this, GoogleAnalyticsService.ADD_NEW_LOCATION);
 		switch (requestCode) {
 			case Constants.ENTER_LOCATION:
 				if (resultCode == RESULT_OK) {
