@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="3dp"
+    tools:ignore="HardcodedText" >
+
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/content_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/default_weather_icon" />
+
+        <TextView
+            android:id="@+id/content_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="12°C"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/content_text"
+        style="@android:style/TextAppearance.StatusBar.EventContent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/frameLayout1"
+        android:layout_toRightOf="@+id/frameLayout1"
+        android:maxLines="1"
+        android:paddingLeft="5dip"
+        android:scrollHorizontally="true"
+        android:text="Content Content Content Content Content" />
+
+    <TextView
+        android:id="@+id/content_title"
+        style="@android:style/TextAppearance.StatusBar.EventContent.Title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/content_text"
+        android:layout_alignTop="@+id/frameLayout1"
+        android:paddingLeft="5dip"
+        android:scrollHorizontally="true"
+        android:text="Title Title Title Title Title Title Title Title"
+        android:textStyle="bold" />
+
+</RelativeLayout>

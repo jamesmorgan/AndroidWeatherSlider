@@ -61,7 +61,6 @@ public class TODO {
 	// FIXME -> Potentially show accuracy and time when looking up GPS location
 	// FIXME -> Ability to sort front screen by various means, e.ge. active, roaming at top, place name, date time etc, Always have GPS at the top, then last update time OR A_z?
 	// FIXME -> Allow exporting of locations as xml file / back, hook in to 3rd party backup application
-	// FIXME -> Backup DB option
 	// FIXME -> Allow for user to override default timeout, functionality already created, no preference
 	
 	// ///////////////////
@@ -87,7 +86,7 @@ public class TODO {
 	// FIXME -> Make icon on overview bigger
 	// FIXME -> The home screen and notification order should always match the same ordering
 	// FIXME -> Doc bar at the bottom of home screen, replace menu with refresh symbol and plus button for new location, could display service register updates
-	
+	// FIXME -> Backup DB option
 	
 	// //////////////////////
 	// Version: 1.1X	   //
@@ -103,7 +102,21 @@ public class TODO {
 	// FIXME -> Complete localisation
 	// FIXME -> After used 'find your GPS - not roaming' display confirmation to always prompt to always use GPS - would turn to roaming mode, could highlight  
 	// FIXME -> Use application bar not button at top of page - https://groups.google.com/forum/?fromgroups#!topic/actionbarsherlock/VeEsPvKKOdo
+	// FIXME -> Add gestures to overview screen to cycle through all of them - http://www.devdaily.com/java/jwarehouse/android-examples/samples/android-9/GestureBuilder/
+
 	// FIXME -> Create new Intel images - http://developer.android.com/guide/developing/devices/emulator.html#accel-vm
+	// FIXME -> Update Preference Activity for use on ICS -> Fix : UserPreferencesActivity
+	// FIXME -> Fix : BitmapDrawable
+	
+	// //////////////////////
+	// Version: 1.15	   //
+	// Status: Development //
+	// Date: 06/05/2011    //
+	// //////////////////////
+	
+	// FIXME -> DONE - (06/05/2012) - Update to use Notification Builder
+	// FIXME -> DONE - (06/05/2012) - Show Temperature as Icon in Notification Bar
+	// FIXME -> DONE - (29/04/2012) - Update ORMLite to 4.40
 	
 	// //////////////////////
 	// Version: 1.14	   //
