@@ -13,6 +13,7 @@ import static com.morgan.design.android.util.PreferenceUtils.PREF_RELOAD_ON_CONN
 import static com.morgan.design.android.util.PreferenceUtils.PREF_REPORT_ERROR_ON_FAILED_LOOKUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_SHOWN_RATE_ME_POPUP;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_TEMPERATURE_MODE;
+import static com.morgan.design.android.util.PreferenceUtils.PREF_USE_NEW_NOTIFICAITON_LAYOUT;
 import static com.morgan.design.android.util.PreferenceUtils.PREF_WIND_MODE;
 
 import java.util.HashMap;
@@ -47,7 +48,7 @@ import com.morgan.design.weatherslider.R;
 		additionalSharedPreferences={PREF_CHANGELOG, PREF_POLLING_SCHEDULE, PREF_POLLING_SCHEDULE, PREF_OVERVIEW_MODE,
 									PREF_TEMPERATURE_MODE,PREF_WIND_MODE, PREF_RELOAD_ON_CONNECTIVITY_CHANGED, PREF_ENABLED_NOTIFCATION_TICKER_TEXT,
 									PREF_REFRESH_ON_USER_PRESENT, PREF_FIRST_LOOKUP, PREF_SHOWN_RATE_ME_POPUP, PREF_ACRA_SYSTME_LOGS, 
-									PREF_REPORT_ERROR_ON_FAILED_LOOKUP, PREF_LAST_UPDATE_CHECK_TIME})
+									PREF_REPORT_ERROR_ON_FAILED_LOOKUP, PREF_LAST_UPDATE_CHECK_TIME, PREF_USE_NEW_NOTIFICAITON_LAYOUT})
 //@formatter:on
 public class WeatherSliderApplication extends Application {
 
