@@ -12,7 +12,7 @@ import com.morgan.design.weatherslider.R;
 
 public class RateMe {
 
-	public static void showOnFirstSuccess(final Context context, boolean override) {
+	public static void showOnFirstSuccess(final Context context, final boolean override) {
 		try {
 			if (override) {
 				createAlertPopup(context);
@@ -22,7 +22,8 @@ public class RateMe {
 			}
 		}
 		catch (final Throwable e) {
-			Toast.makeText(context, "Unable to show market place", Toast.LENGTH_SHORT);
+			Toast.makeText(context, "Unable to show market place", Toast.LENGTH_SHORT)
+				.show();
 		}
 	}
 
@@ -38,19 +39,22 @@ public class RateMe {
 			}
 		}
 		catch (final Throwable e) {
-			Toast.makeText(context, "Unable to show market place", Toast.LENGTH_SHORT);
+			Toast.makeText(context, "Unable to show market place", Toast.LENGTH_SHORT)
+				.show();
 		}
 	}
 
 	private static void createAlertPopup(final Context context) {
-		new AlertDialog.Builder(context).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.rate_me_title)
-				.setPositiveButton(R.string.no_thanks, null)
-				.setNegativeButton(R.string.okay, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int which) {
-						context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MARKET_LINK_URL)));
-					}
-				}).show();
+		new AlertDialog.Builder(context).setIcon(android.R.drawable.ic_dialog_info)
+			.setTitle(R.string.rate_me_title)
+			.setPositiveButton(R.string.no_thanks, null)
+			.setNegativeButton(R.string.okay, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int which) {
+					context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.MARKET_LINK_URL)));
+				}
+			})
+			.show();
 	}
 
 	public static void setSuccessIfRequired(final Context context) {

@@ -109,6 +109,18 @@ public class TODO {
 	// FIXME -> Fix : BitmapDrawable
 	
 	// //////////////////////
+	// Version: 1.16	   //
+	// Status: Development //
+	// Date: 28/07/2012    //
+	// //////////////////////
+	
+	// FIXME -> DONE - (28/07/2012) - Added Portuguese Translation
+	// FIXME -> DONE - (28/07/2012) - Added French Translation
+	// FIXME -> DONE - (28/07/2012) - Added Spanish Translation
+	// FIXME -> DONE - (28/07/2012) - Added translation option to feedback form
+	// FIXME -> DONE - (28/07/2012) - Convert all String to stirngs.xml
+	
+	// //////////////////////
 	// Version: 1.15	   //
 	// Status: Development //
 	// Date: 06/05/2011    //

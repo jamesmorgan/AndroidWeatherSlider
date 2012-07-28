@@ -58,5 +58,6 @@
 		<item>@string/feedbacktype2</item>
 		<item>@string/feedbacktype3</item>
 		<item>@string/feedbacktype4</item>
+		<item>@string/feedbacktype5</item>
 	</string-array>
 </resources>

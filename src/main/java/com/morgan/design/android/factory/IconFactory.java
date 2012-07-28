@@ -1,9 +1,6 @@
 package com.morgan.design.android.factory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import android.annotation.SuppressLint;
+import android.util.SparseIntArray;
 
 import com.morgan.design.android.dao.orm.WeatherChoice;
 import com.morgan.design.weatherslider.R;
@@ -12,13 +9,12 @@ public class IconFactory {
 
 	public static int NOTE_FOUND = 3200;
 
-	@SuppressLint("UseSparseArrays")
-	public static final Map<Integer, Integer> WEATHER_MAP;
+	public static final SparseIntArray WEATHER_MAP;
 
 	public static final int NA = R.drawable.weather_channel_44;
 
 	static {
-		WEATHER_MAP = new HashMap<Integer, Integer>();
+		WEATHER_MAP = new SparseIntArray();
 
 		// Original Images
 		// WEATHER_MAP.put(1, R.drawable.a2);
@@ -175,7 +171,9 @@ public class IconFactory {
 
 	public static int getImageResourceFromCode(final int code) {
 		final Integer imageRes = WEATHER_MAP.get(code);
-		return null != imageRes ? imageRes : R.drawable.weather_channel_44;
+		return null != imageRes
+				? imageRes
+				: R.drawable.weather_channel_44;
 	}
 
 	public static int getStatus(final WeatherChoice woeidChoice) {

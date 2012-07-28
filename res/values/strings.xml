@@ -43,6 +43,7 @@
     <string name="feedbacktype2">Suggestion</string>
     <string name="feedbacktype3">Bug</string>
     <string name="feedbacktype4">Other</string>
+    <string name="feedbacktype5">Translation</string>
     <string name="feedbackmessagebody_responseyes">Requires a response</string>
     <string name="feedbackmessagebody_responseno">Does not require a response</string>
     <string name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>
