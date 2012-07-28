@@ -109,8 +109,17 @@ public class TODO {
 	// FIXME -> Fix : BitmapDrawable
 	
 	// //////////////////////
-	// Version: 1.16	   //
+	// Version: 1.17       //
 	// Status: Development //
+	// Date: 28/07/2012    //
+	// //////////////////////
+	
+	// FIXME -> DONE - (28/07/2012) - Added Italian Translation
+	// FIXME -> DONE - (28/07/2012) - Removed API warning about notification builder (Added Support Library)
+
+	// //////////////////////
+	// Version: 1.16	   //
+	// Status: Released    //
 	// Date: 28/07/2012    //
 	// //////////////////////
 	
@@ -122,7 +131,7 @@ public class TODO {
 	
 	// //////////////////////
 	// Version: 1.15	   //
-	// Status: Development //
+	// Status: Released    //
 	// Date: 06/05/2011    //
 	// //////////////////////
 	

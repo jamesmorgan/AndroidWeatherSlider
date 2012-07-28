@@ -17,6 +17,7 @@ import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
@@ -229,7 +230,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			final String safeLocation = getSafeLocation(weatherInfo);
 			final String forcastText = weatherInfo.getCurrentText() + ", " + safeLocation;
 
-			final Notification.Builder builder = new Notification.Builder(this);
+			final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 			builder.setOngoing(true);
 			builder.setContentTitle(forcastText);
 			builder.setContentText(getContent(weatherInfo, false));

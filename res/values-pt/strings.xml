@@ -37,7 +37,7 @@
     <string name="feedbackbody">Detalhes…</string>
     <string name="feedbackresponse">Você gostaria de uma resposta de e-mail?</string>
     <string name="feedbackbutton">Enviar Comentário</string>
-    <string name="feedbacktype">TIPO</string>
+    <string name="feedbacktype">Tipo</string>
     <string name="feedbacktype1">Melhoria</string>
     <string name="feedbacktype2">Sugestão</string>
     <string name="feedbacktype3">bug</string>
