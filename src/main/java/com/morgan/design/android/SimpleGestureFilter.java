@@ -137,7 +137,7 @@ public class SimpleGestureFilter extends SimpleOnGestureListener {
 
 	@Override
 	public boolean onDoubleTap(final MotionEvent arg0) {
-		this.listener.onDoubleTap();;
+		this.listener.onDoubleTap();
 		return true;
 	}
 

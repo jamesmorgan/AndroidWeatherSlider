@@ -35,8 +35,8 @@ public class UpdateService extends IntentService {
 	}
 
 	@Override
-	protected void onHandleIntent(Intent intent) {
-		AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+	protected void onHandleIntent(final Intent intent) {
+		final AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
 		if (isNot(PreferenceUtils.enableDailyUpdateCheck(this))) {
 			Logger.d(LOG_TAG, "Daily update check is disabled");
@@ -45,7 +45,7 @@ public class UpdateService extends IntentService {
 			return;
 		}
 
-		long lastUpdateTime = PreferenceUtils.getLastTimCheckedForUpdate(this);
+		final long lastUpdateTime = PreferenceUtils.getLastTimCheckedForUpdate(this);
 
 		/* Has it been over 24hrs since the last check? */
 		if (BuildUtils.isRunningEmmulator() || (lastUpdateTime + (24 * 60 * 60 * 1000)) < System.currentTimeMillis()) {
@@ -54,13 +54,13 @@ public class UpdateService extends IntentService {
 
 			PreferenceUtils.setLastTimCheckedForUpdate(this, System.currentTimeMillis());
 
-			checkUpdate.start();
+			this.checkUpdate.start();
 		}
 	}
 
-	public void launchUpdateStrategy(Update result) {
+	public void launchUpdateStrategy(final Update result) {
 		try {
-			int currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+			final int currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
 
 			// If applicable for update
 			if (result.updateType.isAvailable() && (result.versionCode > currentVersion)) {
@@ -78,24 +78,24 @@ public class UpdateService extends IntentService {
 				}
 			}
 		}
-		catch (Exception exception) {
+		catch (final Exception exception) {
 			Logger.w(LOG_TAG, "Unable to determine update strategy", exception);
 		}
 		finally {
-			AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+			final AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			mAlarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), AlarmManager.INTERVAL_DAY,
 					PendingIntent.getService(this, 0, new Intent(this, UpdateService.class), PendingIntent.FLAG_CANCEL_CURRENT));
 		}
 	}
 
-	private void attemptToForceShowDialog(Update result, int currentVersion) {
+	private void attemptToForceShowDialog(final Update result, final int currentVersion) {
 		// Always set preference in-case no activity is available and for a alert dialog
 		enableDialogForNextOpen(result, currentVersion);
 		// Send show update dialog broadcast
 		sendBroadcast(new Intent(APPLICATION_UPDATE_AVAILABLE));
 	}
 
-	private void enableDialogForNextOpen(Update result, int currentVersion) {
+	private void enableDialogForNextOpen(final Update result, final int currentVersion) {
 		// Set Preference for next boot
 		// If found on home screen, send broadcast to show application & clear preference flag
 		PreferenceUtils.setShowUpdateDialogOnNextOpen(this, true);
@@ -105,14 +105,14 @@ public class UpdateService extends IntentService {
 		@Override
 		public void run() {
 			try {
-				String updateString = getUpdateCode();
+				final String updateString = getUpdateCode();
 				if (isNull(updateString)) {
 					launchUpdateStrategy(Update.fail());
 					return;
 				}
 				Logger.d(LOG_TAG, "Found update string=[%s]", updateString);
 
-				int versionCode = parseVersion(updateString);
+				final int versionCode = parseVersion(updateString);
 				if (isZero(versionCode)) {
 					launchUpdateStrategy(Update.fail());
 					return;
@@ -121,27 +121,26 @@ public class UpdateService extends IntentService {
 
 				launchUpdateStrategy(new Update(versionCode, parseUpdateType(updateString)));
 			}
-			catch (Exception e) {
-			}
+			catch (final Exception e) {}
 		}
 	};
 
-	private UpdateType parseUpdateType(String updateCode) {
+	private UpdateType parseUpdateType(final String updateCode) {
 		try {
-			String code = updateCode.substring(updateCode.length() - 1, updateCode.length());
+			final String code = updateCode.substring(updateCode.length() - 1, updateCode.length());
 			return UpdateType.fromCode(code);
 		}
-		catch (Throwable throwable) {
+		catch (final Throwable throwable) {
 			Logger.w(LOG_TAG, "Unable to parse update type", throwable);
 		}
 		return UpdateType.NONE;
 	}
 
-	private int parseVersion(String updateCode) {
+	private int parseVersion(final String updateCode) {
 		try {
 			return Integer.parseInt(updateCode.substring(0, updateCode.length() - 1));
 		}
-		catch (Throwable throwable) {
+		catch (final Throwable throwable) {
 			Logger.w(LOG_TAG, "Unable to parse update code", throwable);
 			return 0;
 		}
@@ -149,12 +148,12 @@ public class UpdateService extends IntentService {
 
 	private String getUpdateCode() {
 		try {
-			URL updateURL = new URL(UPDATE_SITE);
-			URLConnection conn = updateURL.openConnection();
+			final URL updateURL = new URL(UPDATE_SITE);
+			final URLConnection conn = updateURL.openConnection();
 			// Set to 8K to prevent:
 			// "Default buffer size used in BufferedInputStream constructor. It would be better to be explicit if an 8k buffer is required."
-			BufferedReader bis = new BufferedReader(new InputStreamReader(conn.getInputStream()), 8192);
-			ByteArrayBuffer baf = new ByteArrayBuffer(50);
+			final BufferedReader bis = new BufferedReader(new InputStreamReader(conn.getInputStream()), 8192);
+			final ByteArrayBuffer baf = new ByteArrayBuffer(50);
 
 			int current = 0;
 			while ((current = bis.read()) != -1) {
@@ -163,7 +162,7 @@ public class UpdateService extends IntentService {
 			// Clean any potential line endings
 			return new String(baf.toByteArray()).replace("\n", "");
 		}
-		catch (Throwable throwable) {
+		catch (final Throwable throwable) {
 			Logger.w(LOG_TAG, "Unable to reach update site", throwable);
 			return null;
 		}
@@ -173,7 +172,7 @@ public class UpdateService extends IntentService {
 		int versionCode;
 		UpdateType updateType;
 
-		public Update(int versionCode, UpdateType type) {
+		public Update(final int versionCode, final UpdateType type) {
 			this.versionCode = versionCode;
 			this.updateType = type;
 		}
@@ -195,7 +194,7 @@ public class UpdateService extends IntentService {
 
 		private String code;
 
-		private UpdateType(String code) {
+		private UpdateType(final String code) {
 			this.code = code;
 		}
 
@@ -203,8 +202,8 @@ public class UpdateService extends IntentService {
 			return !equals(NONE) || !equals(SILENT);
 		}
 
-		public static UpdateType fromCode(String type) {
-			for (UpdateType up : values()) {
+		public static UpdateType fromCode(final String type) {
+			for (final UpdateType up : values()) {
 				if (up.code.equalsIgnoreCase(type)) {
 					return up;
 				}

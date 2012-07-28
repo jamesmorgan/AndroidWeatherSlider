@@ -15,10 +15,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 import com.morgan.design.Logger;
-import com.morgan.design.weatherslider.R;
 import com.morgan.design.android.broadcast.CancelAllLookupsReciever.OnCancelAll;
 import com.morgan.design.android.broadcast.IServiceUpdateBroadcaster;
 import com.morgan.design.android.broadcast.ServiceUpdateBroadcasterImpl;
+import com.morgan.design.weatherslider.R;
 
 public class LocationLookupService extends Service implements OnCancelAll {
 
@@ -108,7 +108,7 @@ public class LocationLookupService extends Service implements OnCancelAll {
 		this.timer.schedule(new GetLastKnownLocation(), locationTimeOut);
 
 		return START_NOT_STICKY;
-	};
+	}
 
 	@Override
 	public void onCancelAll() {
