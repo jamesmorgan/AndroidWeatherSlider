@@ -101,30 +101,28 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		if (null != notification) {
 			return displayNotifcation(notification.getServiceId(), weatherInfo);
 		}
-		// New notification
-		else {
 
-			// Check available notifications
-			if (!notificationsAreFull()) {
+		// Check available notifications
+		if (!notificationsAreFull()) {
 
-				notification = new WeatherNotification();
-				notification.setFkWeatherChoiceId(weatherChoice.getId());
+			notification = new WeatherNotification();
+			notification.setFkWeatherChoiceId(weatherChoice.getId());
 
-				// Find available service
-				for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers().entrySet()) {
-					if (null == entry.getValue()) {
-						notification.setServiceId(entry.getKey());
-						this.notificationDao.addNotification(notification);
-						return displayNotifcation(notification.getServiceId(), weatherInfo);
-					}
+			// Find available service
+			for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers()
+				.entrySet()) {
+				if (null == entry.getValue()) {
+					notification.setServiceId(entry.getKey());
+					this.notificationDao.addNotification(notification);
+					return displayNotifcation(notification.getServiceId(), weatherInfo);
 				}
+			}
 
-			}
-			else {
-				// No notification available
-				sendBroadcast(new Intent(NOTIFICATIONS_FULL));
-				return false;
-			}
+		}
+		else {
+			// No notification available
+			sendBroadcast(new Intent(NOTIFICATIONS_FULL));
+			return false;
 		}
 		return false;
 	}
@@ -153,7 +151,8 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 	}
 
 	public void updatePreferences() {
-		for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers().entrySet()) {
+		for (final Entry<Integer, YahooWeatherInfo> entry : this.applicaiton.getWeathers()
+			.entrySet()) {
 			if (null != entry.getValue()) {
 				displayNotifcation(entry.getKey(), entry.getValue());
 			}
@@ -179,7 +178,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		return showNotification(serviceId, weatherInfo);
 	}
 
-	private boolean showCustomNotification(int serviceId, YahooWeatherInfo weatherInfo) {
+	private boolean showCustomNotification(final int serviceId, final YahooWeatherInfo weatherInfo) {
 		if (null != weatherInfo) {
 			this.applicaiton.setWeather(serviceId, weatherInfo);
 
@@ -190,17 +189,17 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 			}
 
 			// Scrolling update text
-			CharSequence safeLocation = getSafeLocation(weatherInfo);
+			final CharSequence safeLocation = getSafeLocation(weatherInfo);
 			final CharSequence forcastText = weatherInfo.getCurrentText() + ", " + safeLocation;
 
-			long when = System.currentTimeMillis();
-			Notification notification = new Notification();
+			final long when = System.currentTimeMillis();
+			final Notification notification = new Notification();
 			notification.tickerText = String.format(TICKER_TEXT, weatherInfo.getCurrentText(), safeLocation);
 			notification.when = when;
 			notification.icon = IconFactory.getImageResourceFromCode(weatherInfo.getCurrentCode());
 			notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.DEFAULT_LIGHTS;
 
-			RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.custom_status_bar_notification_layout);
+			final RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.custom_status_bar_notification_layout);
 			contentView.setImageViewResource(R.id.content_icon, IconFactory.getImageResourceFromCode(weatherInfo.getCurrentCode()));
 			contentView.setTextViewText(R.id.content_title, forcastText);
 			contentView.setTextViewText(R.id.content_text, getContent(weatherInfo, true));
@@ -208,7 +207,7 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 					weatherInfo.getCurrentTemp() + Temperature.withDegree(Utils.abrev(weatherInfo.getTemperatureUnit())));
 			notification.contentView = contentView;
 
-			PendingIntent pendingContentIntent = createIntent(serviceId, weatherInfo);
+			final PendingIntent pendingContentIntent = createIntent(serviceId, weatherInfo);
 			notification.contentIntent = pendingContentIntent;
 
 			this.notificationManager.notify(serviceId, notification);
@@ -261,9 +260,11 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		return PendingIntent.getActivity(this, 0, viewIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 
-	private String getContent(final YahooWeatherInfo weatherInfo, boolean switchTempForPreasure) {
-		final String wind = WindSpeed.fromSpeedAndUnit(this, weatherInfo.getWindSpeed(), weatherInfo.getWindSpeedUnit()) + " ("
-				+ Wind.fromDegreeToAbbreviation(weatherInfo.getWindDirection()).toLowerCase() + ")";
+	private String getContent(final YahooWeatherInfo weatherInfo, final boolean switchTempForPreasure) {
+		final String wind =
+				WindSpeed.fromSpeedAndUnit(this, weatherInfo.getWindSpeed(), weatherInfo.getWindSpeedUnit()) + " ("
+					+ Wind.fromDegreeToAbbreviation(weatherInfo.getWindDirection())
+						.toLowerCase() + ")";
 		final String humidity = weatherInfo.getHumidityPercentage() + "% (Humdity)";
 
 		if (switchTempForPreasure) {
@@ -283,7 +284,11 @@ public class WeatherNotificationControllerService extends OrmLiteBaseService<Dat
 		else if (stringHasValue(weatherInfo.getCity())) {
 			location.append(weatherInfo.getCity());
 		}
-		return stringHasValue(weatherInfo.getCountry()) ? location.append(", ").append(weatherInfo.getCountry()).toString() : location.toString();
+		return stringHasValue(weatherInfo.getCountry())
+				? location.append(", ")
+					.append(weatherInfo.getCountry())
+					.toString()
+				: location.toString();
 	}
 
 }

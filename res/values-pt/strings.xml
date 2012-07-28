@@ -1,0 +1,184 @@
+<resources>
+
+    <!-- Android Mainifest -->
+    <string name="crash_toast_text">Desculpe! A aplicação morreu, um relatório foi enviado para o desenvolvedor, a fim de corrigir o problema!</string>
+    <string name="app_name">Slider Tempo</string>
+    <string name="get_my_location_service">Nenhum-ligável Serviço Olha Localização</string>
+    <string name="gps_weather_service">gps_weather_service</string>
+
+    <!-- Change Log -->
+    <string name="changelog_title">Alterar o Registro</string>
+    <string name="changelog_filename">changelog.html</string>
+
+    <!-- Rate Me -->
+    <string name="rate_me_title">Gostaria de classificar o aplicativo?</string>
+
+    <!-- Share Options -->
+    <string name="share_subject">Slider Tempo</string>
+    <!-- https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider -->
+    <string name="share_content">Estou usando o Slider do tempo, o peso leve Companion Tempo Android, http://bit.ly/JhNRyL</string>
+    <string name="share_title">Compartilhar via</string>
+    
+    <!-- Button / General -->
+    <string name="no_thanks">Não, obrigado</string>
+    <string name="okay">OK</string>
+    <string name="feedback">Resposta</string>
+    <string name="home">Página Principal</string>
+    <string name="not_available">NÃO APLICÁVEL</string>
+    <string name="alert_yes">Sim</string>
+    <string name="alert_no">Não</string>
+    <string name="alert_open">abrir</string>
+    <string name="alert_cancel">Cancelar</string>
+
+    <!-- Feedback form -->
+    <string name="feedbacktitle">Digite os detalhes de feedback:</string>
+    <string name="feedbackname">Nome</string>
+    <string name="feedbackemail">E-mail (não obrigatório)</string>
+    <string name="feedbackbody">Detalhes…</string>
+    <string name="feedbackresponse">Você gostaria de uma resposta de e-mail?</string>
+    <string name="feedbackbutton">Enviar Comentário</string>
+    <string name="feedbacktype">TIPO</string>
+    <string name="feedbacktype1">Melhoria</string>
+    <string name="feedbacktype2">Sugestão</string>
+    <string name="feedbacktype3">bug</string>
+    <string name="feedbacktype4">OUTROS</string>
+    <string name="feedbacktype5">tradução</string>
+    <string name="feedbackmessagebody_responseyes">Requer uma resposta</string>
+    <string name="feedbackmessagebody_responseno">Não requer uma resposta</string>
+    <string name="feedbackmessagesubject_format">Comentários Aplicação ( %1$s )</string>
+    <string name="no_email_clients_installed">Não há clientes de e-mail instalado.</string>
+
+    <!-- Notification IDS -->
+    <string name="weather_notification_service_1">weather_notification_service_1</string>
+    <string name="weather_notification_service_2">weather_notification_service_2</string>
+    <string name="weather_notification_service_3">weather_notification_service_3</string>
+
+    <!-- Weather Overview activity -->
+    <string name="further_details">Mais detalhes</string>
+    <string name="open_google_maps">Google Maps</string>
+
+    <!-- User Preferences activity -->
+    <string name="pref_overview_mode_title">O modo de Vista</string>
+    <string name="pref_overview_mode_summary">Alterar o que acontece quando você clica em cada notificação</string>
+    
+    <string name="pref_temp_mode_title">Temperatura</string>
+    <string name="pref_temp_mode_summary">Mostrar temperatura em Celsius ou Fahrenheit</string>
+    
+    <string name="pref_wind_mode_title">Velocidade média do vento local</string>
+    <string name="pref_wind_mode_summary">Mostrar velocidade em mph ou kph</string>
+    
+    <string name="pref_polling_time_title">Atualize Intervalo</string>
+    <string name="pref_polling_time_summary">Configurar quando para verificar se há atualizações do tempo</string>
+    
+    <string name="pref_start_on_boot_title">Durante a inicialização do telefone</string>
+    <string name="pref_start_on_boot_enabled">Atualizar tempo em início de telefone</string>
+    <string name="pref_start_on_boot_disabled">Não atualizar tempo em início de telefone</string>
+
+    <string name="pref_reload_on_connectivity_change_title">Atualizar Em Conectividade Mudou</string>
+    <string name="pref_reload_on_connectivity_change_enabled">O tempo será atualizada quando as alterações de conectividade</string>
+    <string name="pref_reload_on_connectivity_change_disabled">Não se refrescar tempo em mudanças de conectividade</string>
+    
+    <string name="pref_new_notification_layout_title">Usar Layout de Notificação</string>
+    <string name="pref_new_notification_layout_enabled">Esquema de Notificação Habilitado</string>
+    <string name="pref_new_notification_layout_disabled">Esquema de Notificação Desativado</string>
+    
+    <string name="pref_refresh_on_user_present_title">Atualizar Wake On</string>
+    <string name="pref_refresh_on_user_present_summary">por exemplo, desbloqueio de telefone, de vigília. Ativar essa vai usar mais bateria, mas pode ser útil</string>
+    
+    <string name="pref_google_analytics_title">Ativar o Google Analytics</string>
+    <string name="pref_google_analytics_summary">Obrigado por ajudar a melhorar esta aplicação</string>
+    
+    <string name="pref_changelog_title">Alterar o Registro</string>
+    <string name="pref_changelog_disabled">Não mostrar Change Log On Atualização de Versão</string>
+    <string name="pref_changelog_enabled">Mostrar Alterar Log On Atualização de Versão</string>
+    
+    <string name="pref_disable_notification_ticker_text_title">Resumo do Tempo</string>
+    <string name="pref_disable_notification_ticker_text_disabled">Não mostrar atualizações Resumo do Tempo</string>
+    <string name="pref_disable_notification_ticker_text_enabled">Resumo actualizações meteorológicas estão habilitados</string>
+    
+    <string name="pref_report_error_on_failed_lookup_title">Notificação de falha</string>
+    <string name="pref_report_error_on_failed_lookup_disabled">Não me alertar se uma pesquisa de clima não</string>
+    <string name="pref_report_error_on_failed_lookup_enabled">Alertar-me se uma pesquisa de clima não</string>
+    
+    <string name="pref_acra_syslog_disabled">Não coletar registros de sistemas de travamento de aplicação</string>
+    <string name="pref_acra_syslog_enabled">Coletar registros de sistemas de travamento de aplicação</string>
+    <string name="pref_acra_syslog">Relatório de Erros</string>
+    
+    <string name="pref_update_checker_disabled">Não verificador de atualizações Slider Tempo</string>
+    <string name="pref_update_checker_enabled">Verifique se há atualizações estão ativados</string>
+    <string name="pref_update_checker">Edita as opções do aplicativo</string>
+    
+    <!-- Home Screen - ManageWeatherChoiceActivity.java -->
+    <string name="alert_title_open_overview">Tela Resumo Aberto</string>
+    <string name="alert_title_manage_location">Gerenciar Notificação</string>
+    <string name="alert_refresh">Atualizar</string>
+    <string name="alert_disable">Desativar</string>
+    <string name="alert_enable">Ativar</string>
+    <string name="alert_delete">Remover</string>
+    <string name="button_add_new_location">Adicionar novo local…</string>
+    <string name="modify_loaded_locaitons">Adicionar ou modificar as suas localizações</string>
+
+    <!-- List locations activity -->
+    <string name="alert_on_location_click_is_this_correct">Está correcto? </string>
+
+    <!-- Forecast overview tabs -->
+    <string name="forecast_overview_highs_of">Altíssimos de </string>
+    <string name="forecast_overview_lows_of">Baixos de </string>
+
+    <!-- Enter location activity -->
+    <string name="title_add_a_new_location">Adicionar um novo local</string>
+    <string name="summary_enter_a_location_or_use_your_gps">Digite um local ou usar o GPS…</string>
+    <string name="text_field_enter_location">Introduza a localização…</string>
+    <string name="button_lookup">Procurar</string>
+    <string name="enter_location_example">Código Postal por exemplo, ou Cidade</string>
+    <string name="find_your_location_title">Encontre a sua localização</string>
+    <string name="find_your_current_location_summary">Encontre a sua localização actual via GPS</string>
+    <string name="chkbox_always_use_gps">Sempre usar GPS</string>
+    <string name="always_use_gps_summary">Sempre encontrar a sua localização via GPS</string>
+    <string name="toast_unable_to_locate_you">Não foi possível localizá-lo, verifique se você está conectado à rede.</string>
+    <string name="toast_please_enter_a_location">Por favor, indique um local.</string>
+    <string name="network_issue_onload">Você rede está desativada, por favor, re-ativado para que esta aplicação funcione corretamente.</string>
+    <string name="toast_unable_to_request_network_location">Incapaz de pedido de localização de rede. Você não está conectado.</string>
+    <string name="toast_low_battery_warning">Bateria fraca, incapaz de usar os serviços de localização.</string>
+    <string name="toast_attempting_to_lookup_your_gps_location">Tentativa de pesquisa a sua localização GPS e encontrar o tempo.</string>
+    <string name="toast_error_unable_to_find_you">Não foi possível encontrar %s , por favor, tente novamente.</string>
+    <string name="alaert_enabled_gps_provider">Não prestadores de localização encontrados, a GPS e Rede Móvel está desabilitado! Você gostaria de habilitá-lo?</string>
+    <string name="alert_enable_gps">Ativar GPS</string>
+    <string name="alert_do_nothing">Não fazer nada</string>
+
+    <!-- Service Updates -->
+    <string name="service_update_getting_your_location">Obtendo Localização. Por favor, aguarde…</string>
+    <string name="service_update_location_found_looking_up_area">Localização encontrados, olhando para cima área. Por favor, aguarde…</string>
+    <string name="service_update_getting_current_location">Obtendo Localização atual. Por favor, aguarde…</string>
+    <string name="service_update_loading_existing_notifications">Carregando notificações existentes</string>
+    <string name="service_update_preferences_changed_updating">Preferências alterada, a actualização…</string>
+    <string name="service_update_initalizing_weather_lookup">Inicializando Lookup Tempo</string>
+    <string name="service_update_completed_weather_lookup">Pesquisa concluída Tempo</string>
+    <string name="service_update_running_weather_lookup">Correndo Lookup Tempo</string>
+    <string name="service_update_refreshing_weather_notifications">Refrescantes notificações previsões do tempo…</string>
+    <string name="service_update_attempting_to_refresh_weather">A tentativa de atualizar o tempo…</string>
+    <string name="service_update_failed_to_refresh_weather">Falha ao atualizar o tempo</string>
+    <string name="service_update_scheduling_next_refresh">Agendamento próxima atualização…</string>
+    <string name="service_update_initiating_gps_lookup">Iniciando GPS pesquisa</string>
+    <string name="service_update_failed_gps_lookup">Falha GPS pesquisa</string>
+    <string name="service_update_gps_location_found">Localização GPS encontrado</string>
+    <string name="service_update_gps_location_not_found">Localização GPS não encontrado</string>
+    <string name="service_update_lookup_geocode_location">Busca Localização Geocode</string>
+    <string name="service_update_finding_geocode_location">Encontrar Localização Geocode</string>
+    <string name="service_update_unable_to_fina_geocode_location">Não foi possível encontrar Localização Geocode</string>
+    <string name="service_update_geocode_location_found">Localização Geocode Encontrada</string>
+
+    <!-- StaticLookupService -->
+    <string name="toast_unable_to_get_weather_details">Não foi possível obter detalhes das condições meteorológicas no momento, tentará novamente em %s</string>
+
+    <!-- NotificationControllerService -->
+    <string name="toast_max_notifications_reached">Não é possível adicionar mais notificações tempo, retire um máximo, em primeiro %s notificações permitido</string>
+
+    <!-- Swipe Areas -->
+    <string name="swipe_left_for_forecast_details">Passe partiu para detalhes da previsão…</string>
+    <string name="swipe_right_for_current_conditions">Swipe… certo para as condições atuais</string>
+    <string name="toast_unable_to_find_the_weather_for_your_location">Não foi possível encontrar o tempo para a sua localização, por favor tente agin.</string>
+    <string name="update_checker_alert">Uma atualização está disponível para! \ N \ nAbrir Android Market e veja os detalhes?</string>
+    <string name="update_available">Atualização disponível</string>
+    
+</resources>

@@ -90,7 +90,8 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.notificationDao = new NotificationDao(getHelper());
 		this.detector = new SimpleGestureFilter(this, this);
 		this.detector.setEnabled(true);
-		this.googleAnalyticsService = WeatherSliderApplication.locate(this).getGoogleAnalyticsService();
+		this.googleAnalyticsService = WeatherSliderApplication.locate(this)
+			.getGoogleAnalyticsService();
 		this.serviceUpdate = new ServiceUpdateBroadcasterImpl(this);
 		this.serviceUpdateRegister = new ServiceUpdateReceiver(this);
 		this.updateApplicationReciever = new UpdateApplicationReciever(this, this.googleAnalyticsService);
@@ -130,7 +131,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 		getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+			public boolean onItemLongClick(final AdapterView<?> av, final View v, final int pos, final long id) {
 				return handleOnItemLongClick(pos);
 			}
 		});
@@ -278,13 +279,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			// //////////////////////////////
 			// Refresh | Disabled | Delete //
 			// //////////////////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_refresh), new DialogInterface.OnClickListener() {
+			alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.alert_refresh), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					onLoadWeatherChoice(weatherChoice);
 				}
 			});
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_disable), new DialogInterface.OnClickListener() {
+			alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.alert_disable), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					attemptToKillNotifcation(weatherChoice);
@@ -295,7 +296,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			// //////////////////
 			// Enable | Delete //
 			// //////////////////
-			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_enable), new DialogInterface.OnClickListener() {
+			alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.alert_enable), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface dialog, final int id) {
 					onLoadWeatherChoice(weatherChoice);
@@ -303,7 +304,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			});
 		}
 
-		alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.alert_delete), new DialogInterface.OnClickListener() {
+		alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.alert_delete), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
 				attemptToDeleteNotifcation(weatherChoice);
@@ -313,7 +314,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		alertDialog.show();
 	}
 
-	protected boolean handleOnItemLongClick(int pos) {
+	protected boolean handleOnItemLongClick(final int pos) {
 
 		final WeatherChoice weatherChoice = this.weatherChoices.get(pos);
 
@@ -323,7 +324,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 			if (isNotNull(notification) && weatherChoice.isActive()) {
 				final AlertDialog alertDialog = createCurrentAlertDialog(weatherChoice, R.string.alert_title_open_overview);
 				alertDialog.setCancelable(true);
-				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_open), new DialogInterface.OnClickListener() {
+				alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.alert_open), new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(final DialogInterface dialog, final int id) {
@@ -333,7 +334,7 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 						startActivity(overviewIntent);
 					}
 				});
-				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+				alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface dialog, final int id) {
 						alertDialog.cancel();
@@ -361,7 +362,9 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		final Bundle bundle = new Bundle();
 		bundle.putSerializable(WEATHER_ID, woeidChoice.getId());
 
-		final Intent service = woeidChoice.isRoaming() ? new Intent(this, RoamingLookupService.class) : new Intent(this, StaticLookupService.class);
+		final Intent service = woeidChoice.isRoaming()
+				? new Intent(this, RoamingLookupService.class)
+				: new Intent(this, StaticLookupService.class);
 
 		service.putExtra(FROM_INACTIVE_LOCATION, true);
 		service.putExtras(bundle);
@@ -374,12 +377,13 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 
 	private void createShortcut() {
 
-		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
+		final Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
 		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		shortcutIntent.setClassName(this, this.getClass().getName());
+		shortcutIntent.setClassName(this, this.getClass()
+			.getName());
 
-		Intent intent = new Intent();
+		final Intent intent = new Intent();
 		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
 		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "WeatherSlider");
 		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
@@ -408,17 +412,20 @@ public class ManageWeatherChoiceActivity extends OrmLiteBaseListActivity<Databas
 		this.adaptor.remove(woeidChoice);
 	}
 
-	private AlertDialog createCurrentAlertDialog(final WeatherChoice weatherChoice, int titleResource) {
+	private AlertDialog createCurrentAlertDialog(final WeatherChoice weatherChoice, final int titleResource) {
 		final String dialogText = weatherChoice.getCurrentLocationText() + "\n" + DateUtils.dateToSimpleDateFormat(weatherChoice.getLastUpdatedDateTime());
 		return new AlertDialog.Builder(this).setIcon(IconFactory.getImageResourceFromCode(weatherChoice.getCurrentWeatherCode()))
-				.setTitle(getString(titleResource)).setMessage(dialogText).create();
+			.setTitle(getString(titleResource))
+			.setMessage(dialogText)
+			.create();
 	}
 
 	private void showFailedLookupToast() {
 		Toast.makeText(
 				this,
 				String.format(getString(R.string.toast_unable_to_get_weather_details),
-						TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
+						TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
+			.show();
 	}
 
 	// /////////////////////////////////////////////

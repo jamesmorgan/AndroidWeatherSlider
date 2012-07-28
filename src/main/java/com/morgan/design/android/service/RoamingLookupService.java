@@ -88,14 +88,14 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		this.onGeocodeDataCallback = new OnAsyncCallback<GeocodeResult>() {
 			@Override
-			public void onPostLookup(final GeocodeResult geocodeResult) {
-				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", geocodeResult);
-				if (null == geocodeResult) {
+			public void onPostLookup(final GeocodeResult result) {
+				Logger.d(LOG_TAG, "onPostLookup -> GeocodeResult = %s", result);
+				if (null == result) {
 					RoamingLookupService.this.serviceUpdate.complete(getString(R.string.service_update_geocode_location_found));
 				}
 				else {
 					RoamingLookupService.this.serviceUpdate.complete(getString(R.string.service_update_unable_to_fina_geocode_location));
-					onLocationFound(geocodeResult);
+					onLocationFound(result);
 				}
 			}
 
@@ -125,11 +125,11 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	@Override
 	public void onCancelAll() {
 		stopService(new Intent(LocationLookupService.GET_ROAMING_LOCATION_LOOKUP));
-		if (null != getYahooWeatherInformationTask) {
-			getYahooWeatherInformationTask.cancel(true);
+		if (null != this.getYahooWeatherInformationTask) {
+			this.getYahooWeatherInformationTask.cancel(true);
 		}
-		if (null != geocodeWOIEDDataTaskFromLocation) {
-			geocodeWOIEDDataTaskFromLocation.cancel(true);
+		if (null != this.geocodeWOIEDDataTaskFromLocation) {
+			this.geocodeWOIEDDataTaskFromLocation.cancel(true);
 		}
 	}
 
@@ -201,10 +201,10 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		triggerGetGpsLocation();
 	}
 
-	protected void onLocationFound(final GeocodeResult geocodeResult) {
-		this.geocodeResult = geocodeResult;
-		getYahooWeatherInformationTask = new GetYahooWeatherInformationTask(this.cnnxManager, geocodeResult, getTempMode(), this);
-		getYahooWeatherInformationTask.execute();
+	protected void onLocationFound(final GeocodeResult result) {
+		this.geocodeResult = result;
+		this.getYahooWeatherInformationTask = new GetYahooWeatherInformationTask(this.cnnxManager, result, getTempMode(), this);
+		this.getYahooWeatherInformationTask.execute();
 	}
 
 	@Override
@@ -223,7 +223,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 
 		// Remove immediately if cannot find find location
 		if (this.weatherChoice.isFirstAttempt()) {
-			Toast.makeText(this, R.string.toast_unable_to_find_the_weather_for_your_location, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.toast_unable_to_find_the_weather_for_your_location, Toast.LENGTH_SHORT)
+				.show();
 			this.weatherDao.delete(this.weatherChoice);
 		}
 		// If active and failed, report failure and inform user of re-try
@@ -232,7 +233,8 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 				Toast.makeText(
 						this,
 						String.format(getString(R.string.toast_unable_to_get_weather_details),
-								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
+								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
+					.show();
 			}
 			this.weatherChoice.failedQuery();
 			this.weatherDao.update(this.weatherChoice);
@@ -305,8 +307,9 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 						}
 						else if (null != location && providersFound) {
 							Logger.d(LOG_TAG, "Listened to location change lat=[%s], long=[%s]", location.getLatitude(), location.getLatitude());
-							geocodeWOIEDDataTaskFromLocation = new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback);
-							geocodeWOIEDDataTaskFromLocation.execute();
+							RoamingLookupService.this.geocodeWOIEDDataTaskFromLocation =
+									new GeocodeWOIEDDataTaskFromLocation(location, RoamingLookupService.this.onGeocodeDataCallback);
+							RoamingLookupService.this.geocodeWOIEDDataTaskFromLocation.execute();
 						}
 						else {
 							Logger.d(LOG_TAG, "GPS location not found");
@@ -350,13 +353,13 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 	public class GetYahooWeatherInformationTask extends AsyncTask<Void, Void, YahooWeatherInfo> {
 
 		private final Temperature temperature;
-		private final ConnectivityManager cnnxManager;
+		private final ConnectivityManager manager;
 		private final OnAsyncCallback<YahooWeatherInfo> asyncCallback;
 		private final GeocodeResult result;
 
 		public GetYahooWeatherInformationTask(final ConnectivityManager cnnxManager, final GeocodeResult result, final Temperature temperature,
 				final OnAsyncCallback<YahooWeatherInfo> asyncCallback) {
-			this.cnnxManager = cnnxManager;
+			this.manager = cnnxManager;
 			this.result = result;
 			this.asyncCallback = asyncCallback;
 			this.temperature = temperature;
@@ -365,7 +368,7 @@ public class RoamingLookupService extends OrmLiteBaseService<DatabaseHelper> imp
 		@Override
 		protected YahooWeatherInfo doInBackground(final Void... params) {
 			this.asyncCallback.onInitiateExecution();
-			return HttpWeatherLookupFactory.getForGeocodeResult(this.result, this.temperature, this.cnnxManager);
+			return HttpWeatherLookupFactory.getForGeocodeResult(this.result, this.temperature, this.manager);
 		}
 
 		@Override

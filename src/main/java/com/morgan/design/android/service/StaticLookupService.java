@@ -108,15 +108,15 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 	}
 
 	private void reloadAll() {
-		for (final WeatherChoice weatherChoice : this.weatherChoice) {
-			if (weatherChoice.isActive() && !weatherChoice.isRoaming()) {
-				getWeather(weatherChoice);
+		for (final WeatherChoice choice : this.weatherChoice) {
+			if (choice.isActive() && !choice.isRoaming()) {
+				getWeather(choice);
 			}
 		}
 	}
 
-	private void getWeather(final WeatherChoice weatherChoice) {
-		new GetYahooWeatherInformationForWoeid(this.cnnxManager, weatherChoice, getTempMode(), this).execute();
+	private void getWeather(final WeatherChoice choice) {
+		new GetYahooWeatherInformationForWoeid(this.cnnxManager, choice, getTempMode(), this).execute();
 	}
 
 	@Override
@@ -153,7 +153,8 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 				Toast.makeText(
 						this,
 						String.format(getString(R.string.toast_unable_to_get_weather_details),
-								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT).show();
+								TimeUtils.convertMinutesHumanReadableTime(PreferenceUtils.getPollingSchedule(this))), Toast.LENGTH_SHORT)
+					.show();
 			}
 		}
 		sendBroadcast(new Intent(UPDATE_WEATHER_LIST).putExtra(FAILED_LOOKUP, null == weatherLookup));
@@ -168,7 +169,7 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 		return PreferenceUtils.getTemperatureMode(getApplicationContext());
 	}
 
-	private boolean fromInactiveLocation(final Intent intent) {
+	private static boolean fromInactiveLocation(final Intent intent) {
 		return null != intent && intent.hasExtra(FROM_INACTIVE_LOCATION) && intent.getBooleanExtra(FROM_INACTIVE_LOCATION, false);
 	}
 
@@ -187,23 +188,23 @@ public class StaticLookupService extends OrmLiteBaseService<DatabaseHelper> impl
 
 	class GetYahooWeatherInformationForWoeid extends AsyncTask<Void, Void, YahooWeatherLookup> {
 
-		private final WeatherChoice weatherChoice;
+		private final WeatherChoice choice;
 		private final Temperature temperature;
-		private final ConnectivityManager cnnxManager;
+		private final ConnectivityManager manager;
 		private final OnAsyncCallback<YahooWeatherLookup> asyncCallback;
 
 		public GetYahooWeatherInformationForWoeid(final ConnectivityManager cnnxManager, final WeatherChoice weatherChoice, final Temperature temperature,
 				final OnAsyncCallback<YahooWeatherLookup> asyncCallback) {
-			this.cnnxManager = cnnxManager;
+			this.manager = cnnxManager;
 			this.asyncCallback = asyncCallback;
-			this.weatherChoice = weatherChoice;
+			this.choice = weatherChoice;
 			this.temperature = temperature;
 		}
 
 		@Override
 		protected YahooWeatherLookup doInBackground(final Void... params) {
 			this.asyncCallback.onInitiateExecution();
-			return HttpWeatherLookupFactory.getForWeatherChoice(this.weatherChoice, this.temperature, this.cnnxManager);
+			return HttpWeatherLookupFactory.getForWeatherChoice(this.choice, this.temperature, this.manager);
 		}
 
 		@Override
