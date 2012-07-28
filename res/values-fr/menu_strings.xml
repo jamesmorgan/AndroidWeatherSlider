@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="settings">"Paramètres"</string>
+    <string name="change_log">"Change Log"</string>
+    <string name="about">"À PROPOS DE FRESCHE"</string>
+    <string name="share">"Partager"</string>
+    <string name="create_shortcut">"Créer un raccourci"</string>
+    <string name="cancel_all">"Tout annuler"</string>
+    <string name="reload_all">"Recharger Tout"</string>
+
+</resources>
