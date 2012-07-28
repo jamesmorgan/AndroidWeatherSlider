@@ -468,12 +468,14 @@ public final class R {
  List locations activity 
  List locations activity 
  List locations activity 
+ List locations activity 
          */
         public static final int alert_on_location_click_is_this_correct=0x7f06005b;
         public static final int alert_open=0x7f060018;
         public static final int alert_refresh=0x7f060055;
         public static final int alert_title_manage_location=0x7f060054;
         /**  Home Screen - ManageWeatherChoiceActivity.java 
+ Home Screen - ManageWeatherChoiceActivity.java 
  Home Screen - ManageWeatherChoiceActivity.java 
  Home Screen - ManageWeatherChoiceActivity.java 
  Home Screen - ManageWeatherChoiceActivity.java 
@@ -491,10 +493,12 @@ public final class R {
  Change Log 
  Change Log 
  Change Log 
+ Change Log 
          */
         public static final int changelog_title=0x7f06000b;
         public static final int chkbox_always_use_gps=0x7f060065;
         /**  Android Mainifest 
+ Android Mainifest 
  Android Mainifest 
  Android Mainifest 
  Android Mainifest 
@@ -515,6 +519,7 @@ public final class R {
  Feedback form 
  Feedback form 
  Feedback form 
+ Feedback form 
          */
         public static final int feedbacktitle=0x7f06001a;
         public static final int feedbacktype=0x7f060020;
@@ -529,10 +534,12 @@ public final class R {
  Forecast overview tabs 
  Forecast overview tabs 
  Forecast overview tabs 
+ Forecast overview tabs 
          */
         public static final int forecast_overview_highs_of=0x7f06005c;
         public static final int forecast_overview_lows_of=0x7f06005d;
         /**  Weather Overview activity 
+ Weather Overview activity 
  Weather Overview activity 
  Weather Overview activity 
  Weather Overview activity 
@@ -545,6 +552,7 @@ public final class R {
         public static final int network_issue_onload=0x7f060069;
         public static final int no_email_clients_installed=0x7f060029;
         /**  Button / General 
+ Button / General 
  Button / General 
  Button / General 
  Button / General 
@@ -569,6 +577,7 @@ public final class R {
         public static final int pref_new_notification_layout_title=0x7f06003d;
         public static final int pref_overview_mode_summary=0x7f060030;
         /**  User Preferences activity 
+ User Preferences activity 
  User Preferences activity 
  User Preferences activity 
  User Preferences activity 
@@ -598,6 +607,7 @@ public final class R {
  Rate Me 
  Rate Me 
  Rate Me 
+ Rate Me 
          */
         public static final int rate_me_title=0x7f06000d;
         public static final int reload_all=0x7f060006;
@@ -609,6 +619,7 @@ public final class R {
         public static final int service_update_geocode_location_found=0x7f060084;
         public static final int service_update_getting_current_location=0x7f060073;
         /**  Service Updates 
+ Service Updates 
  Service Updates 
  Service Updates 
  Service Updates 
@@ -632,9 +643,11 @@ public final class R {
  https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider 
  https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider 
  https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider 
+ https://play.google.com/store/apps/details?id=com.morgan.design.weatherslider 
          */
         public static final int share_content=0x7f06000f;
         /**  Share Options 
+ Share Options 
  Share Options 
  Share Options 
  Share Options 
@@ -646,11 +659,13 @@ public final class R {
  Swipe Areas 
  Swipe Areas 
  Swipe Areas 
+ Swipe Areas 
          */
         public static final int swipe_left_for_forecast_details=0x7f060087;
         public static final int swipe_right_for_current_conditions=0x7f060088;
         public static final int text_field_enter_location=0x7f060060;
         /**  Enter location activity 
+ Enter location activity 
  Enter location activity 
  Enter location activity 
  Enter location activity 
@@ -663,11 +678,13 @@ public final class R {
  NotificationControllerService 
  NotificationControllerService 
  NotificationControllerService 
+ NotificationControllerService 
          */
         public static final int toast_max_notifications_reached=0x7f060086;
         public static final int toast_please_enter_a_location=0x7f060068;
         public static final int toast_unable_to_find_the_weather_for_your_location=0x7f060089;
         /**  StaticLookupService 
+ StaticLookupService 
  StaticLookupService 
  StaticLookupService 
  StaticLookupService 
@@ -678,6 +695,7 @@ public final class R {
         public static final int update_available=0x7f06008b;
         public static final int update_checker_alert=0x7f06008a;
         /**  Notification IDS 
+ Notification IDS 
  Notification IDS 
  Notification IDS 
  Notification IDS 

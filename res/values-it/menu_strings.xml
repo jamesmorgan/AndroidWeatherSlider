@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="settings">"Impostazioni"</string>
+    <string name="change_log">"Storia delle news"</string>
+    <string name="about">"circa"</string>
+    <string name="share">"Condividi"</string>
+    <string name="create_shortcut">"Crea collegamento"</string>
+    <string name="cancel_all">"Annullare tutte"</string>
+    <string name="reload_all">"Ricarica tutto"</string>
+
+</resources>
