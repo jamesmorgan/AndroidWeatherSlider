@@ -116,6 +116,7 @@ public class TODO {
 	
 	// FIXME -> DONE - (28/07/2012) - Added Italian Translation
 	// FIXME -> DONE - (28/07/2012) - Removed API warning about notification builder (Added Support Library)
+	// FIXME -> DONE - (28/07/2012) - Updated to V3.3.0 android-maven-plugin
 
 	// //////////////////////
 	// Version: 1.16	   //
