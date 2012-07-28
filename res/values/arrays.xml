@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     
-    <string-array name="polling_time">
+    <string-array name="polling_time" tools:ignore="MissingTranslation">
         <!--  <item>1 minute</item>-->
         <item>15 minutes</item>
         <item>30 minutes</item>
@@ -12,7 +12,7 @@
     </string-array>
 
     
-    <string-array  name="polling_time_values">
+    <string-array  name="polling_time_values" tools:ignore="MissingTranslation">
         <!-- <item>1</item> -->
         <item>15</item>
         <item>30</item>
@@ -22,32 +22,32 @@
         <item>1440</item>
     </string-array>
 
-    <string-array name="overview_mode">
+    <string-array name="overview_mode" tools:ignore="MissingTranslation">
         <item>Open Overview Screen</item>
         <item>Open Web Browser</item>
     </string-array>
 
-    <string-array name="overview_mode_values">
+    <string-array name="overview_mode_values" tools:ignore="MissingTranslation">
         <item>OVERVIEW</item>
         <item>WEB</item>
     </string-array>
 
-    <string-array name="temperature_mode_values">
+    <string-array name="temperature_mode_values" tools:ignore="MissingTranslation">
         <item>c</item>
         <item>f</item>
     </string-array>
 
-    <string-array name="temperature_mode">
+    <string-array name="temperature_mode" tools:ignore="MissingTranslation">
         <item>Celsius</item>
         <item>Fahrenheit</item>
     </string-array>
 
-    <string-array name="wind_mode_values">
+    <string-array name="wind_mode_values" tools:ignore="MissingTranslation">
         <item>mph</item>
         <item>kmh</item>
     </string-array>
 
-    <string-array name="wind_mode">
+    <string-array name="wind_mode" tools:ignore="MissingTranslation">
         <item>Mp/h</item>
         <item>Km/h</item>
     </string-array>
