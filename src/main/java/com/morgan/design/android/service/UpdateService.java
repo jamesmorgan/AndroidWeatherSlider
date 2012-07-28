@@ -68,12 +68,16 @@ public class UpdateService extends IntentService {
 					case FORCED:
 						Logger.d(LOG_TAG, "Attempt to show application update available dialog, new version=[%S], old version=[%s]", result.versionCode,
 								currentVersion);
-						attemptToForceShowDialog(result, currentVersion);
+						// Always set preference in-case no activity is available and for a alert dialog
+						enableDialogForNextOpen();
+
+						// Send show update dialog broadcast
+						attemptToForceShowDialog();
 						break;
 					case ON_NEXT_OPEN:
 						Logger.d(LOG_TAG, "Setting application update available dialog for next application open, new version=[%S], old version=[%s]",
 								result.versionCode, currentVersion);
-						enableDialogForNextOpen(result, currentVersion);
+						enableDialogForNextOpen();
 						break;
 				}
 			}
@@ -88,14 +92,11 @@ public class UpdateService extends IntentService {
 		}
 	}
 
-	private void attemptToForceShowDialog(final Update result, final int currentVersion) {
-		// Always set preference in-case no activity is available and for a alert dialog
-		enableDialogForNextOpen(result, currentVersion);
-		// Send show update dialog broadcast
+	private void attemptToForceShowDialog() {
 		sendBroadcast(new Intent(APPLICATION_UPDATE_AVAILABLE));
 	}
 
-	private void enableDialogForNextOpen(final Update result, final int currentVersion) {
+	private void enableDialogForNextOpen() {
 		// Set Preference for next boot
 		// If found on home screen, send broadcast to show application & clear preference flag
 		PreferenceUtils.setShowUpdateDialogOnNextOpen(this, true);
