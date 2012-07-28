@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="settings">"Configuración"</string>
+    <string name="change_log">"Registro de Cambios"</string>
+    <string name="about">"Sobre"</string>
+    <string name="share">"Compartir ..."</string>
+    <string name="create_shortcut">"Crear acceso directo"</string>
+    <string name="cancel_all">"Cancelar todo"</string>
+    <string name="reload_all">"Actualizar todos"</string>
+
+</resources>
