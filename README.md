@@ -70,3 +70,6 @@ Licensed as GNU GPLv3 - [http://www.gnu.org/licenses/gpl-3.0.txt](http://www.gnu
 
 If you steal the code please consider a reference to Weather Slider or morgan-design as a good will gesture.
  
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jamesmorgan/androidweatherslider/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
